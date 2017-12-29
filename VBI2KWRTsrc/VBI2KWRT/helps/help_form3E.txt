@@ -1,0 +1,19 @@
+Text of Extracted from Document Image file
+Adjust line position error in extraction.
+"Kana" button translate kanji to Kana 
+and show result to main form.
+It take a little bit times.
+
+Long line is shown folded.
+User Enter key to split line,
+delete EndOfLine sign(⏎) to concatinate lines.
+
+Mouse Right Button click popup context menu.
+Cut and Paste, Find/Replace, Dictionary,
+shortcut input of Symbol and words appears frequetly.
+
+Shortcut key:
+  F3      :Open Find/Replace Dialog,Find Next
+  Shift+F3:Find Next upward
+
+(Form3E) 2017/12/26

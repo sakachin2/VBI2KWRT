@@ -1,0 +1,8 @@
+Partially extracted Text in the clipped Box.
+
+Copy then Paste to Main form.
+Or, OK button sends the text to the Main form.
+Specify destination range in advance by mouse.
+Reversed range will be replaced.
+
+(Form2E) 2017/12/21

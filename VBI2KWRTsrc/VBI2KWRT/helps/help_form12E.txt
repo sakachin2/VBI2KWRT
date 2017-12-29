@@ -1,0 +1,35 @@
+(Form12E) 
+
+Consideration for translation into Braille:
+  Following consideration is done when translation of Japanese Kanji text to Kana text.
+  It's rule is too hard to implement, so correct remainings on BES99.
+    .Put space before continued(>=3) kanji chars.
+    .After Kanji->kana translation, replace "う" by "ー"(Choon:long sound)
+     if "ー" is next of "ゅ" or "ょ" ".
+     In other case "う" have to be replaced by "ー", use  Translation key above,
+     register to dictionary or update on BES99.
+    .Put 2 space after following Letter.
+        Japanese Period(End of Statement):(。）
+    .Put 1 space after following Letter.
+      Japanese Comma(、)、Seperator(・)、Question Mark(？)、Exclamation Mark(！)
+    .Change following Japanese repeating sign to the previous letter.
+      々 ゝ ゞ ヽ ヾ
+
+KatakanaDocument option is for "Kana" conversion option.
+  Check ON for Old-Style document using Katakana as Kana char.
+  When OFF, "Consideration for translation into Braille" has no effect.
+  When OFF, space is inserted before Katakana string
+  if Braille option is on. 
+
+English Document:
+  When checked ON,  "Kana" button simply send text to Kana form.
+  If "EN" button was used at Image Foram, it is treated as English document.
+
+UTF8:
+  Specify Kanji Document is UTF8.
+  Encoding of Kanji text file extracted from image document is SJIS.
+  This option is applied to the text file separately created.
+  When changed, currently opened file is read again,
+  and also applied to the following.
+
+2017/09/24

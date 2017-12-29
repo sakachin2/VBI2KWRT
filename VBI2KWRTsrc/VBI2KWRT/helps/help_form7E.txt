@@ -1,0 +1,7 @@
+(Form7E) 
+Symbol Add Dialog
+  You can set any string.
+  Comment column may be null.
+  To set Braille string, see Help of Symbol Input dialog.
+
+2017/04/29

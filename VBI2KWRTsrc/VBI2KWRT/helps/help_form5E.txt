@@ -1,0 +1,61 @@
+Print Font/Screen Font:
+  Setup Font
+  Open FontDialog when IconButton pushed.
+  Choose Standard/Bold/Italic/Bold Italic only for FontStyle.
+
+  Set PFKey Number(F1<-->F12) for 4 items bellow.
+  F7 and F8 is not to be assigned because those are used by Japanese IME
+  to translate to Katakana and Hankaku-Katakana,
+  Back to default value when space cleared.
+
+Japanese Kana Letter Replacement Key:
+  Set PFKey Number for replacement of Small and large Japanese Letter like as bellow.
+  Default is :F5.
+    "あいうえおやゆよつわかけ" <--> "ぁぃぅぇぉゃゅょっゎゕゖ"     Hiragana
+    "アイウエオヤユヨツワカケ" <--> "ァィゥェォャュョッヮヵヶ"     Katakana(DBCS)
+    "ｱｲｳｴｵﾔﾕﾖﾂ"                <--> "ｧｨｩｪｫｬｭｮｯ"                    Katakana(SBCS)
+
+  By the same key, following replacemnt will be down, which sometimes cause mis-reading of image.
+    リ(katakana)    <--> り(hiragana)
+    ヘ(katakana)    <--> へ(hiragana)
+    ベ(katakana)    <--> べ(hiragana)
+    ソ(katakana:so) <--> ン(katakana:n)
+  On Kanji text form, following replacement will be done including kanji char.
+    工(kanji) --> エ(katakana) --> ェ(katakana-small) --> 工(kanji)   (WrapAround)
+    力(kanji) --> カ(katakana) --> ヵ(katakana-small) --> 力(kanji)   (WrapAround)
+    一(kanji) --> ー(katakana) --> ─(HorizontalBar) --> 一(kanji)    (WrapAround)
+    夕(kanji) <--> タ(katakana)                                       
+    二(kanji) <--> ニ(katakana) 
+    八(kanji) <--> ハ(katakana) 
+    口(kanji) <--> ロ(katakana) 
+    十(kanji) <--> ＋(Plus) 
+  On Kana text form, Small/Large replacemet will be occur.
+    エ(katakana) <--> ェ(katakana-small), カ(katakana) <-->ヵ (katakana-small)
+
+  By the key with Shift modifier kety,following replacement will be done.
+    は<-->わ、へ<-->え、う<-->ー
+
+Voiced Kana Letter Replacement Key:
+  PF key for Non voiced <--> voiced letter exchange.
+  Default is :F4.
+    "か"<-->"か", "は"-->"ば"-->"ぱ"-->"は"
+    "カ"<-->"ガ", "ハ"-->"バ"-->"パ"-->"ハ"
+  Half width Katakana is replaced to Full width katakana.
+    "ｶ"-->"ガ", "ﾊ"-->"バ"
+
+Symbol Character Input Dialog Open Key:
+  Set PFKey to open "Symbol Character Input" Dialog
+  The dialog is opened also from Context Menu shown by Mouse Right Button Click
+  Set Default:F6 when set space.
+
+FrequetWords Dialog Open Key:
+  Set PFKey to open "FrequentWords" Dialog 
+  for covenient input of words frequently appears.
+  The dialog is opened also from Context Menu.
+  Set Default:F9 when set space.
+
+Find & Replace Dialog Open Key:
+  Default is F3.
+  The dialog is opened also from Context Menu.
+
+(Form5E) 2017/12/26

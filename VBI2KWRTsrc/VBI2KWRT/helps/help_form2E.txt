@@ -1,0 +1,25 @@
+Displaying document image file
+
+"Extract":
+  Extracted text from Japanese document.
+  This action expends a little bit time.
+  Extracted text is show to another form.
+  Extracting from original resolution,so Zooming dose not affect,
+  but reversed up-down have effect on extracting.
+  Extracted portions are marked.
+
+  Vertical writing may be recognized horizontally.
+  in shch case as vertical and horizontal writing are mixed,
+  Boxing by mouse, you can re-extract the portion failed to extract.
+  Extracted text partially is shown on another form.
+  Use OK button or Copy & Paste to take in the text.
+
+"Language":
+  You can select another Language if LanguagePack is installed.
+  On Windows10, install LanguagePack as following.
+    ControlPanel-->Language and Locale-->Language, Add Language
+    Push "Option" on the right of the Language, then Download & Install.
+    Another way from "Settings", you can install the Language Pack,
+    "Application","Optional Feature", ... "OCR",Download & Install. 
+
+(Form2E) 2017/12/19

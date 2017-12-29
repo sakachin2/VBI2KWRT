@@ -1,0 +1,53 @@
+By "TextExtraction function" + "Kana translation function",
+generate Japanese Kana file for WinBES99 extracting text from document file
+created by scanner device.
+English Document can be extracted, and "Kana translation" do nothing paticularly.
+
+Kana is a collection of Japanese Letter excludes Kanji.
+WinBES99 is a text translation tool into Braille.
+Windows app "Windows Fax and Scan" can be used to create image file. 
+
+Requirement：Extrancting text from image file uses "Microsoft OCR Library for Windows",
+             Windows10 Novenber update(2015/11:Version1511) is required.
+
+Starting by Menu:"File" --> "Open Image file",
+"Extract" on ImageFile Form-->
+"Kana" on TextFile Form-->
+, then Kana Text will be displayed on this Main Form.
+
+Long line is folded.
+"⏎" is CRLF sign.
+Lines are concatinated by deleting CRLF sign.
+
+SingleWidth Katakana(a group of Japanese letter Kana) is translated to 
+Hiragana(another group of Japanese letter Kana) by "Kana" button on extracted text Form. 
+SingleWidth Katakana input by keboard is translated to DoubleWidth letter
+by "Katakana" / "Hiragana" button on Kana Form(Main Form).
+
+Adjust Kana text file, save then open by WinBES99 or paste into WinBES99.
+
+Start by Menu:"Open Kanji text file" if you heve Kanji-Kana-Mixed text file.
+Start by Menu:"Open Kana text file" if you heve Kana-Only text file.
+
+("Microsoft Office Document Imaging" or "MicrosoftOffice Document Scanning"
+also enable to scan documents and save to image file, and send extracted text string to "Microsoft Word".)
+"Microsoft OneNote"(Free) also supports extracting text from document file.
+
+Click MouseRight button to popup context menu.
+It enables CutAndPaste, open Find/Replace dialog and open Symbol Input dialog.
+Following shortcut key is available
+F3       :open Find/Replace and Next
+Shift+F3 :find next backward
+(Specify " " as SearchWord to search spacechar (0x20),
+leave RepWord as null to replace to drop SearchWord.)
+
+Cursor is not shown when lost focus by opening child Form,
+touch titlebar to check current cursor position.
+
+Settings:setup followings.
+  Font(Screen and Print)
+  Function key to Kana conversion between Small and Large letter
+  Function key to open SimbolInput dialog
+  English Document
+
+(Form1E) 2017/12/19

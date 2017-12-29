@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root> 
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="STR_FILTER_IMAGE" xml:space="preserve">
+    <value>ImageFile(*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.tif;*.tiff)|*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.tif;*.tiff|All(*.*)|*.*</value>
+  </data>
+  <data name="STR_FILTER_KANATEXT" xml:space="preserve">
+    <value>KanaTextFile(*.txt;*.text)|*.txt;*.text|All(*.*)|*.*</value>
+  </data>
+  <data name="STR_FILTER_KANJITEXT" xml:space="preserve">
+    <value>ExtractedTextFile(*.i2t;*.i2e)|*.i2t;*.i2e|Text(*.txt;*.text)|*.txt;*.text|All(*.*)|*.*</value>
+  </data>
+  <data name="STR_FILTER_DICTIONARY" xml:space="preserve">
+    <value>Dictionary File(*.dct)|*.dct|All(*.*)|*.*</value>
+  </data>
+  <data name="STR_FORM1_INITIAL_TEXT" xml:space="preserve">
+    <value>Open file at first</value>
+  </data>
+  <data name="STR_FORM1_TITLE_KANA_FILE" xml:space="preserve">
+    <value>Kana Text</value>
+  </data>
+  <data name="STR_ENGLISH_DOC" xml:space="preserve">
+    <value>English Text</value>
+  </data>
+  <data name="STR_ENGLISH_DOC_EXTRACTED" xml:space="preserve">
+    <value>Extracted English Text</value>
+  </data>
+  <data name="STR_FORM1_TITLE_KANJI2KANA_FILE" xml:space="preserve">
+    <value>Kanji2Kana</value>
+  </data>
+  <data name="STR_MSG_DISCARD_UPDATE" xml:space="preserve">
+    <value>Discard update ?</value>
+  </data>
+  <data name="STR_MSG_NO_TEXT" xml:space="preserve">
+    <value>No text is set</value>
+  </data>
+  <data name="STR_MSG_REP_EXISTING" xml:space="preserve">
+    <value>File exits, over-write ?</value>
+  </data>
+  <data name="STR_NEWFILE" xml:space="preserve">
+    <value>|New File|</value>
+  </data>
+  <data name="STR_NEWTEXT" xml:space="preserve">
+    <value>|Create New|</value>
+  </data>
+  <data name="STR_NEWTEXT_FILE" xml:space="preserve">
+    <value>NoName</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND" xml:space="preserve">
+    <value>File Not Found</value>
+  </data>
+  <data name="STR_MSG_ERR_PRINT_PAGE" xml:space="preserve">
+    <value> is last page</value>
+  </data>
+  <data name="STR_MSG_ERR_READ" xml:space="preserve">
+    <value>File Read Error</value>
+  </data>
+  <data name="STR_MSG_ERR_WRITE" xml:space="preserve">
+    <value>File Write Error</value>
+  </data>
+  <data name="STR_MSG_INFO_SHOW_TEXT" xml:space="preserve">
+    <value>Text was shown</value>
+  </data>
+  <data name="STR_MSG_ERR_ZOOM" xml:space="preserve">
+    <value>Could not zoom</value>
+  </data>
+  <data name="STR_MSG_ERR_EXTRACT" xml:space="preserve">
+    <value>Failed to Extract text from Image file</value>
+  </data>
+  <data name="STR_FORM2_TITLE" xml:space="preserve">
+    <value>ImageDocument</value>
+  </data>
+  <data name="STR_FORM3_TITLE" xml:space="preserve">
+    <value>TextFile</value>
+  </data>
+  <data name="STR_FORM3_TITLE_RECEIVED" xml:space="preserve">
+    <value>ExtractedText</value>
+  </data>
+  <data name="STR_MSG_INFO_SAVED" xml:space="preserve">
+    <value>Successfully Saved</value>
+  </data>
+  <data name="STR_MSG_ERR_KANA_CONV" xml:space="preserve">
+    <value>Failed to convert Kanji to Kana</value>
+  </data>
+  <data name="STR_MSG_INFO_EXTRACTED" xml:space="preserve">
+    <value>Text was successfully extracted</value>
+  </data>
+  <data name="STR_FONT_STD" xml:space="preserve">
+    <value>Regular</value>
+  </data>
+  <data name="STR_FONT_BOLD" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="STR_FONT_ITALIC" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="STR_FONT_BOLD_ITALIC" xml:space="preserve">
+    <value>Bold Italic</value>
+  </data>
+  <data name="STR_MSG_ERR_FUNCKEY" xml:space="preserve">
+    <value>Specify FunctionKey:Fn (F1～F12)</value>
+  </data>
+  <data name="STR_MSG_ERR_PRINT_FONT" xml:space="preserve">
+    <value>Error of Print Font</value>
+  </data>
+  <data name="STR_MSG_ERR_SCR_FONT" xml:space="preserve">
+    <value>Error of Screen Font</value>
+  </data>
+  <data name="STR_MSG_ERR_SPECIAL_KEY" xml:space="preserve">
+    <value>";" could not be used</value>
+  </data>
+  <data name="STR_MSG_ERR_SPECIAL_KEY_NULL" xml:space="preserve">
+    <value>Missing string specification</value>
+  </data>
+  <data name="STR_MSG_ERR_SELECT_LINE" xml:space="preserve">
+    <value>No line is selected</value>
+  </data>
+  <data name="STR_MSG_ERR_ADD_SELECT_LINE" xml:space="preserve">
+    <value>Select a line to be inserted before</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_RESTORE_DEFAULT" xml:space="preserve">
+    <value>Merge Default ?</value>
+  </data>
+  <data name="STR_MSG_ERR_FIND_NULL" xml:space="preserve">
+    <value>Search word is not set(Specify " " to search space)</value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_UP" xml:space="preserve">
+    <value>Upward, </value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_DOWN" xml:space="preserve">
+    <value>Downward, </value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_CASE_SENSITIVE" xml:space="preserve">
+    <value>CaseSensitive, </value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_CASE_INSENSE" xml:space="preserve">
+    <value>CaseInsensitive, </value>
+  </data>
+  <data name="STR_MSG_ERR_FIND_NOT_FOUND" xml:space="preserve">
+    <value>Not Found(</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_CPOS" xml:space="preserve">
+    <value>CurrentPos: </value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_LINE_COL" xml:space="preserve">
+    <value> Line, Col </value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_NO_CPOS" xml:space="preserve">
+    <value>CurrentPos:Unknown)</value>
+  </data>
+  <data name="STR_MSG_ERR_REPSTR_SAME" xml:space="preserve">
+    <value>Replace string is same as Search string</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_ALL" xml:space="preserve">
+    <value>Search word was not found at all</value>
+  </data>
+  <data name="STR_MSG_ERR_SMALL_LARGE" xml:space="preserve">
+    <value>This char ({0}) is not a target of replacement(Without Shift key). See Help of Settings.</value>
+  </data>
+  <data name="STR_MSG_INFO_SMALL_LARGE_TARGET" xml:space="preserve">
+    <value>This char({0}) is a target of Small/Large Letter replacement. </value>
+  </data>
+  <data name="STR_MSG_ERR_SMALL_LARGE_OTHER" xml:space="preserve">
+    <value>This char({0}) is not a target of replacement(With Shift key). </value>
+  </data>
+  <data name="STR_MSG_ERR_FAILED_KANJI2KANA_CONV" xml:space="preserve">
+    <value>Failed to transration Kanji text to Kana text</value>
+  </data>
+  <data name="STR_MSG_ERR_ALREADY_EXTRACTED" xml:space="preserve">
+    <value>This file was alread extracted</value>
+  </data>
+  <data name="STR_MSG_KATAKANAOKURIGANA" xml:space="preserve">
+    <value>Changed KatakanaOkurigana option</value>
+  </data>
+  <data name="STR_MSG_ERR_ADDDICTIONARY" xml:space="preserve">
+    <value>Null String Error</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_ROW_IGNORED" xml:space="preserve">
+    <value>Row {0} contains error, Total {1} error lines</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_ERRVALUE" xml:space="preserve">
+    <value>";" is not available({0})</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_DISCARD_DICTIONARY_UPDATE" xml:space="preserve">
+    <value>Discard update ?</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_FILE_LINE_FORMAT" xml:space="preserve">
+    <value>Dictionary File LineNo = {0} contains error</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_FILE_NO_SAVE_FILE" xml:space="preserve">
+    <value>This Dictionary is not loaded from a file, use SaveAS button</value>
+  </data>
+  <data name="STR_INFO_MSG_DICTIONARY_LOADED" xml:space="preserve">
+    <value>Dictionary file was loaded.</value>
+  </data>
+  <data name="STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE" xml:space="preserve">
+    <value>No update, not saved.</value>
+  </data>
+  <data name="STR_CHAR_TYPE_HIRAGANA" xml:space="preserve">
+    <value>Hiragana</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KANJI" xml:space="preserve">
+    <value>Kanji</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KATAKANA" xml:space="preserve">
+    <value>Katakana</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KATAKANA_SMALL" xml:space="preserve">
+    <value>Katakana-Small</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KIGO" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="STR_CHAR_TYPE_UNKNOWN" xml:space="preserve">
+    <value>Unknown CharType</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTERWRAP" xml:space="preserve">
+    <value>{0} : {1} --&gt; {2} : {3}</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTERWRAP_QUERY" xml:space="preserve">
+    <value>{0} : {1} </value>
+  </data>
+  <data name="STR_MSG_TEXT_NEW" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="STR_MSG_TEXT_READ" xml:space="preserve">
+    <value>File Encoding={0}</value>
+  </data>
+  <data name="STR_FILTER_WORDS" xml:space="preserve">
+    <value>Words File(*.wrd)|*.wrd|All(*.*)|*.*</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_ROW_IGNORED" xml:space="preserve">
+    <value>Row {0} contains error, Total {1} error lines</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_ERRVALUE" xml:space="preserve">
+    <value>Key have to be one Char and ";" is not available({0})</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_DISCARD_WORDS_UPDATE" xml:space="preserve">
+    <value>Discard update ?</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_FILE_LINE_FORMAT" xml:space="preserve">
+    <value>File LineNo = {0} contains error</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_FILE_NO_SAVE_FILE" xml:space="preserve">
+    <value>This definition is not loaded from a file, use SaveAS button</value>
+  </data>
+  <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
+    <value>Words file was loaded.</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY" xml:space="preserve">
+    <value>Not Registered on Word definition.(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY" xml:space="preserve">
+    <value>On phrase definition, "Use" is not checked ON(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY_SYMBOL" xml:space="preserve">
+    <value>Not Registered on SymbolInput dialog.(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY_SYMBOL" xml:space="preserve">
+    <value>On SymbolInput dialog, "Use" is not checked ON(Ctrl+{0})</value>
+  </data>
+  <data name="STR_LOAD" xml:space="preserve">
+    <value>Loaded from</value>
+  </data>
+  <data name="STR_SAVE" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="STR_SAVEAS" xml:space="preserve">
+    <value>SaveAs</value>
+  </data>
+  <data name="STR_CUT" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="STR_COPY" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="STR_CUTPASTE" xml:space="preserve">
+    <value>Cut-Paste</value>
+  </data>
+  <data name="STR_COPYPASTE" xml:space="preserve">
+    <value>Copy-Paste</value>
+  </data>
+  <data name="STR_SEND" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="STR_FILTER_SYMBOL" xml:space="preserve">
+    <value>SymbolFile (*.sym)|*.sym|All(*.*)|*.*</value>
+  </data>
+  <data name="WARN_EXTRACTED_NULLSTR" xml:space="preserve">
+    <value>Extracted null</value>
+  </data>
+  <data name="STR_MSG_INFO_IMAGESAVE_FULL" xml:space="preserve">
+    <value>Whole image saved:</value>
+  </data>
+  <data name="STR_MSG_INFO_IMAGESAVE_PARTIAL" xml:space="preserve">
+    <value>Partial image saved:</value>
+  </data>
+  <data name="STR_MSR_WARN_CURSOR_POS" xml:space="preserve">
+    <value>Cursor is not on the Text.</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FORM_OPENED" xml:space="preserve">
+    <value>Target form switch to is not opened</value>
+  </data>
+</root>

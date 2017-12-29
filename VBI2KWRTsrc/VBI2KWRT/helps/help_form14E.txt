@@ -1,0 +1,60 @@
+Symbol Input Dialog
+  Input Quotation, Parenthesis, ... not by IME.
+
+  One dialog for both ExtractedText and KanaText form.
+  When both Form is opened, use "Open Symbol dialog" key(Default:F6)
+  to switch Forms to be received.
+  Dialog back-color also switches to identify the symbol is sent to.
+  "SwitchFormSendTo" button also enable it.
+--------------------------------------------------------------------------
+  Push "Send" button to send "String" of the line
+  to cursor position of the ExtractedText or KanaText form.
+  Ctrl+0<-->Ctrl+9 sends a string of the line "Key" is set.
+  "Key" value is single digit of "0"<-->"9".
+
+  Toolbar button Fie/Save/SaveAs are used to switch SymbolInputDefinition for each documents.
+  Record format of Symbol file is as following, CRLF is 0x0d0a.
+  Default extension is ".sym"
+  Line format :
+     n;Key;Phrase    (n: '1':Use, '0':NotUse)
+
+  "Default" button merges default values.
+******************************************************************************
+  To set Braille Character, append lines to WinBES99 configuration file "special.def". 
+  You can find "special.def" in WinBES99 install folder, C:\Program Files\WIN-BES
+  or C:\Program Files (x86)\WIN-BES.
+
+  Folloing string in the default set 
+
+    "~ﾟ["  : Single Quotation(‘) _
+    "~ﾟ],  : Single Quotation(’)
+    "~ﾟ||" : Double poem line splitter(／／)", _
+    "~ﾟﾏﾙ" : Censored word:○
+    "~ﾟｻﾝｶ": Censored word:△
+    "~ﾟｼｶｸ": Censored word:□
+    "~ﾟｶｹ" : Censored word:×
+    "~ﾟｿﾉﾀ": Other Censored word
+
+  is on the assumption that following lines are assed to special.def.
+
+    "~ﾟ[",    CT_J5, CT_E5, 0x20, 0x26, 0x00
+    "~ﾟ]",    CT_J6, CT_E6, 0x34, 0x04, 0x00
+    "~ﾟ||",   CT_J2, CT_E2, 0x38, 0x38, 0x00
+    "~ﾟﾏﾙ",   CT_J7, CT_E7, 0x10, 0x35, 0x00
+    "~ﾟｻﾝｶ",  CT_J7, CT_E7, 0x10, 0x37, 0x00
+    "~ﾟｼｶｸ",  CT_J7, CT_E7, 0x10, 0x3d, 0x00
+    "~ﾟｶｹ",   CT_J7, CT_E7, 0x10, 0x3f, 0x00
+    "~ﾟｿﾉﾀ",  CT_J7, CT_E7, 0x10, 0x3e, 0x00
+
+  By no documentaion about special.def format, this issue is based on my supposition.
+     Column 1:this, up to 5 chars, string is translated to Braille string on sinse 4th column.
+       Starting string "~ﾟ" (UpperLine+Hankaku Katakana Handakuon) is never occurs in Japanese text.
+       DoublwWidth Char first column is not work.
+    Column 2,3:J means Japanese, E Means English, but digit meaning is unknown.
+      It may be indicate "insert space before/after" or "opening/closing of someting".
+      CT_J2,CT_E2 inserts space before and after, CT_J7,CT_E7 inserts no space.
+    Column 4-->:null terminationg Braille string.
+      Pin point 1, 2, 3, 4, 5 and 6 respond to 0x01, 0x02, 0x04, 0x08, 0x10, 0x20.
+      Eg. 0x38 is 0x10+0x20+0x08, then  pin 4,5, and 6 are ON.
+
+(Form14E) 2017/12/27

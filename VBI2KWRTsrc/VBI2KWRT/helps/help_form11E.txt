@@ -1,0 +1,40 @@
+(Form11E) 
+Edit Dictionary Dialog
+
+Register "String" and corresponding Kana translation.
+Straing may contain any characters.
+Register those words repeatedly used in the document, which is not translated correctly.
+Use Mouse Right button for Copy & Paste
+not when cell is highlightened but when string is highlightened.
+Cut/CopyPaste buttons bellow title are used to copy/move row.
+"Paste" inserts row before the selected row(Delete flag is not copied). 
+
+String replacement is applied for only word with "Use" is checked on,
+and then kanji-kana translation is done.
+Replacement is applied from top rows sequencially.
+So, take care for the case "本町" and "町", same char is differently pronunced.  
+e.g)
+空気       |くーき               (when required to replace "う" by ("ー")
+本町       |ほんまち 
+町         |ちょう
+環境汚染   |かんきょう　おせん   (required space to split word)
+飛び地     |　とびち             (Space is prefixed)
+
+The rows with "Del" is checked on is deleted at "OK" is clicked.
+
+Tou can sort by clickking header line.
+Column header "Use" sorts by sequence of Check-On and Check-Off.
+Column header "String" sorts by sequense of values of "String" column.
+
+Fie/Save/SaveAs buttons are used to select dictionary for each documents.
+Record format of dictionary file is as following, CRLF is 0x0d0a.
+Default extension is ".dct".
+
+n;String;Kana
+n is '1':Use,  '0':Not Use
+e.g)  1;飛び地;　とびち
+      0;A市;A し
+      1;本町;ほんまち
+      1;町;ちょー
+
+2017/09/12

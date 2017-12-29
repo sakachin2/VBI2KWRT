@@ -1,0 +1,35 @@
+Words Definition Dialog
+
+Register those "Phrase" frequently appear in the document.
+A candidate is kanji character sometimes misrecognition occurs
+at extracting from image 
+One dialog supports both of Extracted text form and kana text form.
+You can swith forms to receive by Open Key(Default:F9).
+Dialog back-color also switches to identify "Phrase" is sent to.
+"SwitchFormSendTo" button also enable it.
+---------------------------------------------------------------
+When "Key"(One Alphabet Char,Case InSensitive) is registered,
+Ctrl+Key sends "Phrase" to text box if "Use" is checked ON
+even when dislog is not opened.
+Preceding line is adopted when dumplicated key is registered.
+"Send" button also send the "Phrase" regardless "Use" checkbox 
+and "Del" checkbox setting.
+
+Use Mouse Right button for Copy & Paste
+not when cell is highlightened but when string is highlightened.
+Cut/CopyPaste buttons bellow title are used to copy/move row.
+"Paste" inserts row before the selected row(Delete flag is not copied). 
+
+The rows with "Del" is checked on is deleted at "OK" is clicked.
+
+Tou can sort by clickking header line.
+Column header "Use" sorts by sequence of Check-On and Check-Off.
+Column header "Key" sorts by sequense of values of "Key" column.
+
+Toolbar button Fie/Save/SaveAs are used to switch dictionary for each documents.
+Record format of dictionary file is as following, CRLF is 0x0d0a.
+Default extension is ".wrd"
+Line format :
+   n;Key;Phrase    (n: '1':Use, '0':NotUse)
+
+(Form13E) 2017/12/27

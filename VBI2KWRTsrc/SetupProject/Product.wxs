@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  codepage,65001:utf8, 932:shift_jis, 28591:iso8859-1; 1252:ansi latin1   LCID 1041:ja, 1033:en-us            -->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<!--
+    <Product Id="F35AAAE3-1589-479C-87EC-1900E0E30D65" Name="VBI2KWRT" Language="1033" Version="2.0.1" Manufacturer="sakachin2" UpgradeCode="7d2e310c-2317-4f4a-b957-17575752ac49">
+-->
+    <Product Id="*" Name="VBI2KWRT" Language="1033" Version="2.0.1" Manufacturer="sakachin2" UpgradeCode="7d2e310c-2317-4f4a-b957-17575752ac49">
+        <Package InstallerVersion="300" Compressed="yes"
+				Comments="MSI Installer for VBI2KWRT"
+				Id="*"
+				Description="Tool of making Kana text input file for WinBES99(Braille tool) from image file using Windows10 OCR Library" />
+        <Upgrade Id="7d2e310c-2317-4f4a-b957-17575752ac49">
+            <UpgradeVersion OnlyDetect="yes" Property="NEWERFOUND"
+				 Minimum="2.0.1" IncludeMinimum="no" />
+        	<UpgradeVersion OnlyDetect="no" Property="PREVIOUSFOUND"
+            	Minimum="1.0.0" IncludeMinimum="yes"
+            	Maximum="2.0.1" IncludeMaximum="no"
+            />
+        </Upgrade>
+        <Media Id="1" Cabinet="vbi2kwrt.cab" EmbedCab="yes" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="VBI2KWRT">
+                    <!--  name:install foldername -->
+                    <Directory Id="EN_GB" Name="en-GB">
+                        <Component Id="VBI2KWRT.RESOURCES.DLL" DiskId="1" Guid="682836D6-7427-403C-AF0F-04B117A9A485">
+                            <File Id="VBI2KWRT.RESOURCES.DLL" Name="VBI2KWRT.resources.dll" Source="..\VBI2KWRT\bin\Release\en-GB\VBI2KWRT.resources.dll" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="IS" Name="is">
+                        <Component Id="VBI2KWRT.RESOURCES.DLL_1" DiskId="1" Guid="3028138B-1881-4203-9DD3-CDB51B86C97B">
+                            <File Id="VBI2KWRT.RESOURCES.DLL_1" Name="VBI2KWRT.resources.dll" Source="..\VBI2KWRT\bin\Release\is\VBI2KWRT.resources.dll" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="IS_IS" Name="is-IS">
+                        <Component Id="VBI2KWRT.RESOURCES.DLL_2" DiskId="1" Guid="69BA0C9E-308F-4CBF-B4C5-555E7A335F96">
+                            <File Id="VBI2KWRT.RESOURCES.DLL_2" Name="VBI2KWRT.resources.dll" Source="..\VBI2KWRT\bin\Release\is-IS\VBI2KWRT.resources.dll" />
+                        </Component>
+                    </Directory>
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="StartMenu" />
+            </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop">
+            </Directory>
+        </Directory>
+        <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+            <Component Id="VBI2KWRT.EXE" Guid="09A6D72E-05E6-4AE2-9EF2-07DC6AD4467B">
+                <File Id="VBI2KWRT.EXE" Source="..\VBI2KWRT\bin\Release\VBI2KWRT.exe" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Id="VBI2KWRT.EXE.CONFIG" Guid="F782A11B-2317-45F7-9FDA-7A5F5891CC67">
+                <File Id="VBI2KWRT.EXE.CONFIG" Name="VBI2KWRT.exe.config" Source="..\VBI2KWRT\bin\Release\VBI2KWRT.exe.config" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="ApplicationShortcut" Guid="03733BA1-45E2-4826-BA1B-3F832B7AFD6E">
+                <Shortcut Id="ApplicationStartMenuShortcut" Name="VBI2KWRT" Description="Tool of making Kana text input file for WinBES99(Braille tool) from image file using Windows10 OCR Library" Target="[APPLICATIONROOTDIRECTORY]VBI2KWRT.exe" Icon="ICON.EXE" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+                <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\Microsoft\sakachin2VBI2KWRT" Name="Installed" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+        </DirectoryRef>
+        <DirectoryRef Id="DesktopFolder">
+            <Component Id="ApplicationShortcutDesktop" Guid="*">
+                <Shortcut Id="ApplicationDesktopShortcut" Name="VBI2KWRT" Description="Tool of making Kana text input file for WinBES99(Braille tool) from image file using Windows10 OCR Library" Target="[APPLICATIONROOTDIRECTORY]VBI2KWRT.exe" Icon="ICON.EXE" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+                <RemoveFolder Id="ApplicationDesktopFolder" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\Microsoft\sakachin2VBI2KWRTDesktop" Name="Installed" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+        </DirectoryRef>
+        <Feature Id="MainApplication" Title="Main Application" Level="1">
+            <ComponentRef Id="VBI2KWRT.EXE" />
+            <ComponentRef Id="VBI2KWRT.EXE.CONFIG" />
+            <ComponentRef Id="VBI2KWRT.RESOURCES.DLL" />
+            <ComponentRef Id="VBI2KWRT.RESOURCES.DLL_1" />
+            <ComponentRef Id="VBI2KWRT.RESOURCES.DLL_2" />
+            <ComponentRef Id="ApplicationShortcut" />
+            <ComponentRef Id="ApplicationShortcutDesktop" />
+        </Feature>
+        <UI>
+          <Dialog Id="NewerFoundDlg" Width="270" Height="105"
+                  Title="[ProductName] Setup" NoMinimize="yes">
+            <Control Id="MessageText" Type="Text"
+                     X="48" Y="15" Width="205" Height="60" TabSkip="no"
+                     Text="[ProductName]: Newer than this version([ProductVersion])  is already installed." />
+            <Control Id="Y" Type="PushButton"
+                     X="200" Y="80" Width="56" Height="17" TabSkip="yes"
+                     Text="!(loc.WixUIOK)">
+              <Publish Event="EndDialog" Value="Return">1</Publish>
+            </Control>
+
+            <Control Id="NewerFoundDlgIcon"
+                     Type="Icon" X="15" Y="15" Width="24" Height="24"
+                     ToolTip="!(loc.ErrorDlgErrorIconTooltip)" FixedSize="yes" IconSize="32"
+                     Text="!(loc.ErrorDlgErrorIcon)" />
+          </Dialog>
+        </UI>
+        <UIRef Id="WixUI_InstallDir" />
+        <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONROOTDIRECTORY" />
+        <Property Id="ARPPRODUCTICON" Value="ICON.EXE" />
+        <Property Id="ARPCOMMENTS" Value="Tool of making Kana text input file for WinBES99(Braille tool) from image file using Windows10 OCR Library" />
+        <WixVariable Id="WixUILicenseRtf" Value="license-mit.rtf" />
+        <Property Id="ALLUSERS" Value="1" />
+        <Icon Id="ICON.EXE" SourceFile="..\VBI2KWRT\icons\Icon-i2kWRT.ico" />
+
+        <CustomActionRef Id="WixExitEarlyWithSuccess" />
+        <!-- WixUtilExtension required. on cmdline -ext option -->
+        <InstallUISequence>
+            <Show Dialog="NewerFoundDlg" After="FindRelatedProducts">NEWERFOUND</Show>
+            <Custom Action="WixExitEarlyWithSuccess" After="NewerFoundDlg">NEWERFOUND</Custom>
+        </InstallUISequence>
+        <InstallExecuteSequence>
+            <Custom Action="WixExitEarlyWithSuccess" After="FindRelatedProducts">NEWERFOUND</Custom>
+            <RemoveExistingProducts After="InstallFinalize" />
+        </InstallExecuteSequence>
+    </Product>
+</Wix>

@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="help_form1U8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form1U8.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form3.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form5.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form7.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form5E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form5E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form2E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form2E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="STR_NEWTEXT" xml:space="preserve">
+    <value>|新規作成|</value>
+  </data>
+  <data name="STR_NEWFILE" xml:space="preserve">
+    <value>|新しいファイル|</value>
+  </data>
+  <data name="help_form1E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form1E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Resources_en_GB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources.en-GB.resx;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form3E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form3E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form7E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form7E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="STR_FILTER_IMAGE" xml:space="preserve">
+    <value>イメージ(*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.tif;*.tiff)|*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.tif;*.tiff|すべてのファイル(*.*)|*.*</value>
+  </data>
+  <data name="STR_FILTER_KANATEXT" xml:space="preserve">
+    <value>かな変換テキスト(*.txt;*.text)|*.txt;*.text|すべてのファイル(*.*)|*.*</value>
+  </data>
+  <data name="STR_FILTER_KANJITEXT" xml:space="preserve">
+    <value>読み取りテキスト(*.i2t;*.i2e)|*.i2t;*.i2e|テキスト(*.txt;*.text)|*.txt;*.text|すべてのファイル(*.*)|*.*</value>
+  </data>
+  <data name="STR_FILTER_DICTIONARY" xml:space="preserve">
+    <value>辞書ファイル(*.dct)|*.dct|すべてのファイル(*.*)|*.*</value>
+  </data>
+  <data name="STR_FORM1_INITIAL_TEXT" xml:space="preserve">
+    <value>ファイルを開いてください</value>
+  </data>
+  <data name="STR_MSG_NO_TEXT" xml:space="preserve">
+    <value>テキストが設定されていません</value>
+  </data>
+  <data name="STR_NEWTEXT_FILE" xml:space="preserve">
+    <value>無題</value>
+  </data>
+  <data name="STR_FORM1_TITLE_KANA_FILE" xml:space="preserve">
+    <value>かなテキスト</value>
+  </data>
+  <data name="STR_ENGLISH_DOC" xml:space="preserve">
+    <value>英文テキスト</value>
+  </data>
+  <data name="STR_ENGLISH_DOC_EXTRACTED" xml:space="preserve">
+    <value>英文読み取りテキスト</value>
+  </data>
+  <data name="STR_FORM1_TITLE_KANJI2KANA_FILE" xml:space="preserve">
+    <value>かな変換テキスト</value>
+  </data>
+  <data name="STR_MSG_DISCARD_UPDATE" xml:space="preserve">
+    <value>ファイルの変更を破棄しますか？</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND" xml:space="preserve">
+    <value>ファイルが見つかりません</value>
+  </data>
+  <data name="STR_MSG_ERR_PRINT_PAGE" xml:space="preserve">
+    <value> ページが最後のページです</value>
+  </data>
+  <data name="STR_MSG_ERR_READ" xml:space="preserve">
+    <value>ファイル入力エラー</value>
+  </data>
+  <data name="STR_MSG_ERR_WRITE" xml:space="preserve">
+    <value>ファイル出力エラー</value>
+  </data>
+  <data name="STR_MSG_INFO_SHOW_TEXT" xml:space="preserve">
+    <value>テキストを表示しました</value>
+  </data>
+  <data name="STR_MSG_REP_EXISTING" xml:space="preserve">
+    <value>ファイルが存在します上書きしますか？</value>
+  </data>
+  <data name="STR_MSG_ERR_ZOOM" xml:space="preserve">
+    <value>ズーム失敗</value>
+  </data>
+  <data name="STR_MSG_ERR_EXTRACT" xml:space="preserve">
+    <value>イメージファイルからのテキスト読み取り失敗</value>
+  </data>
+  <data name="STR_FORM3_TITLE" xml:space="preserve">
+    <value>テキストファイル</value>
+  </data>
+  <data name="STR_FORM2_TITLE" xml:space="preserve">
+    <value>イメージ文書</value>
+  </data>
+  <data name="STR_FORM3_TITLE_RECEIVED" xml:space="preserve">
+    <value>読取りテキスト</value>
+  </data>
+  <data name="STR_MSG_INFO_SAVED" xml:space="preserve">
+    <value>保存しました</value>
+  </data>
+  <data name="STR_MSG_ERR_KANA_CONV" xml:space="preserve">
+    <value>かな変換に失敗しました</value>
+  </data>
+  <data name="STR_MSG_INFO_EXTRACTED" xml:space="preserve">
+    <value>イメージからテキストを読取りました</value>
+  </data>
+  <data name="STR_FONT_STD" xml:space="preserve">
+    <value>標準</value>
+  </data>
+  <data name="STR_FONT_BOLD" xml:space="preserve">
+    <value>太字</value>
+  </data>
+  <data name="STR_FONT_ITALIC" xml:space="preserve">
+    <value>斜体</value>
+  </data>
+  <data name="STR_FONT_BOLD_ITALIC" xml:space="preserve">
+    <value>太字　斜体</value>
+  </data>
+  <data name="STR_MSG_ERR_FUNCKEY" xml:space="preserve">
+    <value>機能キー:Fn (F1～F12)を指定してください</value>
+  </data>
+  <data name="STR_MSG_ERR_PRINT_FONT" xml:space="preserve">
+    <value>印刷フォント名に誤りがあります</value>
+  </data>
+  <data name="STR_MSG_ERR_SCR_FONT" xml:space="preserve">
+    <value>画面フォント名に誤りがあります</value>
+  </data>
+  <data name="STR_MSG_ERR_SPECIAL_KEY" xml:space="preserve">
+    <value>";" は使用できません</value>
+  </data>
+  <data name="STR_MSG_ERR_SPECIAL_KEY_NULL" xml:space="preserve">
+    <value>文字の指定がありません</value>
+  </data>
+  <data name="STR_MSG_ERR_SELECT_LINE" xml:space="preserve">
+    <value>行が選択されていません</value>
+  </data>
+  <data name="STR_MSG_ERR_ADD_SELECT_LINE" xml:space="preserve">
+    <value>追加する位置（その行の前に追加）を選択してください</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_RESTORE_DEFAULT" xml:space="preserve">
+    <value>既定を組み込みますか？</value>
+  </data>
+  <data name="STR_MSG_ERR_FIND_NULL" xml:space="preserve">
+    <value>検索文字列が未設定です(スペース検索は " " を指定する)</value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_UP" xml:space="preserve">
+    <value>上 方向、</value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_DOWN" xml:space="preserve">
+    <value>下 方向、</value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_CASE_SENSITIVE" xml:space="preserve">
+    <value>大小区別 あり、</value>
+  </data>
+  <data name="STR_MSG_INFO_FIND_CASE_INSENSE" xml:space="preserve">
+    <value>大小区別 なし、</value>
+  </data>
+  <data name="STR_MSG_ERR_FIND_NOT_FOUND" xml:space="preserve">
+    <value>検索文字列は見つかりません (</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_CPOS" xml:space="preserve">
+    <value>現在位置: </value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_LINE_COL" xml:space="preserve">
+    <value> 行,カラム </value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_NO_CPOS" xml:space="preserve">
+    <value>現在位置:不明)</value>
+  </data>
+  <data name="STR_MSG_ERR_REPSTR_SAME" xml:space="preserve">
+    <value>置換文字列が検索文字列と同じです</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FOUND_ALL" xml:space="preserve">
+    <value>検索文字列はひとつも見つかりません</value>
+  </data>
+  <data name="STR_MSG_ERR_SMALL_LARGE" xml:space="preserve">
+    <value>"{0}" は置換キー（シフトキーなし）の 対象文字はありません。(設定のヘルプを見てください)</value>
+  </data>
+  <data name="STR_MSG_INFO_SMALL_LARGE_TARGET" xml:space="preserve">
+    <value>"{0}" は大文字/小文字 置換の 対象文字です。</value>
+  </data>
+  <data name="STR_MSG_ERR_SMALL_LARGE_OTHER" xml:space="preserve">
+    <value>"{0}" は置換キー（＋シフトキー）の 対象文字はありません。 </value>
+  </data>
+  <data name="STR_MSG_ERR_FAILED_KANJI2KANA_CONV" xml:space="preserve">
+    <value>かな/カナ変換に失敗</value>
+  </data>
+  <data name="STR_MSG_ERR_ALREADY_EXTRACTED" xml:space="preserve">
+    <value>このファイルは処理済です</value>
+  </data>
+  <data name="STR_MSG_KATAKANAOKURIGANA" xml:space="preserve">
+    <value>カタカナの送り仮名を認める設定を変更しました</value>
+  </data>
+  <data name="STR_MSG_ERR_ADDDICTIONARY" xml:space="preserve">
+    <value>文字列が空白です</value>
+  </data>
+  <data name="help_form11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form11.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form11E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form11E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;shift_jis</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_ROW_IGNORED" xml:space="preserve">
+    <value>{0} 行目にエラーがあります、合計 {1} 行のエラー</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_ERRVALUE" xml:space="preserve">
+    <value>";" は使用できません({0})</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_DISCARD_DICTIONARY_UPDATE" xml:space="preserve">
+    <value>変更がありました、破棄しますか</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_FILE_LINE_FORMAT" xml:space="preserve">
+    <value>辞書ファイルの {0} 行目にエラーがあります</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_FILE_NO_SAVE_FILE" xml:space="preserve">
+    <value>この辞書はファイルからロードしたものでは有りません、名前を付けて保存をしてください</value>
+  </data>
+  <data name="STR_INFO_MSG_DICTIONARY_LOADED" xml:space="preserve">
+    <value>辞書ファイルを読み込みました</value>
+  </data>
+  <data name="STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE" xml:space="preserve">
+    <value>変更がないので保存されませんでした</value>
+  </data>
+  <data name="help_form12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form12.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form12E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form12E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="STR_CHAR_TYPE_HIRAGANA" xml:space="preserve">
+    <value>ひらがな</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KANJI" xml:space="preserve">
+    <value>漢字</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KATAKANA" xml:space="preserve">
+    <value>カタカナ</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KATAKANA_SMALL" xml:space="preserve">
+    <value>小文字</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KIGO" xml:space="preserve">
+    <value>記号</value>
+  </data>
+  <data name="STR_CHAR_TYPE_UNKNOWN" xml:space="preserve">
+    <value>文字種不明</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTERWRAP" xml:space="preserve">
+    <value>{0} : {1} --&gt; {2} : {3}</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTERWRAP_QUERY" xml:space="preserve">
+    <value>{0} : {1} </value>
+  </data>
+  <data name="STR_MSG_TEXT_NEW" xml:space="preserve">
+    <value>新規作成ファイル</value>
+  </data>
+  <data name="STR_MSG_TEXT_READ" xml:space="preserve">
+    <value>ファイルエンコーディング={0}</value>
+  </data>
+  <data name="help_form13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form13.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form13E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form13E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;shift_jis</value>
+  </data>
+  <data name="STR_FILTER_WORDS" xml:space="preserve">
+    <value>語句ファイル(*.wrd)|*.wrd|すべてのファイル(*.*)|*.*</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_ROW_IGNORED" xml:space="preserve">
+    <value>{0} 行目にエラーがあります、合計 {1} 行のエラー</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_ERRVALUE" xml:space="preserve">
+    <value>キーは1文字、また ";" は使用できません({0})</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_DISCARD_WORDS_UPDATE" xml:space="preserve">
+    <value>変更がありました、破棄しますか</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_FILE_LINE_FORMAT" xml:space="preserve">
+    <value>ファイルの {0} 行目にエラーがあります</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_FILE_NO_SAVE_FILE" xml:space="preserve">
+    <value>この定義はファイルからロードしたものでは有りません、名前を付けて保存をしてください</value>
+  </data>
+  <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
+    <value>語句ファイルを読み込みました</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY" xml:space="preserve">
+    <value>語句定義に登録されていません(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY" xml:space="preserve">
+    <value>語句定義で有効になっていません(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY_SYMBOL" xml:space="preserve">
+    <value>記号入力ダイアログに登録されていません(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY_SYMBOL" xml:space="preserve">
+    <value>記号入力ダイアログで有効になっていません(Ctrl+{0})</value>
+  </data>
+  <data name="help_form14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form14.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form14E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form14E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="STR_LOAD" xml:space="preserve">
+    <value>ファイルから設定</value>
+  </data>
+  <data name="STR_SAVE" xml:space="preserve">
+    <value>上書き保存</value>
+  </data>
+  <data name="STR_SAVEAS" xml:space="preserve">
+    <value>別名保存</value>
+  </data>
+  <data name="STR_CUT" xml:space="preserve">
+    <value>切り取り</value>
+  </data>
+  <data name="STR_COPY" xml:space="preserve">
+    <value>複写</value>
+  </data>
+  <data name="STR_CUTPASTE" xml:space="preserve">
+    <value>切り取り-貼り付け</value>
+  </data>
+  <data name="STR_COPYPASTE" xml:space="preserve">
+    <value>複写-貼り付け</value>
+  </data>
+  <data name="STR_SEND" xml:space="preserve">
+    <value>転送</value>
+  </data>
+  <data name="STR_FILTER_SYMBOL" xml:space="preserve">
+    <value>記号ファイル(*.sym)|*.sym|すべてのファイル(*.*)|*.*</value>
+  </data>
+  <data name="Icon_i2kWRT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Icon-i2kWRT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Icon_i2k1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Icon-i2kWRT.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="help_Form15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_Form15.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_Form15E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_Form15E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;shift_jis</value>
+  </data>
+  <data name="WARN_EXTRACTED_NULLSTR" xml:space="preserve">
+    <value>読み取り結果は空でした</value>
+  </data>
+  <data name="STR_MSG_INFO_IMAGESAVE_FULL" xml:space="preserve">
+    <value>イメージ全体を保存:</value>
+  </data>
+  <data name="STR_MSG_INFO_IMAGESAVE_PARTIAL" xml:space="preserve">
+    <value>イメージの一部を保存:</value>
+  </data>
+  <data name="STR_MSG_ERR_DAKUON" xml:space="preserve">
+    <value>"{0}" は濁音置換の対象ではありません</value>
+  </data>
+  <data name="STR_MSR_WARN_CURSOR_POS" xml:space="preserve">
+    <value>カーソルをテキスト内においてください</value>
+  </data>
+  <data name="STR_MSG_ERR_NOT_FORM_OPENED" xml:space="preserve">
+    <value>変更しようとしている転送先のフォ-ムが開いていません</value>
+  </data>
+</root>

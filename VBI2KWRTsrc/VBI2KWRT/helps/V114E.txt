@@ -1,0 +1,15 @@
+V1.14 : Update                               2017/09/27
+
+. Support Kanji file of encoding = UTF-8.
+. Words Definition support.
+    On Kanji text form, register those words repeatedly used in the document.
+    Candidates are kanji character sometimes misrecognition occurs
+    at extracting from image, e.g. "三" may be recognized as "一二" 
+    When "Key"(One Alphabet Char,Case InSensitive) is registered,
+    Ctrl+Key sends "Phrase" to text box.
+    When the dialog is opened, "Send" button also send the "Phrase".
+. Miscellaneous.
+   .Cursor and Caret shape was changed.
+   .(Bug)It may scroll to top by Enter key at Kanji Form.
+   .(Bug)Form size is not restored at re-open.
+*********************************************************************************************

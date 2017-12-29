@@ -1,0 +1,194 @@
+'v128 2017/12/30 delete dperecated form(form6,9,10)
+			form1.vb
+'v127 2017/12/29 conv katakana+kanji+hiragana at once for the case yogore(to)ri
+			class5.vb
+'v126 2017/12/29 (Bug)char positioning err by BESstyle consideration for "..."
+			class5.vb
+'v125 2017/12/29 Ctrl+x fire keyDown when "d",KeyUp when "a","c"
+'                and Handle=True at KeyDown dose not suppress KeyUp event
+			class2.vb
+'v124 2017/12/29 why beep by Ctrl+x(word shortcut)
+			class2.vb
+'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form
+			form1.vb form14.vb form3.vb
+'v122 2017/12/29 show version on form1 title
+			class2.vb 
+'v121 2017/12/27 assign Ctrl+f also words definition from Find shortcut
+			class2.vb 
+'v120 2017/12/27 Msg:Not valid Ctrl+x is overridden by "" by display the char is target of F5 replacement 
+			class2.vb class1.vb
+'v119 2017/12/27 requires to set shortcutEnabled property of TextBox to off to use Ctrl+a for Word Definition shortcut
+'                protect Ctrl+F as word shortcut because it is assigned to FindNex
+			class2.vb
+'v118 2017/12/27 errmsg errmsg for not registered Ctrl+N(send word) on Form1 was not shown when Ctl+n on form1 is first of all
+'                swform1 was not set after New() form14 by dlgSymbol=Nothing
+           class2.vb form1.vb form14.vb
+'v117 2017/12/27 word dialog from also form1 as single instance
+           form1.vb form13.vb class2.vb
+'v116 2017/12/26 allow Symbol/word dialog open even though cursor pos invalid
+           class2.vb
+
+'v115 2017/12/26 support dakuon,handakuon key
+           Form5.vb class2.vb class1.vb Form1.vb
+'va04 2017/12/25 save cut image to file
+           Form2.vb class10.vb
+'v114 2017/12/22 add file menu button to kanji Text  form
+           Form3.vb form1.vb
+'v113 2017/12/22 put Zorder Top
+           Form1,vb form2.vb form3.vb form15.vb form8.vb
+'v112 2017/12/22 add file menu button to Image form
+           Form2.vb form1.vb 
+'v111 2017/12/22 embed handler by try-catch
+           Form1.vb form2.vb form3.vb form15
+'v110 2017/12/22 StringConstant reset required when lang changed
+           Form1.vb Form5.vb class6.vb main.vb form2.vb
+'v106 2017/12/20 partially extract from image(box by mouse dragging)
+           form15.vb form2.vb form3.vb class10.vb class11.vb
+'v105 2017/12/20 display char type not by f4 but automatically by keyup/mouseclick event
+           class2.vb class1.vb form1.vb form3.vb form5.vb form5.Designer.vb
+'v105 2017/12/20 support srch/rep word enclosed by quotation
+           form8.vb
+'v104 2017/12/20 drop space between chars of extracted text
+           class10.vb
+'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err
+           Form11.vb Form13.vb Form14.vb
+'v102 2017/12/16 (BUG)Enable/Disable check  of Dialog(Dictionary,Word,Symbol)
+           Form11.vb Form13.vb Form14.vb
+'v101 2017/12/16 Conversion warning
+'v100 2017/12/15 porting from MOD to Microsoft Ocr Library for Windows
+           class10.vb form2.vb form3.vb class7.vb
+V1.15 : 2017/10/27 released *******************************************************
+'v080 2017/10/10 (BUG)2nd paste after cut remove cut pos twice
+           form11.vb form13.vb 
+'v079 2017/10/10 class DataGridView
+           class9.vb form14.vb 
+'v078 2017/10/09 dialog status bar
+           class8.vb form13.vb form11.vb
+'v077 2017/10/08 Commit required when cut/copy
+           form13.vb form11.vb
+'v076 2017/10/08 Symbol Dialog by DataGridView
+           form14.vb class4.vb Form1.vb class2.vb
+'v075 2017/10/08 Set background color to Word dialog gridview
+           form13.vb
+'v074 2017/10/08 (Bug)Word Dialog cut&Paste word was not copyed(requires set button text)
+           form13.vb
+V1.14 : 2017/09/27 released *******************************************************
+'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel
+           form3.vb form13.vb Form1.vb
+'v073 2017/09/26 (Bug)ScrollToCaret will move Selectio start at botom of visible area,it sometimes scroll to top.
+           class2.vb
+'v072 2017/09/26 Display doc option at receive text
+           Form12.vb Form1.vb
+'v071 2017/09/26 (Bug) clush when send from SpecialCharDialog after form3 closed
+           Form3.vb Form1.vb
+'v070 2017/09/26 F3 for find dialog is configurable
+           Form5.vb class2.vb
+'v069 2017/09/26 save and restore clientsize
+           Form11.designner.vb Form13.designer.vb Form6.designer.vb
+'v068 2017/09/26 implement Debug trace
+           Form1.vb
+'v067 2017/09/25 change caret width
+           Form3.vb Form1.vb
+'v066 2017/09/25 (Bug)Dictionary dialog;if err line exist saveFile write "False"
+           Form11.vb
+'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")
+           Form13.vb Form3.vb class4.vb class2.vb form5.vb
+'v064 2017/09/24 (Bug) Doc option is not initialy applied
+           Form3.vb
+'v063 2017/09/24 support kanji file encoded by UTF8
+           Form3.vb Form12.vb
+'v062 2017/09/23 kanji repeated char "々" is not treated as kanji
+           class5.vb
+'v061 2017/09/23 Form1 showstatus for INFO_SHOW_TEXT
+           Form1.vb
+V1.03 : 2017/09/23 released *******************************************************
+'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02
+           class1.vb class2.vb
+'v052 2017/09/21 utilize status bar at bottom also on Form1
+           Form1.vb class1.vb
+'v051 2017/09/23 add "＋" and "十", "ソ" and "ン" to replace char
+           form3.vb
+'v050 2017/09/23 kanji form,saved msg to status bar
+           form3.vb
+V1.02 : 2017/09/23 released *******************************************************
+'v038 2017/09/22 (Bug)SpecialKey default is also F5 when text cleared
+           form5.vb
+'v037 2017/09/22 assign F4 as query of replacing char
+                 Forecolor have to be InactiveCaptureText to get effective for switching Text by language
+           form5.vb class1.vb class2.vb form3.vb
+'v036 2017/09/22 add for F5 ニ,ハ,ロ,ー,ト
+           class1.vb
+'v035 2017/09/21 additional to v017 when discard old=yes
+           Form3.vb 
+'v034 2017/09/21 utilize status bar at bottom for result of F5 on Form5
+           class1.vb Form3.vb 
+'v033 2017/09/21 insert space before katakana only when prev of katakana is josi or 2 sounds string;
+'                it is difficult,so no space insert berfore after katakana
+           class5.vb
+'v032 2017/09/21 English document, i2e was not used
+           Form2.vb Form1.vb Form3.vb class5.vb
+'v031 2017/09/21 katakana document, put no space before hiragana
+           class5.vb
+'v030 2017/09/21 new option dialog for each document
+           Form12.vb Form5.vb Form3.VB
+'v029 2017/09/18 like v025 send kanji+ツ(tsu)/ッ(tsu-small) to kanjiconvg
+           calss5.vb
+'v028 2017/09/19 He/Be replacement was supported by v026,so do not auto replacement 
+           calss5.vb
+'v027 2017/09/19 when all katakana document, all He/Be treate as katakana
+           calss5.vb
+'v026 2017/09/19 By F5,"り"(hiragana)<-->"リ"(katakana),"工"(kanji)-->"エ"(katakana)-->"ェ"(katakana-small)-->"工" (wrap),"力"(kanji)-->"カ"(katakana)-->"ヵ"(katakana)-->"力"(Wrap)
+           calss2.vb class1.vb
+'v025 2017/09/18 カ(ka)/ケ(ke)+kanji send to kanjiconvg
+           calss5.vb
+'v024 2017/09/18 appendspace have to chk space existing
+           calss5.vb
+'v023 2017/09/18 Not 3人->3hito but 3nin
+           calss5.vb
+'v022 2017/09/18 hirakata-Be,kanji+be allows next type(kanji+BE+kata-->kata,kanji+BE+hira->hira)
+           calss5.vb
+'v021 2017/09/18 conv katakana+kanji(case of indo-jin)
+           calss5.vb
+'v020 2017/09/18 for katakana document,treate katakana same as hiragana
+           calss5.vb
+'v019 2017/09/17 Try space before kanji if length>=3
+           calss5.vb
+'v018 2017/09/17 requires activate to move ImageView to top of z-order when next image open
+           form2.vb
+'v017 2017/09/17 Image2kanji issues already processed msg when saved even updated,it dose not allow re-i2k
+           form2.vb from3.vb
+'v016 2017/09/17 apply v014 for not only kanji conv out but also kana(it may by replaced by dictionary)
+           class5.vb
+'v015 2017/09/17 saveed evenif not updated
+           Form3.vb Form1.vb class5.vb
+'v014 2017/09/16 change "う" to "ー" if after "ゅ" or "ょ" (rule is widely after "う" row or "お" row)
+           calss5.vb
+'v013 2017/09/16 katakana "ー"(815b=u30fc) have to be assumed as hiraganais for BES99
+           calss5.vb
+'v013 2017/09/16 Cut&Paste support for Dictionary
+           Form11.vb
+'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file
+           Form11.vb Form1.vb Class4.vb
+'v011 2017/09/15 (Bug) Exit menu have to chk discard
+           Form1.vb
+'v010 2017/09/15 try another kanji->kana conversion(split by delm char,ignore crlf)
+           Class5.vb
+'v009 2017/09/12 hirgana Ri and katakana Ri is similar looking
+           Class5.vb
+'v008 2017/09/12 dictionary support
+           Form11.vb Form1.vb Form3.vb Form9.vb
+'v007 2017/09/12 duplicated confirm discard msg
+           Form3.vb
+'v006 2017/09/12 katakana okurigana is optional
+           class5.vb Form3.vb Form3.resx forma3.en-GB.resx
+           help_form3.txt help_form3E.txt
+'v005 2017/09/12 u30fc(ー) is katakana
+           class5.vb
+'v004 2017/09/12 hirgana He/Be and katakana He/Be are similar looking
+           class5.vb
+'v003 2017/09/11 dumplicated confirm save override msg for receive text
+           class5.vb
+'v002 2017/09/11 have to confirm when received text remaining
+           Form1.vb
+'v001 2017/09/11 consider continuing word over EOL
+           class5.vb
