@@ -1,5 +1,9 @@
 (UTF8 encoding)
 
+V2.03 : Update                               2017/12/31
+
+. Show string enclosed by Error() when Kanji->Kana translation error.
+
 V2.02 : Update                               2017/12/30
 
 . KanjiText->KanaText conversion hungs by combination of Chuten(・)

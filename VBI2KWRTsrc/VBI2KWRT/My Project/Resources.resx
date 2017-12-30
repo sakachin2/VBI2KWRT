@@ -490,4 +490,7 @@
   <data name="STR_MSG_ERR_NOT_FORM_OPENED" xml:space="preserve">
     <value>変更しようとしている転送先のフォ-ムが開いていません</value>
   </data>
+  <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
+    <value>かな変換エラーがありました("Error" で表示されています)</value>
+  </data>
 </root>

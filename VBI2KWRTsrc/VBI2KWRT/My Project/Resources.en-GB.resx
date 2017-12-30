@@ -417,4 +417,7 @@
   <data name="STR_MSG_ERR_NOT_FORM_OPENED" xml:space="preserve">
     <value>Target form switch to is not opened</value>
   </data>
+  <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
+    <value>Detected Kana conversion error(indicated by "Error")</value>
+  </data>
 </root>

@@ -1089,6 +1089,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  かな変換エラーがありました( &quot;Error&quot; で表示されています) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_KANACONV_FAILED() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_KANACONV_FAILED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  変更しようとしている転送先のフォ-ムが開いていません に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_MSG_ERR_NOT_FORM_OPENED() As String

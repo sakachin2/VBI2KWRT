@@ -1,5 +1,7 @@
-﻿'CID:''+v128R~:#72                             update#=  740;         ''~v128R~
+﻿'CID:''+v133R~:#72                             update#=  743;         ''~v128R~''~v132R~''~v133R~
 '************************************************************************************''~v002I~
+'v133 2017/12/30 (Bug)MRUList was synchronized; form1 selection-->form2/form3,form2/form3 selection-->form2/fornm3(for2/form-->form1 is OK but)''~v133I~
+'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
 'v128 2017/12/30 delete dperecated form(form6,9,10)                    ''~v128I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v122 2017/12/29 show version on form1 title                           ''~v122I~
@@ -34,7 +36,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.0.2"                                   ''~v122I~''+v128R~
+    Private Const VERSION = "v2.03"                                   ''~v122I~''~v128R~''+v133R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -552,7 +554,7 @@ Public Class Form1
                 insertMRUList(1, fnm)      '1:imagefile                ''~v112I~
                 openImageBoxForm2(fnm)                                 ''~v112I~
             End If                                                     ''~v112I~
-            formImage.updateMRUList()                                  ''~v112I~
+'*          formImage.updateMRUList()     'insrtMRU update Form2 filemanu                             ''~v112I~''~v133R~
         Catch ex As Exception                                          ''~v112I~
             Form1.exceptionMsg("Form1 MRU_Image for Form2", ex)        ''~v112I~
         End Try                                                        ''~v112I~
@@ -589,7 +591,7 @@ Public Class Form1
                 insertMRUList(2, fnm)      '2:kanji text               ''~v114I~
                 openTextBoxForm3(fnm)                                  ''~v114I~
             End If                                                     ''~v114I~
-            formText.updateMRUList()                                   ''~v114I~
+'*          formText.updateMRUList() '+insertMRUList update form2 open menu                                   ''~v114I~''~v133R~
         Catch ex As Exception                                          ''~v114I~
             Form1.exceptionMsg("Form MRU_Text for Form3", ex)          ''~v114I~
         End Try                                                        ''~v114I~
@@ -634,6 +636,16 @@ Public Class Form1
         MRU.insertMRUList(Pcase, Pfnm)      '                           ''~7522M~
         setMRUListMenu(Pcase)                                          ''~7411I~
         saveMRUList(Pcase)                                             ''~7411I~
+        Select Case Pcase                                              ''~v133I~
+            Case 1 'Image                                              ''~v133I~
+				if formIsAvailable(formImage)                          ''~v133I~
+					formImage.updateMRUList()  '*update form2 File menuitem''~v133I~
+                end if                                                 ''~v133I~
+            Case 2 'KanjiText                                          ''~v133I~
+				if formIsAvailable(formText)                           ''~v133I~
+					formText.updateMRUList()   '*update form3 File menuitem''~v133I~
+                end if                                                 ''~v133I~
+        End Select                                                     ''~v133I~
     End Sub                                                            ''~7411I~
 
     Private Sub loadMRUList()                                          ''~7522R~
@@ -1317,6 +1329,13 @@ Public Class Form1
             formText.showStatus(Pmsg)    '*Form3                       ''~v115I~
         End If                                                         ''~v115I~
     End Sub                                                            ''~v115I~
+    Public Shared Sub showStatusForChild(PswForm1 As Boolean, Pmsg As String, PswPending As Boolean) ''~v132I~
+        If PswForm1 Then                                               ''~v132I~
+            MainForm.showStatus(PswPending, Pmsg)    '*Form1             ''~v132I~
+        Else                                                           ''~v132I~
+            formText.showStatus(Pmsg)    '*Form3                       ''~v132I~
+        End If                                                         ''~v132I~
+    End Sub                                                            ''~v132I~
     Private Sub debugInit()                                            ''~v068I~
 #If DEBUG Then                                                              ''~v068I~
         Debug.Listeners.Remove("Default")                              ''~v068I~
@@ -1383,4 +1402,8 @@ Public Class Form1
             showTop(frm)                                               ''~v113I~
         End If                                                         ''~v113I~
     End Sub                                                            ''~v113I~
+    '*************************************************************     ''~v133I~
+    Public Shared Function formIsAvailable(Pform As Form) As Boolean           ''~v133I~
+        Return Not IsNothing(Pform) AndAlso Not Pform.IsDisposed()     ''~v133I~
+    End Function                                                            ''~v133I~
 End Class

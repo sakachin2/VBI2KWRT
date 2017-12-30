@@ -464,7 +464,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("7")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("9")>  _
         Public Property CFGF5_KeyWords() As Integer
             Get
                 Return CType(Me("CFGF5_KeyWords"),Integer)

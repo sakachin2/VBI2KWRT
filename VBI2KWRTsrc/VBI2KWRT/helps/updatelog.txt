@@ -1,3 +1,13 @@
+V2.0.3 : 2017/12/31 released *******************************************************
+'v134 2017/12/30 EOLCont is done before convKana(remaining crlf need not set to sbConv)
+			class5.vb
+'v133 2017/12/30 (Bug)MRUList was synchronized; form1 selection-->form2/form3,form2/form3 selection-->form2/fornm3(for2/form-->form1 is OK but)
+			form1.vb
+'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"
+'                ==>This is fixed by v134(real cause is passed str to conv with SIGN_CRLF)
+			class5.vb form1.vb
+'v131 2017/12/30 WordDialog key value was not 9 but 7(My property\setting)
+V2.0.2 : 2017/12/30 released *******************************************************
 'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only
 			class2.vb
 'v129 2017/12/30 (BUG)When Chuten+{mamimumemo}(fuseji),next pos was not updated despite of return true==>Loop
@@ -18,13 +28,14 @@ V2.0.1 : 2017/12/30 released ***************************************************
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form
 			form1.vb form14.vb form3.vb
 'v122 2017/12/29 show version on form1 title
-			class2.vb 
+			form1.vb
 'v121 2017/12/27 assign Ctrl+f also words definition from Find shortcut
 			class2.vb 
 'v120 2017/12/27 Msg:Not valid Ctrl+x is overridden by "" by display the char is target of F5 replacement 
 			class2.vb class1.vb
 'v119 2017/12/27 requires to set shortcutEnabled property of TextBox to off to use Ctrl+a for Word Definition shortcut
 '                protect Ctrl+F as word shortcut because it is assigned to FindNex
+'                ==>msvs2010 is no problem
 			class2.vb
 'v118 2017/12/27 errmsg errmsg for not registered Ctrl+N(send word) on Form1 was not shown when Ctl+n on form1 is first of all
 '                swform1 was not set after New() form14 by dlgSymbol=Nothing
@@ -33,7 +44,6 @@ V2.0.1 : 2017/12/30 released ***************************************************
            form1.vb form13.vb class2.vb
 'v116 2017/12/26 allow Symbol/word dialog open even though cursor pos invalid
            class2.vb
-
 'v115 2017/12/26 support dakuon,handakuon key
            Form5.vb class2.vb class1.vb Form1.vb
 'va04 2017/12/25 save cut image to file

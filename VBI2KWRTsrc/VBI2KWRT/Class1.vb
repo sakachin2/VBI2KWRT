@@ -1,6 +1,7 @@
-﻿'CID:''+v120R~:#72                          update#=  270;            ''+v120R~
+﻿'CID:''+v120R~:#72                          update#=  272;            ''~v120R~
 '************************************************************************************''~v026I~
-'v120 2017/12/27 Msg:Not valid Ctrl+x is overridden by "" by display the char is target of F5 replacement''+v120I~
+'v131 2017/12/30 WordDialog key value was not 9 but 7(My property\setting)''~v120I~
+'v120 2017/12/27 Msg:Not valid Ctrl+x is overridden by "" by display the char is target of F5 replacement''~v120I~
 'v115 2017/12/26 support dakuon,handakuon key                          ''~v115R~
 'v105 2017/12/20 display char type not by f4 but automatically by keyup/mouseclick event''~v105I~
 'v101 2017/12/16 Conversion warning                                    ''~v052I~
@@ -153,8 +154,10 @@ Public Class FormatBES                                                 ''~7421I~
     Public Shared STR_DAKUON_TGT As String = "がぎぐげござじずぜぞだぢづでどばびぶべぼヴヷヸヹヺ" ''~7428R~''~7430R~''~7525R~''~7607R~
     Public Shared STR_DAKUON_TGT_KATAKANA As String = "ガギグゲゴザジズゼゾダヂヅデドバビブベボヴヷヸヹヺ" ''~7525I~''~7607R~
     Private STR_COMPOSIT2 As String = "ゃゅょぁぃぅぇぉ"                   ''~7427I~''~7430R~
-    Private STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~7501R~''~7525R~
-    Private STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~7501R~''~7525R~
+'*  Private STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~7501R~''~7525R~''~v120R~
+'*  Private STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~7501R~''~7525R~''~v120R~
+    Public  Shared STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ"''+v120R~
+    Public  Shared STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ"''+v120R~
     Private STR_SMALL_LETTER_HANKATA As String = "ｧｨｩｪｫｬｭｮｯ"           ''~7501I~
     Private STR_LARGE_LETTER_HIRA As String = "あいうえおやゆよつわかけ"   ''~7501I~''~7525R~
     Private STR_LARGE_LETTER_KATA As String = "アイウエオヤユヨツワカケ"  ''~7501I~''~7525R~
@@ -1156,8 +1159,8 @@ Public Class FormatBES                                                 ''~7421I~
         Return False                                                   ''~v037I~
     End Function                                                       ''~v037I~
     '*********************************************************************''~v105I~
-'*  Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean) As Boolean ''~v105I~''+v120R~
-    Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean,PmsgClear as Boolean) As Boolean''+v120I~
+'*  Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean) As Boolean ''~v105I~''~v120R~
+    Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean,PmsgClear as Boolean) As Boolean''~v120I~
         Dim cvch As Char                                               ''~v105I~
         Dim msg As String = ""                                           ''~v105I~
         Dim rc As Boolean = False                                       ''~v105I~
@@ -1167,13 +1170,13 @@ Public Class FormatBES                                                 ''~7421I~
             msg = String.Format(msg, strSrc, Pch)                      ''~v105I~
             rc = True                                                    ''~v105I~
         End If                                                         ''~v105I~
-      if rc orelse PmsgClear                                           ''+v120I~
+      if rc orelse PmsgClear                                           ''~v120I~
         If PswForm1 Then                                                    ''~v105I~
             Form1.MainForm.showStatus(msg)                             ''~v105I~
         Else                                                           ''~v105I~
             Form1.formText.showStatus(msg)                             ''~v105I~
         End If                                                         ''~v105I~
-      End If                                                           ''+v120I~
+      End If                                                           ''~v120I~
         Return rc                                                      ''~v105I~
     End Function                                                       ''~v105I~
     '*********************************************************************''~v105I~
