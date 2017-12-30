@@ -1,7 +1,8 @@
-﻿'CID:''+v125R~:#72                          update#=  245;            ''~v125R~
+﻿'CID:''+v130R~:#72                          update#=  247;            ''+v130R~
 '************************************************************************************''~v026I~
+'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only''+v130I~
 'v125 2017/12/29 Ctrl+x fire keyDown when "d",KeyUp when "a","c"       ''~v125I~
-'                and Handle=True at KeyDown dose not suppress KeyUp event''+v125I~
+'                and Handle=True at KeyDown dose not suppress KeyUp event''~v125I~
 'v124 2017/12/29 why beep by Ctrl+x(word shortcut)                     ''~v124I~
 'v121 2017/12/27 assign Ctrl+f also words definition from Find shortcut''~v121I~
 'v120 2017/12/27 Msg:Not valid Ctrl+x is overridden by "" by display the char is target of F5 replacement''~v120I~
@@ -393,7 +394,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         len = rect.Y                                                     ''~7514I~
         swKeyBS = False                                                  ''~7506I~
         swDeleteCRLF = False                                             ''~7513I~
-        Trace.W("Class2 KeyDown key=" & e.KeyCode.ToString())          ''~v117I~
+'*      Trace.W("Class2 KeyDown key=" & e.KeyCode.ToString())          ''~v117I~''~v125R~
         Select Case e.KeyCode                                          ''~7506M~
             Case Keys.None                                             ''~7521I~
             Case Keys.Delete                                           ''~7506M~
@@ -431,8 +432,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 End If                                                 ''~7521I~
             Case Else                                                  ''~v124I~
                 '*              If setWordKeyUp(e) Then                                ''~v124I~''~v125R~
-                If setWordKeyUp(e, False) >= 0 Then    'Ctrl+alpha key despite of defined as shortcut''+v125R~
-                    Trace.W("KeyDown handled Ctrl+alpha")              ''~v125R~
+                If setWordKeyUp(e, False) >= 0 Then    'Ctrl+alpha key despite of defined as shortcut''~v125R~
+'*                  Trace.W("KeyDown handled Ctrl+alpha")              ''~v125R~
                     e.Handled = True            '*bypass keyup           ''~v124I~
                     e.SuppressKeyPress = True '*bypass press event     ''~v124I~
                     Exit Sub                                           ''~v124I~
@@ -455,7 +456,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         Dim specialStrIndex As Integer = -1                              ''~7525I~
         Dim str As String                                              ''~7525I~
         key = e.KeyCode                                                ''~v116I~
-        Trace.W("Class2 KeyUp key=" & e.KeyCode.ToString())            ''~v117I~
+'*      Trace.W("Class2 KeyUp key=" & e.KeyCode.ToString())            ''~v117I~''~v125R~
         If key = FormOptions.keySpecialCharKey Then                           ''~v116I~
             showDialogSpecialKey()                                     ''~v116I~
             Exit Sub                                                   ''~v116I~
@@ -510,7 +511,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     '*                  If setWordKeyUp(e) Then                            ''~v119I~''~v124R~
                     '*                      Exit Sub                                       ''~v119I~''~v124R~
                     '*                  End If                                             ''~v119I~''~v124R~
-                    If setWordKeyUp(e, True) >= 0 Then                  ''+v125R~
+                    If setWordKeyUp(e, True) >= 0 Then                  ''~v125R~
                         Exit Sub                                       ''~v125I~
                     End If                                             ''~v125I~
                     showCharType(key, ch)                               ''~v105I~
@@ -550,7 +551,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         End If                                                         ''~7525I~
     End Sub                                                            ''~7501I~''~7506M~
     Public Sub TB_KeyPress(e As System.Windows.Forms.KeyPressEventArgs) ''~7506M~
-        Trace.W("Class2 KeyPress key=" & e.KeyChar)                    ''~v117I~
+'*      Trace.W("Class2 KeyPress key=" & e.KeyChar)                    ''~v117I~''~v125R~
 #If False Then      'Ctrl+A generate KeyPress only                          ''~v119I~
         If setWord(e.KeyChar) Then                                          ''~v065R~
             e.Handled = True                                           ''~v065R~
@@ -594,7 +595,9 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 rc = True                                                ''~7506I~
             End If                                                     ''~7506M~
         Else                                                           ''~7525R~
-            If PkeyBS Then                                                  ''~7525I~
+            If ch = FormatBES.CHAR_LF AndAlso Plen > 0 Then   '*0x0a                      ''+v130I~
+            Else                                                           ''+v130I~
+                If PkeyBS Then                                                  ''~7525I~
                 If ch = FormatBES.CHAR_LF Then   'del by backspace     ''~7525I~
                     TB.SelectionStart = pos - 1 'pos of CHAR_CR        ''~7525R~
                     TB.SelectionLength = vbCrLf.Length                 ''~7525I~
@@ -604,6 +607,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     rc = True                                          ''~7525R~
                 End If                                                 ''~7525R~
             End If                                                     ''~7525I~
+        End If                                                         ''+v130I~
         End If                                                         ''~7525I~
         Return rc                                                      ''~7506I~
     End Function                                                       ''~7506R~
@@ -711,7 +715,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     End Function                                                            ''~v065I~
     '**************************************************************************''~v119I~
     '*  Public Function setWordKeyUp(e As System.Windows.Forms.KeyEventArgs) As Boolean ''~v119I~''~v125R~
-    Public Function setWordKeyUp(e As System.Windows.Forms.KeyEventArgs, PswKeyup As Boolean) As Integer ''+v125R~
+    Public Function setWordKeyUp(e As System.Windows.Forms.KeyEventArgs, PswKeyup As Boolean) As Integer ''~v125R~
         If (e.Modifiers And Keys.Control) <> Keys.Control Then              ''~v119I~
             '*          Return False                                               ''~v119I~''~v125R~
             Return -1                                                  ''~v125I~
@@ -721,13 +725,13 @@ Public Class ClassUndoRedo                                             ''~7429R~
             '*          Return False                                               ''~v119I~''~v125R~
             Return -1                                                  ''~v125I~
         End If                                                         ''~v119I~
-        If Not PswKeyup Then   '*keydown                                    ''+v125I~
-            Return 0      'suppress Keypress;shortcut of Words in spite of it is defined as shortcut''+v125I~
-        End If                                                         ''+v125I~
+        If Not PswKeyup Then   '*keydown                                    ''~v125I~
+            Return 0      'suppress Keypress;shortcut of Words in spite of it is defined as shortcut''~v125I~
+        End If                                                         ''~v125I~
         Dim ch As Char = ChrW(key - Keys.A + 1)                          ''~v119R~
         '       Return setWord(ch)                                             ''~v119I~''~v125R~
         Dim rc As Boolean = setWord(ch)                                  ''~v125I~
-        Trace.W("setWordKeyUp by Ctrl+Alpha swtWord rc=" & rc & ",ch=" & e.KeyCode) ''~v125R~
+'*      Trace.W("setWordKeyUp by Ctrl+Alpha swtWord rc=" & rc & ",ch=" & e.KeyCode)''~v125R~
         If rc Then                                                          ''~v125I~
             Return 1                                                   ''~v125I~
         End If                                                         ''~v125I~

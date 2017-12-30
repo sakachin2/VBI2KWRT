@@ -1,8 +1,0 @@
-V2.01 : 変更点                                      2017/12/21
-
-・OCR 機能を "SharePoint Designer 2007" MODI から
-  "Microsoft OCR Llibrary for Windows" に切り替え
-  Windows10 Version 1511 (2015/11)以降が必要です
-  .Net Framework は 4.6.1
-・インストール方法を ClickOnce から msi に変更
-・マウスで囲んだ範囲を部分読み取りする機能の追加

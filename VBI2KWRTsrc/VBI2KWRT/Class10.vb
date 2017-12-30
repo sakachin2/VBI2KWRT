@@ -1,4 +1,4 @@
-﻿'CID:''+va05R~:#72                             update#=  158;         ''~va04R~''~va05R~
+﻿'CID:''+va05R~:#72                             update#=  159;         ''~va04R~''~va05R~
 '************************************************************************************''~v026I~''~v100I~
 'va05 2017/12/26 ext name Jpeg-->jpg,icon-->ico,tiff->tif              ''~va05I~
 'va04 2017/12/25 save cut image to file                                ''~va04I~
@@ -119,11 +119,11 @@ Public Class Cocr
 #Else                                                                  ''~va04I~
         Dim bmp As Bitmap = cutImage(PorgBMP, tgtRect)                 ''~va04I~
 #End If                                                                ''~va04I~
-        Trace.W("cutBMPRect org W=" & PorgBMP.Width & ",H=" & PorgBMP.Height) ''~v106I~
-        Trace.W("cutBMPRect clipRect X=" & clipRect.X & ",Y=" & clipRect.Y & ",W=" & clipRect.Width & ",H=" & clipRect.Height) ''~v106I~
-        Trace.W("cutBMPRect scale=" & scaleNew)                        ''~v106I~
-        Trace.W("cutBMPRect xx=" & xx & ",yy=" & yy & ",ww=" & ww & ",hh=" & hh) ''~v106I~
-        Trace.W("cutBMPRect clip W=" & bmp.Width & ",H=" & bmp.Height) ''~v106I~
+'*      Trace.W("cutBMPRect org W=" & PorgBMP.Width & ",H=" & PorgBMP.Height) ''~v106I~''+va05R~
+'*      Trace.W("cutBMPRect clipRect X=" & clipRect.X & ",Y=" & clipRect.Y & ",W=" & clipRect.Width & ",H=" & clipRect.Height) ''~v106I~''+va05R~
+'*      Trace.W("cutBMPRect scale=" & scaleNew)                        ''~v106I~''+va05R~
+'*      Trace.W("cutBMPRect xx=" & xx & ",yy=" & yy & ",ww=" & ww & ",hh=" & hh) ''~v106I~''+va05R~
+'*      Trace.W("cutBMPRect clip W=" & bmp.Width & ",H=" & bmp.Height) ''~v106I~''+va05R~
         '       bmp.Save("W:\cutbmprect.bmp", ImageFormat.BMP) '@@@@test       ''~v106I~
         Return bmp                                                     ''~v106I~
     End Function                                                       ''~v106I~
@@ -351,24 +351,24 @@ Public Class Cocr
     End Function                                                       ''~va04I~
     '*************************************************************     ''~va04I~
     Public Function getImageFormat(Pfmt As ImageFormat) As String      ''~va04I~
-        If Pfmt.equals(ImageFormat.Jpeg) Then                          ''+va05I~
-            Return "jpg"                                               ''+va05I~
-        End If                                                         ''+va05I~
-        If Pfmt.equals(ImageFormat.Icon) Then                          ''+va05I~
-            Return "ico"                                               ''+va05I~
-        End If                                                         ''+va05I~
-        If Pfmt.equals(ImageFormat.Tiff) Then                          ''+va05I~
-            Return "tif"                                               ''+va05I~
-        End If                                                         ''+va05I~
-        If Pfmt.equals(ImageFormat.Png) Then                           ''+va05I~
-            Return "png"       '*lowercase                             ''+va05I~
-        End If                                                         ''+va05I~
-        If Pfmt.equals(ImageFormat.Bmp) Then                           ''+va05I~
-            Return "bmp"       '*lowercase                             ''+va05I~
-        End If                                                         ''+va05I~
-        If Pfmt.equals(ImageFormat.Gif) Then                           ''+va05I~
-            Return "gif"       '*lowercase                             ''+va05I~
-        End If                                                         ''+va05I~
+        If Pfmt.equals(ImageFormat.Jpeg) Then                          ''~va05I~
+            Return "jpg"                                               ''~va05I~
+        End If                                                         ''~va05I~
+        If Pfmt.equals(ImageFormat.Icon) Then                          ''~va05I~
+            Return "ico"                                               ''~va05I~
+        End If                                                         ''~va05I~
+        If Pfmt.equals(ImageFormat.Tiff) Then                          ''~va05I~
+            Return "tif"                                               ''~va05I~
+        End If                                                         ''~va05I~
+        If Pfmt.equals(ImageFormat.Png) Then                           ''~va05I~
+            Return "png"       '*lowercase                             ''~va05I~
+        End If                                                         ''~va05I~
+        If Pfmt.equals(ImageFormat.Bmp) Then                           ''~va05I~
+            Return "bmp"       '*lowercase                             ''~va05I~
+        End If                                                         ''~va05I~
+        If Pfmt.equals(ImageFormat.Gif) Then                           ''~va05I~
+            Return "gif"       '*lowercase                             ''~va05I~
+        End If                                                         ''~va05I~
         Dim fmt As String = Pfmt.ToString()                            ''~va04I~
         Return fmt                                                     ''~va04I~
     End Function                                                       ''~va04I~

@@ -1,6 +1,8 @@
-﻿''*CID:''+v127R~:#72                          update#=  241;          ''~v126R~''+v127R~
+﻿''*CID:''+v129R~:#72                          update#=  244;          ''~v129R~
 '************************************************************************************''~v001I~
-'v127 2017/12/29 conv katakana+kanji+hiragana at once for the case yogore(to)ri''+v127I~
+'v129 2017/12/30 (BUG)When Chuten+{mamimumemo}(fuseji),next pos was not updated despite of return true==>Loop''~v129I~
+'                     But fuseji consideration not required for kanji text. it is tenji logic.''~v129I~
+'v127 2017/12/29 conv katakana+kanji+hiragana at once for the case yogore(to)ri''~v127I~
 'v126 2017/12/29 (Bug)char positioning err by BESstyle consideration for "..."''~v126I~
 'v101 2017/12/16 Conversion warning                                    ''~v101I~
 'v062 2017/09/23 kanji repeated char "々" is not treated as kanji      ''~v062I~
@@ -501,7 +503,7 @@ Public Class ClassKanaText                                             ''~7522R~
                 If swKanjiSpace Then                                   ''~v019R~
                     sbConv = insertKanjiSpace(sbConv, chcode, prevchcode, swprevkanji, poskanji, ctrkanji) ''~v019R~
                 End If                                                 ''~v019R~
-                Trace.W("Conv2kanaM2 chcode=" & chcode & ",chii=" & chii) ''~v101I~
+                '*              Trace.W("Conv2kanaM2 chcode=" & chcode & ",chii=" & chii) ''~v101I~''+v129R~
                 Select Case chcode                                     ''~v010I~
                     Case 1, 3 'kanji                                    ''~v010R~
                         '                       If swprevkatakana AndAlso Not swKatakanaDoc Then 'katakana+kanji''~v010I~''~v021R~''~v030R~
@@ -520,7 +522,7 @@ Public Class ClassKanaText                                             ''~7522R~
                     Case 2  'hiraganaOkurigana                         ''~v010I~
                         If swKatakanaDoc Then                            ''~v031I~
                         Else                                             ''~v031I~
-#If False Then                                                              ''+v127I~
+#If False Then                                                              ''~v127I~
                             '                       If swprevkatakana Then                              ''~v010R~''~v021R~
                             If katakanactr > 0 Then                               ''~v021I~
                                 '                           strConvM2(sb, sbConv, swkanji)                      ''~v010I~''~v021R~
@@ -532,7 +534,7 @@ Public Class ClassKanaText                                             ''~7522R~
                             '                                   appendSpace(sb, 1)                     ''~v010I~''~v033R~
                             '                               End If                                     ''~v010R~''~v033R~
                             '                           End If                                         ''~v010I~''~v033R~
-#End If                                                                ''+v127I~
+#End If                                                                ''~v127I~
                         End If                                           ''~v031I~
                         '                       Trace.W("conv2kanaM2 hira appendto SbConv chii=" & chii)            ''~v010I~''~v029R~
                         sbConv.Append(chii)                            ''~v010I~
@@ -569,7 +571,7 @@ Public Class ClassKanaText                                             ''~7522R~
                         '                       strConvM2(sb, sbConv, swkanji)                          ''~v010I~''~v021R~
                         Dim swSplit As Boolean = isSplitter(chii) 'string terminator''~v023I~
                         '                       If swSplit OrElse katakanactr Then                  ''~v023R~''~v101R~
-                        Trace.W("swSplit=" & swSplit & ",katakanactr=" & katakanactr) ''~v101I~
+                        '*                      Trace.W("swSplit=" & swSplit & ",katakanactr=" & katakanactr) ''~v101I~''+v129R~
                         If swSplit OrElse katakanactr <> 0 Then          ''~v101I~
                             strConvM2(sb, sbConv, swkanji, katakanactr)     ''~v021I~
                             swkanji = False                                  ''~v010I~
@@ -577,16 +579,16 @@ Public Class ClassKanaText                                             ''~7522R~
                         '                       Trace.W("conv2kanaM2 kata appendto Sb chii=" & chii)                ''~v010I~''~v029R~
 
                         If chkBES99Style(chars, ii, sb, nextpos) Then  ''~v010I~
-                            Trace.W("chkBES99Style ii=" & ii & ",nextpos=" & nextpos) ''~v101I~
+                            '*                          Trace.W("chkBES99Style ii=" & ii & ",nextpos=" & nextpos) ''~v101I~''+v129R~
                             ii = nextpos    'skip exausted space for required by kuten etc''~v010I~
                         Else                                           ''~v010I~
                             If swSplit Then                                   ''~v023I~
                                 sb.Append(chii)                            ''~v010R~
                                 ''~v101I~
-                                Trace.W("conv2kanaM2 swsplit chcode=" & chcode & ",sb append=" & chii) ''~v101R~
+                                '*                              Trace.W("conv2kanaM2 swsplit chcode=" & chcode & ",sb append=" & chii) ''~v101R~''+v129R~
                             Else                                         ''~v023I~
                                 sbConv.Append(chii)  'translate with following string''~v023I~
-                                Trace.W("conv2kanaM2 sbconv.Append chii=" & chii) ''~v101I~
+                                '*                              Trace.W("conv2kanaM2 sbconv.Append chii=" & chii) ''~v101I~''+v129R~
                             End If                                       ''~v023I~
                         End If                                         ''~v010I~
                 End Select                                             ''~v010I~
@@ -703,11 +705,11 @@ Public Class ClassKanaText                                             ''~7522R~
         Dim kanastr As String                                          ''~v010M~
         Dim rc As Boolean = False                                        ''~v010I~
         If PsbConv.Length > 0 Then                                            ''~v010I~
-            Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v101R~
+            '*          Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v101R~''+v129R~
             If PswKanji Then 'detected kanji                           ''~v010I~
                 Dim kanjistr As String = PsbConv.ToString()              ''~v010I~
                 kanastr = strConv(Psb, kanjistr)                         ''~v010I~
-                Trace.W("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v010I~''~v029R~''~v101R~
+                '*              Trace.W("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v010I~''~v029R~''~v101R~''+v129R~
                 '               Debug.WriteLine("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v033I~''~v101R~
                 '               If DocOptions.swBES99 Then                         ''~v014I~''~v016R~''~v030R~
                 '                   kanastr = applyBES99_U2Choon(kanastr)                ''~v014I~''~v016R~
@@ -721,15 +723,15 @@ Public Class ClassKanaText                                             ''~7522R~
                         End If                                         ''~v021I~
                     End If                                             ''~v021I~
                     Psb.Append(kanastr.Substring(Ppkatakanactr, kanastr.Length - Ppkatakanactr)) ''~v021R~
-                    Trace.W("strConvM2  kanji katakana append to Psb=" & Psb.ToString()) ''~v101R~
+                    '*                  Trace.W("strConvM2  kanji katakana append to Psb=" & Psb.ToString()) ''~v101R~''+v129R~
                 Else                                                     ''~v021I~
                     Psb.Append(kanastr)                                    ''~v010I~
-                    Trace.W("strConvM2  kanji no katakana append to Psb=" & Psb.ToString()) ''~v101R~
+                    '*                  Trace.W("strConvM2  kanji no katakana append to Psb=" & Psb.ToString()) ''~v101R~''+v129R~
                 End If                                                    ''~v021I~
                 rc = True                                                ''~v010I~
             Else                                                       ''~v010I~
                 Psb.Append(PsbConv)                                    ''~v010I~
-                Trace.W("strConvM2 No kanji append to Psb=" & Psb.ToString()) ''~v101R~
+                '*              Trace.W("strConvM2 No kanji append to Psb=" & Psb.ToString()) ''~v101R~''+v129R~
             End If                                                     ''~v010I~
             PsbConv.Clear()                                            ''~v010I~
             Ppkatakanactr = 0                                             ''~v021I~
@@ -895,9 +897,12 @@ Public Class ClassKanaText                                             ''~7522R~
                 '*              Ppnextpos = Ppos + 3                                   ''~7608I~''~v126R~
                 Ppnextpos = Ppos + 2 '* ii+1 after exit(cunsume following 2)''~v126I~
                 '#if false                                                              ''~7608I~''~7610R~
+#If False Then                                                              ''~v129I~
             ElseIf isFuseji(Pcharray, Ppos) Then                             ''~7608I~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                      ''~7608I~
+                Ppnextpos = Ppos  '* missing,caused loop               ''~v129I~
                 '#end if                                                                ''~7608I~''~7610R~
+#End If                                                                ''~v129I~
             Else                                                       ''~7608I~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                          ''~7605I~''~7608R~
                 ctr = getSpaceCtrForKuten(Pcharray, Ppos, 1)               ''~7605I~''~7608R~

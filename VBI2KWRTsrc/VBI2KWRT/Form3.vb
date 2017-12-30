@@ -1,4 +1,4 @@
-﻿'CID:''+v123R~:#72                             update#=  381;         ''~v123R~
+﻿'CID:''+v123R~:#72                             update#=  382;         ''~v123R~
 '************************************************************************************''~v006I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v114 2017/12/22 add file menu button to kanji Text  form              ''~v114I~
@@ -645,8 +645,8 @@ Public Class Form3
         End If                                                         ''~7515I~
     End Sub                                                            ''~7515I~
     Public Sub showSpecialKeyDialog()                                  ''~7515I~
-'*      Form1.MainForm.dlgSpecialKey.showForForm3(Me)                           ''~7515R~''~7521R~''+v123R~
-        Form14.dlgSymbol.showForForm3(Me)                              ''+v123I~
+'*      Form1.MainForm.dlgSpecialKey.showForForm3(Me)                           ''~7515R~''~7521R~''~v123R~
+        Form14.dlgSymbol.showForForm3(Me)                              ''~v123I~
     End Sub                                                            ''~7515I~
     Private Sub ToolStripMenuItemSpecialChar_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemSpecialChar.Click ''~7515I~
         Try                                                            ''~v111I~
@@ -750,10 +750,10 @@ Public Class Form3
     '    End Sub                                                            ''~v006I~''~v030R~
     Public Sub showStatus(Pmsg As String)                              ''~v034I~
         ToolStripStatusLabel1.Text = Pmsg                                ''~v034I~
-        Trace.W("Form3:showStatus =" & Pmsg)                            ''~v114I~
+'*      Trace.W("Form3:showStatus =" & Pmsg)                            ''~v114I~''+v123R~
     End Sub                                                       ''~v034I~
     Public Sub showStatus(PswLater As Boolean, Pmsg As String)          ''~v034I~
-        Trace.W("Form3:showStatus swlater=" & PswLater & ",msg=" & Pmsg) ''~v114I~
+'*      Trace.W("Form3:showStatus swlater=" & PswLater & ",msg=" & Pmsg) ''~v114I~''+v123R~
         If (PswLater) Then                                                  ''~v034I~
             pendingStatusMsg = Pmsg                                    ''~v034I~
         Else                                                           ''~v034I~

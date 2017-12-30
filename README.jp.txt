@@ -1,4 +1,8 @@
 (UTF8 encoding)
+V2.02 : 変更点                                      2017/12/30
+
+・中点のあとが ま行の文字の時ハングする
+
 V2.01 : 変更点                                      2017/12/27
 
 ・OCR 機能を "SharePoint Designer 2007" MODI から

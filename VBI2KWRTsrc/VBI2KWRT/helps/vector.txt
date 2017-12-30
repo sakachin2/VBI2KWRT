@@ -1,21 +1,13 @@
 文書読み取り機能+かな変換機能で
 スキャナーで読み取ったイメージファイルから漢字かな混じり文を読み取って
-WinBES99 のためのかな入力ファイルを作成するツールです
+点字ツール:WinBES99 のためのかな入力ファイルを作成するツールです
+SetupVBI2KWRT.msi を 実行してインストールしてください
+デスクトップに実行ファイルのショートカットが作成されます
 
-イメージファイルは"Windows Fax と スキャン" で スキャナーから得られます
-文書読み取り機能を使用する場合は
-"Microsoft Office Document Imaging"(MODI) がインストールされている必要があります
-尚、Microsoft Office Document Imaging や MicrosoftOffice Document Scanning や
-Microsoft OneNote(無料) でも イメージファイルからテキストを読み取ることができます
-それを利用する場合はMODIのインストールは不要です
-OneNoteの品質は良くないようです
+文書読み取り機能は OCR engine:"Microsoft OCR Llibrary for Windows"を使用、
+Windows10 Version 1511 (2015/11)以降が必要です
+.Net Framework は 4.6.1
 
-証明書がプライベートなので "発行元を確認できません" がでます。
-心配な方はウイルスチェックをかけてください
-ソースはGitHubにあります
+ソースはGitHubにあります(sakachin2/VBI2KWRT)
 
-MODIのインストール
-ここで(https://support.microsoft.com/ja-jp/help/982760/install-modi-for-use-with-microsoft-office-2010)
-方法が記述されています
-SharePointDesigner2007 のサポート期限は 2017/10/10 だそうです 
-GitHub sakachin2/VBI2K/staff に分割保存しています
+2017/12/30

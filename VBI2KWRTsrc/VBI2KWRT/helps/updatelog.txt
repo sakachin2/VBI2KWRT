@@ -1,3 +1,9 @@
+'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only
+			class2.vb
+'v129 2017/12/30 (BUG)When Chuten+{mamimumemo}(fuseji),next pos was not updated despite of return true==>Loop
+'                     But fuseji consideration not required for kanji text. it is tenji logic.
+			class5.vb
+V2.0.1 : 2017/12/30 released *******************************************************
 'v128 2017/12/30 delete dperecated form(form6,9,10)
 			form1.vb
 'v127 2017/12/29 conv katakana+kanji+hiragana at once for the case yogore(to)ri

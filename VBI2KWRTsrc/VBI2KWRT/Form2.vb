@@ -1,6 +1,6 @@
-﻿'CID:''+va06R~:#72                             update#=  240;         ''+va06R~
+﻿'CID:''+va06R~:#72                             update#=  241;         ''~va06R~
 '************************************************************************************''~v017I~
-'va06 2017/12/26 ajust filter index by original extension              ''+va06I~
+'va06 2017/12/26 ajust filter index by original extension              ''~va06I~
 'va04 2017/12/25 save cut image to file                                ''~va04I~
 'va01 2017/12/25 mousedow did not cleared swRectBMP(do partial extracting)''~va01I~
 'v113 2017/12/22 put Zorder Top                                        ''~v112I~
@@ -920,9 +920,9 @@ Public Class Form2
         End If                                                         ''~v106I~
         Dim oldbmp = bmpForRect                                        ''~v106I~
         bmpForRect = DirectCast(Pbmp.Clone(), Bitmap)                  ''~v106I~
-        Trace.W("saveRectBMP  new bmpForRect Hashcode:" & bmpForRect.GetHashCode()) ''~v106I~
+'*      Trace.W("saveRectBMP  new bmpForRect Hashcode:" & bmpForRect.GetHashCode()) ''~v106I~''+va06R~
         If oldbmp IsNot Nothing Then                                   ''~v106I~
-            Trace.W("saveWordBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~v106I~
+'*          Trace.W("saveWordBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~v106I~''+va06R~
             oldbmp.Dispose()                                           ''~v106I~
         End If                                                         ''~v106I~
     End Sub                                                            ''~v106I~
@@ -976,7 +976,7 @@ Public Class Form2
             Exit Sub              'not yet open image file             ''~v106I~
         End If                                                         ''~v106I~
         Dim bmprect As Bitmap = bmpForRect 'rectangle free bitmap      ''~v106I~
-        Trace.W("PBmouseDown bmpForRect=" & bmprect.ToString() & ",swWordBMP=" & swWordBMP) ''~v106I~
+'*      Trace.W("PBmouseDown bmpForRect=" & bmprect.ToString() & ",swWordBMP=" & swWordBMP) ''~v106I~''+va06R~
         iIC.mouseDown(e, bmprect)                                      ''~v106I~
         setPictureBoxImageRect(bmprect, True) 'clear old box           ''~v106R~
     End Sub                                                            ''~v106I~
@@ -1039,7 +1039,7 @@ Public Class Form2
         dlg.FileName = base & "-clip"                                  ''~va04R~
         '       dlg.AddExtension = True   'add extension if missing    ''~va04R~
         dlg.DefaultExt = ext                                           ''~va04R~
-        imageSaveFilterIndex = getSaveFilterIndex(imageSaveFilterIndex, imageSaveFileFilter, ext)''+va06I~
+        imageSaveFilterIndex = getSaveFilterIndex(imageSaveFilterIndex, imageSaveFileFilter, ext)''~va06I~
         dlg.FilterIndex = imageSaveFilterIndex                         ''~va04R~
         If dlg.ShowDialog() = DialogResult.OK Then                     ''~va04R~
             fnm = dlg.FileName                                         ''~va04R~
@@ -1077,21 +1077,21 @@ Public Class Form2
         Ppext = ext                                                    ''~va04R~
         Return True                                                    ''~va04R~
     End Function                                                       ''~va04R~
-    Private Function getSaveFilterIndex(Poldidx as Integer,PstrFilter as String,Pext as String) as Integer''+va06I~
-    '* Bitmap|*.bmp|Jpeg|*.jpg|Png|*.png|Tiff|*.tif|Icon|*.ico|All Files|*.*"''+va06I~
-    	Dim idx as Integer=Poldidx                                     ''+va06I~
-        Dim fmt As Imaging.ImageFormat = iOCR.str2Fmt(Pext)            ''+va06I~
-        Dim ext As String = iOCR.getImageFormat(fmt)                   ''+va06I~
-        Dim pos as Integer=PstrFilter.indexOf(ext)                     ''+va06I~
-        if pos>0                                                       ''+va06I~
-        	Dim idx2 as Integer=0                                      ''+va06I~
-            For ii As Integer = 0 To pos                               ''+va06I~
-                If PstrFilter.Chars(ii) = "|"c Then                    ''+va06I~
-                    idx2 += 1                                          ''+va06I~
-                End If                                                 ''+va06I~
-            Next                                                       ''+va06I~
-            idx =CType((idx2+1)/2,Integer)                             ''+va06I~
-        end if                                                         ''+va06I~
-        return idx                                                     ''+va06I~
-    End Function                                                       ''+va06I~
+    Private Function getSaveFilterIndex(Poldidx as Integer,PstrFilter as String,Pext as String) as Integer''~va06I~
+    '* Bitmap|*.bmp|Jpeg|*.jpg|Png|*.png|Tiff|*.tif|Icon|*.ico|All Files|*.*"''~va06I~
+    	Dim idx as Integer=Poldidx                                     ''~va06I~
+        Dim fmt As Imaging.ImageFormat = iOCR.str2Fmt(Pext)            ''~va06I~
+        Dim ext As String = iOCR.getImageFormat(fmt)                   ''~va06I~
+        Dim pos as Integer=PstrFilter.indexOf(ext)                     ''~va06I~
+        if pos>0                                                       ''~va06I~
+        	Dim idx2 as Integer=0                                      ''~va06I~
+            For ii As Integer = 0 To pos                               ''~va06I~
+                If PstrFilter.Chars(ii) = "|"c Then                    ''~va06I~
+                    idx2 += 1                                          ''~va06I~
+                End If                                                 ''~va06I~
+            Next                                                       ''~va06I~
+            idx =CType((idx2+1)/2,Integer)                             ''~va06I~
+        end if                                                         ''~va06I~
+        return idx                                                     ''~va06I~
+    End Function                                                       ''~va06I~
 End Class

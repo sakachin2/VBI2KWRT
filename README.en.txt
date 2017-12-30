@@ -1,5 +1,11 @@
 (UTF8 encoding)
+
+V2.02 : Update                               2017/12/30
+
+. KanjiText->KanaText conversion hungs by combination of Chuten(・)
+
 V2.01 : Update                               2017/12/27
+
 
 . Changed OCR library from "SharePoint Designer 2007" MODI
   to "Microsoft OCR Llibrary for Windows".

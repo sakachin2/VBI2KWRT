@@ -1,9 +1,0 @@
-V2.01 : Update                               2017/12/19
-
-. Changed OCR library from "SharePoint Designer 2007" MODI
-  to "Microsoft OCR Llibrary for Windows".
-  Windows10 Version 1511 (2015/11) is required.
-  .Net framework version is 4.6.1
-. Changed install method from ClicOnce to msi.
-. Supports partial extracting in the box by mouse dragging.
-

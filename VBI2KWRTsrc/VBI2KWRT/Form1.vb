@@ -1,6 +1,6 @@
-﻿'CID:''+v128R~:#72                             update#=  739;         ''+v128R~
+﻿'CID:''+v128R~:#72                             update#=  740;         ''~v128R~
 '************************************************************************************''~v002I~
-'v128 2017/12/30 delete dperecated form(form6,9,10)                    ''+v128I~
+'v128 2017/12/30 delete dperecated form(form6,9,10)                    ''~v128I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v122 2017/12/29 show version on form1 title                           ''~v122I~
 'v118 2017/12/27 errmsg errmsg for not registered Ctrl+N(send word) on Form1 was not shown when Ctl+n on form1 is first of all''~v118I~
@@ -34,7 +34,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.0.1"                                   ''~v122I~
+    Private Const VERSION = "v2.0.2"                                   ''~v122I~''+v128R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -114,7 +114,7 @@ Public Class Form1
     Public dlgOptions As FormOptions                                  ''~7430I~''~7501R~
     '   Public dlgSpecialKey As Form6                                      ''~7515I~''~v076R~
     '*  Public dlgSpecialKey As Form14 '*keep in Form14                                     ''~v076I~''~v123R~
-'*  Public dlgDictionary As Form9                                      ''~v008R~''+v128R~
+'*  Public dlgDictionary As Form9                                      ''~v008R~''~v128R~
     Public dlgFind1 As Form8                                            ''~7516I~''~7519R~
     Public dlgFind3 As Form8                                           ''~7519I~
     Public undoRedo As ClassUndoRedo                                  ''~7501I~''~7515R~
@@ -156,7 +156,7 @@ Public Class Form1
             '       dlgSpecialKey = New Form6()                                    ''~7515R~''~v076R~
             '*          dlgSpecialKey = New Form14()                                   ''~v076I~''~v123R~
             Form14.newForm()                                           ''~v123R~
-'*          dlgDictionary = New Form9()     'deprecated to foerm11         ''~v008R~''+v128R~
+'*          dlgDictionary = New Form9()     'deprecated to foerm11         ''~v008R~''~v128R~
             fmtBES = New FormatBES()                                         ''~7421I~
             '        swViewKatakana = dlgOptions.swKatakana                            ''~7501I~
             '        setkatakanaBtn()                                               ''~7501I~
