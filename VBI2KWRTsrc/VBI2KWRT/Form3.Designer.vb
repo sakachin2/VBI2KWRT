@@ -60,6 +60,7 @@ Partial Class Form3
         Me.TextBox1.ContextMenuStrip = Me.ContextMenuWordSelection
         Me.TextBox1.Cursor = System.Windows.Forms.Cursors.Default
         resources.ApplyResources(Me.TextBox1, "TextBox1")
+        Me.TextBox1.HideSelection = False
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ShortcutsEnabled = False
         '

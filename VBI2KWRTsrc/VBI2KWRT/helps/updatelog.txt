@@ -1,3 +1,46 @@
+V2.0.4 : 2018/01/08  REDME gitup   *************************************************
+'v153 2018/01/08 point size change consider small char, drop from average 
+           clss10.vb
+'v152 2018/01/08 zoom also for rotated any degree
+           form2.vb
+'v151 2018/01/07 show rotate degree on status bar
+           form2.vb
+'v150 2018/01/07 cliprect shuld be adjusted when degree rotation because source bmp was expanded
+           form2.vb
+'v149 2018/01/07 box should be cleared by rotate
+           form2.vb
+'v148 2018/01/07 mark line requirs ajustment by textangle?
+           class10.vb
+'v147 2018/01/06 OcrWord.Boundingrect is readonly
+           class10.vb
+'v146 2018/01/06 point change chk by not max H/W but by average
+           class10.vb
+'v145 2018/01/06 determin horizontal or vertical for 1 char line by distance to prev/next char
+           class10.vb
+'v144 2018/01/06 chk short line but sameline,do not inser crlf but insert space
+           class10.vb
+'va08 2018/01/05 Try rotate image any degree
+           form2.vb
+'v143 2018/01/05 (Bug) word may contains multiple char for english
+			class10.vb
+'v142 2018/01/05 keep rect after extact for repeated extract button,clear box at next mousedown 
+			form2.vb
+'v141 2018/01/04 add selection of japanese writing direction for sortline
+			class10.vb
+'v140 2018/01/03 sort ption by x or y of line
+			class10.vb
+'v139 2018/01/03 markWord position invalid when cliprect
+			class10.vb
+'v138 2018/01/02 keep EOL for short line(add space at last if last is not delm)
+			class10.vb
+'v137 2018/01/02 do not delete CRLF after "」"  etc like as ・。、
+			class5.vb
+'v136 2018/01/02 HideSelection=Off to keep highlight even when focus lost;form1(already) and form3
+			form3.Designer.vb
+'v135 2018/01/02 Form1 textbox lastline was hide by statusbar. recreated(delete then add) TBBES
+'           set TBBES enabled=false,shotcutenabled=false,Cursor=Default,multiline,backcolor
+'           Form1.vb re-add Handles xxx
+			Form1.vb form1.Designer.vb
 V2.0.3 : 2017/12/31 released *******************************************************
 'v134 2017/12/30 EOLCont is done before convKana(remaining crlf need not set to sbConv)
 			class5.vb

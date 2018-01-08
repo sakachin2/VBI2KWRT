@@ -46,7 +46,6 @@ Partial Class Form1
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.TBBES = New System.Windows.Forms.TextBox()
         Me.ContextMenuSpecialChar = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CMCut = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,6 +56,7 @@ Partial Class Form1
         Me.ToolStripMenuItemWords = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.TBBES = New System.Windows.Forms.TextBox()
         Me.MenuStrip1.SuspendLayout()
         Me.ContextMenuSpecialChar.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -184,16 +184,6 @@ Partial Class Form1
         '
         resources.ApplyResources(Me.NotifyIcon1, "NotifyIcon1")
         '
-        'TBBES
-        '
-        Me.TBBES.BackColor = System.Drawing.SystemColors.Info
-        Me.TBBES.ContextMenuStrip = Me.ContextMenuSpecialChar
-        Me.TBBES.Cursor = System.Windows.Forms.Cursors.Default
-        resources.ApplyResources(Me.TBBES, "TBBES")
-        Me.TBBES.HideSelection = False
-        Me.TBBES.Name = "TBBES"
-        Me.TBBES.ShortcutsEnabled = False
-        '
         'ContextMenuSpecialChar
         '
         Me.ContextMenuSpecialChar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.CMFind, Me.ToolStripMenuItemWords})
@@ -246,12 +236,22 @@ Partial Class Form1
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
         '
+        'TBBES
+        '
+        Me.TBBES.BackColor = System.Drawing.SystemColors.Info
+        Me.TBBES.ContextMenuStrip = Me.ContextMenuSpecialChar
+        Me.TBBES.Cursor = System.Windows.Forms.Cursors.Default
+        resources.ApplyResources(Me.TBBES, "TBBES")
+        Me.TBBES.HideSelection = False
+        Me.TBBES.Name = "TBBES"
+        Me.TBBES.ShortcutsEnabled = False
+        '
         'Form1
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TBBES)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Form1"
@@ -281,7 +281,6 @@ Partial Class Form1
     Friend WithEvents FontDialog1 As System.Windows.Forms.FontDialog
     Friend WithEvents ToolStripMenuItemOptions As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
-    Friend WithEvents TBBES As System.Windows.Forms.TextBox
     Friend WithEvents ToolStripMenuItemHelp As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemUndo As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemRedo As System.Windows.Forms.ToolStripMenuItem
@@ -302,5 +301,6 @@ Partial Class Form1
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItemWords As ToolStripMenuItem
+    Friend WithEvents TBBES As TextBox
     '   Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
 End Class

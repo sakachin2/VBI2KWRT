@@ -1,4 +1,4 @@
-﻿'CID:''+v123R~:#72                             update#=   98;         ''~v123R~
+﻿'CID:''+v123R~:#72                             update#=   99;         ''~v123R~
 '************************************************************************************''~v076I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v118 2017/12/27 errmsg errmsg for not registered Ctrl+N(send word) on Form1 was not shown when Ctl+n on form1 is first of all''~v118I~
@@ -150,15 +150,15 @@ Public Class Form14                                                    ''~v076R~
         dlgSymbol = New Form14()                                         ''~v123I~
     End Sub                                                            ''~v123I~
     '***************************************************************************''~v123I~
-    Public Sub setParent(PswForm1 As Boolean)                          ''+v123I~
-        '* from form1:to send word without showing by shortcutkey      ''+v123I~
-        If PswForm1 Then                                               ''+v123I~
-            setParent(PswForm1, Form1.MainForm)              ''+v123I~
-        Else                                                           ''+v123I~
-            setParent(PswForm1, Form1.formText)              ''+v123I~
-        End If                                                         ''+v123I~
-    End Sub                                                            ''+v123I~
-    '***************************************************************************''+v123I~
+    Public Sub setParent(PswForm1 As Boolean)                          ''~v123I~
+        '* from form1:to send word without showing by shortcutkey      ''~v123I~
+        If PswForm1 Then                                               ''~v123I~
+            setParent(PswForm1, Form1.MainForm)              ''~v123I~
+        Else                                                           ''~v123I~
+            setParent(PswForm1, Form1.formText)              ''~v123I~
+        End If                                                         ''~v123I~
+    End Sub                                                            ''~v123I~
+    '***************************************************************************''~v123I~
     Public Sub setParent(PswForm1 As Boolean, Pform As Form)            ''~v118I~
         '* from form1:to send word without showing by shortcutkey          ''~v118I~
         If PswForm1 Then                                                    ''~v118I~
@@ -568,17 +568,17 @@ Public Class Form14                                                    ''~v076R~
         Else                                                           ''~v076I~
             cfgKeys = String.Join(";", ListData)                       ''~v076I~
         End If                                                         ''~v076I~
-        Debug.WriteLine("Form14.putcfg =" & cfgKeys)                   ''~v076I~
+'*      Debug.WriteLine("Form14.putcfg =" & cfgKeys)                   ''~v076I~''+v123R~
         My.Settings.CFGF14_Symbol = cfgKeys                             ''~v076R~
         Return True                                                    ''~v076I~
     End Function                                                       ''~v076I~
     Private Sub getCfg()                                               ''~v076I~
         If cfgKeys.Length = 0 Then                                     ''~v076I~
             ListData = listDataDefault                                 ''~v076I~
-            Debug.WriteLine("Form14.getcfg deefault" & ListData.ToString())       ''~v076I~
+'*          Debug.WriteLine("Form14.getcfg deefault" & ListData.ToString())       ''~v076I~''+v123R~
         Else                                                           ''~v076I~
             ListData = cfgKeys.Split(";"c)                             ''~v076I~
-            Debug.WriteLine("Form14.getcfg cfgKey=" & cfgKeys)         ''~v076I~
+'*          Debug.WriteLine("Form14.getcfg cfgKey=" & cfgKeys)         ''~v076I~''+v123R~
         End If                                                         ''~v076I~
     End Sub                                                            ''~v076I~
     Private Sub setLang()                                              ''~v076I~

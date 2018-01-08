@@ -121,73 +121,6 @@
     <value>154, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="MenuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>963, 40</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MenuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="MenuStrip1.Text" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.Name" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MenuStrip1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="FileToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        TkSuQmCC
-</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FileToolStripMenuItem.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 36</value>
-  </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>ファイル(&amp;F)</value>
-  </data>
-  <data name="FileToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>名前を付けて保存</value>
-  </data>
   <data name="ImageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
@@ -238,6 +171,48 @@
   </data>
   <data name="ExitXToolStripMenuItem.Text" xml:space="preserve">
     <value>終了(&amp;X)</value>
+  </data>
+  <data name="FileToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        TkSuQmCC
+</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FileToolStripMenuItem.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 36</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>ファイル(&amp;F)</value>
+  </data>
+  <data name="FileToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>名前を付けて保存</value>
   </data>
   <data name="ToolStripMenuItemSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -607,6 +582,31 @@
   <data name="ToolStripMenuButtonHira.ToolTipText" xml:space="preserve">
     <value>かな表示に切り替え</value>
   </data>
+  <data name="MenuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>963, 40</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MenuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="MenuStrip1.Text" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.Name" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MenuStrip1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
   </metadata>
@@ -634,51 +634,6 @@
   <metadata name="ContextMenuSpecialChar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>751, 17</value>
   </metadata>
-  <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 158</value>
-  </data>
-  <data name="&gt;&gt;ContextMenuSpecialChar.Name" xml:space="preserve">
-    <value>ContextMenuSpecialChar</value>
-  </data>
-  <data name="&gt;&gt;ContextMenuSpecialChar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TBBES.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TBBES.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TBBES.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 40</value>
-  </data>
-  <data name="TBBES.MaxLength" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TBBES.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TBBES.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="TBBES.Size" type="System.Drawing.Size, System.Drawing">
-    <value>963, 461</value>
-  </data>
-  <data name="TBBES.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TBBES.Name" xml:space="preserve">
-    <value>TBBES</value>
-  </data>
-  <data name="&gt;&gt;TBBES.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TBBES.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TBBES.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="CMCut.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 22</value>
   </data>
@@ -721,9 +676,21 @@
   <data name="ToolStripMenuItemWords.Text" xml:space="preserve">
     <value>頻出語句</value>
   </data>
+  <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 158</value>
+  </data>
+  <data name="&gt;&gt;ContextMenuSpecialChar.Name" xml:space="preserve">
+    <value>ContextMenuSpecialChar</value>
+  </data>
+  <data name="&gt;&gt;ContextMenuSpecialChar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="StatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>940, 17</value>
   </metadata>
+  <data name="ToolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
   <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 479</value>
   </data>
@@ -746,13 +713,46 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StatusStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="ToolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 17</value>
+  <data name="TBBES.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TBBES.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TBBES.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 40</value>
+  </data>
+  <data name="TBBES.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TBBES.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="TBBES.Size" type="System.Drawing.Size, System.Drawing">
+    <value>963, 439</value>
+  </data>
+  <data name="TBBES.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;TBBES.Name" xml:space="preserve">
+    <value>TBBES</value>
+  </data>
+  <data name="&gt;&gt;TBBES.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TBBES.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TBBES.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>41</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>

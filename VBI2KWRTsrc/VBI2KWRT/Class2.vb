@@ -1,6 +1,6 @@
-﻿'CID:''+v130R~:#72                          update#=  247;            ''+v130R~
+﻿'CID:''+v130R~:#72                          update#=  248;            ''~v130R~
 '************************************************************************************''~v026I~
-'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only''+v130I~
+'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only''~v130I~
 'v125 2017/12/29 Ctrl+x fire keyDown when "d",KeyUp when "a","c"       ''~v125I~
 '                and Handle=True at KeyDown dose not suppress KeyUp event''~v125I~
 'v124 2017/12/29 why beep by Ctrl+x(word shortcut)                     ''~v124I~
@@ -352,7 +352,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         Return TB.SelectionStart                                     ''~7502I~
     End Function                                                       ''~7502I~
     Private Sub setVScrollPos(Ppos As Integer)                         ''~7502I~
-        Debug.WriteLine("setVscrollPos issue ScrollToCaret pos=" & Ppos) ''~v070I~
+'*      Debug.WriteLine("setVscrollPos issue ScrollToCaret pos=" & Ppos) ''~v070I~''+v130R~
         TB.ScrollToCaret()                                    ''~7502R~
     End Sub                                                            ''~7502I~
     Public Sub CMCut(Pafter As Integer)      'Cut&Paste                ''~7514R~
@@ -595,8 +595,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 rc = True                                                ''~7506I~
             End If                                                     ''~7506M~
         Else                                                           ''~7525R~
-            If ch = FormatBES.CHAR_LF AndAlso Plen > 0 Then   '*0x0a                      ''+v130I~
-            Else                                                           ''+v130I~
+            If ch = FormatBES.CHAR_LF AndAlso Plen > 0 Then   '*0x0a                      ''~v130I~
+            Else                                                           ''~v130I~
                 If PkeyBS Then                                                  ''~7525I~
                 If ch = FormatBES.CHAR_LF Then   'del by backspace     ''~7525I~
                     TB.SelectionStart = pos - 1 'pos of CHAR_CR        ''~7525R~
@@ -607,7 +607,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     rc = True                                          ''~7525R~
                 End If                                                 ''~7525R~
             End If                                                     ''~7525I~
-        End If                                                         ''+v130I~
+        End If                                                         ''~v130I~
         End If                                                         ''~7525I~
         Return rc                                                      ''~7506I~
     End Function                                                       ''~7506R~
@@ -631,7 +631,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private Sub restoreCaretPosLen(Ppoint As Rectangle)                     ''~7506R~
         TB.SelectionStart = Ppoint.X                                     ''~7506I~
         TB.SelectionLength = Ppoint.Y                                    ''~7506I~
-        Debug.WriteLine("restoreCaretPosLen before Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~
+'*      Debug.WriteLine("restoreCaretPosLen before Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~''+v130R~
         If Ppoint.X < TB.Text.Length Then                                     ''~7525R~
             If TB.Text.Chars(Ppoint.X) = FormatBES.CHAR_CR Then               ''~7525I~
                 TB.SelectionStart += vbCrLf.Length  'move caret at top of next line''~7525R~
@@ -642,7 +642,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 TB.SelectionLength = 0                                 ''~7525I~
             End If                                                     ''~7525I~
         End If                                                         ''~7525I~
-        Debug.WriteLine("restoreCaretPosLen after Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~
+'*      Debug.WriteLine("restoreCaretPosLen after Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~''+v130R~
         If optFormat = OPT_KANATEXT Then                                    ''~7508R~
             Form1.MainForm.formkanaText.setHirakata(Ppoint.Width = 1)  ''~7522I~
             If (Ppoint.Height And POSFLAG_VSCROLL) = POSFLAG_VSCROLL Then                                        ''~7507I~''~7525R~''~7609R~
@@ -661,7 +661,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         '        SetScrollPos(TB.Handle, SB_VERT, pos, True)                    ''~7507I~
         pos = (pos << 16) + SB_THUMBPOSITION                                 ''~7507R~
         Dim rc = SendMessage(TB.Handle, WM_VSCROLL, pos, 0)                 ''~7507R~
-        Debug.WriteLine("scrollTB sendMsg Ppos=" & Ppos)               ''~v070I~
+'*      Debug.WriteLine("scrollTB sendMsg Ppos=" & Ppos)               ''~v070I~''+v130R~
     End Sub                                                            ''~7507I~
     '***************************************************************************''~7507I~
     Private Const SB_VERT = 1                                          ''~7507R~

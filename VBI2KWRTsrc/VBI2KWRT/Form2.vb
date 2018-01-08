@@ -1,8 +1,14 @@
-﻿'CID:''+va06R~:#72                             update#=  241;         ''~va06R~
+﻿'CID:''+v152R~:#72                             update#=  271;         ''+v152R~
 '************************************************************************************''~v017I~
+'v152 2018/01/08 zoom also for rotated any degree                      ''~v151I~
+'v151 2018/01/07 show rotate degree on status bar                      ''~v151I~
+'v150 2018/01/07 cliprect shuld be adjusted when degree rotation because source bmp was expanded''~v150I~
+'v149 2018/01/07 box should be cleared by rotate                       ''~v149I~
+'va08 2018/01/05 Try rotate image any degree                           ''~va08I~
+'v142 2018/01/05 keep rect after extact for repeated extract button,clear box at next mousedown''~v142I~
 'va06 2017/12/26 ajust filter index by original extension              ''~va06I~
 'va04 2017/12/25 save cut image to file                                ''~va04I~
-'va01 2017/12/25 mousedow did not cleared swRectBMP(do partial extracting)''~va01I~
+'va01 2017/12/25 mousedown did not cleared swRectBMP(do partial extracting)''~va01I~''~v142R~
 'v113 2017/12/22 put Zorder Top                                        ''~v112I~
 'v112 2017/12/22 add file menu button to Image form                    ''~v110I~
 'v111 2017/12/22 embed handler by try-catch                            ''~v111I~
@@ -40,7 +46,7 @@ Public Class Form2
     Private scaleRate As Double = 0.1      ' 10%                       ''~7430R~
     Private scrollbarH As Integer = SystemInformation.HorizontalScrollBarHeight ''~7430R~
     Private scrollbarW As Integer = SystemInformation.VerticalScrollBarWidth ''~7430R~
-    Private Debug As Boolean = True                                    ''~7430R~
+    '*  Private Debug As Boolean = True                                    ''~7430R~''~va06R~
     Private rotation As Integer = 0                                          ''~7409I~''~7430R~
     Private titlePrefix As String = ""                                   ''~7613R~
 #If False Then                                                              ''~v100R~
@@ -52,6 +58,8 @@ Public Class Form2
     Private cbLang As ToolStripComboBox                                ''~v100R~
     Private orgBMP As Bitmap = Nothing                                 ''~v100R~
     Private wordBMP As Bitmap = Nothing                                ''~v100R~
+    Private rotateAnyBMP As Bitmap = Nothing                           ''~va08I~
+    Private extractedBMP As Bitmap = Nothing                           ''~va08I~
     Private langTag As String                                          ''~v100R~
     Private swWordBMP As Boolean = False                               ''~v100R~
     Private iOCR As Cocr = Nothing                                     ''~v100R~
@@ -72,6 +80,11 @@ Public Class Form2
     Private Shared formClip As Form15       'partial text display form ''~v106I~
     Private imageSaveFileFilter As String = "Bitmap|*.bmp|Jpeg|*.jpg|Png|*.png|Tiff|*.tif|Icon|*.ico|All Files|*.*" ''~va04R~
     Private imageSaveFilterIndex As Integer = 1                          ''~va04R~
+    Private BKC_DegreeOff As Color = System.Drawing.SystemColors.ButtonShadow ''~va08I~
+    Private BKC_DegreeON As Color = System.Drawing.Color.Yellow        ''~va08I~
+    Private swDegree As Boolean = False                                ''~va08I~
+    Private ctrDegree As Integer = 0                                   ''~va08I~
+    Private ctrDegreeMsg As Integer = 0                                ''~v151I~
     '************************************************
     Private Sub Form2_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load ''~7619R~
         Try                                                            ''~v111I~
@@ -91,6 +104,7 @@ Public Class Form2
             Form1.exceptionMsg("Form2 Load", ex)                        ''~v111I~
         End Try                                                        ''~v111I~
         swInitialized = True                                             ''~v110I~
+        ToolStripMenuItemDegree1.BackColor = BKC_DegreeOff             ''~va08I~
     End Sub
     Private Sub Form2_Shown(sender As System.Object, e As System.EventArgs) Handles Me.Shown ''~7619I~
 #If False Then                                                              ''~v100I~
@@ -180,6 +194,8 @@ Public Class Form2
             Form1.ReadError(Pfnm, ex)                                   ''~7617I~
         End Try                                                        ''~7428I~
         Ppbitmap = image                                                 ''~v100R~
+        swRectBMP = False    '*initial                                 ''~v142I~
+        ctrDegree = 0                                                  ''~va08I~
         Return rc                                                      ''~7428I~
     End Function                                                       ''~7428I~
     '*************************************************************     ''~v100I~
@@ -336,7 +352,13 @@ Public Class Form2
     Private Sub On_RotateLeft_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRotateLeft.Click ''~v112I~
         Try                                                            ''~v111I~
             showStatus("")                                                 ''~v100I~
-            rotateImage(3)   '90*3                                         ''~7409R~
+            swRectBMP = False                                            ''~v149I~
+            If swDegree Then                                               ''~va08I~
+                rotateAny(-1)                                              ''~va08I~
+            Else                                                           ''~va08I~
+                ctrDegree = 0                                              ''~va08I~
+                rotateImage(3)   '90*3                                         ''~7409R~
+            End If                                                         ''~va08I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form2 RotateLeft", ex)                  ''~v111R~
         End Try                                                        ''~v111I~
@@ -344,11 +366,30 @@ Public Class Form2
     Private Sub On_RotateRight_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRotateRight.Click ''~v112I~
         Try                                                            ''~v111I~
             showStatus("")                                                 ''~v100I~
-            rotateImage(1)   '90*1                                         ''~7409R~
+            swRectBMP = False                                            ''~v149I~
+            If swDegree Then                                               ''~va08I~
+                rotateAny(1)                                               ''~va08I~
+            Else                                                           ''~va08I~
+                ctrDegree = 0                                          ''~v150I~
+                rotateImage(1)   '90*1                                         ''~7409R~
+            End If                                                         ''~va08I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form2 RotateRight", ex)                 ''~v111R~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7409I~
+    '**************************************************                ''~va08I~
+    Private Sub ToolStripMenuItemDegree1_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles ToolStripMenuItemDegree1.Click ''~va08I~
+        If swDegree Then                                               ''~va08I~
+            swDegree = False                                           ''~va08I~
+            ToolStripMenuItemDegree1.BackColor = BKC_DegreeOff         ''~va08I~
+            showStatus("One degree mode rotation:Off")                 ''~v151R~
+        Else                                                           ''~va08I~
+            swDegree = True                                            ''~va08I~
+            ToolStripMenuItemDegree1.BackColor = BKC_DegreeON          ''~va08I~
+            showStatus("One degree mode rotation:On")                  ''~v151R~
+        End If                                                         ''~va08I~
+    End Sub                                                            ''~va08I~
+    '**************************************************                ''~va08I~
     Private Sub On_Extract_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemExtract.Click ''~v112I~
         '#If True   Then '@@@@test                                             ''~v112R~
         '        Dim frm As Form16=New Form16()                                ''~v112R~
@@ -529,16 +570,23 @@ Public Class Form2
     ''~7409I~
 #Else                                                                  ''~v100R~
     '*************************************************************     ''~v100R~
+    '*from handler                                                     ''~v152I~
+    '*************************************************************     ''~v152I~
     Private Sub drawZoom(Pzoom As Integer)                             ''~v100R~
         '**Pzoom 1:zoomin(enlarge) , -1,zoomout                        ''~v100R~
         Dim zoomBMP As Bitmap                                          ''~v100R~
         If swWordBMP Then                                              ''~v100R~
             zoomBMP = wordBMP                                          ''~v100R~
         Else                                                           ''~v100R~
-            zoomBMP = orgBMP                                           ''~v100R~
+            If ctrDegree <> 0 Then                                              ''~v152I~
+                zoomBMP = rotateAnyBMP                                    ''~v152I~
+            Else                                                         ''~v152I~
+                zoomBMP = orgBMP                                           ''~v100R~
+            End If                                                       ''~v152I~
         End If                                                         ''~v100R~
         Try                                                            ''~v100R~
             Dim scaleNext As Double                                    ''~v100R~
+            Dim scaleOld As Double = scaleNew                            ''~v142I~
             Dim hh, ww As Integer                                      ''~v100R~
             If Pzoom <> 0 Then                                         ''~v100R~
 #If False Then                                                         ''~v100R~
@@ -551,14 +599,19 @@ Public Class Form2
             End If                                                     ''~v100R~
             ''~v@@@I~                                                  ''~v100R~
             scaleNext = adjustScale(zoomBMP, Pzoom, scaleNext, scaleNew) ''~v100R~
-            hh = CType(orgBMP.Height * scaleNext, Integer)                             ''~v100R~
-            ww = CType(orgBMP.Width * scaleNext, Integer)                              ''~v100R~
+            '*          hh = CType(orgBMP.Height * scaleNext, Integer)                             ''~v100R~''~v152R~
+            '*          ww = CType(orgBMP.Width * scaleNext, Integer)                              ''~v100R~''~v152R~
+            hh = CType(zoomBMP.Height * scaleNext, Integer)            ''~v152I~
+            ww = CType(zoomBMP.Width * scaleNext, Integer)             ''~v152I~
             If scaleNext < SCALE_LIMIT_LOW Then                        ''~v100R~
                 Exit Sub                                               ''~v100R~
             End If                                                     ''~v100R~
             bitmapZoom = New Bitmap(zoomBMP, ww, hh)                   ''~v100R~
             scaleNew = scaleNext                                       ''~v100R~
             setPictureBoxImage(bitmapZoom)                             ''~v100R~
+            If swRectBMP Then                                               ''~v142I~
+                drawClipBoxWordBMP(bitmapZoom, scaleNext / scaleOld)      ''~v142I~
+            End If                                                     ''~v142I~
         Catch ex As Exception                                          ''~v100R~
             MessageBox.Show("Zoom I/Out:" & ex.Message)                ''~v100R~
         End Try                                                        ''~v100R~
@@ -571,8 +624,16 @@ Public Class Form2
         End If                                                         ''~v100R~
         Try                                                            ''~v100R~
             Dim hh, ww As Integer ''~v@@@I~                            ''~v100R~
-            hh = CType(orgBMP.Height * Pzoom, Integer)                                 ''~v100R~
-            ww = CType(orgBMP.Width * Pzoom, Integer)                                  ''~v100R~
+            '*          hh = CType(orgBMP.Height * Pzoom, Integer)                                 ''~v100R~''~v152R~
+            '*          ww = CType(orgBMP.Width * Pzoom, Integer)                                  ''~v100R~''~v152R~
+            Dim bmp As Bitmap                                          ''~v152I~
+            If ctrDegree <> 0 Then                                     ''~v152I~
+                bmp = rotateAnyBMP                                     ''~v152I~
+            Else                                                       ''~v152I~
+                bmp = orgBMP                                           ''~v152I~
+            End If                                                     ''~v152I~
+            hh = CType(bmp.Height * Pzoom, Integer)                    ''~v152I~
+            ww = CType(bmp.Width * Pzoom, Integer)                     ''~v152I~
             bitmapZoom = New Bitmap(Pbitmap, ww, hh)                   ''~v100R~
             setPictureBoxImage(bitmapZoom)                             ''~v100R~
         Catch ex As Exception                                          ''~v100R~
@@ -722,7 +783,7 @@ Public Class Form2
 #Else                                                                  ''~v100R~
         Dim swRect As Boolean = swRectBMP 'it is reset by drawWord ->setPictureBoxImage''~v106I~
         Dim rc As Boolean = extractText()                                ''~v100R~
-        swRectBMP = False    'drawWord is not called when extracted null ''~v106I~
+        '*      swRectBMP = False    'drawWord is not called when extracted null ''~v106I~''~v142R~
         If xText.Length = 0 Then                                      ''~v106I~
             rc = False                                                   ''~v106I~
         End If                                                         ''~v106I~
@@ -826,7 +887,15 @@ Public Class Form2
         Try                                                            ''~v100R~
             xText = ""                                                  ''~v100R~
             iOCR.setRect(swRectBMP, CType(PictureBox1.Image, Bitmap), scaleNew, clipRect) ''~v106I~
-            swOK = iOCR.extractText(imageFilename, orgBMP, langTag, xText) 'text with CRLF''~v100R~
+            '*          swOK = iOCR.extractText(imageFilename, orgBMP, langTag, xText) 'text with CRLF''~v100R~''~va08R~
+            Dim bmp As Bitmap                                          ''~va08I~
+            If ctrDegree <> 0 Then                                     ''~va08I~
+                bmp = rotateAnyBMP                                     ''~va08I~
+            Else                                                       ''~va08I~
+                bmp = orgBMP                                           ''~va08I~
+            End If                                                     ''~va08I~
+            swOK = iOCR.extractText(imageFilename, bmp, langTag, xText)     ''~v@@@R~''~va08I~
+            extractedBMP = bmp                                         ''~va08I~
             '           setText(xText)                                             ''~v100R~
             If swOK Then                                               ''~v100R~
                 If xText.Length = 0 Then                               ''~v106I~
@@ -860,10 +929,13 @@ Public Class Form2
             Dim g As Graphics                                          ''~v100R~
             Dim bmpDraw As Bitmap                                      ''~v100R~
             Try   ' chk indexd pixcel format                           ''~v100R~
-                g = Graphics.FromImage(orgBMP)                         ''~v100R~
-                bmpDraw = CType(orgBMP.Clone(), Bitmap)     'Not Indexed Pixel format,draw to clone''~v100R~
+                '*              g = Graphics.FromImage(orgBMP)                         ''~v100R~''~va08R~
+                g = Graphics.FromImage(extractedBMP)                    ''~va08I~
+                '*              bmpDraw = CType(orgBMP.Clone(), Bitmap)     'Not Indexed Pixel format,draw to clone''~v100R~''~va08R~
+                bmpDraw = CType(extractedBMP.Clone(), Bitmap)     'Not Indexed Pixel format,draw to clone''~va08I~
             Catch ex As Exception                                      ''~v100R~
-                bmpDraw = Index2NonIndex(orgBMP)                       ''~v100R~
+                '*              bmpDraw = Index2NonIndex(orgBMP)                       ''~v100R~''~va08R~
+                bmpDraw = Index2NonIndex(extractedBMP)                 ''~va08I~
             End Try                                                    ''~v100R~
             If Not iOCR.markWords(bmpDraw) Then                        ''~v100R~
                 Exit Sub                                               ''~v100R~
@@ -883,6 +955,16 @@ Public Class Form2
     Private Sub drawClipBox(Pbmp As Bitmap, Prect As Rectangle)        ''~v106I~
         iIC.drawRect(Pbmp, Prect)                                      ''~v106I~
     End Sub                                                            ''~v106I~
+    '*************************************************************     ''~v142I~
+    Private Sub drawClipBoxWordBMP(Pbmp As Bitmap, Pscale As Double)   ''~v142I~
+        Dim rect As Rectangle = clipRect                                 ''~v142I~
+        rect.X = CType(rect.X * Pscale, Integer)                                                 ''~v142I~
+        rect.Y = CType(rect.Y * Pscale, Integer)                                                 ''~v142I~
+        rect.Width = CType(rect.Width * Pscale, Integer)                                             ''~v142I~
+        rect.Height = CType(rect.Height * Pscale, Integer)                                            ''~v142I~
+        drawClipBox(Pbmp, rect)
+        clipRect = rect ''~v142I~
+    End Sub                                                            ''~v142I~
     '*************************************************************     ''~v@@@I~''~v100I~
     Private Function Index2NonIndex(Psrc As Bitmap) As Bitmap          ''~v@@@I~''~v100I~
         Dim r As New Rectangle(0, 0, Psrc.Width, Psrc.Height)             ''~v@@@I~''~v100I~
@@ -890,6 +972,100 @@ Public Class Form2
         Dim fmt As Imaging.PixelFormat = bmpNonIndexed.PixelFormat     ''~v@@@I~''~v100I~
         Return bmpNonIndexed                                           ''~v@@@I~''~v100I~
     End Function                                                       ''~v@@@I~''~v100I~
+    '*************************************************************     ''~va08I~
+    Private Sub rotateAny(Pdegree As Integer)                          ''~va08I~
+        If PictureBox1.Image Is Nothing Then                           ''~va08I~
+            Exit Sub                                                   ''~va08I~
+        End If                                                         ''~va08I~
+        If ctrDegree = 0 Then                                          ''~v151R~
+            ctrDegreeMsg = 0                                           ''~v151R~
+        End If                                                         ''~v151R~
+        ctrDegreeMsg -= Pdegree                                        ''~v151R~
+        ctrDegree = (ctrDegree + Pdegree) Mod 360                      ''~va08I~
+        If ctrDegree < 0 Then                                          ''~va08I~
+            ctrDegree += 360                                           ''~va08I~
+        End If                                                         ''~va08I~
+        Try                                                            ''~va08I~
+            Dim hh As Integer = orgBMP.Height                          ''~va08I~
+            Dim ww As Integer = orgBMP.Width                           ''~va08I~
+            Dim rad As Single = CSng((ctrDegree / 180) * Math.PI)      ''~va08I~
+            ''~va08I~
+            Dim msin As Double = Math.Sin(-rad)                        ''~va08I~
+            Dim mcos As Double = Math.Cos(-rad)                        ''~va08I~
+            Dim p1x As Double = hh * msin  '*bottom left               ''~va08I~
+            Dim p1y As Double = hh * mcos                              ''~va08I~
+            Dim p2x As Double = ww * mcos  '*top right                 ''~va08I~
+            Dim p2y As Double = -ww * msin                             ''~va08I~
+            Dim p3x As Double = p1x + ww * mcos '*bottom right ->hh*msin+ww*mcos''~va08I~
+            Dim p3y As Double = p1y - ww * msin '*             ->hh*mcos+ww*Msin''~va08I~
+            Dim wwnew As Double                                        ''~va08I~
+            Dim hhnew As Double                                        ''~va08I~
+            Dim posx As Double                                         ''~va08I~
+            Dim posy As Double                                         ''~va08I~
+            If ctrDegree >= 0 AndAlso ctrDegree <= 90 Then  '*p1:bottom Left is on 3rd orthant''~va08I~
+                wwnew = p2x - p1x                                     '' ~va08R~''~va08I~
+                hhnew = p3y                                           '' ~va08R~''~va08I~
+                posx = -p1x                                        '' ~va08I~''~va08I~
+                posy = 0                                           '' ~va08I~''~va08I~
+            ElseIf ctrDegree > 270 AndAlso ctrDegree <= 360 Then '*p1:bottom left is on 4th orthant''~va08I~
+                wwnew = p3x           '4th orthant                     ''~va08I~
+                hhnew = p1y - p2y                                      ''~va08I~
+                posx = 0                                               ''~va08I~
+                posy = -p2y                                            ''~va08I~
+            ElseIf ctrDegree > 90 AndAlso ctrDegree <= 180 Then  '*p1:bottom left is on 2nd orthant''~va08I~
+                wwnew = -p3x                                           ''~va08I~
+                hhnew = p2y - p1y                                      ''~va08I~
+                posx = -p3x                                            ''~va08I~
+                posy = -p1y                                            ''~va08I~
+            ElseIf ctrDegree > 180 AndAlso ctrDegree <= 270 Then  '*p1:bottom left is on 2nd orthant''~va08I~
+                wwnew = p1x - p2x                                      ''~va08I~
+                hhnew = -p3y                                           ''~va08I~
+                posx = -p2x                                            ''~va08I~
+                posy = -p3y                                            ''~va08I~
+            End If                                                     ''~va08I~
+            Dim ratew As Double = (wwnew / ww)                         ''~va08I~
+            Dim rateh As Double = (hhnew / hh)                         ''~va08I~
+#If False Then                                                         ''~va08I~
+            Dim includingrate As Double = 1.0 / Math.Max(rateh, ratew) ''~va08I~
+            Dim bmp As Bitmap = New Bitmap(ww, hh)  '*including box    ''~va08I~
+            Dim g As Graphics = Graphics.FromImage(bmp)                ''~va08I~
+            Dim br As Brush = Brushes.Blue                             ''~va08I~
+            g.FillRectangle(br, New Rectangle(0, 0, ww, hh))           ''~va08I~
+            g.ResetTransform()                                         ''~va08I~
+            g.ScaleTransform(CSng(includingrate), CSng(includingrate)) ''~va08I~
+            g.TranslateTransform(CSng(posx), CSng(posy))               ''~va08I~
+            g.RotateTransform(CSng(ctrDegree))                         ''~va08I~
+            Dim rect As Rectangle = New Rectangle(0, 0, CType(ww, Integer), CType(hh, Integer))''~va08I~
+            g.DrawImage(orgBMP, rect)                                  ''~va08I~
+            g.Dispose()                                                ''~va08I~
+            drawZoom(bmp, scaleNew)                                    ''~va08I~
+#Else                                                                  ''~va08I~
+#If False Then                                                         ''~va08I~
+            Dim wwnewi As Integer = CType(ww / includingrate, Integer) ''~va08I~
+            Dim hhnewi As Integer = CType(hh / includingrate, Integer) ''~va08I~
+#Else                                                                  ''~va08I~
+            Dim wwnewi As Integer = CType(wwnew, Integer)              ''~va08I~
+            Dim hhnewi As Integer = CType(hhnew, Integer)              ''~va08I~
+#End If                                                                ''~va08I~
+            Dim bmp As Bitmap = New Bitmap(wwnewi, hhnewi)  '*including box''~va08I~
+            Dim g As Graphics = Graphics.FromImage(bmp)                ''~va08I~
+            Dim br As Brush = Brushes.Blue                             ''~va08I~
+            g.FillRectangle(br, New Rectangle(0, 0, wwnewi, hhnewi))   ''~va08I~
+            g.ResetTransform()                                         ''~va08I~
+            '*           g.ScaleTransform(CSng(1.0 / includingrate), CSng(1.0 / includingrate))''~va08I~
+            g.TranslateTransform(CSng(posx), CSng(posy))               ''~va08I~
+            g.RotateTransform(CSng(ctrDegree))                         ''~va08I~
+            Dim rect As Rectangle = New Rectangle(0, 0, CType(ww, Integer), CType(hh, Integer)) ''~va08I~
+            g.DrawImage(orgBMP, rect)                                  ''~va08I~
+            ''~va08I~
+            g.Dispose()                                                ''~va08I~
+            drawZoomRotateAny(bmp, scaleNew)                           ''~va08I~
+#End If                                                                ''~va08I~
+            showStatus("Rotation=" & ctrDegreeMsg & "°")              ''~v151I~
+        Catch ex As Exception                                          ''~va08I~
+            MessageBox.Show("RotateAny :" & ex.Message)                ''~va08I~
+        End Try                                                        ''~va08I~
+    End Sub    'rotate                                                 ''~va08I~
     '*************************************************************     ''~v100R~
     Private Sub saveOrgBMP(Pbmp As Bitmap)                             ''~v100R~
         Dim oldbmp = orgBMP                                            ''~v100R~
@@ -920,12 +1096,39 @@ Public Class Form2
         End If                                                         ''~v106I~
         Dim oldbmp = bmpForRect                                        ''~v106I~
         bmpForRect = DirectCast(Pbmp.Clone(), Bitmap)                  ''~v106I~
-'*      Trace.W("saveRectBMP  new bmpForRect Hashcode:" & bmpForRect.GetHashCode()) ''~v106I~''+va06R~
+        '*      Trace.W("saveRectBMP  new bmpForRect Hashcode:" & bmpForRect.GetHashCode()) ''~v106I~''~va06R~
         If oldbmp IsNot Nothing Then                                   ''~v106I~
-'*          Trace.W("saveWordBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~v106I~''+va06R~
+            '*          Trace.W("saveWordBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~v106I~''~va06R~
             oldbmp.Dispose()                                           ''~v106I~
         End If                                                         ''~v106I~
     End Sub                                                            ''~v106I~
+    '*************************************************************     ''~va08I~
+    Private Sub saveRotateAnyBMP(Pbmp As Bitmap)                       ''~va08I~
+        Dim oldbmp = rotateAnyBMP                                      ''~va08I~
+        rotateAnyBMP = CType(Pbmp.Clone(), Bitmap)                     ''~va08I~
+        Trace.W("saveRotateAnyBMP  new bmp Hashcode:" & rotateAnyBMP.GetHashCode()) ''~va08I~
+        If oldbmp IsNot Nothing Then                                   ''~va08I~
+            Trace.W("saveRotateAnyBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~va08I~
+            oldbmp.Dispose()                                           ''~va08I~
+        End If                                                         ''~va08I~
+        swWordBMP = False    'zoom use orgBMP                          ''~v152M~
+    End Sub                                                            ''~va08I~
+    '*************************************************************     ''~va08I~
+    Private Function drawZoomRotateAny(Pbitmap As Bitmap, Pzoom As Double) As Boolean ''~va08I~
+        Try                                                            ''~va08I~
+            Dim bitmapZoom As Bitmap                                   ''~va08I~
+            Dim hh, ww As Integer                                      ''~va08I~
+            hh = CType(Pbitmap.Height * Pzoom, Integer)                ''~va08I~
+            ww = CType(Pbitmap.Width * Pzoom, Integer)                 ''~va08I~
+            bitmapZoom = New Bitmap(Pbitmap, ww, hh)                   ''~va08I~
+            saveRotateAnyBMP(Pbitmap)                                  ''~va08I~
+            setPictureBoxImage(bitmapZoom)                             ''~va08I~
+        Catch ex As Exception                                          ''~va08I~
+            MessageBox.Show("Zoom by Rate:" & ex.Message)              ''~va08I~
+            Return False     'Dont dispose                             ''~va08I~
+        End Try                                                        ''~va08I~
+        Return True 'Dispose parm bitmap                               ''~va08I~
+    End Function                                                       ''~va08I~
     '**************************************************                ''~v100I~
     Private Sub setupComboBoxLang()                                    ''~v100I~
         idxLang = iOCR.setupComboBoxLang(cbLang, idxLang)                 ''~v100R~
@@ -934,7 +1137,7 @@ Public Class Form2
     Private Sub setPictureBoxImage(Pbmp As Bitmap)                     ''~v@@@I~''~v100I~
         Dim oldbmp = PictureBox1.Image                                   ''~v@@@I~''~v100I~
         PictureBox1.Image = Pbmp                                       ''~v@@@I~''~v100I~
-        swRectBMP = False 'PictureBox image is not rect drawn          ''~v106I~
+        '*      swRectBMP = False 'PictureBox image is not rect drawn          ''~v106I~''~v142R~
         '       If Not swWordBMP Then   'not zoom use wordBMP          ''~v106I~
         If Not swSaveRectImage Then                                    ''~v106R~
             saveRectBMP(Pbmp)                                          ''~v106I~
@@ -953,13 +1156,14 @@ Public Class Form2
         swSaveRectImage = True                                         ''~v106I~
         If PrestoreOrg Then                                            ''~v106I~
             drawZoom(Pbmp, scaleNew)  'set clone to PictureBox.Image   ''~v106I~
+            swRectBMP = False  'next box is not drawn,mousedown case   ''~v142I~
         Else                                                           ''~v106I~
             setPictureBoxImage(Pbmp)                                   ''~v106I~
             swRectBMP = True 'PictureBox image is rect drawn           ''~va01I~
         End If                                                         ''~v106I~
         swSaveRectImage = False                                        ''~v106I~
         '       swRectBMP = True 'PictureBox image is rect drawn               ''~v106I~''~va01R~
-        swWordBMP = False   'clip image is from orgBMP                 ''~v106R~
+        '*      swWordBMP = False   'clip image is from orgBMP                 ''~v106R~''~v142R~
     End Sub                                                            ''~v106I~
     '*************************************************************     ''~v100I~
     Private Sub showStatus(Pmsg As String)                             ''~v100I~
@@ -976,7 +1180,7 @@ Public Class Form2
             Exit Sub              'not yet open image file             ''~v106I~
         End If                                                         ''~v106I~
         Dim bmprect As Bitmap = bmpForRect 'rectangle free bitmap      ''~v106I~
-'*      Trace.W("PBmouseDown bmpForRect=" & bmprect.ToString() & ",swWordBMP=" & swWordBMP) ''~v106I~''+va06R~
+        '*      Trace.W("PBmouseDown bmpForRect=" & bmprect.ToString() & ",swWordBMP=" & swWordBMP) ''~v106I~''~va06R~
         iIC.mouseDown(e, bmprect)                                      ''~v106I~
         setPictureBoxImageRect(bmprect, True) 'clear old box           ''~v106R~
     End Sub                                                            ''~v106I~
@@ -1039,7 +1243,7 @@ Public Class Form2
         dlg.FileName = base & "-clip"                                  ''~va04R~
         '       dlg.AddExtension = True   'add extension if missing    ''~va04R~
         dlg.DefaultExt = ext                                           ''~va04R~
-        imageSaveFilterIndex = getSaveFilterIndex(imageSaveFilterIndex, imageSaveFileFilter, ext)''~va06I~
+        imageSaveFilterIndex = getSaveFilterIndex(imageSaveFilterIndex, imageSaveFileFilter, ext) ''~va06I~
         dlg.FilterIndex = imageSaveFilterIndex                         ''~va04R~
         If dlg.ShowDialog() = DialogResult.OK Then                     ''~va04R~
             fnm = dlg.FileName                                         ''~va04R~
@@ -1050,15 +1254,22 @@ Public Class Form2
             If fnmsaved.Length <> 0 Then                                      ''~va04I~
                 Form1.MainForm.isrtMRUListSaveImage(fnmsaved)           ''~va04I~
                 If swRectBMP Then                                           ''~va04I~
-                    showStatus(My.Resources.STR_MSG_INFO_IMAGESAVE_PARTIAL & fnmsaved)''~va04R~
+                    showStatus(My.Resources.STR_MSG_INFO_IMAGESAVE_PARTIAL & fnmsaved) ''~va04R~
                 Else                                                   ''~va04I~
-                    showStatus(My.Resources.STR_MSG_INFO_IMAGESAVE_FULL & fnmsaved)''~va04R~
+                    showStatus(My.Resources.STR_MSG_INFO_IMAGESAVE_FULL & fnmsaved) ''~va04R~
                 End If                                                 ''~va04I~
             End If                                                     ''~va04I~
         End If                                                         ''~va04R~
     End Sub                                                            ''~va04R~
     Private Function SaveImage(Pfnm As String, Pfmt As String) As String ''~va04R~
-        Dim fnm As String = iOCR.saveImage(Pfnm, Pfmt, swRectBMP, orgBMP, scaleNew, clipRect) ''~va04R~
+        '*      Dim fnm As String = iOCR.saveImage(Pfnm, Pfmt, swRectBMP, orgBMP, scaleNew, clipRect) ''~va04R~''~v150R~
+        Dim bmp As Bitmap                                               ''~v150I~
+        If ctrDegree <> 0 Then                                                ''~v150I~
+            bmp = rotateAnyBMP                                           ''~v150I~
+        Else                                                           ''~v150I~
+            bmp = orgBMP                                                 ''~v150I~
+        End If                                                         ''~v150I~
+        Dim fnm As String = iOCR.saveImage(Pfnm, Pfmt, swRectBMP, bmp, scaleNew, clipRect) ''~v150R~
         Return fnm                                                     ''~va04I~
     End Function                                                       ''~va04R~
     Private Function getFileNameExt(Pfnm As String, ByRef Pppath As String, ByRef Ppext As String) As Boolean ''~va04R~

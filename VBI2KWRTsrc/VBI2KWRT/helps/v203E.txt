@@ -18,4 +18,3 @@ V2.01 : Update                               2017/12/27
 . Support FrequentWords dialog also on kanaText form
   and took back some shortcut key(Ctrl+Alpha) from system default
   to "FrequentWords" dialog.
-

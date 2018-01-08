@@ -1,5 +1,14 @@
 (UTF8 encoding)
 
+V2.04 : Update                               2018/01/08
+
+. When extracting from image, insert CRLF at EOL considering 
+  font size change, short line asn writing direction change 
+  insert CRLF for the line missing statement terminator such as ".".
+. (Bug)Character making was not show when partial extracting
+. For Japanese, Option of Vertical/Horizontal writing sorts lines.
+. Support rotation by 1 degree for document image sloped a litte.
+
 V2.03 : Update                               2017/12/31
 
 . Show string enclosed by Error() when Kanji->Kana translation error.

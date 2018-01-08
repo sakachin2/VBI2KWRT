@@ -1,5 +1,6 @@
-﻿''*CID:''+v134R~:#72                          update#=  259;          ''~v134R~
+﻿''*CID:''+v137R~:#72                          update#=  264;          ''~v137R~
 '************************************************************************************''~v001I~
+'v137 2018/01/02 do not delete CRLF after "」"  etc like as ・。、     ''~v137I~
 'v134 2017/12/30 EOLCont is done before convKana(remaining crlf need not set to sbConv)''~v134I~
 'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
 'v129 2017/12/30 (BUG)When Chuten+{mamimumemo}(fuseji),next pos was not updated despite of return true==>Loop''~v129I~
@@ -58,6 +59,7 @@ Public Class ClassKanaText                                             ''~7522R~
     Private Const KATAKANA_CHOON = "ー"c                               ''~v062I~
     '   Private Const DELMCHARS = " ,.　、。"                              ''~v023R~
     Private Const DELMCHARS = " ,.?!　、。・？！｡､･"    '+ hankaku katakana                            ''~v010I~''~v023I~
+    Private Const CLOSEP = "〉》」〉』】〕〗〙〛＞］｝）｣>]})"  'closer''~v137I~
     Private Const KAKECHARS = "カケヵヶ"                               ''~v025I~
     Private Const TSUCHARS = "ツッ"                                    ''~v029I~
     Private Const CHAR_DQ_DBCS = ChrW(&HFF02)                          ''~v023I~
@@ -285,6 +287,7 @@ Public Class ClassKanaText                                             ''~7522R~
         '       Dim iinext As Integer                                          ''~v001I~''~v008R~
         Dim swKatakanaDoc As Boolean = DocOptions.swKatakanaDoc    'allow katakana as okurigana''~v006I~''~v030R~
         swException = False                                              ''~v010I~
+        Trace.setOn()                                                  ''+v137I~
         Try                                                            ''~7522I~
             chii = Chr(&H0)                                              ''~7607I~
             Do While ii < charctr                                      ''~7522I~
@@ -446,6 +449,7 @@ Public Class ClassKanaText                                             ''~7522R~
             swException = True                                           ''~v010I~
             Return ""                                                  ''~7522I~
         End Try                                                        ''~7522I~
+        Trace.setOff()                                                 ''+v137I~
         Return sb.ToString()                                       ''~7522I~''~7618I~
     End Function                                                       ''~7522I~
     '****************************************************************************''~v010I~
@@ -713,7 +717,7 @@ Public Class ClassKanaText                                             ''~7522R~
         Dim kanastr As String                                          ''~v010M~
         Dim rc As Boolean = False                                        ''~v010I~
         If PsbConv.Length > 0 Then                                            ''~v010I~
-            '*          Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v101R~''~v129R~
+Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v101R~''~v129R~''+v137R~
             If PswKanji Then 'detected kanji                           ''~v010I~
                 Dim kanjistr As String = PsbConv.ToString()              ''~v010I~
                 kanastr = strConv(Psb, kanjistr)                         ''~v010I~
@@ -731,15 +735,15 @@ Public Class ClassKanaText                                             ''~7522R~
                         End If                                         ''~v021I~
                     End If                                             ''~v021I~
                     Psb.Append(kanastr.Substring(Ppkatakanactr, kanastr.Length - Ppkatakanactr)) ''~v021R~
-                    '*                  Trace.W("strConvM2  kanji katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~
+    Trace.W("strConvM2  kanji katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''+v137R~
                 Else                                                     ''~v021I~
                     Psb.Append(kanastr)                                    ''~v010I~
-                    '*                  Trace.W("strConvM2  kanji no katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~
+     Trace.W("strConvM2  kanji no katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''+v137R~
                 End If                                                    ''~v021I~
                 rc = True                                                ''~v010I~
             Else                                                       ''~v010I~
                 Psb.Append(PsbConv)                                    ''~v010I~
-                '*              Trace.W("strConvM2 No kanji append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~
+     Trace.W("strConvM2 No kanji append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''+v137R~
             End If                                                     ''~v010I~
             PsbConv.Clear()                                            ''~v010I~
             Ppkatakanactr = 0                                             ''~v021I~
@@ -1152,7 +1156,8 @@ Public Class ClassKanaText                                             ''~7522R~
                 If prevch = FormatBES.CHAR_LF Then 'continued CRLF   ''~v010R~
                     Return 0                                           ''~v010I~
                 End If                                                 ''~v010I~
-                If isDelmChar(prevch) Then 'accept CRLF if before is delm''~v010I~
+                '*              If isDelmChar(prevch) Then 'accept CRLF if before is delm''~v010I~''~v137R~
+                If isDelmCharEOL(prevch) Then 'accept CRLF if before is delm''~v137I~
                     Return 0                                           ''~v010I~
                 End If                                                 ''~v010I~
             Else                                                       ''~v010I~
@@ -1179,7 +1184,8 @@ Public Class ClassKanaText                                             ''~7522R~
                     If prevch = FormatBES.CHAR_LF Then 'continued CRLF''~v010M~
                         Return 0                                       ''~v010M~
                     End If                                             ''~v010M~
-                    If isDelmChar(prevch) Then 'accept CRLF if before is delm''~v010I~
+                    '*                  If isDelmChar(prevch) Then 'accept CRLF if before is delm''~v010I~''~v137R~
+                    If isDelmCharEOL(prevch) Then 'accept CRLF if before is delm''~v137I~
                         Return 0                                       ''~v010I~
                     End If                                             ''~v010I~
                 Else                                                   ''~v010I~
@@ -1380,10 +1386,17 @@ Public Class ClassKanaText                                             ''~7522R~
         Return sb                                                      ''~v008I~
     End Function                                                       ''~v008I~
     '*************************************************************************''~v010I~
-    Private Function isDelmChar(Pch As Char) As Boolean                ''~v010R~
+    Private Shared Function isDelmChar(Pch As Char) As Boolean                ''~v010R~''~v137R~
         Dim rc As Boolean = DELMCHARS.IndexOf(Pch) >= 0                  ''~v010R~
         Return rc                                                      ''~v010I~
     End Function                                                       ''~v010I~
+    '*************************************************************************''~v137I~
+    Public shared Function isDelmCharEOL(Pch As Char) As Boolean       ''~v137R~
+        If isDelmChar(Pch) Then                                        ''~v137I~
+            Return True                                                ''~v137I~
+        End If                                                         ''~v137I~
+        Return CLOSEP.IndexOf(Pch) >= 0                             ''~v137I~
+    End Function                                                       ''~v137I~
     '*************************************************************************''~v023I~
     Private Function isSplitter(Pch As Char) As Boolean                ''~v023I~
         If isDelmChar(Pch) Then                                             ''~v023I~

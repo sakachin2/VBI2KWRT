@@ -38,6 +38,7 @@ Partial Class Form2
         Me.PanelPictureBox = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.SaveFileDialogImage = New System.Windows.Forms.SaveFileDialog()
+        Me.ToolStripMenuItemDegree1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.PanelPictureBox.SuspendLayout()
@@ -46,7 +47,7 @@ Partial Class Form2
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemZoomIn, Me.ToolStripMenuItemZoomOut, Me.ToolStripMenuItemRotateLeft, Me.ToolStripMenuItemRotateRight, Me.ToolStripComboBoxLang, Me.ToolStripMenuItemExtract, Me.ToolStripMenuItemSaveImage, Me.ToolStripMenuItemHelp})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFile, Me.ToolStripMenuItemZoomIn, Me.ToolStripMenuItemZoomOut, Me.ToolStripMenuItemDegree1, Me.ToolStripMenuItemRotateLeft, Me.ToolStripMenuItemRotateRight, Me.ToolStripComboBoxLang, Me.ToolStripMenuItemExtract, Me.ToolStripMenuItemSaveImage, Me.ToolStripMenuItemHelp})
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.Name = "MenuStrip1"
         '
@@ -128,6 +129,13 @@ Partial Class Form2
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
+        'ToolStripMenuItemDegree1
+        '
+        Me.ToolStripMenuItemDegree1.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.ToolStripMenuItemDegree1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripMenuItemDegree1.Name = "ToolStripMenuItemDegree1"
+        resources.ApplyResources(Me.ToolStripMenuItemDegree1, "ToolStripMenuItemDegree1")
+        '
         'Form2
         '
         resources.ApplyResources(Me, "$this")
@@ -164,4 +172,5 @@ Partial Class Form2
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItemSaveImage As ToolStripMenuItem
     Friend WithEvents SaveFileDialogImage As SaveFileDialog
+    Friend WithEvents ToolStripMenuItemDegree1 As ToolStripMenuItem
 End Class

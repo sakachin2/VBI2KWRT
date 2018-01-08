@@ -1,4 +1,4 @@
-﻿'CID:''+v133R~:#72                             update#=  743;         ''~v128R~''~v132R~''~v133R~
+﻿'CID:''+v133R~:#72                             update#=  745;         ''~v128R~''~v132R~''~v133R~
 '************************************************************************************''~v002I~
 'v133 2017/12/30 (Bug)MRUList was synchronized; form1 selection-->form2/form3,form2/form3 selection-->form2/fornm3(for2/form-->form1 is OK but)''~v133I~
 'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
@@ -36,7 +36,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.03"                                   ''~v122I~''~v128R~''+v133R~
+    Private Const VERSION = "v2.04"                                   ''~v122I~''~v128R~''+v133R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -197,7 +197,7 @@ Public Class Form1
         CreateCaret(TBBES.Handle, IntPtr.Zero, caretWidth, caretHeight) ''~v067I~
         ShowCaret(TBBES.Handle)                                     ''~v067I~
     End Sub                                                            ''~v067I~
-    Private Sub TextBox_GotFocus(sender As System.Object, e As System.EventArgs) Handles TBBES.GotFocus ''~v067I~
+    Private Sub TextBox_GotFocus(sender As System.Object, e As System.EventArgs) Handles TBBES.GotFocus ''~v067I~''~v133I~
         Try                                                            ''~v111I~
             showCustomCaret()                                              ''~v067I~
         Catch ex As Exception                                          ''~v111I~
@@ -214,7 +214,7 @@ Public Class Form1
         Trace.fsClose()                                                ''~7619I~
         My.Settings.Save()     'required if using Main.vb              ''~v110I~
     End Sub                                                            ''~7501I~
-    Private Sub TBBES_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBBES.TextChanged ''~7501I~
+    Private Sub TBBES_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBBES.TextChanged ''~7501I~''~v133I~
         Try                                                            ''~v111I~
             showStatus("")      'clear                                     ''~v052I~
             If TBBES.Enabled Then    'called by Design.vb initial text setting  ''~7508I~
@@ -554,7 +554,7 @@ Public Class Form1
                 insertMRUList(1, fnm)      '1:imagefile                ''~v112I~
                 openImageBoxForm2(fnm)                                 ''~v112I~
             End If                                                     ''~v112I~
-'*          formImage.updateMRUList()     'insrtMRU update Form2 filemanu                             ''~v112I~''~v133R~
+            '*          formImage.updateMRUList()     'insrtMRU update Form2 filemanu                             ''~v112I~''~v133R~
         Catch ex As Exception                                          ''~v112I~
             Form1.exceptionMsg("Form1 MRU_Image for Form2", ex)        ''~v112I~
         End Try                                                        ''~v112I~
@@ -591,7 +591,7 @@ Public Class Form1
                 insertMRUList(2, fnm)      '2:kanji text               ''~v114I~
                 openTextBoxForm3(fnm)                                  ''~v114I~
             End If                                                     ''~v114I~
-'*          formText.updateMRUList() '+insertMRUList update form2 open menu                                   ''~v114I~''~v133R~
+            '*          formText.updateMRUList() '+insertMRUList update form2 open menu                                   ''~v114I~''~v133R~
         Catch ex As Exception                                          ''~v114I~
             Form1.exceptionMsg("Form MRU_Text for Form3", ex)          ''~v114I~
         End Try                                                        ''~v114I~
@@ -638,13 +638,13 @@ Public Class Form1
         saveMRUList(Pcase)                                             ''~7411I~
         Select Case Pcase                                              ''~v133I~
             Case 1 'Image                                              ''~v133I~
-				if formIsAvailable(formImage)                          ''~v133I~
-					formImage.updateMRUList()  '*update form2 File menuitem''~v133I~
-                end if                                                 ''~v133I~
+                If formIsAvailable(formImage) Then                          ''~v133I~
+                    formImage.updateMRUList()  '*update form2 File menuitem''~v133I~
+                End If                                                 ''~v133I~
             Case 2 'KanjiText                                          ''~v133I~
-				if formIsAvailable(formText)                           ''~v133I~
-					formText.updateMRUList()   '*update form3 File menuitem''~v133I~
-                end if                                                 ''~v133I~
+                If formIsAvailable(formText) Then                           ''~v133I~
+                    formText.updateMRUList()   '*update form3 File menuitem''~v133I~
+                End If                                                 ''~v133I~
         End Select                                                     ''~v133I~
     End Sub                                                            ''~7411I~
 
@@ -1025,28 +1025,28 @@ Public Class Form1
             Form1.exceptionMsg("Form1 SelectAll", ex)                   ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7509I~
-    Private Sub TB_KeyUpEvent(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TBBES.KeyUp ''~7513I~
+    Private Sub TB_KeyUpEvent(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TBBES.KeyUp ''~7513I~''~v133I~
         Try                                                            ''~v111I~
             undoRedo.TB_KeyUp(e)                                           ''~7513I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 KeyUp", ex)                       ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7513I~
-    Private Sub TB_KeyDownEvent(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TBBES.KeyDown ''~7513I~
+    Private Sub TB_KeyDownEvent(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TBBES.KeyDown ''~7513I~''~v133I~
         Try                                                            ''~v111I~
             undoRedo.TB_KeyDown(e)                                         ''~7513I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 KeyDown", ex)                     ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7513I~
-    Private Sub TB_KeyPressEvent(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TBBES.KeyPress ''~7513I~
+    Private Sub TB_KeyPressEvent(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TBBES.KeyPress ''~7513I~''~v133I~
         Try                                                            ''~v111I~
             undoRedo.TB_KeyPress(e)                                        ''~7513I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 KeyPress", ex)                    ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7513I~
-    Private Sub TB_MouseClickEvent(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles TBBES.MouseClick ''~v105M~
+    Private Sub TB_MouseClickEvent(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles TBBES.MouseClick ''~v105M~''~v133I~
         Try                                                            ''~v111I~
             undoRedo.TB_MouseClick(e)                                      ''~v105M~
         Catch ex As Exception                                          ''~v111I~
