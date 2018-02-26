@@ -1,9 +1,12 @@
-(Form11E) 
 Edit Dictionary Dialog
 
 Register "String" and corresponding Kana translation.
-Straing may contain any characters.
+Simply replace the left column string to right colomun string,
+both can contain any type of character.
 Register those words repeatedly used in the document, which is not translated correctly.
+Those chars extraction mis-rcognize many times may be register and corrected at 
+kana translation.
+
 Use Mouse Right button for Copy & Paste
 not when cell is highlightened but when string is highlightened.
 Cut/CopyPaste buttons bellow title are used to copy/move row.
@@ -13,12 +16,22 @@ String replacement is applied for only word with "Use" is checked on,
 and then kanji-kana translation is done.
 Replacement is applied from top rows sequencially.
 So, take care for the case "本町" and "町", same char is differently pronunced.  
+
+Shows "(null)" when left "Translation to Kana" to null, 
+the "String" is deleted at translation.
+if "Kana" is space char it is shown like as "( )".
+"─" may be translated to "けいせん"(line drawing character),
+to avoid it register "(symbol)"(See bellow). 
+
 e.g)
 空気       |くーき               (when required to replace "う" by ("ー")
 本町       |ほんまち 
 町         |ちょう
 環境汚染   |かんきょう　おせん   (required space to split word)
 飛び地     |　とびち             (Space is prefixed)
+◆         |(null)
+(symbol)   |─ ☆
+、つ       |う                   (for many time mis-recognition)
 
 The rows with "Del" is checked on is deleted at "OK" is clicked.
 
@@ -37,4 +50,4 @@ e.g)  1;飛び地;　とびち
       1;本町;ほんまち
       1;町;ちょー
 
-2017/09/12
+(Form11E) 2017/02/24

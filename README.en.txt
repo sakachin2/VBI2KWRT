@@ -1,5 +1,16 @@
 (UTF8 encoding)
 
+V2.05 : Update                               2018/02/26
+
+. Paticular setting of Disctionary.
+  -Delete the "String" if "Translation to Kana" is left null.(shown by "(null)")
+  -"(symbol)" on "String" column means bypassing translation those chars in "Trans.." column.
+   This is for avoiding such symbol "○" is translated to "まる"(circle).
+. (Bug)Reloading Dictionary/Words file has no effect if not updated it after load.
+. (Bug)Caret positioning error when line is deleted by Del key and next is CRLF only line.
+. (Bug)Add filter setting to SaveAS dialog of Kanji/Kana text file.
+. Paticular setting of Disctionary.
+
 V2.04 : Update                               2018/01/08
 
 . When extracting from image, insert CRLF at EOL considering 

@@ -2,7 +2,11 @@ Words Definition Dialog
 
 Register those "Phrase" frequently appear in the document.
 A candidate is kanji character sometimes misrecognition occurs
-at extracting from image 
+at extracting from image.
+e.g. "ŽO" is sometime recognized  as "ˆê" and "“ñ", 
+    "‘T" resembles "åú".
+     so register "ŽO" or "‘T" to easy correction.
+
 One dialog supports both of Extracted text form and kana text form.
 You can swith forms to receive by Open Key(Default:F9).
 Dialog back-color also switches to identify "Phrase" is sent to.
@@ -32,4 +36,4 @@ Default extension is ".wrd"
 Line format :
    n;Key;Phrase    (n: '1':Use, '0':NotUse)
 
-(Form13E) 2017/12/27
+(Form13E) 2018/02/24

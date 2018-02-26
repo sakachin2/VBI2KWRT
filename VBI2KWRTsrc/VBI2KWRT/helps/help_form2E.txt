@@ -20,16 +20,18 @@ Displaying document image file
   Use OK button or Copy & Paste to take in the text.
 
 "Language":
-  For Japanese, OCR library is missing para,eter of Horizontal or Vertical writing.
+  For Japanese, OCR library is missing parameter of Horizontal or Vertical writing.
   But you can specify sequence of recognized text.
   "Jp-VR2L", "Jp-VL2RH", "Jp-HR2L" and Jp-HL2R is 
   Vertical(Right to Left), Vertical(Left to Right), Horizontal(Right to Left) 
   and Horizontal(Left to Right).
-  When Vertical, horizontal lines are after vertical lines.
-  When Horitontal , vertical lines are after horizontal lines  
+  When Vertical, all horizontal lines are after vertical lines.
+  When Horitontal , all vertical lines are after horizontal lines  
   and Left or Rifht is for vertical lines. 
   When the image has some inclination,a line may be split and mixed into next line.
-  When "Japanese" is selected, no sort is done. 
+  Try 1°rotattion.
+
+  When simply "Japanese" is selected, no sort is done. 
 
   You can select another Language if LanguagePack is installed.
   On Windows10, install LanguagePack as following.
@@ -38,4 +40,4 @@ Displaying document image file
     Another way from "Settings", you can install the Language Pack,
     "Application","Optional Feature", ... "OCR",Download & Install. 
 
-(Form2E) 2017/12/19
+(Form2E) 2018/01/10

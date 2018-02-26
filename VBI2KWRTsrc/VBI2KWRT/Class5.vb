@@ -1,5 +1,7 @@
-﻿''*CID:''+v137R~:#72                          update#=  264;          ''~v137R~
+﻿''*CID:''+v162R~:#72                          update#=  268;          ''~v162R~
 '************************************************************************************''~v001I~
+'v162 2018/02/26 set filter for savefiledialog of i2k and txt          ''~v162I~
+'v158 2018/02/24 support specification of no translation symbol sush as "─", it may be translated to keisen''~v158I~
 'v137 2018/01/02 do not delete CRLF after "」"  etc like as ・。、     ''~v137I~
 'v134 2017/12/30 EOLCont is done before convKana(remaining crlf need not set to sbConv)''~v134I~
 'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
@@ -243,6 +245,7 @@ Public Class ClassKanaText                                             ''~7522R~
     ''~7522I~
     Public Sub SaveAs() 'from Form1                                    ''~7522I~
         Dim dlg = Form1.MainForm.SaveFileDialog1                         ''~7522R~
+        dlg.Filter = Rstr.getStr("STR_FILTER_KANATEXT")                ''~v162I~
         If dlg.ShowDialog() = DialogResult.OK Then                     ''~7522I~
             Dim fnm As String = dlg.FileName                           ''~7522I~
             saveFile(fnm)                                              ''~7522I~
@@ -287,7 +290,7 @@ Public Class ClassKanaText                                             ''~7522R~
         '       Dim iinext As Integer                                          ''~v001I~''~v008R~
         Dim swKatakanaDoc As Boolean = DocOptions.swKatakanaDoc    'allow katakana as okurigana''~v006I~''~v030R~
         swException = False                                              ''~v010I~
-        Trace.setOn()                                                  ''+v137I~
+        Trace.setOn()                                                  ''~v137I~
         Try                                                            ''~7522I~
             chii = Chr(&H0)                                              ''~7607I~
             Do While ii < charctr                                      ''~7522I~
@@ -449,7 +452,7 @@ Public Class ClassKanaText                                             ''~7522R~
             swException = True                                           ''~v010I~
             Return ""                                                  ''~7522I~
         End Try                                                        ''~7522I~
-        Trace.setOff()                                                 ''+v137I~
+        Trace.setOff()                                                 ''~v137I~
         Return sb.ToString()                                       ''~7522I~''~7618I~
     End Function                                                       ''~7522I~
     '****************************************************************************''~v010I~
@@ -651,7 +654,7 @@ Public Class ClassKanaText                                             ''~7522R~
         Return Pfiletext                                               ''~7619I~
 #End If                                                                ''~7619I~
     End Function                                                       ''~7618I~
-    ''~7522I~
+    '***********************************************************************************''~v158R~
     Function getCharType(Pchar As Char, Pchar2 As Char) As Char        ''~7522I~
         'rc 2:hiraganaOkurigana,1:kanji-ucs2,3:kanji-ucs4,4:katakana,0:no conversion,else converted to char''~7522I~''~7525R~
         Dim chtype As Integer = 0                                      ''~7522I~
@@ -717,7 +720,7 @@ Public Class ClassKanaText                                             ''~7522R~
         Dim kanastr As String                                          ''~v010M~
         Dim rc As Boolean = False                                        ''~v010I~
         If PsbConv.Length > 0 Then                                            ''~v010I~
-Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v101R~''~v129R~''+v137R~
+'*          Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v101R~''~v129R~''~v137R~''+v162R~
             If PswKanji Then 'detected kanji                           ''~v010I~
                 Dim kanjistr As String = PsbConv.ToString()              ''~v010I~
                 kanastr = strConv(Psb, kanjistr)                         ''~v010I~
@@ -735,15 +738,15 @@ Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v1
                         End If                                         ''~v021I~
                     End If                                             ''~v021I~
                     Psb.Append(kanastr.Substring(Ppkatakanactr, kanastr.Length - Ppkatakanactr)) ''~v021R~
-    Trace.W("strConvM2  kanji katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''+v137R~
+'*                  Trace.W("strConvM2  kanji katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''~v137R~''+v162R~
                 Else                                                     ''~v021I~
                     Psb.Append(kanastr)                                    ''~v010I~
-     Trace.W("strConvM2  kanji no katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''+v137R~
+'*                  Trace.W("strConvM2  kanji no katakana append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''~v137R~''+v162R~
                 End If                                                    ''~v021I~
                 rc = True                                                ''~v010I~
             Else                                                       ''~v010I~
                 Psb.Append(PsbConv)                                    ''~v010I~
-     Trace.W("strConvM2 No kanji append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''+v137R~
+'*              Trace.W("strConvM2 No kanji append to Psb=" & Psb.ToString()) ''~v101R~''~v129R~''~v137R~''+v162R~
             End If                                                     ''~v010I~
             PsbConv.Clear()                                            ''~v010I~
             Ppkatakanactr = 0                                             ''~v021I~
@@ -1324,7 +1327,7 @@ Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v1
         '       Dim repwords As String() = dictionaryRepwords                  ''~v008R~
         '       Dim ctrWords As Integer = words.Length                         ''~v008R~
         Dim sb As StringBuilder
-        '       Trace.W("applyDictionary in str=" & Pfiletext)                 ''~v008I~''~v029R~
+'*      Trace.W("applyDictionary in str=" & Pfiletext)                 ''~v008I~''~v029R~''~v137R~''+v162R~
         swException = False                                              ''~v010I~
         Try                                                            ''~v008I~
             sb = suppressEOL(Pfiletext)                                ''~v008R~
@@ -1342,7 +1345,7 @@ Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v1
             Return ""                                                  ''~v008I~
         End Try                                                        ''~v008I~
         Dim str = sb.ToString()
-        '       Trace.W("applyDictionary out str=" & str)                      ''~v008R~''~v029R~
+'*      Trace.W("applyDictionary out str=" & str)                      ''~v008R~''~v029R~''~v137R~''+v162R~
         Return str                                           ''~v008I~
     End Function                                                       ''~v008I~
     '*************************************************************************''~v008I~
@@ -1391,7 +1394,7 @@ Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v1
         Return rc                                                      ''~v010I~
     End Function                                                       ''~v010I~
     '*************************************************************************''~v137I~
-    Public shared Function isDelmCharEOL(Pch As Char) As Boolean       ''~v137R~
+    Public Shared Function isDelmCharEOL(Pch As Char) As Boolean       ''~v137R~
         If isDelmChar(Pch) Then                                        ''~v137I~
             Return True                                                ''~v137I~
         End If                                                         ''~v137I~
@@ -1402,6 +1405,9 @@ Trace.W("strConvM2 PsbConv input=" & PsbConv.ToString() & vbCrLf & "<<<<") ''~v1
         If isDelmChar(Pch) Then                                             ''~v023I~
             Return True                                                ''~v023I~
         End If                                                         ''~v023I~
+        If Form11.chkSymbol(Pch) Then                                  ''~v158I~
+            Return True                                                ''~v158I~
+        End If                                                         ''~v158I~
         Dim rc As Boolean = SPLITCHARS.IndexOf(Pch) >= 0               ''~v023I~
         '       Trace.W("splitter=" & SPLITCHARS)                              ''~v023I~''~v029R~
         Return rc                                                   ''~v023I~

@@ -1,6 +1,9 @@
-﻿'CID:''+v103R~:#72                             update#=  100;         ''~v102R~''+v103R~
+﻿'CID:''+v158R~:#72                             update#=  123;         ''~v158R~
 '************************************************************************************''~v008I~
-'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err''+v103I~
+'v158 2018/02/24 support specification of no translation symbol sush as "─", it may be translated to keisen''~v158I~
+'v157 2018/02/24 allow dictionary translation to space(sbcs and dbcs)  ''~v156I~
+'v156 2018/02/24 applydictionary may cause invalid object reference    ''~v103I~
+'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err''~v103I~
 'v102 2017/12/16 (BUG)Enable/Disable check  of Dislog(Dictionary,Word,Symbol)''~v102I~
 'v101 2017/12/16 Conversion warning                                    ''~v101I~
 'v080 2017/10/10 (BUG)2nd paste after cut remove cut pos twice         ''~v080I~
@@ -26,6 +29,9 @@ Public Class Form11                                                    ''~v008R~
     Private Const ENABLEID_ON = "1"                                      ''~v008I~
     Private Const ENABLEID_OFF = "0"                                     ''~v008I~''~v012R~
     Private Const DEFAULT_EXT = "dct"                                   ''~v012I~
+    Private Const NULL_VALUE = "(null)"                                ''~v157I~
+    Private Const SYMBOL_VALUE = "(symbol)"                            ''~v158I~
+    Private Shared SdictionarySymbol As String = ""                    ''~v158R~
     ''~v012I~
     '   Private fileEncoding As System.Text.Encoding = System.Text.Encoding.UTF8''~v012R~
     Private fileEncoding As System.Text.Encoding = System.Text.Encoding.Default ''~v012R~
@@ -126,6 +132,7 @@ Public Class Form11                                                    ''~v008R~
             If Not putCFG() Then                                            ''~v008R~
                 Exit Sub                                               ''~v008I~
             End If                                                     ''~v008I~
+            swUpdated = False                                          ''+v158I~
         End If                                                         ''~v008I~
         Me.Close()                                                     ''~v008I~
     End Sub 'resize                                                    ''~v008I~
@@ -153,6 +160,7 @@ Public Class Form11                                                    ''~v008R~
         End If                                                         ''~v012I~
         SB.show(SBM.MSGID.CLEAR, "")                                   ''~v078I~
     End Sub                                                            ''~v012I~
+    '*****************************************************************************************''~v157I~
     Private Sub CellValueChanged(ByVal sender As System.Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewDictionary.CellValueChanged ''~v008I~
         ' e.ColumnIndex, e.RowIndex                                        ''~v008I~
         If Not swFilled Then                                                ''~v008I~
@@ -166,6 +174,33 @@ Public Class Form11                                                    ''~v008R~
         End If                                                           ''~v066I~
         swUpdated = True                                                  ''~v008I~
     End Sub                                                            ''~v008I~
+    '*****************************************************************************************''~v157I~
+    Private Sub chkKanaNull(Prow As Integer)                           ''~v157I~
+        Dim kana As String = CType(DGV.Rows(Prow).Cells(CELLNO_KANA).Value, String) ''~v157I~
+        If kana Is Nothing OrElse kana.CompareTo("") = 0 Then          ''~v157I~
+            DGV.Rows(Prow).Cells(CELLNO_KANA).Value = NULL_VALUE       ''~v157I~
+        Else                                                           ''~v157I~
+            If kana.Trim().CompareTo("") = 0 Then                      ''~v157I~
+                DGV.Rows(Prow).Cells(CELLNO_KANA).Value = "(" & kana & ")" ''~v157I~
+            End If                                                     ''~v157I~
+        End If                                                         ''~v157I~
+    End Sub                                                            ''~v157I~
+    '*****************************************************************************************''~v158I~
+    Private Sub getSymbolValidate(Prow As Integer)                     ''~v158I~
+        Dim kanji As String = CType(DGV.Rows(Prow).Cells(CELLNO_KANJI).Value, String) ''~v158I~
+        Dim kana As String = CType(DGV.Rows(Prow).Cells(CELLNO_KANA).Value, String) ''~v158I~
+        getSymbol(kanji, kana)                                          ''~v158I~
+    End Sub                                                            ''~v158I~
+    '*****************************************************************************************''~v157I~
+    Private Sub RowLeave(ByVal sender As System.Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewDictionary.RowLeave ''~v157I~
+        '       chkKanaNull(e.RowIndex)                                        ''~v157I~
+    End Sub                                                            ''~v157I~
+    '*****************************************************************************************''~v157I~
+    Private Sub Rowvalidated(ByVal sender As System.Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewDictionary.RowValidated ''~v157I~
+        chkKanaNull(e.RowIndex)                                        ''~v157I~
+        getSymbolValidate(e.RowIndex)                                  ''~v158I~
+    End Sub                                                            ''~v157I~
+    '*****************************************************************************************''~v157I~
     Private Sub showHelp()                                             ''~v008I~
         Dim txt As String                                              ''~v008I~
         If FormOptions.swLangEN Then                                   ''~v008I~
@@ -179,18 +214,45 @@ Public Class Form11                                                    ''~v008R~
         DGV = DataGridViewDictionary                                     ''~v008I~
         fillColumn()                                                   ''~v008I~
     End Sub                                                            ''~v008I~
+    '*****************************************************************************************''~v158I~
+    Private Sub getSymbol(Pkanji As String, Pkana As String)            ''~v158I~
+        If Pkanji Is Nothing Then                                           ''~v158I~
+            Exit Sub                                                   ''~v158I~
+        End If                                                         ''~v158I~
+        If Pkana Is Nothing Then                                            ''~v158I~
+            Exit Sub                                                   ''~v158I~
+        End If                                                         ''~v158I~
+        If String.Compare(Pkanji, SYMBOL_VALUE, True) = 0 Then                    ''~v158I~
+            SdictionarySymbol = Pkana                                    ''~v158I~
+            If String.Compare(Pkana, NULL_VALUE, True) = 0 Then          ''~v158I~
+                SdictionarySymbol = ""                                   ''~v158I~
+            End If                                                     ''~v158I~
+        End If                                                         ''~v158I~
+    End Sub                                                            ''~v158I~
+    '*****************************************************************************************''~v158I~
+    Public Shared Function chkSymbol(Psymbol As Char) As Boolean        ''~v158I~
+        Return SdictionarySymbol.IndexOf(Psymbol) >= 0                   ''~v158I~
+    End Function                                                            ''~v158I~
+    '*****************************************************************************************''~v158I~
     Private Sub fillColumn()                                           ''~v008I~
         clearDGV()                                                     ''~v008R~
         '       For ii As Integer = 0 To ListData.Length / COLNO - 1           ''~v008I~''~v101R~
+        Dim entno As Integer = 0                                        ''~v158I~
         For ii As Integer = 0 To CType(ListData.Length / COLNO, Integer) - 1 ''~v101I~
             Dim enable As Boolean                                      ''~v008I~
             Dim enableid As String = ListData(ii * COLNO)                ''~v008I~
             '           enable = IIf(enableid.CompareTo(ENABLEID_ON) = 0, True, False) ''~v008I~''~v101R~
             enable = CType(IIf(enableid.CompareTo(ENABLEID_ON) = 0, True, False), Boolean) ''~v101I~
+            getSymbol(ListData(ii * COLNO + 1), ListData(ii * COLNO + 2)) ''~v158I~
             DGV.Rows.Add(enable, ListData(ii * COLNO + 1), ListData(ii * COLNO + 2), False) ''~v008R~
+            entno += 1                                                   ''~v158I~
         Next                                                           ''~v008I~
+        If entno = 0 Then                                                     ''~v158I~
+            DGV.Rows.Add(True, SYMBOL_VALUE, NULL_VALUE, False)         ''~v158I~
+        End If                                                         ''~v158I~
         swFilled = True                                                  ''~v008I~
     End Sub                                                            ''~v008I~
+    '*****************************************************************************************''~v157I~
     Private Function getListData() As Integer                          ''~v008R~
         Dim rowctr As Integer = getRowCount()                            ''~v008I~
         Dim newrow As Integer = DGV.NewRowIndex                        ''~v008I~
@@ -224,6 +286,10 @@ Public Class Form11                                                    ''~v008R~
             '           Dim kana As String = DGV.Rows(ii).Cells(CELLNO_KANA).Value ''~v008I~''~v101R~
             Dim kana As String = CType(DGV.Rows(ii).Cells(CELLNO_KANA).Value, String) ''~v101I~
             rc2 = chkValueValidity(ii, False)                            ''~v008R~
+            If rc2 = 2 Then 'kana is Nothing or null                          ''~v157I~
+                DGV.Rows(ii).Cells(CELLNO_KANA).Value = NULL_VALUE     ''~v157R~
+                rc2 = 0                                                  ''~v157I~
+            End If                                                     ''~v157I~
             If rc2 > 0 Then                                                   ''~v008I~
                 If errpos < 0 Then                                            ''~v008I~
                     errpos = ii                                          ''~v008I~
@@ -303,6 +369,9 @@ Public Class Form11                                                    ''~v008R~
         End If                                                         ''~v008I~
         Return True                                                    ''~v008I~
     End Function                                                       ''~v008I~
+    '**********************************************************************************''~v157I~
+    '*rc:1 err,4:splitter=";" it is used as splitter of save file,2:kana string is null(accept as nullify)''~v157I~
+    '**********************************************************************************''~v157I~
     Private Function chkValueValidity(Ppos As Integer, PswHandler As Boolean) As Integer ''~v008R~
         '       Dim kanji As String = DGV.Rows(Ppos).Cells(CELLNO_KANJI).Value   ''~v008I~''~v101R~
         Dim kanji As String = CType(DGV.Rows(Ppos).Cells(CELLNO_KANJI).Value, String) ''~v101I~
@@ -322,7 +391,10 @@ Public Class Form11                                                    ''~v008R~
         End If                                                         ''~v008I~
         If kana Is Nothing OrElse kana.Trim().CompareTo("") = 0 Then                 ''~v008I~''~v012R~
             If rc = 0 Then                                                    ''~v008I~
-                rc = 1                                                 ''~v008R~
+                '               rc = 1                                                 ''~v008R~''~v157R~
+                If kana Is Nothing OrElse kana.Length = 0 Then          ''~v157R~
+                    rc = 2    'id of null                                ''~v157I~
+                End If                                                 ''~v157I~
             End If                                                     ''~v008I~
         Else                                                           ''~v008I~
             If kana.IndexOf(";"c) >= 0 Then                            ''~v008I~
@@ -357,14 +429,34 @@ Public Class Form11                                                    ''~v008R~
         Dim applyctr As Integer = 0                                      ''~v008I~
         Dim sb As StringBuilder = Psbtext                                ''~v008R~
         '       For ii As Integer = 0 To ListData.Length / COLNO - 1           ''~v008I~''~v101R~
-        For ii As Integer = 0 To CType(ListData.Length / COLNO, Integer) - 1 ''~v101I~
-            Dim enableid As String = ListData(ii * COLNO)              ''~v008I~
-            If enableid.CompareTo(ENABLEID_ON) = 0 Then                         ''~v008I~
-                Dim kanji As String = ListData(ii * COLNO + 1)           ''~v008I~
-                Dim kana As String = ListData(ii * COLNO + 2)            ''~v008I~
-                sb = sb.Replace(kanji, kana)                              ''~v008I~
-            End If                                                     ''~v008I~
-        Next                                                           ''~v008I~
+        Dim ii2 As Integer = 0                                         ''~v103R~
+        Try                                                            ''~v156R~
+            For ii As Integer = 0 To CType(ListData.Length / COLNO, Integer) - 1 ''~v101I~''~v103R~
+                ii2 = ii                                                 ''~v103I~
+                Dim enableid As String = ListData(ii * COLNO)              ''~v008I~
+                If enableid.CompareTo(ENABLEID_ON) = 0 Then                         ''~v008I~
+                    Dim kanji As String = ListData(ii * COLNO + 1)           ''~v008I~
+                    If String.Compare(kanji, SYMBOL_VALUE, True) = 0 Then         ''~v158I~
+                        Continue For                                   ''~v158I~
+                    End If                                             ''~v158I~
+                    Dim kana As String = ListData(ii * COLNO + 2)            ''~v008I~
+                    If (kana Is Nothing) Then                               ''~v157I~
+                        kana = ""                                        ''~v157I~
+                    Else                                               ''~v157I~
+                        If String.Compare(kana, NULL_VALUE, True) = 0 Then ''~v158I~
+                            kana = ""                                  ''~v157I~
+                        Else                                           ''~v157I~
+                            If kana.Chars(0) = "("c AndAlso kana.Chars(kana.Length - 1) = ")"c AndAlso Trim(kana.Substring(1, kana.Length - 2)).Length = 0 Then ''~v157I~
+                                kana = kana.Substring(1, kana.Length - 2)   ''~v157I~
+                            End If                                     ''~v157I~
+                        End If                                         ''~v157I~
+                    End If                                             ''~v157I~
+                    sb = sb.Replace(kanji, kana)                              ''~v008I~
+                End If                                                     ''~v008I~
+            Next                                                           ''~v008I~
+        Catch ex As Exception                                          ''~v156R~
+            Form1.exceptionMsg("Form11:applyDictionary entryNo=" & ii2, ex)''~v156R~
+        End Try                                                        ''~v156R~
         Return sb                                                      ''~v008I~
     End Function                                                            ''~v008I~
     '************************************************************************************''~v008I~
@@ -484,6 +576,7 @@ Public Class Form11                                                    ''~v008R~
         End If                                                         ''~v012I~
         ListData = tmp                                                   ''~v012I~
         fillColumn()                                                   ''~v012I~
+        swUpdated=true                                                 ''~v158I~
         setTitle(Pfnm)                                                 ''~v012I~
         '       MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_DICTIONARY_LOADED")) ''~v013R~''~v078R~
         SB.show(SBM.MSGID.LOAD, Pfnm)                                  ''~v078I~
@@ -523,7 +616,7 @@ Public Class Form11                                                    ''~v008R~
                 line = sr.ReadLine()                                     ''~v012I~
                 Dim tmp2 As String() = line.Split(";"c)                  ''~v012I~
                 If Not formatChk(tmp2) Then  'err                           ''~v012I~
-            		sr.Close()                                         ''+v103I~
+            		sr.Close()                                         ''~v103I~
                     errLineFormat(linectr + 1, line)                      ''~v012I~
                     Return Nothing                                     ''~v012I~
                 End If                                                 ''~v012I~

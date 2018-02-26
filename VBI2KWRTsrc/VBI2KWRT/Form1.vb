@@ -1,4 +1,4 @@
-﻿'CID:''+v133R~:#72                             update#=  745;         ''~v128R~''~v132R~''~v133R~
+﻿'CID:''+v133R~:#72                             update#=  746;         ''~v128R~''~v132R~''~v133R~
 '************************************************************************************''~v002I~
 'v133 2017/12/30 (Bug)MRUList was synchronized; form1 selection-->form2/form3,form2/form3 selection-->form2/fornm3(for2/form-->form1 is OK but)''~v133I~
 'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
@@ -36,7 +36,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.04"                                   ''~v122I~''~v128R~''+v133R~
+    Private Const VERSION = "v2.05"                                   ''~v122I~''~v128R~''+v133R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~

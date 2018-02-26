@@ -1,12 +1,16 @@
 Text of Extracted from Document Image file
-Adjust line position error in extraction.
-"Kana" button translate kanji to Kana 
-and show result to main form.
-It take a little bit times.
-
+Adjust mis-recognition in extraction.
 Long line is shown folded.
 User Enter key to split line,
 delete EndOfLine sign(⏎) to concatinate lines.
+
+"Kana" button translate kanji to Kana 
+and show result to main form.
+It take a little bit times.
+Lines not ended with puctuation including parenthesis or space
+are concatinated to the next line at translation.
+Concatination is not done if over 2 EndOfLine sign at end of line. 
+Cosider it at translation.
 
 Mouse Right Button click popup context menu.
 Cut and Paste, Find/Replace, Dictionary,
@@ -16,4 +20,4 @@ Shortcut key:
   F3      :Open Find/Replace Dialog,Find Next
   Shift+F3:Find Next upward
 
-(Form3E) 2017/12/26
+(Form3E) 2018/01/10

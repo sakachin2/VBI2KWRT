@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Generate Japanese-Kana text file from image file for WinBes99(Tool of translation to Braille)")> 
 <Assembly: AssemblyCompany("sakachin2")>
 <Assembly: AssemblyProduct("VBI2KWRT")>
-<Assembly: AssemblyCopyright("Copyright © sakachin2 2017")> 
+<Assembly: AssemblyCopyright("Copyright © sakachin2 2018")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 既定値にすることができます:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("2.0.4.0")>
-<Assembly: AssemblyFileVersion("2.0.4.0")>
+<Assembly: AssemblyVersion("2.0.5.0")>
+<Assembly: AssemblyFileVersion("2.0.5.0")>

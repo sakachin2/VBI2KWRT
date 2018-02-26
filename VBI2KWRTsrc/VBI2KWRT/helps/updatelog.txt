@@ -1,3 +1,23 @@
+V2.0.5 : 2018/02/26  gitup         *************************************************
+'v162 2018/02/26 set filter for savefiledialog of i2k and txt
+           form3.vb class5.vb
+'v161 2018/02/26 csr move to net of top of next line when Del key on just after CRLF 
+           class2.vb
+'v160 2018/02/26 csr move to after CRLF sign whe Del 1st of 2 continued CRLF sign(actuary on0x0a).
+'                BackSpace on that position, delete CRLF sign and nextline top char.
+           class2.vb
+'v159 2018/02/24 load dicctionary file/word file is not restore (it is not written)
+           form11.vb form13.vb
+'v158 2018/02/24 support specification of no translation symbol sush as "„Ÿ", it may be translated to keisen,shown by "(symbol)"
+           form11.vb class5.vb
+'v157 2018/02/24 allow dictionary translation to space(sbcs and dbcs)-shown by "(bull)"
+           form11.vb
+'v156 2018/02/24 applydictionary may cause invalid object reference(set Try/Catch)
+           form11.vb
+'v155 2018/01/10 markword should use not sorted lines but result.OcrLines
+           clss10.vb
+'v154 2018/01/10 have to chk also horizontal(chk line style)
+           clss10.vb
 V2.0.4 : 2018/01/08  REDME gitup   *************************************************
 'v153 2018/01/08 point size change consider small char, drop from average 
            clss10.vb

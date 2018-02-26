@@ -1,5 +1,6 @@
-﻿'CID:''+v123R~:#72                             update#=  382;         ''~v123R~
+﻿'CID:''+v162R~:#72                             update#=  383;         ''+v162R~
 '************************************************************************************''~v006I~
+'v162 2018/02/26 set filter for savefiledialog of i2k and txt          ''+v162I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v114 2017/12/22 add file menu button to kanji Text  form              ''~v114I~
 'v113 2017/12/22 put Zorder Top                                        ''~v113I~
@@ -378,9 +379,10 @@ Public Class Form3
             Form1.exceptionMsg("Form3 Save", ex)                        ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7410I~
-    ''~7411I~
+'********************************************************************************''+v162I~
     '   Private Sub ToolStripButtonSaveAs_Click(ByVal sender As System.Object, ByVal e As EventArgs)  ''~7410I~''~v114R~
     Private Sub On_SaveAs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSaveAs.Click ''~v114I~
+        SaveFileDialog1.Filter = Rstr.getStr("STR_FILTER_KANJITEXT")   ''+v162I~
         Try                                                            ''~v111I~
             If SaveFileDialog1.ShowDialog() = DialogResult.OK Then         ''~7410I~
                 '           MessageBox.Show(SaveFileDialog1.FileName)      ''~7410I~
@@ -391,7 +393,7 @@ Public Class Form3
             Form1.exceptionMsg("Form3 SaveAs", ex)                      ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7410I~
-    ''~7411R~
+'********************************************************************************''+v162I~
     Private Sub saveFile(Pfnm As String)                               ''~7410I~
         Dim txt As String                                              ''~7429R~
         txt = undoRedo.getTextToSave()                                   ''~7430I~
@@ -750,10 +752,10 @@ Public Class Form3
     '    End Sub                                                            ''~v006I~''~v030R~
     Public Sub showStatus(Pmsg As String)                              ''~v034I~
         ToolStripStatusLabel1.Text = Pmsg                                ''~v034I~
-'*      Trace.W("Form3:showStatus =" & Pmsg)                            ''~v114I~''+v123R~
+'*      Trace.W("Form3:showStatus =" & Pmsg)                            ''~v114I~''~v123R~
     End Sub                                                       ''~v034I~
     Public Sub showStatus(PswLater As Boolean, Pmsg As String)          ''~v034I~
-'*      Trace.W("Form3:showStatus swlater=" & PswLater & ",msg=" & Pmsg) ''~v114I~''+v123R~
+'*      Trace.W("Form3:showStatus swlater=" & PswLater & ",msg=" & Pmsg) ''~v114I~''~v123R~
         If (PswLater) Then                                                  ''~v034I~
             pendingStatusMsg = Pmsg                                    ''~v034I~
         Else                                                           ''~v034I~

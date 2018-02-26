@@ -1,5 +1,6 @@
-﻿'CID:''+v123R~:#72                             update#=  163;         ''~v117R~''~v123R~
+﻿'CID:''+v159R~:#72                             update#=  164;         ''+v159R~
 '************************************************************************************''~v008I~
+'v159 2018/02/24 load dicctionary file is not restore (it is not written)''+v159I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v117 2017/12/27 word dialog from also form1 as single instance        ''~v117I~
 'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err''~v103I~
@@ -165,15 +166,15 @@ Public Class Form13                                                    ''~v008R~
     Private Sub PasteToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PasteToolStripMenuItem.Click ''~v013I~
         pasteRow()                                                     ''~v013I~
     End Sub                                                            ''~v013I~
-    '*******************************************************************''+v123I~
-    Private Sub SwitchTarget_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemSwitchTarget.Click''+v123R~
-        Try                                                            ''+v123R~
-            switchTarget()                                             ''+v123R~
-        Catch ex As Exception                                          ''+v123R~
-            Form1.exceptionMsg("Form13 SwitchTarget", ex)              ''+v123R~
-        End Try                                                        ''+v123R~
-    End Sub                                                            ''+v123R~
-    '*******************************************************************''+v123I~
+    '*******************************************************************''~v123I~
+    Private Sub SwitchTarget_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemSwitchTarget.Click''~v123R~
+        Try                                                            ''~v123R~
+            switchTarget()                                             ''~v123R~
+        Catch ex As Exception                                          ''~v123R~
+            Form1.exceptionMsg("Form13 SwitchTarget", ex)              ''~v123R~
+        End Try                                                        ''~v123R~
+    End Sub                                                            ''~v123R~
+    '*******************************************************************''~v123I~
     Private Sub ButtonCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonCancel.Click ''~v065R~
         '       If swUpdated Then                 'Closing will chk discard         ''~v008I~''~v065R~
         '           If Not confirmDiscard() Then                               ''~v008I~''~v065R~
@@ -206,15 +207,15 @@ Public Class Form13                                                    ''~v008R~
         End If                                                         ''~v008I~
     End Sub                                                            ''~v008M~
     Private Sub DataGridViewWords_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewWords.CellContentClick ''~v065M~
-        Try                                                            ''+v123R~
+        Try                                                            ''~v123R~
             Dim col As Integer = e.ColumnIndex                             ''~v065I~
             If col = CELLNO_SEND Then  ' send button                            ''~v065I~
                 Dim row As Integer = e.RowIndex                            ''~v065I~
                 sendWord(row)                                              ''~v065I~
             End If                                                         ''~v065I~
-        Catch ex As Exception                                          ''+v123R~
-            Form1.exceptionMsg("Form13 Send", ex)                      ''+v123R~
-        End Try                                                        ''+v123R~
+        Catch ex As Exception                                          ''~v123R~
+            Form1.exceptionMsg("Form13 Send", ex)                      ''~v123R~
+        End Try                                                        ''~v123R~
     End Sub                                                            ''~v065M~
     Private Sub CellDirtyStateChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles DataGridViewWords.CurrentCellDirtyStateChanged ''~v012I~
         '** chkbox on dose not immediately committed until current forcus change, so delete flag is ignored at save file''~v012R~
@@ -654,6 +655,7 @@ Public Class Form13                                                    ''~v008R~
         End If                                                         ''~v012I~
         ListData = tmp                                                   ''~v012I~
         fillColumn()                                                   ''~v012I~
+        swUpdated = True                                               ''+v159I~
         setTitle(Pfnm)                                                 ''~v012I~
         'MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_WORDS_LOADED")) ''~v013R~''~v065R~''~v078R~
         SB.show(SBM.MSGID.LOAD, Pfnm)                                   ''~v078I~
