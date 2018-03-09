@@ -151,6 +151,7 @@
     <Compile Include="Class1.vb" />
     <Compile Include="Class10.vb" />
     <Compile Include="Class11.vb" />
+    <Compile Include="Class12.vb" />
     <Compile Include="Class2.vb" />
     <Compile Include="Class3.vb" />
     <Compile Include="Class4.vb" />
@@ -220,6 +221,12 @@
     <Compile Include="Form5.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form6.Designer.vb">
+      <DependentUpon>Form6.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form6.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form7.Designer.vb">
       <DependentUpon>Form7.vb</DependentUpon>
     </Compile>
@@ -274,6 +281,9 @@
     <EmbeddedResource Include="Form13.en-GB.resx">
       <DependentUpon>Form13.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form13.en-VI.resx">
+      <DependentUpon>Form13.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form13.resx">
       <DependentUpon>Form13.vb</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +316,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form5.resx">
       <DependentUpon>Form5.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form6.en-GB.resx">
+      <DependentUpon>Form6.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form6.is.resx">
+      <DependentUpon>Form6.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form6.resx">
+      <DependentUpon>Form6.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form7.en-GB.resx">
       <DependentUpon>Form7.vb</DependentUpon>

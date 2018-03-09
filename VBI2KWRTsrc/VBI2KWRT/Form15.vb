@@ -1,11 +1,12 @@
-﻿'CID:''+v113R~:#72                             update#=  198;         ''~v113R~
+﻿'CID:''+v166R~:#72                             update#=  200;         ''~v166R~
 '************************************************************************************''~v106I~
+'v166 2018/03/04 partial text send;consider selection start/length     ''~v166I~
 'v113 2017/12/22 put Zorder Top                                        ''~v113I~
 'v111 2017/12/22 embed handler by try-catch                            ''~v111I~
 'v106 2017/12/20 partially extract from image(box by mouse dragging)   ''~v106I~
 '************************************************************************************''~v106I~
 Public Class Form15                                                    ''~v106I~
-    '* partial extraction textbox                                      ''+v113I~
+    '* partial extraction textbox                                      ''~v113I~
     Private parentFrm As Form2                                         ''~v106R~
     '**************************************************                ''~v111I~
 '   Public Sub New(PparentFrm As Form2)                                ''~v106I~''~v113R~
@@ -51,7 +52,15 @@ Public Class Form15                                                    ''~v106I~
     End Sub                                                            ''~v106I~
     '**************************************************                ''~v106I~
     Public Sub sendText()                                              ''~v106I~
+    	Dim spos as integer=TextBox.SelectionStart                     ''~v166I~
+    	Dim len as integer=TextBox.SelectionLength                     ''~v166I~
+        if spos>=0 andalso len>0                                       ''~v166I~
+            Dim epos As Integer = Math.Min(TextBox.Text.Length, spos + len)      ''~v166I~
+            len =epos-spos                                              ''~v166I~
+            parentFrm.receivePartialText(TextBox.Text.Substring(spos, len)) ''~v166I~
+        Else                                                           ''~v166I~
         parentFrm.receivePartialText(TextBox.Text)                     ''~v106I~
+        end if                                                         ''~v166I~
     End sub                                                            ''~v106I~
 
 End Class

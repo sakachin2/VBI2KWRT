@@ -8,7 +8,7 @@ Print Font/Screen Font:
   to translate to Katakana and Hankaku-Katakana,
   Back to default value when space cleared.
 
-Japanese Kana Letter Replacement Key:
+Japanese Letter Replacement Key:
   Set PFKey Number for replacement of Small and large Japanese Letter like as bellow.
   Default is :F5.
     "あいうえおやゆよつわかけ" <--> "ぁぃぅぇぉゃゅょっゎゕゖ"     Hiragana
@@ -29,11 +29,13 @@ Japanese Kana Letter Replacement Key:
     八(kanji) <--> ハ(katakana) 
     口(kanji) <--> ロ(katakana) 
     十(kanji) <--> ＋(Plus) 
-  On Kana text form, Small/Large replacemet will be occur.
-    エ(katakana) <--> ェ(katakana-small), カ(katakana) <-->ヵ (katakana-small)
 
   By the key with Shift modifier kety,following replacement will be done.
     は<-->わ、へ<-->え、う<-->ー
+
+Additional:
+  Push button to open additional replacement dialog
+  to add letter/string to replace more over above.
 
 Voiced Kana Letter Replacement Key:
   PF key for Non voiced <--> voiced letter exchange.
@@ -48,8 +50,8 @@ Symbol Character Input Dialog Open Key:
   The dialog is opened also from Context Menu shown by Mouse Right Button Click
   Set Default:F6 when set space.
 
-FrequetWords Dialog Open Key:
-  Set PFKey to open "FrequentWords" Dialog 
+Words Definition Dialog Open Key:
+  Set PFKey to open Words Definition Dialog 
   for covenient input of words frequently appears.
   The dialog is opened also from Context Menu.
   Set Default:F9 when set space.
@@ -58,4 +60,4 @@ Find & Replace Dialog Open Key:
   Default is F3.
   The dialog is opened also from Context Menu.
 
-(Form5E) 2017/12/26
+(Form5E) 2018/03/08

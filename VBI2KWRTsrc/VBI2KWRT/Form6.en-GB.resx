@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="OpenToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolStripMenuItemOpen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAACINJREFUWEfl
         l3tQVNcdx1dNm6nNTCcPZ9KmJdPppBq01kSdNpl00kltjI8oqLwUEERRFJ+gPCQqLlYhKOIqBlhAeSrv
@@ -160,7 +160,7 @@
         q2KaDG4G/p+Dx/sf1F+5IxCsbLcAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="SaveToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolStripMenuItemSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAABtJJREFUWEft
         l1lMVHcUxqExsdIaTdW2LmmiIgKOjiKIC7jgguK+g1rrhgvC9LE2NdHgDoKALAMIw47RqKCisRo1gPrQ
@@ -195,7 +195,7 @@
         /ldm1w6bLgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="SaveAsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolStripMenuItemSaveAS.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAACYpJREFUWEft
         lok31esax7fkSB1dcbpNNGBvmwwZypSUNKI0mVKnVFJtGk51O04jdRscjchMxm7zLJRCaRKakZSxcCqV
@@ -241,7 +241,7 @@
         5s3TJNHBfn5+GmS0/5w5c/rw+fyf5OTk1CiOLD+1P3nKfwExsOoS5X7LcQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="CutToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolStripMenuItemCut.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAA7NJREFUWEe1
         l1uITWEUx8e4K5oiNWfOzJmZM3PmfhHxgEhqSCkPSMpdiUShSMSblHJLER4kTx6kJuZBDUpRI8qlaNyi
@@ -262,7 +262,7 @@
         sD72YbkOO6GdBW22k9Pp8/Pz83Op7Dpi2OFm8ex1vkaOhXIBOTl/ATU6z+TApTWAAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="CopyToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolStripMenuItemCopy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAQ5JREFUWEft
         1zEOAUEYxfFNcA5HUKlFoXYEhUanUouG0gHo1S7gEFoSWpVKi/d2szJh1nzfzIhmXvKXTUzilxBW5rET
@@ -272,7 +272,7 @@
         tfW3t+C1BCBgjogIiX9YvQGxUgKy7Ak8w9tQ3+pT3AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="PasteToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="ToolStripMenuItemPaste.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAABLpJREFUWEe9
         l2lQU1cUx9/XznSmn/upM+2M3aZjp3RabGtRBxnQUoqQSKqVxYEiIxAXCg1BFgkQAVmasImgpgIWFBAo
@@ -298,55 +298,25 @@
         zv8CWW0jYV9xqXIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="ToolStripMenuItemSwitchTarget.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 20</value>
-  </data>
-  <data name="ToolStripMenuItemSwitchTarget.Text" xml:space="preserve">
-    <value>SwitchFormSendTo</value>
-  </data>
-  <data name="ToolStripMenuItemSwitchTarget.ToolTipText" xml:space="preserve">
-    <value>Switch Form send to</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 43</value>
-  </data>
-  <data name="ButtonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 0</value>
+  <data name="ButtonHelp.Text" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="ButtonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 39</value>
-  </data>
-  <data name="ButtonHelp.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
   <data name="ColumnEnable.HeaderText" xml:space="preserve">
     <value>Use</value>
   </data>
-  <data name="ColumnKanji.HeaderText" xml:space="preserve">
-    <value>Key</value>
+  <data name="ColumnShift.HeaderText" xml:space="preserve">
+    <value>Shift</value>
   </data>
-  <data name="ColumnSend.HeaderText" xml:space="preserve">
-    <value>Send</value>
-  </data>
-  <data name="ColumnKana.HeaderText" xml:space="preserve">
-    <value>Phrase</value>
+  <data name="ColumnChars.HeaderText" xml:space="preserve">
+    <value>Translation</value>
   </data>
   <data name="ColumnDel.HeaderText" xml:space="preserve">
     <value>Del</value>
   </data>
-  <data name="DataGridViewWords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 179</value>
-  </data>
-  <data name="PanelDataGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 43</value>
-  </data>
-  <data name="PanelDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 179</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Words Definition</value>
+    <value>Additional Replacement</value>
   </data>
 </root>

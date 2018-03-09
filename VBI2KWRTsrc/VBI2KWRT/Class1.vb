@@ -1,5 +1,7 @@
-﻿'CID:''+v120R~:#72                          update#=  272;            ''~v120R~
+﻿'CID:''+v169R~:#72                          update#=  277;            ''~v169R~
 '************************************************************************************''~v026I~
+'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)''~v169I~
+'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
 'v131 2017/12/30 WordDialog key value was not 9 but 7(My property\setting)''~v120I~
 'v120 2017/12/27 Msg:Not valid Ctrl+x is overridden by "" by display the char is target of F5 replacement''~v120I~
 'v115 2017/12/26 support dakuon,handakuon key                          ''~v115R~
@@ -154,10 +156,10 @@ Public Class FormatBES                                                 ''~7421I~
     Public Shared STR_DAKUON_TGT As String = "がぎぐげござじずぜぞだぢづでどばびぶべぼヴヷヸヹヺ" ''~7428R~''~7430R~''~7525R~''~7607R~
     Public Shared STR_DAKUON_TGT_KATAKANA As String = "ガギグゲゴザジズゼゾダヂヅデドバビブベボヴヷヸヹヺ" ''~7525I~''~7607R~
     Private STR_COMPOSIT2 As String = "ゃゅょぁぃぅぇぉ"                   ''~7427I~''~7430R~
-'*  Private STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~7501R~''~7525R~''~v120R~
-'*  Private STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~7501R~''~7525R~''~v120R~
-    Public  Shared STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ"''+v120R~
-    Public  Shared STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ"''+v120R~
+    '*  Private STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~7501R~''~7525R~''~v120R~
+    '*  Private STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~7501R~''~7525R~''~v120R~
+    Public Shared STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~v120R~
+    Public Shared STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~v120R~
     Private STR_SMALL_LETTER_HANKATA As String = "ｧｨｩｪｫｬｭｮｯ"           ''~7501I~
     Private STR_LARGE_LETTER_HIRA As String = "あいうえおやゆよつわかけ"   ''~7501I~''~7525R~
     Private STR_LARGE_LETTER_KATA As String = "アイウエオヤユヨツワカケ"  ''~7501I~''~7525R~
@@ -1131,6 +1133,7 @@ Public Class FormatBES                                                 ''~7421I~
         End If                                                         ''~v037I~
         Return True                                                    ''~v037I~
     End Function                                                       ''~v037I~
+#If False Then                                                              ''~v163I~
     '   Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char) As Boolean ''~7502I~''~v026R~
     '*********************************************************************''~v105I~
     Public Function queryLetterSmallLarge(Pch As Char, PswForm1 As Boolean) As Boolean ''~v037I~
@@ -1158,29 +1161,40 @@ Public Class FormatBES                                                 ''~7421I~
         End If                                                           ''~v037I~
         Return False                                                   ''~v037I~
     End Function                                                       ''~v037I~
+#End If                                                                ''~v163I~
     '*********************************************************************''~v105I~
-'*  Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean) As Boolean ''~v105I~''~v120R~
-    Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean,PmsgClear as Boolean) As Boolean''~v120I~
+    '*  Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean) As Boolean ''~v105I~''~v120R~
+    '*  Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean, PmsgClear As Boolean) As Boolean ''~v120I~''~v169R~
+    Public Function queryLetterSmallLargeOfCaret(Pch As Char, PswForm1 As Boolean, PmsgClear As Boolean, Ptext As String, Ppos As Integer) As Boolean ''~v169I~
         Dim cvch As Char                                               ''~v105I~
         Dim msg As String = ""                                           ''~v105I~
         Dim rc As Boolean = False                                       ''~v105I~
+        '*      If Form6.sharedQueryAdditionalChangeLetter(PswForm1, PmsgClear, Pch, cvch, Nothing) > 0 Then ''~v163I~''~v169R~
+        If Form6.sharedQueryAdditionalChangeLetter(PswForm1, PmsgClear, Pch, cvch, Ptext, Ppos) > 0 Then ''~v169I~
+            Return True                                                ''~v163I~
+        End If                                                         ''~v163I~
         If changeLetterWrap(Pch, cvch, PswForm1) Then                  ''~v105R~
             Dim strSrc As String = FormatBES.getCharType(typeSrc)      ''~v105I~
             msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP_QUERY")        ''~v105I~
             msg = String.Format(msg, strSrc, Pch)                      ''~v105I~
             rc = True                                                    ''~v105I~
         End If                                                         ''~v105I~
-      if rc orelse PmsgClear                                           ''~v120I~
-        If PswForm1 Then                                                    ''~v105I~
-            Form1.MainForm.showStatus(msg)                             ''~v105I~
-        Else                                                           ''~v105I~
-            Form1.formText.showStatus(msg)                             ''~v105I~
-        End If                                                         ''~v105I~
-      End If                                                           ''~v120I~
+        If rc OrElse PmsgClear Then                                           ''~v120I~
+            If PswForm1 Then                                                    ''~v105I~
+                Form1.MainForm.showStatus(msg)                             ''~v105I~
+            Else                                                           ''~v105I~
+                Form1.formText.showStatus(msg)                             ''~v105I~
+            End If                                                         ''~v105I~
+        End If                                                           ''~v120I~
         Return rc                                                      ''~v105I~
     End Function                                                       ''~v105I~
     '*********************************************************************''~v105I~
-    Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v026I~
+    '*  Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v026I~''+v169R~
+    Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean, Ptext As String, Ppos As Integer, ByRef Ppcvstr As String, ByRef Ppcvsrclen As Integer) As Boolean ''+v169I~
+        '*      If Form6.sharedAdditionalChangeLetter(PswForm1, Pch, False, Ppcvch, Nothing) > 0 Then 'target of tarns by form6''~v163M~''+v169R~
+        If Form6.sharedAdditionalChangeLetter(PswForm1, Pch, False, Ppcvch, Ptext, Ppos, Ppcvstr, Ppcvsrclen) > 0 Then 'target of tarns by form6''+v169I~
+            Return True                                                ''~v163M~
+        End If                                                         ''~v163M~
         If changeLetterWrap(Pch, Ppcvch, PswForm1) Then                      ''~v026I~
             If Not PswForm1 Then 'form3                                     ''~v034I~
                 Form1.formText.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''~v034I~
@@ -1202,7 +1216,7 @@ Public Class FormatBES                                                 ''~7421I~
         Return False
     End Function                                                       ''~7502I~
     '*********************************************************************''~v115R~
-    Public Function changeLetterDakuon(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean''~v115R~
+    Public Function changeLetterDakuon(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v115R~
         '*seion-->dakuon-->handakuon-->seion                           ''~v115R~
         Dim rc As Boolean = True                                       ''~v115R~
         Dim idx As Integer                                             ''~v115R~
@@ -1262,8 +1276,8 @@ Public Class FormatBES                                                 ''~7421I~
             Exit Do                                                    ''~v115R~
         Loop                                                           ''~v115R~
         Ppcvch = ch                                                    ''~v115R~
-        if not rc                                                      ''~v115I~
-            Form1.showStatusForChild(PswForm1,String.Format(My.Resources.STR_MSG_ERR_DAKUON, Pch))''~v115I~
+        If Not rc Then                                                      ''~v115I~
+            Form1.showStatusForChild(PswForm1, String.Format(My.Resources.STR_MSG_ERR_DAKUON, Pch)) ''~v115I~
         End If                                                         ''~v115I~
         Return rc                                                      ''~v115R~
     End Function                                                       ''~v115R~
@@ -1461,10 +1475,15 @@ Public Class FormatBES                                                 ''~7421I~
         Return True                                                    ''~v026I~
     End Function                                                       ''~v026I~
     '*********************************************************************''~v105I~
-'   Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char) As Integer ''~7525I~''~v101R~
-    Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char,PswForm1 as Boolean) As Integer''~v101R~
+    '   Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char) As Integer ''~7525I~''~v101R~
+    '*  Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Integer ''~v101R~''+v169R~
+    Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean, Ptext As String, Ppos As Integer, ByRef Ppcvstr As String, ByRef Ppcvsrclen As Integer) As Integer ''+v169I~
         '  Ha<-->Wa , U<-->cho-on etc                                      ''~7525I~
         ' rc=0 err,1:repeat                                               ''~7525I~
+        '*      If Form6.sharedAdditionalChangeLetter(PswForm1, Pch, True, Ppcvch, Nothing) > 0 Then 'target of tarns by form6''~v163I~''+v169R~
+        If Form6.sharedAdditionalChangeLetter(PswForm1, Pch, True, Ppcvch, Ptext, Ppos, Ppcvstr, Ppcvsrclen) > 0 Then 'target of tarns by form6''+v169I~
+            Return 4                                                   ''~v163I~
+        End If                                                         ''~v163I~
         Dim rc As Integer = 0                                            ''~7525I~
         Dim idx As Integer                                             ''~7525I~
         Ppcvch = SIGN_CHAR_NOTHING                                     ''~7525I~
@@ -1491,11 +1510,11 @@ Public Class FormatBES                                                 ''~7421I~
         If rc = 0 Then                                                        ''~7525I~
             '           MessageBox.Show("""" & STR_LARGE_LETTER_OTHER & """" & "<-->" & """" & STR_SMALL_LETTER_OTHER & """ の変換対象外です") ''~7525I~''~7608R~''~7618R~
             '           MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE_OTHER & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~7618I~''~v034R~
-         if PswForm1                                                   ''~v053I~
-            Form1.MainForm.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")")''~v053I~
-         else                                                          ''~v053I~
-            Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~v034R~
-         end if                                                        ''~v053I~
+            If PswForm1 Then                                                   ''~v053I~
+                Form1.MainForm.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~v053I~
+            Else                                                          ''~v053I~
+                Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~v034R~
+            End If                                                        ''~v053I~
         End If                                                         ''~7525I~
         Return rc                                                      ''~7525I~
     End Function                                                       ''~7525I~

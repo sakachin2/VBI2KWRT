@@ -379,6 +379,12 @@
   <data name="STR_MSG_CHANGELETTERWRAP" xml:space="preserve">
     <value>{0} : {1} --&gt; {2} : {3}</value>
   </data>
+  <data name="STR_MSG_CHANGELETTER_ADDITIONAL" xml:space="preserve">
+    <value>{0} --&gt; {1}</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTER_ADDITIONAL_STR" xml:space="preserve">
+    <value>変換しました {0}</value>
+  </data>
   <data name="STR_MSG_CHANGELETTERWRAP_QUERY" xml:space="preserve">
     <value>{0} : {1} </value>
   </data>
@@ -397,11 +403,17 @@
   <data name="STR_FILTER_WORDS" xml:space="preserve">
     <value>語句ファイル(*.wrd)|*.wrd|すべてのファイル(*.*)|*.*</value>
   </data>
+  <data name="STR_FILTER_TCH" xml:space="preserve">
+    <value>変換の追加ファイル(*.trn)|*.trn|すべてのファイル(*.*)|*.*</value>
+  </data>
   <data name="STR_ERR_MSG_WORDS_ROW_IGNORED" xml:space="preserve">
     <value>{0} 行目にエラーがあります、合計 {1} 行のエラー</value>
   </data>
   <data name="STR_ERR_MSG_WORDS_ERRVALUE" xml:space="preserve">
     <value>キーは1文字、また ";" は使用できません({0})</value>
+  </data>
+  <data name="STR_ERR_MSG_ADDTRANS_ERRVALUE" xml:space="preserve">
+    <value>エラー({0})</value>
   </data>
   <data name="STR_MSG_CONFIRM_DISCARD_WORDS_UPDATE" xml:space="preserve">
     <value>変更がありました、破棄しますか</value>
@@ -414,6 +426,9 @@
   </data>
   <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
     <value>語句ファイルを読み込みました</value>
+  </data>
+  <data name="STR_INFO_MSG_ADDTRANS_LOADED" xml:space="preserve">
+    <value>変換の追加ファイルを読み込みました</value>
   </data>
   <data name="STR_ERR_MSG_NOT_REGISTERED_KEY" xml:space="preserve">
     <value>語句定義に登録されていません(Ctrl+{0})</value>
@@ -492,5 +507,11 @@
   </data>
   <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
     <value>かな変換エラーがありました("Error" で表示されています)</value>
+  </data>
+  <data name="help_form6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form6.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form6E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form6E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

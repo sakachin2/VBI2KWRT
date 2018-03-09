@@ -1,5 +1,20 @@
 (UTF8 encoding)
 
+V2.06 : Update                               2018/03/08
+
+ .Add "Additional" button to open "Additional Replacement" dialog.
+  -Add new replacement pattern.
+  e.g.)
+       -!                     : (-)-->(!)-->(-)
+       /:/.../                : (:)-->(...)
+       /"/</                  : (")-->(<)  
+       /"/>/     (+shift On)  : (")-->(<)
+       /、つ/う/              : (、つ)-->(う)
+ .Reverse display a char at caret position when focus lost.
+ .Allows partial text sending from ClipOutText dialog.
+  (text extracted partially from the image)
+
+
 V2.05 : Update                               2018/02/26
 
 . Paticular setting of Disctionary.

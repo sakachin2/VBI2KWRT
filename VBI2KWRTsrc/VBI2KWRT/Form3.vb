@@ -1,6 +1,9 @@
-﻿'CID:''+v162R~:#72                             update#=  383;         ''+v162R~
+﻿'CID:''+v168R~:#72                             update#=  390;         ''~v168R~
 '************************************************************************************''~v006I~
-'v162 2018/02/26 set filter for savefiledialog of i2k and txt          ''+v162I~
+'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign''~v168I~
+'v167 2018/03/04 partial text send;target reverse length is short by CRLF sign''~v167I~
+'v165 2018/03/04 show caret even if focus lost by selectionStart/Length''~v165I~
+'v162 2018/02/26 set filter for savefiledialog of i2k and txt          ''~v162I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v114 2017/12/22 add file menu button to kanji Text  form              ''~v114I~
 'v113 2017/12/22 put Zorder Top                                        ''~v113I~
@@ -61,6 +64,7 @@ Public Class Form3
     '   Public Shared swKatakanaOkurigana As Boolean = False                 ''~v006R~''~v030R~
     Public swSaved As Boolean = False                                  ''~v015I~
     Private pendingStatusMsg As String = Nothing                              ''~v034I~
+    Private TBF As TBFocus                                             ''~v165I~
 
     Sub New()                                                          ''~v064I~
         InitializeComponent()                                          ''~v064I~
@@ -79,6 +83,7 @@ Public Class Form3
             updateTitle(title)                                             ''~7614I~
             '       DocOptions.initByCFG()  ' load English doc option etc          ''~v032I~''~v064R~
             loadMRUList()                                              ''~v114I~
+            TBF = New TBFocus(TextBox1)                                  ''~v165I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form3 Load", ex)                        ''~v111I~
         End Try                                                        ''~v111I~
@@ -151,7 +156,7 @@ Public Class Form3
         Form1.closeForm8(Form1.dlgFind3)                               ''~v101I~
         '       Form1.closeForm(Form13.dlgWord)                                ''~v065I~''~v073R~
         '       Form1.closeForm(Form1.MainForm.dlgSpecialKey, False) 'keep dlgSpecialKey''~v071R~''~v101R~
-'*      Form1.closeForm14(Form1.MainForm.dlgSpecialKey, False) 'keep dlgSpecialKey''~v101I~''~v123R~
+        '*      Form1.closeForm14(Form1.MainForm.dlgSpecialKey, False) 'keep dlgSpecialKey''~v101I~''~v123R~
         Form1.closeForm14(Form14.dlgSymbol, False) 'keep valiable      ''~v123I~
         Dim rc As Boolean = True                                       ''~7508I~
         If IsNothing(undoRedo) Then      'fine not found or read err   ''~7617I~
@@ -239,6 +244,7 @@ Public Class Form3
             setImage(Pfnm, Ptext, PenglishDoc)                           ''~v106I~
             Exit Sub                                                   ''~v106I~
         End If                                                         ''~v106I~
+        TBF.restoreSelection()                                         ''~v165I~
         updateText(Ptext)                                              ''~v106I~
     End Sub                                                            ''~v106I~
     '***************************************************************************''~v106I~
@@ -253,7 +259,10 @@ Public Class Form3
         Dim pos2 As Integer = Math.Min(pos + cutlen, txtoldsz)         ''~v106I~
         txtnew = txtold.Substring(0, pos) & txtadd & txtold.Substring(pos2, txtoldsz - pos2) ''~v106I~
         TextBox1.Text = txtnew                                           ''~v106I~
-        TextBox1.Select(pos, txtadd.Length) 'pos and length             ''~v106I~
+        '*      TextBox1.Select(pos, txtadd.Length) 'pos and length             ''~v106I~''~v167R~
+        Dim revlen As Integer = txtadd.Length                            ''~v167I~
+        revlen += getSubstrCount(txtadd, vbCrLf)                       ''~v167R~
+        TextBox1.Select(pos, revlen) 'pos and length                   ''~v167I~
         '        TextBox1.Invalidate()                                           ''~v106I~
     End Sub                                                            ''~v106I~
     '***************************************************************************''~v106I~
@@ -379,10 +388,10 @@ Public Class Form3
             Form1.exceptionMsg("Form3 Save", ex)                        ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7410I~
-'********************************************************************************''+v162I~
+    '********************************************************************************''~v162I~
     '   Private Sub ToolStripButtonSaveAs_Click(ByVal sender As System.Object, ByVal e As EventArgs)  ''~7410I~''~v114R~
     Private Sub On_SaveAs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSaveAs.Click ''~v114I~
-        SaveFileDialog1.Filter = Rstr.getStr("STR_FILTER_KANJITEXT")   ''+v162I~
+        SaveFileDialog1.Filter = Rstr.getStr("STR_FILTER_KANJITEXT")   ''~v162I~
         Try                                                            ''~v111I~
             If SaveFileDialog1.ShowDialog() = DialogResult.OK Then         ''~7410I~
                 '           MessageBox.Show(SaveFileDialog1.FileName)      ''~7410I~
@@ -393,7 +402,7 @@ Public Class Form3
             Form1.exceptionMsg("Form3 SaveAs", ex)                      ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7410I~
-'********************************************************************************''+v162I~
+    '********************************************************************************''~v162I~
     Private Sub saveFile(Pfnm As String)                               ''~7410I~
         Dim txt As String                                              ''~7429R~
         txt = undoRedo.getTextToSave()                                   ''~7430I~
@@ -628,8 +637,19 @@ Public Class Form3
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7514I~
     Private Sub CMPaste_Click(sender As System.Object, e As System.EventArgs) Handles CMPaste.Click ''~7514I~
+        Dim crlfctr As Integer = 0                                       ''~v168I~
         Try                                                            ''~v111I~
+            If Clipboard.ContainsText() Then           ''~v168I~
+                Dim str As String = Clipboard.GetText()               ''~v168I~
+                If str.IndexOf(FormatBES.SIGN_CRLF) < 0 Then  'not from form3/form1      ''~v168I~
+                    crlfctr = getSubstrCount(str, vbCrLf)                 ''~v168I~
+                End If                                                 ''~v168I~
+            End If                                                     ''~v168I~
+            Dim poso As Integer = TextBox1.SelectionStart                ''+v168I~
             TextBox1.Paste()                                               ''~7514I~
+            Trace.W("CMPaste_Click old pos=" & TextBox1.SelectionStart & ",len=" & TextBox1.SelectionLength & ",crlfctr=" & crlfctr) ''~v168I~
+            Dim posn As Integer = TextBox1.SelectionStart + crlfctr        ''+v168I~
+            TextBox1.Select(poso, posn - poso)                             ''+v168R~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form3 MenuPaste", ex)                   ''~v111I~
         End Try                                                        ''~v111I~
@@ -647,7 +667,7 @@ Public Class Form3
         End If                                                         ''~7515I~
     End Sub                                                            ''~7515I~
     Public Sub showSpecialKeyDialog()                                  ''~7515I~
-'*      Form1.MainForm.dlgSpecialKey.showForForm3(Me)                           ''~7515R~''~7521R~''~v123R~
+        '*      Form1.MainForm.dlgSpecialKey.showForForm3(Me)                           ''~7515R~''~7521R~''~v123R~
         Form14.dlgSymbol.showForForm3(Me)                              ''~v123I~
     End Sub                                                            ''~7515I~
     Private Sub ToolStripMenuItemSpecialChar_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemSpecialChar.Click ''~7515I~
@@ -752,10 +772,10 @@ Public Class Form3
     '    End Sub                                                            ''~v006I~''~v030R~
     Public Sub showStatus(Pmsg As String)                              ''~v034I~
         ToolStripStatusLabel1.Text = Pmsg                                ''~v034I~
-'*      Trace.W("Form3:showStatus =" & Pmsg)                            ''~v114I~''~v123R~
+        '*      Trace.W("Form3:showStatus =" & Pmsg)                            ''~v114I~''~v123R~
     End Sub                                                       ''~v034I~
     Public Sub showStatus(PswLater As Boolean, Pmsg As String)          ''~v034I~
-'*      Trace.W("Form3:showStatus swlater=" & PswLater & ",msg=" & Pmsg) ''~v114I~''~v123R~
+        '*      Trace.W("Form3:showStatus swlater=" & PswLater & ",msg=" & Pmsg) ''~v114I~''~v123R~
         If (PswLater) Then                                                  ''~v034I~
             pendingStatusMsg = Pmsg                                    ''~v034I~
         Else                                                           ''~v034I~
@@ -791,4 +811,24 @@ Public Class Form3
     Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
 
     End Sub
+    '*************************************************************     ''~v167I~
+    '*count substring contained intgt str                              ''~v167I~
+    Public Shared Function getSubstrCount(Pstr As String, Psubstr As String) As Integer ''~v167I~
+        Dim ctr As Integer = 0                                           ''~v167I~
+        Dim pos As Integer = 0                                           ''~v167I~
+        Dim lentgt As Integer = Pstr.Length                              ''~v167I~
+        Dim lensrc As Integer = Psubstr.Length                           ''~v167I~
+        Do While True                                                  ''~v167I~
+            If pos >= lentgt Then                                             ''~v167I~
+                Exit Do                                              ''~v167I~
+            End If                                                     ''~v167I~
+            pos = Pstr.IndexOf(Psubstr, pos)                              ''~v167R~
+            If (pos < 0) Then                                                 ''~v167I~
+                Exit Do                                              ''~v167I~
+            End If                                                     ''~v167I~
+            ctr += 1                                                     ''~v167I~
+            pos += lensrc                                                ''~v167I~
+        Loop                                                           ''~v167I~
+        Return ctr                                                     ''~v167I~
+    End Function                                                       ''~v167I~
 End Class

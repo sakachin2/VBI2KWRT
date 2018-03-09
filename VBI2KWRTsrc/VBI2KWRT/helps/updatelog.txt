@@ -1,3 +1,19 @@
+V2.0.6 : 2018/03/08  gitup         *************************************************
+'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)
+           form6.vb class1.vb class2.vb
+'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign
+           form3.vb form1.vb
+'v167 2018/03/04 partial text send;target reverse length is short by CRLF sign
+           form3.vb
+'v166 2018/03/04 partial text send;consider selection start/length
+           form15.vb
+'v165 2018/03/04 show caret even if focus lost by selectionStart/Length
+           form1.vb form3.vb class12.vb
+'v164 2018/03/04 refresh required to toolstrip in any case?
+                 ==>real cause is too long msg,but dose not recur after Form6 design formsize changed?
+           class8.vb form6.vb
+'v163 2018/03/03 add string customizability for kata/hira chikan
+           form5.vb class4.vb class1.vb
 V2.0.5 : 2018/02/26  gitup         *************************************************
 'v162 2018/02/26 set filter for savefiledialog of i2k and txt
            form3.vb class5.vb

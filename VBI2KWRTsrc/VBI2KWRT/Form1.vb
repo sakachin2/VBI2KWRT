@@ -1,5 +1,7 @@
-﻿'CID:''+v133R~:#72                             update#=  746;         ''~v128R~''~v132R~''~v133R~
+﻿'CID:''+v168R~:#72                             update#=  750;         ''~v168R~
 '************************************************************************************''~v002I~
+'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign''~v168I~
+'v165 2018/03/04 show caret even if focus lost by selectionStart/Length''~v165I~
 'v133 2017/12/30 (Bug)MRUList was synchronized; form1 selection-->form2/form3,form2/form3 selection-->form2/fornm3(for2/form-->form1 is OK but)''~v133I~
 'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
 'v128 2017/12/30 delete dperecated form(form6,9,10)                    ''~v128I~
@@ -36,7 +38,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.05"                                   ''~v122I~''~v128R~''+v133R~
+    Private Const VERSION = "v2.06"                                   ''~v122I~''~v128R~''~v133R~''+v168R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -129,6 +131,7 @@ Public Class Form1
     Private pendingStatusMsg As String = Nothing                       ''~v052I~
     '   Private swSpecificItem As Boolean = False   'menuitem of Form2       ''~v112I~''~v114R~
     '   Private parmItem As ToolStripMenuItem                               ''~v112I~''~v114R~
+    Private TBF as TBFocus                                             ''~v165I~
 
     '**************************************************************************************''~v110I~
     Private Sub Form1_Activated(sender As System.Object, e As System.EventArgs) Handles Me.Activated ''~7412I~
@@ -170,6 +173,7 @@ Public Class Form1
             Me.Text = initialTitle                                       ''~v122I~
             '       initialText = TBBES.Text                                         ''~7519I~''~7615R~
             TBBES.Text = initialText                                         ''~7615I~
+            TBF=new TBFocus(TBBES)                                     ''~v165I~
             debugInit()                                                    ''~v068I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 Load", ex)                        ''~v111I~
@@ -1005,8 +1009,18 @@ Public Class Form1
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7509I~
     Private Sub CMPaste_Click(sender As System.Object, e As System.EventArgs) Handles CMPaste.Click ''~7514R~
+        Dim crlfctr As Integer = 0                                     ''~v168I~
         Try                                                            ''~v111I~
+            If Clipboard.ContainsText() Then                           ''~v168I~
+                Dim str As String = Clipboard.GetText()                ''~v168I~
+                If str.IndexOf(FormatBES.SIGN_CRLF) < 0 Then  'not from form3/form1''~v168I~
+                    crlfctr = Form3.getSubstrCount(str, vbCrLf)              ''~v168I~
+                End If                                                 ''~v168I~
+            End If                                                     ''~v168I~
+            Dim poso as Integer=TBBES.SelectionStart                   ''~v168I~
             TBBES.Paste()                                         ''~7509R~
+            Dim posn=TBBES.SelectionStart + crlfctr                    ''~v168R~
+            TBBES.Select(poso,posn-poso)                               ''~v168I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 Paste", ex)                       ''~v111I~
         End Try                                                        ''~v111I~

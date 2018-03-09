@@ -1,0 +1,32 @@
+This dialog expands replacement by "Japanese Letter Replacement Key"
+over default translation cases shown on "Help" of Setting dialog.
+  Specify at least 2 characters in "Translation" column.
+  e.g.) '"<              : (')-->(")-->(<)-->(').
+  If char is defined duplicated to default cases shown on "Help" of "Settings",
+  definition in this dialog is applied.
+  /str1/str2/ format allows string translation, no reverse replacemeny.
+  str1,str2 may contains space char.
+  e.g) (F5 is default functio key, changable on "Settings" dialog)
+       -!                     : By F5, (-)-->(!)-->(-)
+       /:/.../                : By F5, (:)-->(...)
+       /"/</                  : By F5, (")-->(<)  
+       /"/>/     (+shift On)  : By Shift+F5, (")-->(<)
+       /、つ/う/              : By F5, (、つ)-->(う)
+
+  Use "Use" checkbox to set on/off temporally.
+  The line with "Shift":On is applied when PF key is pressed with Shift modifier.
+  The line with "Del":On is deleted when dialog closed by "OK".
+--------------------------------------------------------------------------
+ToolBarButtons Open/Save/SaveAS is to load/save the settiog of this dialog.
+Use for exchanging setting for each document differently.
+(No need to use file if you use only 1 pattern.)
+Record format is as following, line terminater is 0x0d0a,
+default extension is ".trn" です
+  n;m;Translation (n-'1':Use, '0':NotUse; m- '1':with Shift, '0':without Shift)
+
+Use Mouse Right button for Copy & Paste
+not when cell is highlightened but when string is highlightened.
+Cut/CopyPaste buttons bellow title are used to copy/move row.
+"Paste" inserts row before the selected row(Delete flag is not copied). 
+
+(Form6E) 2018/03/08

@@ -1,6 +1,7 @@
-﻿'CID:''+v101R~:#72                          update#=     12;          ''+v101R~
+﻿'CID:''+v164R~:#72                          update#=     23;          ''~v164R~
 '************************************************************************************''~v078I~
-'v101 2017/12/16 Conversion warning                                    ''+v101I~
+'v164 2018/03/04 refresh required to toolstrip in any case?            ''~v164I~
+'v101 2017/12/16 Conversion warning                                    ''~v101I~
 'v078 2017/10/09 dialog status bar                                     ''~v078I~
 '************************************************************************************''~v078I~
 Imports System.Windows.Forms                                           ''~v078I~
@@ -17,14 +18,21 @@ Public Class SBM                                                       ''~v078R~
         SEND                                                           ''~v078R~
     End Enum                                                           ''~v078I~
     Private SBL As ToolStripStatusLabel                             ''~v078R~
+    Private SB As StatusStrip = Nothing                                 ''~v164I~
     Private msgPending As String = Nothing                               ''~v078I~
     '**************************************************************        ''~v078I~
     Sub New(Psb As ToolStripStatusLabel)                               ''~v078R~
         SBL = Psb                                                      ''~v078R~
     End Sub                                                            ''~v078I~
-'   Public Sub show(Pmsg)                                              ''~v078R~''+v101R~
-    Public Sub show(Pmsg as String)                                    ''+v101I~
+    Sub New(Psb As ToolStripStatusLabel, Pparent As StatusStrip)        ''~v164I~
+        SBL = Psb                                                      ''~v164I~
+        SB = Pparent                                                  ''~v164I~
+    End Sub                                                            ''~v164I~
+    '   Public Sub show(Pmsg)                                              ''~v078R~''~v101R~
+    Public Sub show(Pmsg As String)                                    ''~v101I~
         SBL.Text = Pmsg                                                ''~v078R~
+'*      Trace.W("Class8:show=" & Pmsg)                                 ''~v101R~''+v164R~
+        refresh()                                                      ''~v164M~
     End Sub                                                            ''~v078I~
     Public Sub show(Pmsg As String, Pswdelay As Boolean)                          ''~v078I~
         msgPending = Pmsg                                                ''~v078I~
@@ -62,4 +70,10 @@ Public Class SBM                                                       ''~v078R~
         msg = prefix & " : " & Pdata                                     ''~v078I~
         show(msg)                                                      ''~v078I~
     End Sub                                                            ''~v078I~
+    Public Sub refresh()                                               ''~v164I~
+        If SB IsNot Nothing Then                                             ''~v164R~
+            SB.Refresh()                                               ''~v164R~
+'*          Trace.W("class8:refresh()")                                ''+v164R~
+        End If                                                         ''~v164I~
+    End Sub                                                            ''~v164I~
 End Class

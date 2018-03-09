@@ -605,6 +605,30 @@ Namespace My
                 Me("CFGF5_KeyDakuon") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CFGF6_TransChars() As String
+            Get
+                Return CType(Me("CFGF6_TransChars"),String)
+            End Get
+            Set
+                Me("CFGF6_TransChars") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CfgMRUTransChars() As String
+            Get
+                Return CType(Me("CfgMRUTransChars"),String)
+            End Get
+            Set
+                Me("CfgMRUTransChars") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

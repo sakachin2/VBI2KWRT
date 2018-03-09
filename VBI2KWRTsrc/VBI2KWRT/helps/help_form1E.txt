@@ -41,13 +41,14 @@ Shift+F3 :find next backward
 (Specify " " as SearchWord to search spacechar (0x20),
 leave RepWord as null to replace to drop SearchWord.)
 
-Cursor is not shown when lost focus by opening child Form,
-touch titlebar to check current cursor position.
-
 Settings:setup followings.
   Font(Screen and Print)
-  Function key to Kana conversion between Small and Large letter
-  Function key to open SimbolInput dialog
-  English Document
+  Function key of shortcut of Letter Replacement
+  (e.g.あ<->ぁ,ロ(katakana:ro)<-->口(kanji:mouth)
+  Function key of voiced kana letter exchange
+  (e.g.は(ha)<-->ば(ba)<-->ぱ(pa))
+  Function key to open Dialogs(SymbolInput,(FrequentlyUsed)Words,FindAndReplace)
+  Language of Label/Messages.
+  For details, see "Help" of "Settings" dialog.
 
-(Form1E) 2017/12/19
+(Form1E) 2018/03/08

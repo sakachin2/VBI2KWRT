@@ -206,7 +206,7 @@
     <value>224, 40</value>
   </data>
   <data name="SplitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 97</value>
+    <value>387, 102</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="SplitContainer2.SplitterDistance" type="System.Int32, mscorlib">
@@ -216,40 +216,40 @@
     <value>167, 19</value>
   </data>
   <data name="RBLangEN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 41</value>
+    <value>82, 27</value>
   </data>
   <data name="RBLangJP.Location" type="System.Drawing.Point, System.Drawing">
     <value>85, 19</value>
   </data>
   <data name="RBLangJP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 41</value>
+    <value>82, 27</value>
   </data>
   <data name="RBLangJP.Text" xml:space="preserve">
     <value>Japanes</value>
   </data>
   <data name="RBLangDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 41</value>
+    <value>82, 27</value>
   </data>
   <data name="RBLangDefault.Text" xml:space="preserve">
     <value>Default</value>
   </data>
   <data name="GroupBoxLang.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 206</value>
+    <value>0, 235</value>
   </data>
   <data name="GroupBoxLang.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 63</value>
+    <value>387, 49</value>
   </data>
   <data name="GroupBoxLang.Text" xml:space="preserve">
     <value>Language(Label,Message)</value>
   </data>
-  <data name="TextBoxDakuonKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 58</value>
+  <data name="TextBoxKeyDakuon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>325, 116</value>
   </data>
   <data name="TextBoxKeyFind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 145</value>
+    <value>325, 174</value>
   </data>
   <data name="TextBoxKeyWords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 116</value>
+    <value>325, 145</value>
   </data>
   <data name="TextBoxKeySpecialChar.Location" type="System.Drawing.Point, System.Drawing">
     <value>325, 87</value>
@@ -263,17 +263,26 @@
   <data name="TextBoxKeySmallKana.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="TextBoxLabelDakuon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 87</value>
+  </data>
   <data name="TextBoxLabelDakuon.Text" xml:space="preserve">
     <value>Voiced  Kana Letter Replacement Key</value>
   </data>
   <data name="TextBoxLabelFind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 145</value>
+    <value>0, 174</value>
   </data>
   <data name="TextBoxLabelFind.Text" xml:space="preserve">
     <value>Find &amp; Replace Dialog Open Key</value>
   </data>
+  <data name="TextBoxlabelWords.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 145</value>
+  </data>
   <data name="TextBoxlabelWords.Text" xml:space="preserve">
-    <value>Word Definition Dialog Open Key</value>
+    <value>Words Definition Dialog Open Key</value>
+  </data>
+  <data name="TextBoxLabelSpecialChar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 116</value>
   </data>
   <data name="TextBoxLabelSpecialChar.Text" xml:space="preserve">
     <value>Symbol Character Input Dialog Open Key</value>
@@ -287,20 +296,23 @@
   <data name="CheckBoxPrintFont.Text" xml:space="preserve">
     <value>PrintFont==ScreenFont</value>
   </data>
+  <data name="ButtonAddString.Text" xml:space="preserve">
+    <value>Additional</value>
+  </data>
   <data name="TextBoxLabelSmallKey.Text" xml:space="preserve">
-    <value>Japanese Kana Letter Replacement Key</value>
+    <value>Japanese  Letter Replacement Key</value>
   </data>
   <data name="PanelMiddleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 190</value>
+    <value>324, 213</value>
   </data>
   <data name="PanelMiddle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 190</value>
+    <value>387, 213</value>
   </data>
   <data name="ButtonHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 0</value>
   </data>
   <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 45</value>
+    <value>134, 48</value>
   </data>
   <data name="ButtonHelp.Text" xml:space="preserve">
     <value>Help</value>
@@ -309,28 +321,28 @@
     <value>266, 0</value>
   </data>
   <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 45</value>
+    <value>121, 48</value>
   </data>
   <data name="ButtonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 45</value>
+    <value>132, 48</value>
   </data>
   <data name="SplitContainer3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 318</value>
+    <value>387, 336</value>
   </data>
   <data name="SplitContainer3.SplitterDistance" type="System.Int32, mscorlib">
-    <value>269</value>
+    <value>284</value>
   </data>
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 419</value>
+    <value>387, 442</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>97</value>
+    <value>102</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>387, 419</value>
+    <value>387, 442</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>

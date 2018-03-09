@@ -1,5 +1,6 @@
-﻿'CID:''+v161R~:#72                          update#=  261;            ''~v161R~
+﻿'CID:''+v169R~:#72                          update#=  265;            ''~v169R~
 '************************************************************************************''~v026I~
+'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)''~v169I~
 'v161 2018/02/26 csr move to net of top of next line when Del key on just after CRLF''~v161I~
 'v160 2018/02/26 csr move to after CRLF sign whe Del 1st of 2 continued CRLF sign(actuary on0x0a).''~v160I~
 '                BackSpace on that position, delete CRLF sign and nextline top char.''~v160I~
@@ -108,7 +109,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         swSetText = True                                               ''~7429M~
         '       TB.Clear()           'also call textchanged handler            ''~7429M~''~7506R~
         TB.Text = Ptext                                                ''~7429M~
-'*      Trace.W("Class2 setTBText1=" & Ptext)                          ''~v130I~''~v161R~
+        '*      Trace.W("Class2 setTBText1=" & Ptext)                          ''~v130I~''~v161R~
         swSetText = False                                              ''~7429M~
         If swtextchng Then                                                  ''~7508I~
             swSaved = False                                                  ''~7429I~''~7508I~
@@ -123,7 +124,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private Sub setTBTextRepAll(Ptext As String)                       ''~7612R~
         swSetText = True                                               ''~7612I~
         TB.Text = Ptext                                                ''~7612I~
-'*      Trace.W("Class2 setTBTextRepall =" & Ptext)                    ''~v130I~''~v161R~
+        '*      Trace.W("Class2 setTBTextRepall =" & Ptext)                    ''~v130I~''~v161R~
         swSetText = False                                              ''~7612I~
         swSaved = False                                                ''~7612I~
     End Sub                                                            ''~7612I~
@@ -152,7 +153,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         cpos = getCaretPosLen(Pswchnghirakata)        'pos before TB.Text''~7506I~
         swSetText = True                                               ''~7506I~
         TB.Text = Ptext                                                ''~7506I~
-'*      Trace.W("Class2 setTBText2 =" & Ptext)                         ''~v130I~''~v161R~
+        '*      Trace.W("Class2 setTBText2 =" & Ptext)                         ''~v130I~''~v161R~
         swSetText = False                                              ''~7506I~
         If swtextchng Then                                                  ''~7508I~
             swSaved = False                                                ''~7506I~''~7508I~
@@ -238,7 +239,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
             Return Ptext                                               ''~7429M~
         End If                                                         ''~7429M~
         txt = Ptext.Replace(FormatBES.SIGN_CRLF, "")                             ''~7429M~''~7506R~
-'*      Trace.W("dropCRLF return  =" & txt)                            ''~v130I~''+v161R~
+        '*      Trace.W("dropCRLF return  =" & txt)                            ''~v130I~''~v161R~
         Return txt                                                     ''~7429M~
     End Function                                                       ''~7429M~
     Private Function appendCRLF(Ptext As String) As String             ''~7429R~
@@ -249,7 +250,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         txt = dropCRLF(Ptext)                                          ''~7429M~
         strCRLF = FormatBES.SIGN_CRLF & vbNewLine                                ''~7429M~''~7506R~
         txt = txt.Replace(vbNewLine, strCRLF)                          ''~7429M~
-'*      Trace.W("appendCRLF return  =" & txt)                          ''~v130I~''+v161R~
+        '*      Trace.W("appendCRLF return  =" & txt)                          ''~v130I~''~v161R~
         Return txt                                                     ''~7429I~
     End Function                                                            ''~7429M~
     Private Sub prepareUndo(Ppos As Rectangle)                                          ''~7429I~''~7506R~
@@ -402,7 +403,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         len = rect.Y                                                     ''~7514I~
         swKeyBS = False                                                  ''~7506I~
         swDeleteCRLF = False                                             ''~7513I~
-'*      Trace.W("Class2 KeyDown key=" & e.KeyCode.ToString())          ''~v117I~''~v125R~''~v130R~''+v161R~
+        '*      Trace.W("Class2 KeyDown key=" & e.KeyCode.ToString())          ''~v117I~''~v125R~''~v130R~''~v161R~
         Select Case e.KeyCode                                          ''~7506M~
             Case Keys.None                                             ''~7521I~
             Case Keys.Delete                                           ''~7506M~
@@ -457,6 +458,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
     End Sub                                                            ''~7506M~
     '************************************************************************''~v124I~
     Public Sub TB_KeyUp(e As System.Windows.Forms.KeyEventArgs)       ''~7501I~''~7506M~
+        Dim cvstr As String=""                                         ''~v169R~
+        Dim cvsrclen As Integer                                        ''~v169I~
         Dim pos As Integer = getCaretPos()                               ''~7501I~''~7506M~
         Dim txt As String = TB.Text                                ''~7501I~''~7506I~
         Dim ch, cvch As Char                                            ''~7501I~''~7506M~
@@ -479,9 +482,10 @@ Public Class ClassUndoRedo                                             ''~7429R~
             Exit Sub                                                   ''~v116I~
         End If                                                         ''~7501I~''~7506M~
         ch = txt.Chars(pos)                                             ''~7501I~''~7506M~
-'*      Trace.W("Class2 KeyUp key=" & e.KeyCode.ToString() & ",pos=" & pos & "ch=" & ch)            ''~v117I~''~v125R~''~v130I~''+v161R~
+        '*      Trace.W("Class2 KeyUp key=" & e.KeyCode.ToString() & ",pos=" & pos & "ch=" & ch)            ''~v117I~''~v125R~''~v130I~''~v161R~
         cvch = FormatBES.SIGN_CHAR_NOTHING                                         ''~7501I~''~7506M~
         '       key = e.KeyCode                                                  ''~7525I~''~v116R~
+        cvsrclen=0                                                     ''+v169I~
         Select Case key                                                     ''~7525R~
             Case Keys.None                                             ''~7521I~
 #If False Then                                                              ''~v105I~
@@ -498,11 +502,13 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     end if                                             ''~7525I~
 #Else                                                                  ''~7608I~
                     '                   fmtBES.changeLetterOther(ch, cvch)                 ''~7608I~''~v053R~
-                    fmtBES.changeLetterOther(ch, cvch, swForm1)         ''~v053I~
+                    '*                  fmtBES.changeLetterOther(ch, cvch, swForm1)         ''~v053I~''~v169R~
+                    fmtBES.changeLetterOther(ch, cvch, swForm1, txt, pos, cvstr, cvsrclen) ''~v169I~
 #End If                                                                ''~7608I~
                 Else                                                   ''~7525I~
                     '                   fmtBES.changeLetterSmallLarge(ch, cvch)                ''~7515I~''~7525R~''~v026R~
-                    fmtBES.changeLetterSmallLarge(ch, cvch, swForm1)    ''~v026I~
+                    '*                  fmtBES.changeLetterSmallLarge(ch, cvch, swForm1)    ''~v026I~''~v169R~
+                    fmtBES.changeLetterSmallLarge(ch, cvch, swForm1, txt, pos, cvstr, cvsrclen) ''~v169I~
                 End If                                                 ''~7525I~
                 '*          Case FormOptions.keySpecialCharKey                         ''~7525I~''~v116R~
                 '*              showDialogSpecialKey(cvch)                             ''~7515I~''~v116R~
@@ -524,13 +530,14 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     If setWordKeyUp(e, True) >= 0 Then                  ''~v125R~
                         Exit Sub                                       ''~v125I~
                     End If                                             ''~v125I~
-                    showCharType(key, ch)                               ''~v105I~
+                    '*                  showCharType(key, ch)                               ''~v105I~''~v169R~
+                    showCharType(key, ch, txt)                          ''~v169I~
                 End If                                                 ''~7525I~
         End Select                                                     ''~7501M~''~7506M~
         If swDeleteCRLF AndAlso Not swCut Then                                                ''~7513I~
             '*          TB.SelectionStart = pos - 1                                  ''~7513I~''~v160R~
             TB.SelectionStart = posBack(pos)                           ''~v160I~
-'*          Trace.W("TB  KeyUp deletecrlf set Selectionstart=" & TB.SelectionStart & ",(int)ch=" & AscW(txt.Chars(TB.SelectionStart))) ''~v130R~''~v160R~''+v161R~
+            '*          Trace.W("TB  KeyUp deletecrlf set Selectionstart=" & TB.SelectionStart & ",(int)ch=" & AscW(txt.Chars(TB.SelectionStart))) ''~v130R~''~v160R~''~v161R~
         End If                                                         ''~7513I~
         If specialStrIndex >= 0 Then                                          ''~7525I~
             '*          str = Form1.MainForm.getSpecialStr(specialStrIndex)          ''~7525I~''~v116R~
@@ -551,6 +558,9 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 TBChanged(txt)                                         ''~7525I~
             end if                                                     ''~7525I~
 #End If                                                                ''~7608I~
+        elseif cvsrclen>0	'*/str1/str2/ type translation             ''+v169I~
+        	txt = txt.Substring(0, pos) & cvstr & txt.Substring(pos + cvsrclen)''+v169I~
+            TBChanged(txt)                                             ''+v169I~
         Else                                                           ''~7525I~
             If cvch <> FormatBES.SIGN_CHAR_NOTHING Then                    ''~7501R~''~7506M~
                 If pos + 1 = txt.Length Then                               ''~7501R~''~7506M~
@@ -579,7 +589,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         If e.KeyChar = FormatBES.CHAR_CR Then  'enter key                     ''~7525R~
             If txt.Chars(pos) = FormatBES.CHAR_LF Then                        ''~7525R~
                 TB.SelectionStart = pos + 1 'pos after LF                  ''~7525R~
-'*              Trace.W("TB  KeyPress enter key Selectionstart=" & TB.SelectionStart) ''~v130I~''+v161R~
+                '*              Trace.W("TB  KeyPress enter key Selectionstart=" & TB.SelectionStart) ''~v130I~''~v161R~
             End If                                                     ''~7525I~
         ElseIf swKeyBS Then   'delete CRLF(after SIGN_CRLF)           ''~7525I~
         Else     'ignore input after CRLF except Enter and BackSpace   ''~7525I~
@@ -624,7 +634,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 End If                                                     ''~7525I~
             End If                                                         ''~v130I~
         End If                                                         ''~7525I~
-'*      Trace.W("chkCRLFDeleted pos=" & pos & ",ch=" & ch & ",rc=" & rc) ''~v130I~''+v161R~
+        '*      Trace.W("chkCRLFDeleted pos=" & pos & ",ch=" & ch & ",rc=" & rc) ''~v130I~''~v161R~
         Return rc                                                      ''~7506I~
     End Function                                                       ''~7506R~
     '************************************************************************''~v160I~
@@ -652,7 +662,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
             End If                                                     ''~v160I~
             pos -= 1                                                     ''~v160I~
         End If                                                         ''~v160I~
-'*      Trace.W("posBack pos=" & Ppos & "-->" & pos)                     ''~v160I~''+v161R~
+        '*      Trace.W("posBack pos=" & Ppos & "-->" & pos)                     ''~v160I~''~v161R~
         Return pos                                                     ''~v160I~
     End Function                                                       ''~v160I~
     '************************************************************************''~v161I~
@@ -672,7 +682,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
             End If                                                     ''~v161I~
             pos -= 1                                                   ''~v161I~
         End If                                                         ''~v161I~
-'*      Trace.W("posBackIfCRLF pos=" & Ppos & "-->" & pos)             ''+v161R~
+        '*      Trace.W("posBackIfCRLF pos=" & Ppos & "-->" & pos)             ''~v161R~
         Return pos                                                     ''~v161I~
     End Function                                                       ''~v161I~
     '************************************************************************''~v160I~
@@ -681,7 +691,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         rect = New Rectangle(TB.SelectionStart, TB.SelectionLength, 0, 0)  'X/Y''~7506R~''~7507R~''~7525R~
         Dim scrollpos As Integer = GetScrollPos(TB.Handle, SB_VERT)    ''~7507M~
         rect.Height = scrollpos Or POSFLAG_VSCROLL                                       ''~7507M~''~7525R~
-'*      Trace.W("getCaretPosLens pos=" & rect.X & ",len=" & rect.Y)    ''~v130R~''+v161R~
+        '*      Trace.W("getCaretPosLens pos=" & rect.X & ",len=" & rect.Y)    ''~v130R~''~v161R~
         Return rect                                                    ''~7507I~
     End Function                                                       ''~7506I~
     Private Function getCaretPosLen(Pswchnghirakata As Boolean) As Rectangle ''~7506I~
@@ -694,7 +704,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private Sub restoreCaretPosLen(Ppoint As Rectangle)                     ''~7506R~
         TB.SelectionStart = Ppoint.X                                     ''~7506I~
         TB.SelectionLength = Ppoint.Y                                    ''~7506I~
-'*      Debug.WriteLine("restoreCaretPosLen before Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~''~v130R~
+        '*      Debug.WriteLine("restoreCaretPosLen before Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~''~v130R~
         If Ppoint.X < TB.Text.Length Then                                     ''~7525R~
             If TB.Text.Chars(Ppoint.X) = FormatBES.CHAR_CR Then               ''~7525I~
                 TB.SelectionStart += vbCrLf.Length  'move caret at top of next line''~7525R~
@@ -705,7 +715,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 TB.SelectionLength = 0                                 ''~7525I~
             End If                                                     ''~7525I~
         End If                                                         ''~7525I~
-'*      Debug.WriteLine("restoreCaretPosLen after Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~''~v130R~
+        '*      Debug.WriteLine("restoreCaretPosLen after Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength) ''~v070I~''~v130R~
         If optFormat = OPT_KANATEXT Then                                    ''~7508R~
             Form1.MainForm.formkanaText.setHirakata(Ppoint.Width = 1)  ''~7522I~
             If (Ppoint.Height And POSFLAG_VSCROLL) = POSFLAG_VSCROLL Then                                        ''~7507I~''~7525R~''~7609R~
@@ -724,7 +734,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         '        SetScrollPos(TB.Handle, SB_VERT, pos, True)                    ''~7507I~
         pos = (pos << 16) + SB_THUMBPOSITION                                 ''~7507R~
         Dim rc = SendMessage(TB.Handle, WM_VSCROLL, pos, 0)                 ''~7507R~
-'*      Debug.WriteLine("scrollTB sendMsg Ppos=" & Ppos)               ''~v070I~''~v130R~
+        '*      Debug.WriteLine("scrollTB sendMsg Ppos=" & Ppos)               ''~v070I~''~v130R~
     End Sub                                                            ''~7507I~
     '***************************************************************************''~7507I~
     Private Const SB_VERT = 1                                          ''~7507R~
@@ -794,7 +804,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         Dim ch As Char = ChrW(key - Keys.A + 1)                          ''~v119R~
         '       Return setWord(ch)                                             ''~v119I~''~v125R~
         Dim rc As Boolean = setWord(ch)                                  ''~v125I~
-'*      Trace.W("setWordKeyUp by Ctrl+Alpha swtWord rc=" & rc & ",ch=" & e.KeyCode)''~v125R~
+        '*      Trace.W("setWordKeyUp by Ctrl+Alpha swtWord rc=" & rc & ",ch=" & e.KeyCode)''~v125R~
         If rc Then                                                          ''~v125I~
             Return 1                                                   ''~v125I~
         End If                                                         ''~v125I~
@@ -831,7 +841,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
         Return False                                                   ''~7519I~
     End Function                                                            ''~7519I~
     '*********************************************************************''~v105I~
-    Private Sub showCharType(Pkey As Keys, Pch As Char)                  ''~v105I~
+    '*  Private Sub showCharType(Pkey As Keys, Pch As Char)                  ''~v105I~''~v169R~
+    Private Sub showCharType(Pkey As Keys, Pch As Char, Ptext As String) ''~v169I~
         '*      fmtBES.queryLetterSmallLargeOfCaret(Pch, swForm1)              ''~v105I~''~v120R~
         Dim pos As Integer = getCaretPos()                               ''~v120I~
         Dim swClear As Boolean = False                                   ''~v120I~
@@ -839,7 +850,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
             swClear = True                                               ''~v120I~
             posQuery = pos                                               ''~v120I~
         End If                                                         ''~v120I~
-        fmtBES.queryLetterSmallLargeOfCaret(Pch, swForm1, swClear)     ''~v120R~
+        '*      fmtBES.queryLetterSmallLargeOfCaret(Pch, swForm1, swClear)     ''~v120R~''~v169R~
+        fmtBES.queryLetterSmallLargeOfCaret(Pch, swForm1, swClear, Ptext, pos) ''~v169I~
     End Sub                                                            ''~v105I~
     '*********************************************************************''~v105I~
     Public Sub TB_MouseClick(e As System.Windows.Forms.MouseEventArgs) ''~v105I~
@@ -848,9 +860,11 @@ Public Class ClassUndoRedo                                             ''~7429R~
         If pos < txt.Length Then                                                ''~v105I~
             Dim ch As Char = txt.Chars(pos)                                ''~v105I~
             '*          fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1)               ''~v105I~''~v120R~
-            fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1, True)   'true:clear statusmsg''~v120I~
+            '*          fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1, True)   'true:clear statusmsg''~v120I~''~v169R~
+            fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1, True, txt, pos)   'true:clear statusmsg''~v169I~
         End If                                                           ''~v105I~
     End Sub                                                            ''~v105I~
+    '*********************************************************************''~v169I~
     Public Sub errCursorPos()                                         ''~v116I~
         Form1.showStatusForChild(swForm1, My.Resources.STR_MSR_WARN_CURSOR_POS) ''~v116I~
     End Sub                                                            ''~v116I~

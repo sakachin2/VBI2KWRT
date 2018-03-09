@@ -1,5 +1,6 @@
-﻿'*CID:''+v115R~:#72                          update#=  187;           ''~v115R~
+﻿'*CID:''+v163R~:#72                          update#=  190;           ''~v163R~
 '************************************************************************************''~v030I~
+'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
 'v115 2017/12/26 support dakuon,handakuon key                          ''~v115I~
 'v110 2017/12/22 StringConstant reset required when lang changed       ''~v110I~
 'v105 2017/12/20 display char type not by f4 but automatically by keyup/mouseclick event''~v105I~
@@ -122,7 +123,7 @@ Public Class FormOptions
         If keyDakuon = 0 Then                                          ''~v115I~
             keyDakuon = DEFAULT_KEY_DAKUON                             ''~v115I~
         End If                                                         ''~v115I~
-        keyDakuonKey = CType(Keys.F1 + keyDakuon - 1, Keys)            ''+v115R~
+        keyDakuonKey = CType(Keys.F1 + keyDakuon - 1, Keys)            ''~v115R~
         ''~v070R~
         keyWords = My.Settings.CFGF5_KeyWords                          ''~v065I~
         If keyWords = 0 Then                                           ''~v065I~
@@ -230,6 +231,9 @@ Public Class FormOptions
     Private Sub ButtonScrFont_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonScrFont.Click ''~7515I~
         dialogFontScr()                                                ''~7515I~
     End Sub 'resize                                                    ''~7515I~
+    Private Sub ButtonAddString_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonAddString.Click ''~v163I~
+        dialogAddString()                                              ''~v163I~
+    End Sub 'resize                                                    ''~v163I~
     Private Sub showOptions()
         TextBoxScrFontName.Text = createFontnameScr()                   ''~7508I~''~7515R~
         TextBoxPrintFontname.Text = createFontname()                   ''~7515R~
@@ -284,7 +288,7 @@ Public Class FormOptions
             Return False                                               ''~v115I~
         End If                                                         ''~v115I~
         keyDakuon = keyval                                             ''~v115I~
-        keyDakuonKey = CType(Keys.F1 + keyDakuon - 1, Keys)            ''+v115R~
+        keyDakuonKey = CType(Keys.F1 + keyDakuon - 1, Keys)            ''~v115R~
         ''~v115I~
         keyval = getKeyValue(TextBoxlabelWords.Text, TextBoxKeyWords.Text, DEFAULT_KEY_WORDS) ''~v065I~
         If keyval < 0 Then                                             ''~v065I~
@@ -637,7 +641,7 @@ Public Class FormOptions
     End Sub                                                            ''~v110I~
     '********************************************************************************''~v110I~
     Private Sub hideNonDebug()                                         ''~v110I~
-#if Not DEBUG                                                          ''~v110I~
+#If Not DEBUG Then                                                          ''~v110I~
         GroupBoxLang.visible=False                                     ''~v110I~
         RBLangEN.Visible=False                                         ''~v110I~
         RBLangJP.Visible=False                                         ''~v110I~
@@ -647,4 +651,9 @@ Public Class FormOptions
         RBLangDefault.Enabled=False                                     ''~v110I~
 #End If                                                                ''~v110I~
     End Sub                                                            ''~v110I~
+    '********************************************************************************''~v163I~
+    Private Sub dialogAddString()                                      ''~v163I~
+        Dim dlg As Form6 = New Form6()                                   ''~v163R~
+        dlg.showDlg()                                                  ''+v163R~
+    End Sub                                                            ''~v163I~
 End Class

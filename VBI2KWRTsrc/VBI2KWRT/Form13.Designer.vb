@@ -57,64 +57,64 @@ Partial Class Form13
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.MenuStrip1)
         resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.MenuStrip1)
         Me.Panel1.Name = "Panel1"
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.CutToolStripMenuItem, Me.CopyToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ToolStripMenuItemSwitchTarget})
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.CutToolStripMenuItem, Me.CopyToolStripMenuItem, Me.PasteToolStripMenuItem, Me.ToolStripMenuItemSwitchTarget})
         Me.MenuStrip1.Name = "MenuStrip1"
         '
         'OpenToolStripMenuItem
         '
-        Me.OpenToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.OpenToolStripMenuItem, "OpenToolStripMenuItem")
+        Me.OpenToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         '
         'SaveToolStripMenuItem
         '
-        Me.SaveToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.SaveToolStripMenuItem, "SaveToolStripMenuItem")
+        Me.SaveToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         '
         'SaveAsToolStripMenuItem
         '
-        Me.SaveAsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.SaveAsToolStripMenuItem, "SaveAsToolStripMenuItem")
+        Me.SaveAsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
         '
         'CutToolStripMenuItem
         '
-        Me.CutToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.CutToolStripMenuItem, "CutToolStripMenuItem")
+        Me.CutToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
         '
         'CopyToolStripMenuItem
         '
-        Me.CopyToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.CopyToolStripMenuItem, "CopyToolStripMenuItem")
+        Me.CopyToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
         '
         'PasteToolStripMenuItem
         '
-        Me.PasteToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.PasteToolStripMenuItem, "PasteToolStripMenuItem")
+        Me.PasteToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
         '
         'ToolStripMenuItemSwitchTarget
         '
+        resources.ApplyResources(Me.ToolStripMenuItemSwitchTarget, "ToolStripMenuItemSwitchTarget")
         Me.ToolStripMenuItemSwitchTarget.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.ToolStripMenuItemSwitchTarget.Name = "ToolStripMenuItemSwitchTarget"
-        resources.ApplyResources(Me.ToolStripMenuItemSwitchTarget, "ToolStripMenuItemSwitchTarget")
         '
         'PanelBottons
         '
+        resources.ApplyResources(Me.PanelBottons, "PanelBottons")
         Me.PanelBottons.Controls.Add(Me.ButtonCancel)
         Me.PanelBottons.Controls.Add(Me.ButtonHelp)
         Me.PanelBottons.Controls.Add(Me.ButtonOK)
-        resources.ApplyResources(Me.PanelBottons, "PanelBottons")
         Me.PanelBottons.Name = "PanelBottons"
         '
         'ButtonCancel
@@ -137,16 +137,16 @@ Partial Class Form13
         '
         'PanelDataGrid
         '
-        Me.PanelDataGrid.Controls.Add(Me.DataGridViewWords)
         resources.ApplyResources(Me.PanelDataGrid, "PanelDataGrid")
+        Me.PanelDataGrid.Controls.Add(Me.DataGridViewWords)
         Me.PanelDataGrid.Name = "PanelDataGrid"
         '
         'DataGridViewWords
         '
+        resources.ApplyResources(Me.DataGridViewWords, "DataGridViewWords")
         Me.DataGridViewWords.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.DataGridViewWords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewWords.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColumnEnable, Me.ColumnKanji, Me.ColumnSend, Me.ColumnKana, Me.ColumnDel})
-        resources.ApplyResources(Me.DataGridViewWords, "DataGridViewWords")
         Me.DataGridViewWords.Name = "DataGridViewWords"
         Me.DataGridViewWords.RowTemplate.Height = 21
         '
@@ -186,17 +186,22 @@ Partial Class Form13
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
+        '
+        'SaveFileDialog1
+        '
+        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
         Me.StatusStrip1.Name = "StatusStrip1"
         '
         'ToolStripStatusLabel1
         '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         '
         'Form13
         '

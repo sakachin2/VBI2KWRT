@@ -333,6 +333,12 @@
   <data name="STR_MSG_CHANGELETTERWRAP" xml:space="preserve">
     <value>{0} : {1} --&gt; {2} : {3}</value>
   </data>
+  <data name="STR_MSG_CHANGELETTER_ADDITIONAL" xml:space="preserve">
+    <value>{0} --&gt; {1}</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTER_ADDITIONAL_STR" xml:space="preserve">
+    <value>Done {0}</value>
+  </data>
   <data name="STR_MSG_CHANGELETTERWRAP_QUERY" xml:space="preserve">
     <value>{0} : {1} </value>
   </data>
@@ -345,11 +351,17 @@
   <data name="STR_FILTER_WORDS" xml:space="preserve">
     <value>Words File(*.wrd)|*.wrd|All(*.*)|*.*</value>
   </data>
+  <data name="STR_FILTER_TCH" xml:space="preserve">
+    <value>AdditionalTrans File(*.trn)|*.trn|すべてのファイル(*.*)|*.*</value>
+  </data>
   <data name="STR_ERR_MSG_WORDS_ROW_IGNORED" xml:space="preserve">
     <value>Row {0} contains error, Total {1} error lines</value>
   </data>
   <data name="STR_ERR_MSG_WORDS_ERRVALUE" xml:space="preserve">
     <value>Key have to be one Char and ";" is not available({0})</value>
+  </data>
+  <data name="STR_ERR_MSG_ADDTRANS_ERRVALUE" xml:space="preserve">
+    <value>Error({0})</value>
   </data>
   <data name="STR_MSG_CONFIRM_DISCARD_WORDS_UPDATE" xml:space="preserve">
     <value>Discard update ?</value>
@@ -362,6 +374,9 @@
   </data>
   <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
     <value>Words file was loaded.</value>
+  </data>
+  <data name="STR_INFO_MSG_ADDTRANS_LOADED" xml:space="preserve">
+    <value>Translation was loaded</value>
   </data>
   <data name="STR_ERR_MSG_NOT_REGISTERED_KEY" xml:space="preserve">
     <value>Not Registered on Word definition.(Ctrl+{0})</value>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--  codepage,65001:utf8, 932:shift_jis, 28591:iso8859-1; 1252:ansi latin1   LCID 1041:ja, 1033:en-us            -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="VBI2KWRT" Language="1033" Version="2.0.5" Manufacturer="sakachin2" UpgradeCode="7d2e310c-2317-4f4a-b957-17575752ac49">
+    <Product Id="*" Name="VBI2KWRT" Language="1033" Version="2.0.6" Manufacturer="sakachin2" UpgradeCode="7d2e310c-2317-4f4a-b957-17575752ac49">
         <Package InstallerVersion="300" Compressed="yes"
 				Comments="MSI Installer for VBI2KWRT"
 				Id="*"
 				Description="Tool of making Kana text input file for WinBES99(Braille tool) from image file using Windows10 OCR Library" />
         <Upgrade Id="7d2e310c-2317-4f4a-b957-17575752ac49">
             <UpgradeVersion OnlyDetect="yes" Property="NEWERFOUND"
-				 Minimum="2.0.5" IncludeMinimum="no" />
+				 Minimum="2.0.6" IncludeMinimum="no" />
         	<UpgradeVersion OnlyDetect="no" Property="PREVIOUSFOUND"
             	Minimum="1.0.0" IncludeMinimum="yes"
-            	Maximum="2.0.5" IncludeMaximum="no"
+            	Maximum="2.0.6" IncludeMaximum="no"
             />
         </Upgrade>
         <Media Id="1" Cabinet="vbi2kwrt.cab" EmbedCab="yes" />
