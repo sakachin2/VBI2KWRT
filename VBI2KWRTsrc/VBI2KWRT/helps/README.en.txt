@@ -1,5 +1,13 @@
 (UTF8 encoding)
 
+V2.07 : Update                               2018/09/22
+
+ .Send button on FrequentWord-Words Definition Dialog did not insert the word but replaced 1 character at the cursor position.
+ .Do Paste/Copy/Cut by Ctrl+V/C/X if those are not registered as shortcut key on Words dDefinition.
+ .No character type message on status bar for which replacement is applied by PF5.
+ .Japanese vertical line text was sometimes split and mixed up the order.
+ .For english text, inter-word space was dropped.
+
 V2.06 : Update                               2018/03/08
 
  .Add "Additional" button to open "Additional Replacement" dialog.

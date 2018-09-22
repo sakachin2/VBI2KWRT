@@ -1,5 +1,7 @@
-﻿'CID:''+v168R~:#72                             update#=  390;         ''~v168R~
+﻿'CID:''+v175R~:#72                             update#=  399;        ''+v175R~
 '************************************************************************************''~v006I~
+'v175 2018/09/13 (Bug)"OK" on partial extracted form, scroll to top page of Form3''+v175I~
+'v171 2018/03/16 Do Paste by Ctrl+V if not registered as wordsRep key  ''~v171I~
 'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign''~v168I~
 'v167 2018/03/04 partial text send;target reverse length is short by CRLF sign''~v167I~
 'v165 2018/03/04 show caret even if focus lost by selectionStart/Length''~v165I~
@@ -264,6 +266,7 @@ Public Class Form3
         revlen += getSubstrCount(txtadd, vbCrLf)                       ''~v167R~
         TextBox1.Select(pos, revlen) 'pos and length                   ''~v167I~
         '        TextBox1.Invalidate()                                           ''~v106I~
+        TextBox1.ScrollToCaret()  '*above set text set caretr to top page,ajust to insterted text pos''+v175I~
     End Sub                                                            ''~v106I~
     '***************************************************************************''~v106I~
     Sub setText(Pfnm As String)                                    ''~7411I~
@@ -622,21 +625,30 @@ Public Class Form3
     End Sub                                                            ''~v105I~
     Private Sub CMCut_Click(sender As System.Object, e As System.EventArgs) Handles CMCut.Click ''~7514I~
         Try                                                            ''~v111I~
+#If False Then                                                              ''~v171I~
             undoRedo.CMCut(0)    'del crlf with SIGN_CRLF is last          ''~7514I~
             TextBox1.Cut()                                                 ''~7514I~
             undoRedo.CMCut(1)    'del crlf with SIGN_CRLF is last          ''~7514I~
+#Else                                                                  ''~v171I~
+            undoRedo.CutTB(True)    'del crlf with SIGN_CRLF is last   ''~v171I~
+#End If                                                                ''~v171I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form3 MenuCut", ex)                     ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7514I~
     Private Sub CMCopy_Click(sender As System.Object, e As System.EventArgs) Handles CMCopy.Click ''~7514I~
         Try                                                            ''~v111I~
+#If False Then                                                              ''~v171I~
             TextBox1.Copy()                                                ''~7514I~
+#Else                                                                  ''~v171I~
+            undoRedo.CopyTB(True)    'del crlf with SIGN_CRLF is last  ''~v171I~
+#End If                                                                ''~v171I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form3 MenuCopy", ex)                    ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7514I~
     Private Sub CMPaste_Click(sender As System.Object, e As System.EventArgs) Handles CMPaste.Click ''~7514I~
+#If False Then                                                              ''~v171I~
         Dim crlfctr As Integer = 0                                       ''~v168I~
         Try                                                            ''~v111I~
             If Clipboard.ContainsText() Then           ''~v168I~
@@ -645,14 +657,21 @@ Public Class Form3
                     crlfctr = getSubstrCount(str, vbCrLf)                 ''~v168I~
                 End If                                                 ''~v168I~
             End If                                                     ''~v168I~
-            Dim poso As Integer = TextBox1.SelectionStart                ''+v168I~
+            Dim poso As Integer = TextBox1.SelectionStart                ''~v168I~
             TextBox1.Paste()                                               ''~7514I~
-            Trace.W("CMPaste_Click old pos=" & TextBox1.SelectionStart & ",len=" & TextBox1.SelectionLength & ",crlfctr=" & crlfctr) ''~v168I~
-            Dim posn As Integer = TextBox1.SelectionStart + crlfctr        ''+v168I~
-            TextBox1.Select(poso, posn - poso)                             ''+v168R~
+'*            Trace.W("CMPaste_Click old pos=" & TextBox1.SelectionStart & ",len=" & TextBox1.SelectionLength & ",crlfctr=" & crlfctr) ''~v168I~''~v171R~
+            Dim posn As Integer = TextBox1.SelectionStart + crlfctr        ''~v168I~
+            TextBox1.Select(poso, posn - poso)                             ''~v168R~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form3 MenuPaste", ex)                   ''~v111I~
         End Try                                                        ''~v111I~
+#Else                                                                  ''~v171I~
+        Try                                                            ''~v171I~
+            undoRedo.PasteTB(True)    '* true:contextMenu              ''~v171R~
+        Catch ex As Exception                                          ''~v171I~
+            Form1.exceptionMsg("Form3 MenuPaste", ex)                  ''~v171I~
+        End Try                                                        ''~v171I~
+#End If                                                                ''~v171I~
     End Sub                                                            ''~7514I~
     Private Sub CMSelectAll_Click(sender As System.Object, e As System.EventArgs) Handles CMSelectAll.Click ''~7514I~
         Try                                                            ''~v111I~
@@ -831,4 +850,8 @@ Public Class Form3
         Loop                                                           ''~v167I~
         Return ctr                                                     ''~v167I~
     End Function                                                       ''~v167I~
+    '*************************************************************     ''~v171I~
+    Public Sub restoreSelection()                                      ''~v171I~
+        TBF.restoreSelection()                                         ''~v171I~
+    End Sub                                                            ''~v171I~
 End Class

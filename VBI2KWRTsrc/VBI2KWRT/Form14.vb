@@ -1,5 +1,6 @@
-﻿'CID:''+v123R~:#72                             update#=   99;         ''~v123R~
+﻿'CID:''+v174R~:#72                             update#=  100;        ''+v174R~
 '************************************************************************************''~v076I~
+'v174 2018/09/13 (Bug by v165) SendButton from WordDialog always replace a char on csr''+v174I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v118 2017/12/27 errmsg errmsg for not registered Ctrl+N(send word) on Form1 was not shown when Ctl+n on form1 is first of all''~v118I~
 '                swform1 was not set after New() form14 by dlgSymbol=Nothing''~v118I~
@@ -568,17 +569,17 @@ Public Class Form14                                                    ''~v076R~
         Else                                                           ''~v076I~
             cfgKeys = String.Join(";", ListData)                       ''~v076I~
         End If                                                         ''~v076I~
-'*      Debug.WriteLine("Form14.putcfg =" & cfgKeys)                   ''~v076I~''+v123R~
+'*      Debug.WriteLine("Form14.putcfg =" & cfgKeys)                   ''~v076I~''~v123R~
         My.Settings.CFGF14_Symbol = cfgKeys                             ''~v076R~
         Return True                                                    ''~v076I~
     End Function                                                       ''~v076I~
     Private Sub getCfg()                                               ''~v076I~
         If cfgKeys.Length = 0 Then                                     ''~v076I~
             ListData = listDataDefault                                 ''~v076I~
-'*          Debug.WriteLine("Form14.getcfg deefault" & ListData.ToString())       ''~v076I~''+v123R~
+'*          Debug.WriteLine("Form14.getcfg deefault" & ListData.ToString())       ''~v076I~''~v123R~
         Else                                                           ''~v076I~
             ListData = cfgKeys.Split(";"c)                             ''~v076I~
-'*          Debug.WriteLine("Form14.getcfg cfgKey=" & cfgKeys)         ''~v076I~''+v123R~
+'*          Debug.WriteLine("Form14.getcfg cfgKey=" & cfgKeys)         ''~v076I~''~v123R~
         End If                                                         ''~v076I~
     End Sub                                                            ''~v076I~
     Private Sub setLang()                                              ''~v076I~
@@ -1102,8 +1103,10 @@ Public Class Form14                                                    ''~v076R~
             Return False                                               ''~v076I~
         End If                                                         ''~v076I~
         If swForm1 Then   'when showdialog                             ''~v076I~
+            callerForm1.restoreSelection()                             ''+v174I~
             callerForm1.undoRedo.setSpecialChar(symbol)                ''~v076I~
         Else                                                           ''~v076I~
+            callerForm3.restoreSelection()                             ''+v174I~
             callerForm3.undoRedo.setSpecialChar(symbol)                ''~v076R~
         End If                                                         ''~v076I~
         SB.show(SBM.MSGID.SEND, symbol)                                ''~v076I~

@@ -1,3 +1,22 @@
+V2.0.7 : 2018/09/22  gitup         *************************************************
+'v178 2018/09/20 insert space after if X or Y is too far from next
+           class10.vb
+'v177 2018/09/19 (Bug)inter word space was dropped when English mode
+           class10.vb
+'v176 2018/09/16 vertical line sometimes updown reversed by differece of top char boundary.X, chk same line by center line X
+           class10.vb
+'v175 2018/09/13 (Bug)"OK" on partial extracted form, scroll to top page of Form3
+           form3.vb
+'v174 2018/09/13 (Bug by v165) SendButton from WordDialog always replace a char on csr
+           form13.vb Form1.vb Form3.vb form14.vb
+'v173 2018/09/13 (Bug)Exception by Del key after EOF
+           class2.vb
+'v172 2018/09/11 (Bug of V169)char type msg was not shown(gueryAdditionalChangeLetter return code set err)
+           form6.vb
+'v171 2018/03/16 Do Paste by Ctrl+V/C/X if not registered as wordsRep key 
+           class2.vb form3.vb form1.vb
+'v170 2018/03/16 msg "not registered" disappear showchartype by KeyUp event of ControlKey 
+           class2.vb
 V2.0.6 : 2018/03/08  gitup         *************************************************
 'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)
            form6.vb class1.vb class2.vb
@@ -99,7 +118,7 @@ V2.0.1 : 2017/12/30 released ***************************************************
 			class5.vb
 'v126 2017/12/29 (Bug)char positioning err by BESstyle consideration for "..."
 			class5.vb
-'v125 2017/12/29 Ctrl+x fire keyDown when "d",KeyUp when "a","c"
+'v125 2017/12/29 Ctrl+x fire keyDown when x="d",KeyUp when "a","c"
 '                and Handle=True at KeyDown dose not suppress KeyUp event
 			class2.vb
 'v124 2017/12/29 why beep by Ctrl+x(word shortcut)

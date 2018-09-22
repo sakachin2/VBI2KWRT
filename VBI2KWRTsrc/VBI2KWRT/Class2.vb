@@ -1,11 +1,14 @@
-﻿'CID:''+v169R~:#72                          update#=  265;            ''~v169R~
+﻿'CID:''+v173R~:#72                          update#=  285;           ''+v173R~
 '************************************************************************************''~v026I~
+'v173 2018/09/31 (Bug)Exception by Del key after EOF                   ''~v173I~
+'v171 2018/03/16 Do Paste by Ctrl+V/C/X if not registered as wordsRep key''~v171I~
+'v170 2018/03/16 msg "not registered" disappear showchartype by KeyUp event of ControlKey''~v170I~
 'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)''~v169I~
 'v161 2018/02/26 csr move to net of top of next line when Del key on just after CRLF''~v161I~
 'v160 2018/02/26 csr move to after CRLF sign whe Del 1st of 2 continued CRLF sign(actuary on0x0a).''~v160I~
 '                BackSpace on that position, delete CRLF sign and nextline top char.''~v160I~
 'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only''~v130I~
-'v125 2017/12/29 Ctrl+x fire keyDown when "d",KeyUp when "a","c"       ''~v125I~
+'v125 2017/12/29 Ctrl+x fire keyDown when x="d",KeyUp when "a","c"       ''~v125I~''~v169R~
 '                and Handle=True at KeyDown dose not suppress KeyUp event''~v125I~
 'v124 2017/12/29 why beep by Ctrl+x(word shortcut)                     ''~v124I~
 'v121 2017/12/27 assign Ctrl+f also words definition from Find shortcut''~v121I~
@@ -403,7 +406,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         len = rect.Y                                                     ''~7514I~
         swKeyBS = False                                                  ''~7506I~
         swDeleteCRLF = False                                             ''~7513I~
-        '*      Trace.W("Class2 KeyDown key=" & e.KeyCode.ToString())          ''~v117I~''~v125R~''~v130R~''~v161R~
+        '*        Trace.W("Class2 KeyDown key=" & e.KeyCode.ToString())          ''~v117I~''~v125R~''~v130R~''~v161R~''~v169R~''~v171R~
         Select Case e.KeyCode                                          ''~7506M~
             Case Keys.None                                             ''~7521I~
             Case Keys.Delete                                           ''~7506M~
@@ -412,7 +415,9 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 Else                                                   ''~v161I~
                     pos = posBackIfCRLF(pos)                             ''~v161I~
                 End If                                                 ''~7514I~
-                swDeleteCRLF = chkCRLFDeleted(pos, len, False)                                    ''~7506M~''~7513R~''~7514R~''~7525R~
+                If pos >= 0 Then                                         ''~v173I~
+                    swDeleteCRLF = chkCRLFDeleted(pos, len, False)                                    ''~7506M~''~7513R~''~7514R~''~7525R~
+                End If                                                 ''~v173I~
             Case Keys.Back                                             ''~7506M~
                 If len > 0 Then                                        ''~7514I~
                     pos += len - 1                                     ''~7514I~
@@ -441,10 +446,12 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 Else                                                   ''~7521I~
                     Form1.formText.findNext(swUp)             ''~7521R~
                 End If                                                 ''~7521I~
+            Case Keys.ControlKey                                       ''~v170I~
+                '*                Trace.W("Class2 KeyDown key=ControlKey=" & e.KeyCode)  ''~v170I~''~v171R~
             Case Else                                                  ''~v124I~
                 '*              If setWordKeyUp(e) Then                                ''~v124I~''~v125R~
                 If setWordKeyUp(e, False) >= 0 Then    'Ctrl+alpha key despite of defined as shortcut''~v125R~
-                    '*                  Trace.W("KeyDown handled Ctrl+alpha")              ''~v125R~
+                    '*                    Trace.W("KeyDown handled Ctrl+alpha")              ''~v125R~''~v169R~''~v171R~
                     e.Handled = True            '*bypass keyup           ''~v124I~
                     e.SuppressKeyPress = True '*bypass press event     ''~v124I~
                     Exit Sub                                           ''~v124I~
@@ -458,7 +465,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     End Sub                                                            ''~7506M~
     '************************************************************************''~v124I~
     Public Sub TB_KeyUp(e As System.Windows.Forms.KeyEventArgs)       ''~7501I~''~7506M~
-        Dim cvstr As String=""                                         ''~v169R~
+        Dim cvstr As String = ""                                         ''~v169R~
         Dim cvsrclen As Integer                                        ''~v169I~
         Dim pos As Integer = getCaretPos()                               ''~7501I~''~7506M~
         Dim txt As String = TB.Text                                ''~7501I~''~7506I~
@@ -482,10 +489,10 @@ Public Class ClassUndoRedo                                             ''~7429R~
             Exit Sub                                                   ''~v116I~
         End If                                                         ''~7501I~''~7506M~
         ch = txt.Chars(pos)                                             ''~7501I~''~7506M~
-        '*      Trace.W("Class2 KeyUp key=" & e.KeyCode.ToString() & ",pos=" & pos & "ch=" & ch)            ''~v117I~''~v125R~''~v130I~''~v161R~
+        '*        Trace.W("Class2 KeyUp key=" & e.KeyCode.ToString() & ",pos=" & pos & "ch=" & ch)            ''~v117I~''~v125R~''~v130I~''~v161R~''~v169R~''~v171R~
         cvch = FormatBES.SIGN_CHAR_NOTHING                                         ''~7501I~''~7506M~
         '       key = e.KeyCode                                                  ''~7525I~''~v116R~
-        cvsrclen=0                                                     ''+v169I~
+        cvsrclen = 0                                                     ''~v169I~
         Select Case key                                                     ''~7525R~
             Case Keys.None                                             ''~7521I~
 #If False Then                                                              ''~v105I~
@@ -514,6 +521,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 '*              showDialogSpecialKey(cvch)                             ''~7515I~''~v116R~
                 '*          Case FormOptions.keyWordsKey                               ''~v065I~''~v116R~
                 '*              showDialogWords()                                      ''~v065I~''~v116R~
+            Case Keys.ControlKey                                       ''~v170R~
+                '*                Trace.W("Class2 KeyUp key=ControlKey=" & key)          ''~v170R~''~v171R~
             Case Else                                                  ''~7515I~
                 If key >= Keys.D0 AndAlso key <= Keys.D9 Then                   '' ~7525I~
                     If (e.Modifiers And Keys.Control) = Keys.Control Then 'with shift key''~7525I~''~7608R~
@@ -527,7 +536,12 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     '*                  If setWordKeyUp(e) Then                            ''~v119I~''~v124R~
                     '*                      Exit Sub                                       ''~v119I~''~v124R~
                     '*                  End If                                             ''~v119I~''~v124R~
-                    If setWordKeyUp(e, True) >= 0 Then                  ''~v125R~
+                    '*                  If setWordKeyUp(e, True) >= 0 Then                  ''~v125R~''~v171R~
+                    Dim rc2 As Integer = setWordKeyUp(e, True)           ''~v171I~
+                    If rc2 >= 0 Then                                          ''~v171I~
+                        If rc2 = 0 AndAlso (e.Modifiers And Keys.Control) = Keys.Control Then ''~v171I~
+                            shortcutCP(key)                            ''~v171I~
+                        End If                                         ''~v171I~
                         Exit Sub                                       ''~v125I~
                     End If                                             ''~v125I~
                     '*                  showCharType(key, ch)                               ''~v105I~''~v169R~
@@ -558,9 +572,9 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 TBChanged(txt)                                         ''~7525I~
             end if                                                     ''~7525I~
 #End If                                                                ''~7608I~
-        elseif cvsrclen>0	'*/str1/str2/ type translation             ''+v169I~
-        	txt = txt.Substring(0, pos) & cvstr & txt.Substring(pos + cvsrclen)''+v169I~
-            TBChanged(txt)                                             ''+v169I~
+        ElseIf cvsrclen > 0 Then    '*/str1/str2/ type translation             ''~v169I~
+            txt = txt.Substring(0, pos) & cvstr & txt.Substring(pos + cvsrclen) ''~v169I~
+            TBChanged(txt)                                             ''~v169I~
         Else                                                           ''~7525I~
             If cvch <> FormatBES.SIGN_CHAR_NOTHING Then                    ''~7501R~''~7506M~
                 If pos + 1 = txt.Length Then                               ''~7501R~''~7506M~
@@ -673,6 +687,10 @@ Public Class ClassUndoRedo                                             ''~7429R~
         If pos = 0 Then                                                ''~v161I~
             Return 0                                                   ''~v161I~
         End If                                                         ''~v161I~
+        If pos >= TB.Text.Length Then                                   ''~v173R~
+            errCursorPos()                                             ''~v173I~
+            Return -1  '* err                                          ''~v173I~
+        End If                                                         ''~v173I~
         If TB.Text.Chars(pos) = FormatBES.CHAR_LF Then                 ''~v161I~
             pos -= 1                                                   ''~v161I~
         End If                                                         ''~v161I~
@@ -804,7 +822,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         Dim ch As Char = ChrW(key - Keys.A + 1)                          ''~v119R~
         '       Return setWord(ch)                                             ''~v119I~''~v125R~
         Dim rc As Boolean = setWord(ch)                                  ''~v125I~
-        '*      Trace.W("setWordKeyUp by Ctrl+Alpha swtWord rc=" & rc & ",ch=" & e.KeyCode)''~v125R~
+'*        Trace.W("setWordKeyUp by Ctrl+Alpha swtWord rc=" & rc & ",ch=" & e.KeyCode) ''~v125R~''~v171R~
         If rc Then                                                          ''~v125I~
             Return 1                                                   ''~v125I~
         End If                                                         ''~v125I~
@@ -851,6 +869,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
             posQuery = pos                                               ''~v120I~
         End If                                                         ''~v120I~
         '*      fmtBES.queryLetterSmallLargeOfCaret(Pch, swForm1, swClear)     ''~v120R~''~v169R~
+'*      Trace.W("class2:showCharType pos=" & pos)                      ''~v171R~
         fmtBES.queryLetterSmallLargeOfCaret(Pch, swForm1, swClear, Ptext, pos) ''~v169I~
     End Sub                                                            ''~v105I~
     '*********************************************************************''~v105I~
@@ -861,6 +880,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
             Dim ch As Char = txt.Chars(pos)                                ''~v105I~
             '*          fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1)               ''~v105I~''~v120R~
             '*          fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1, True)   'true:clear statusmsg''~v120I~''~v169R~
+'*      Trace.W("class2:TB_MouseClisk pos=" & pos)                     ''~v171R~
             fmtBES.queryLetterSmallLargeOfCaret(ch, swForm1, True, txt, pos)   'true:clear statusmsg''~v169I~
         End If                                                           ''~v105I~
     End Sub                                                            ''~v105I~
@@ -868,4 +888,55 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Public Sub errCursorPos()                                         ''~v116I~
         Form1.showStatusForChild(swForm1, My.Resources.STR_MSR_WARN_CURSOR_POS) ''~v116I~
     End Sub                                                            ''~v116I~
+    '*********************************************************************''~v171I~
+    '*Cut and Paste By Shortcut key                                    ''~v171I~
+    Private Function shortcutCP(Pkey As Keys) As Boolean               ''~v171I~
+        Dim rc As Boolean = False                                        ''~v171I~
+        Try                                                            ''~v171I~
+            If Pkey = Keys.V Then                                             ''~v171I~
+                rc = PasteTB(False)    '*false:not contextmenu           ''~v171I~
+            elseif Pkey=Keys.X         '*Cut                           ''~v171I~
+                rc = CutTB(False)    '*false:not contextmenu           ''~v171I~
+            elseif Pkey=Keys.C         '*Copy                          ''~v171I~
+                rc = CopyTB(False)    '*false:not contextmenu          ''~v171I~
+            End If                                                     ''~v171I~
+        Catch ex As Exception                                          ''~v171I~
+            Form1.exceptionMsg("Class2 shortcutCP", ex)                ''~v171I~
+        End Try                                                        ''~v171I~
+        Return rc                                                      ''~v171I~
+    End Function                                                        ''~v171I~
+    '*********************************************************************''~v171I~
+    Public Function PasteTB(PswContextMenu As Boolean) As Boolean      ''~v171I~
+        Dim crlfctr As Integer = 0                                     ''~v171I~
+        If Clipboard.ContainsText() Then                               ''~v171I~
+            Dim str As String = Clipboard.GetText()                    ''~v171I~
+            If str.IndexOf(FormatBES.SIGN_CRLF) < 0 Then  'not from form3/form1''~v171I~
+                crlfctr = Form3.getSubstrCount(str, vbCrLf)            ''~v171I~
+            End If                                                     ''~v171I~
+        Else                                                           ''~v171I~
+            Form1.showStatusForChild(swForm1, My.Resources.STR_MSG_ERR_CLIPBOARD_NOTEXT) ''~v171R~
+            Return False                                               ''~v171I~
+        End If                                                         ''~v171I~
+        Dim poso As Integer = TB.SelectionStart                        ''~v171I~
+        TB.Paste()                                                     ''~v171I~
+'*        Trace.W("shortcutCP_PAste old pos=" & TB.SelectionStart & ",len=" & TB.SelectionLength & ",crlfctr=" & crlfctr)''~v171R~
+        Dim posn As Integer = TB.SelectionStart + crlfctr              ''~v171I~
+        TB.Select(poso, posn - poso)                                   ''~v171I~
+        Form1.showStatusForChild(swForm1, My.Resources.STR_PASTE)      ''~v171I~
+        Return True                                                    ''~v171I~
+    End Function  '*PasteTB                                            ''~v171R~
+    '*********************************************************************''~v171I~
+    Public Function CutTB(PswContextMenu As Boolean) As Boolean        ''~v171I~
+        CMCut(0)    'del crlf with SIGN_CRLF is last                   ''~v171I~
+        TB.Cut()                                                       ''~v171I~
+        CMCut(1)    'del crlf with SIGN_CRLF is last                   ''~v171I~
+        Form1.showStatusForChild(swForm1, My.Resources.STR_CUT)        ''~v171I~
+        Return True                                                    ''~v171I~
+    End Function   '*CutTB                                             ''~v171I~
+    '*********************************************************************''~v171I~
+    Public Function CopyTB(PswContextMenu As Boolean) As Boolean       ''~v171I~
+        TB.Copy()                                                      ''~v171I~
+        Form1.showStatusForChild(swForm1, My.Resources.STR_COPY)       ''~v171I~
+        Return True                                                    ''~v171I~
+    End Function   '*CutTB                                             ''~v171I~
 End Class

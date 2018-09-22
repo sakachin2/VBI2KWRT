@@ -435,4 +435,10 @@
   <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
     <value>Detected Kana conversion error(indicated by "Error")</value>
   </data>
+  <data name="STR_MSG_ERR_CLIPBOARD_NOTEXT" xml:space="preserve">
+    <value>No text data on Clipboard</value>
+  </data>
+  <data name="STR_PASTE" xml:space="preserve">
+    <value>Paste</value>
+  </data>
 </root>

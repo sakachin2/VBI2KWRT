@@ -508,10 +508,16 @@
   <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
     <value>かな変換エラーがありました("Error" で表示されています)</value>
   </data>
+  <data name="STR_MSG_ERR_CLIPBOARD_NOTEXT" xml:space="preserve">
+    <value>クリップボードにテキストデータがありません。</value>
+  </data>
   <data name="help_form6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\helps\help_form6.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="help_form6E" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\helps\help_form6E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="STR_PASTE" xml:space="preserve">
+    <value>貼り付け</value>
   </data>
 </root>

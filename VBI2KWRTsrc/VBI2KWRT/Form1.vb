@@ -1,5 +1,7 @@
-﻿'CID:''+v168R~:#72                             update#=  750;         ''~v168R~
+﻿'CID:''+v174R~:#72                             update#=  758;        ''~v174R~
 '************************************************************************************''~v002I~
+'v174 2018/09/13 (Bug by v165) SendButton from WordDialog always replace a char on csr''~v174I~
+'v171 2018/03/16 Do Paste by Ctrl+V if not registered as wordsRep key  ''~v171I~
 'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign''~v168I~
 'v165 2018/03/04 show caret even if focus lost by selectionStart/Length''~v165I~
 'v133 2017/12/30 (Bug)MRUList was synchronized; form1 selection-->form2/form3,form2/form3 selection-->form2/fornm3(for2/form-->form1 is OK but)''~v133I~
@@ -38,7 +40,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.06"                                   ''~v122I~''~v128R~''~v133R~''+v168R~
+    Private Const VERSION = "v2.07"                                   ''~v122I~''~v128R~''~v133R~''~v168R~''+v174R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -118,7 +120,7 @@ Public Class Form1
     Public dlgOptions As FormOptions                                  ''~7430I~''~7501R~
     '   Public dlgSpecialKey As Form6                                      ''~7515I~''~v076R~
     '*  Public dlgSpecialKey As Form14 '*keep in Form14                                     ''~v076I~''~v123R~
-'*  Public dlgDictionary As Form9                                      ''~v008R~''~v128R~
+    '*  Public dlgDictionary As Form9                                      ''~v008R~''~v128R~
     Public dlgFind1 As Form8                                            ''~7516I~''~7519R~
     Public dlgFind3 As Form8                                           ''~7519I~
     Public undoRedo As ClassUndoRedo                                  ''~7501I~''~7515R~
@@ -131,7 +133,7 @@ Public Class Form1
     Private pendingStatusMsg As String = Nothing                       ''~v052I~
     '   Private swSpecificItem As Boolean = False   'menuitem of Form2       ''~v112I~''~v114R~
     '   Private parmItem As ToolStripMenuItem                               ''~v112I~''~v114R~
-    Private TBF as TBFocus                                             ''~v165I~
+    Private TBF As TBFocus                                             ''~v165I~
 
     '**************************************************************************************''~v110I~
     Private Sub Form1_Activated(sender As System.Object, e As System.EventArgs) Handles Me.Activated ''~7412I~
@@ -161,7 +163,7 @@ Public Class Form1
             '       dlgSpecialKey = New Form6()                                    ''~7515R~''~v076R~
             '*          dlgSpecialKey = New Form14()                                   ''~v076I~''~v123R~
             Form14.newForm()                                           ''~v123R~
-'*          dlgDictionary = New Form9()     'deprecated to foerm11         ''~v008R~''~v128R~
+            '*          dlgDictionary = New Form9()     'deprecated to foerm11         ''~v008R~''~v128R~
             fmtBES = New FormatBES()                                         ''~7421I~
             '        swViewKatakana = dlgOptions.swKatakana                            ''~7501I~
             '        setkatakanaBtn()                                               ''~7501I~
@@ -173,7 +175,7 @@ Public Class Form1
             Me.Text = initialTitle                                       ''~v122I~
             '       initialText = TBBES.Text                                         ''~7519I~''~7615R~
             TBBES.Text = initialText                                         ''~7615I~
-            TBF=new TBFocus(TBBES)                                     ''~v165I~
+            TBF = New TBFocus(TBBES)                                     ''~v165I~
             debugInit()                                                    ''~v068I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 Load", ex)                        ''~v111I~
@@ -994,21 +996,30 @@ Public Class Form1
     End Sub                                                            ''~7501I~
     Private Sub CMCut_Click(sender As System.Object, e As System.EventArgs) Handles CMCut.Click ''~7514R~
         Try                                                            ''~v111I~
+#If False Then                                                              ''~v171I~
             undoRedo.CMCut(0)    'del crlf with SIGN_CRLF is last          ''~7514R~
             TBBES.Cut()                                                    ''~7509I~
             undoRedo.CMCut(1)    'del crlf with SIGN_CRLF is last          ''~7514I~
+#Else                                                                  ''~v171I~
+            undoRedo.CutTB(True)    'del crlf with SIGN_CRLF is last   ''~v171I~
+#End If                                                                ''~v171I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 Cut", ex)                         ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7509I~
     Private Sub CMCopy_Click(sender As System.Object, e As System.EventArgs) Handles CMCopy.Click ''~7514R~
         Try                                                            ''~v111I~
+#If False Then                                                              ''~v171I~
             TBBES.Copy()                                                   ''~7509I~
+#Else                                                                  ''~v171I~
+            undoRedo.CopyTB(True)    'del crlf with SIGN_CRLF is last  ''~v171I~
+#End If                                                                ''~v171I~
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 Copy", ex)                        ''~v111I~
         End Try                                                        ''~v111I~
     End Sub                                                            ''~7509I~
     Private Sub CMPaste_Click(sender As System.Object, e As System.EventArgs) Handles CMPaste.Click ''~7514R~
+#If False Then                                                              ''~v171I~
         Dim crlfctr As Integer = 0                                     ''~v168I~
         Try                                                            ''~v111I~
             If Clipboard.ContainsText() Then                           ''~v168I~
@@ -1024,6 +1035,13 @@ Public Class Form1
         Catch ex As Exception                                          ''~v111I~
             Form1.exceptionMsg("Form1 Paste", ex)                       ''~v111I~
         End Try                                                        ''~v111I~
+#Else                                                                  ''~v171I~
+        Try                                                            ''~v171I~
+            undoRedo.PasteTB(True)    '* true:contextMenu              ''~v171I~
+        Catch ex As Exception                                          ''~v171I~
+            Form1.exceptionMsg("Form1 Paste", ex)                      ''~v171I~
+        End Try                                                        ''~v171I~
+#End If                                                                ''~v171I~
     End Sub                                                            ''~7509I~
     Private Sub CMFind_Click(sender As System.Object, e As System.EventArgs) Handles CMFind.Click ''~7519R~
         Try                                                            ''~v111I~
@@ -1311,6 +1329,7 @@ Public Class Form1
     End Sub
     ''~v052I~
     Public Sub showStatus(Pmsg As String)                              ''~v052I~
+        '*      Trace.W("Form1:showStatus =" & Pmsg)                            ''~v114I~''~v123R~''~v171R~
         ToolStripStatusLabel1.Text = Pmsg                              ''~v052I~
     End Sub                                                            ''~v052I~
     Public Sub showStatus(PswLater As Boolean, Pmsg As String)         ''~v052I~
@@ -1420,4 +1439,8 @@ Public Class Form1
     Public Shared Function formIsAvailable(Pform As Form) As Boolean           ''~v133I~
         Return Not IsNothing(Pform) AndAlso Not Pform.IsDisposed()     ''~v133I~
     End Function                                                            ''~v133I~
+    '*************************************************************     ''~v174I~
+    Public Sub restoreSelection()                                      ''~v174I~
+        TBF.restoreSelection()                                         ''~v174I~
+    End Sub                                                            ''~v174I~
 End Class

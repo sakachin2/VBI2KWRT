@@ -18,6 +18,7 @@ even when dislog is not opened.
 Preceding line is adopted when dumplicated key is registered.
 "Send" button also send the "Phrase" regardless "Use" checkbox 
 and "Del" checkbox setting.
+Ctrl+v do "Paste" if not set in this dialog.
 
 Use Mouse Right button for Copy & Paste
 not when cell is highlightened but when string is highlightened.
@@ -36,4 +37,4 @@ Default extension is ".wrd"
 Line format :
    n;Key;Phrase    (n: '1':Use, '0':NotUse)
 
-(Form13E) 2018/02/24
+(Form13E) 2018/03/16

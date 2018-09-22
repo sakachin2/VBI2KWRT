@@ -1,5 +1,8 @@
-﻿'CID:''+v155R~:#72                             update#=  324;         ''~v154R~''~v155R~
+﻿'CID:''+v178R~:#72                             update#=  393;        ''~v178R~
 '************************************************************************************''~v026I~''~v100I~
+'v178 2018/09/20 insert space after if X or Y is too far from next     ''~v178I~
+'v177 2018/09/19 (Bug)inter word space was dropped when English mode   ''~v177I~
+'v176 2018/09/16 vertical line sometimes updown reversed by differece of top char boundary.X, chk same line by center line X''~v176I~
 'v155 2018/01/10 markword should use not sorted lines but result.OcrLines''~v155I~
 'v154 2018/01/10 have to chk also horizontal                           ''~v154R~
 'v153 2018/01/08 point size change consider small char, drop from average''~v153I~
@@ -46,9 +49,11 @@ Public Class Cocr
     Private Const LS_CHANGE_POINT = &H200                              ''~v138I~
     Private Const LS_CHANGE_LINESPACE = &H400                          ''~v140I~
     Private Const LS_REP_CRLF = &H800                          ''~v144I~
+    Private Const LS_SKIP_CRLF = &H1000                                ''~v176I~
     Private Const RATE_POINT_CHANGED = 0.1 '*add crlf if char point changed 20%''~v138R~
     Private Const RATE_LENGTH_CHANGED = 0.8 '*add crlf if line length shorter than max of group''~v138I~
     Private Const RATE_LINESPACING = 2.5 '*add crlf lines spacing of both side is over 1.0 of char width/height''~v140R~''~v147R~
+    Private Const RATE_WORDSPACING = 2.5 '*add space between word if distance is multiple of char size''~v178I~
     Private Const SORT_SCALE = 10000.0    '* sortkey for X and Y     ''~v140I~
     Private Const RATE_SMALL_CHAR = 0.5     'drop from average char width/height if charsize is small''~v153I~
     Private softBitmap As SoftwareBitmap
@@ -78,6 +83,9 @@ Public Class Cocr
     '*  Private sortOption As Integer = 0                                  ''~v138I~''~v140R~
     Private listLines As List(Of OcrLine)                            ''~v140R~
     Private swPointChangeByMax As Boolean = True                         ''~v153I~
+    Private langTag As String                                          ''~v177I~
+    Private charH As Double()                                          ''~v178I~
+    Private charW As Double()                                          ''~v178I~
     '**************************************************************************************
     Public Function setupComboBoxLang(Pcb As ToolStripComboBox, Pidxcfg As Integer) As Integer ''~v100R~
         Dim cb As ToolStripComboBox = Pcb
@@ -175,7 +183,7 @@ Public Class Cocr
         bmpRect = PbmpRect                                             ''~v106I~
         scaleNew = PscaleNew                                           ''~v106I~
         clipRect = PclipRect                                           ''~v106I~
-'*      Trace.W("iOCR:setrect cliprect X=" & clipRect.X & ",Y=" & clipRect.Y & ",W=" & clipRect.Width & ",H=" & clipRect.Height)''+v155R~
+        '*      Trace.W("iOCR:setrect cliprect X=" & clipRect.X & ",Y=" & clipRect.Y & ",W=" & clipRect.Width & ",H=" & clipRect.Height)''~v155R~
     End Sub                                                            ''~v106I~
     '**************************************************                ''~v106I~
     Public Function cutBMPRect(PorgBMP As Bitmap) As Bitmap            ''~v106I~
@@ -184,7 +192,7 @@ Public Class Cocr
         yy = CType(clipRect.Y / scaleNew, Integer)                     ''~v106I~
         ww = CType(clipRect.Width / scaleNew, Integer)                 ''~v106I~
         hh = CType(clipRect.Height / scaleNew, Integer)                ''~v106I~
-'*      Trace.W("cutBMPRect xx=" & xx & ",yy=" & yy & ",ww=" & ww & ",hh=" & hh)''+v155R~
+        '*      Trace.W("cutBMPRect xx=" & xx & ",yy=" & yy & ",ww=" & ww & ",hh=" & hh)''~v155R~
         Dim tgtRect As Rectangle = New Rectangle(xx, yy, ww, hh)       ''~v106I~
 #If False Then                                                         ''~va04I~
         Dim bmp As Bitmap = New Bitmap(PorgBMP.Width, PorgBMP.Height)  ''~v106I~
@@ -207,8 +215,8 @@ Public Class Cocr
     Public Function saveImage(Pbasename As String, Pextname As String, PswRectBMP As Boolean, PorgBMP As Bitmap, Pscale As Double, Prect As Rectangle) As String ''~va04R~
         '* from Form2                                                      ''~va04I~
         Dim bmp As Bitmap                                              ''~va04I~
-'*      Trace.W("iOCR:saveImage fnm=" & Pbasename & ",swRectBMP=" & PswRectBMP & ",scale=" & Pscale)''+v155R~
-'*      Trace.W("iOCR:saveImage cliprect X=" & Prect.X & ",Y=" & Prect.Y & ",W=" & Prect.Width & ",H=" & Prect.Height)''+v155R~
+        '*      Trace.W("iOCR:saveImage fnm=" & Pbasename & ",swRectBMP=" & PswRectBMP & ",scale=" & Pscale)''~v155R~
+        '*      Trace.W("iOCR:saveImage cliprect X=" & Prect.X & ",Y=" & Prect.Y & ",W=" & Prect.Width & ",H=" & Prect.Height)''~v155R~
         If PswRectBMP Then 'clipped                                         ''~va04I~
             Dim xx, yy, ww, hh As Integer                              ''~va04I~
             xx = CType(Prect.X / Pscale, Integer) 'dest and src position''~va04I~
@@ -216,8 +224,8 @@ Public Class Cocr
             ww = CType(Prect.Width / Pscale, Integer)                  ''~va04I~
             hh = CType(Prect.Height / Pscale, Integer)                 ''~va04I~
             Dim tgtRect As Rectangle = New Rectangle(xx, yy, ww, hh)   ''~va04I~
-'*          Trace.W("saveImage X=" & xx & ",Y=" & yy & ",ww=" & ww & ",hh=" & hh)''+v155R~
-'*          Trace.W("saveImage bmp W=" & PorgBMP.Width & ",H=" & PorgBMP.Height)''+v155R~
+            '*          Trace.W("saveImage X=" & xx & ",Y=" & yy & ",ww=" & ww & ",hh=" & hh)''~v155R~
+            '*          Trace.W("saveImage bmp W=" & PorgBMP.Width & ",H=" & PorgBMP.Height)''~v155R~
             bmp = cutImage(PorgBMP, tgtRect)                           ''~va04I~
         Else                                                           ''~va04I~
             bmp = PorgBMP                                                ''~va04I~
@@ -243,6 +251,7 @@ Public Class Cocr
 #Else
     '*************************************************************
     Public Function extractText(Pfnm As String, PfileBMP As Bitmap, Ptag As String, ByRef Pptext As String) As Boolean
+        langTag = Ptag                                                   ''~v177I~
         imageFilename = Pfnm
         fileBMP = PfileBMP
         If swRectBMP Then                                              ''~v106M~
@@ -251,6 +260,7 @@ Public Class Cocr
         xText = ""
         result = Nothing
         statusMsg = Nothing                                              ''~v100R~
+'*      Trace.W("extraceText swRectBMP=" & swRectBMP & ",resolution H=" & fileBMP.HorizontalResolution & ",W=" & fileBMP.VerticalResolution) ''~v176R~''+v178R~
         Dim t As Task = Task.Run(Async Function()
                                      swOK = Await extractTextAsync(Pfnm, Ptag)
                                  End Function)
@@ -272,7 +282,7 @@ Public Class Cocr
                 Return False
             End If
             xText = result.Text
-'*          Trace.W("all text=" & xText)                               ''~v140I~''+v155R~
+            '*          Trace.W("all text=" & xText)                               ''~v140I~''~v155R~
             listLines = toList(result.Lines)                           ''~v140R~
             xText = makeLines(xText.Length) 'insert crlf between lines
             swOK = True
@@ -377,7 +387,7 @@ Public Class Cocr
             Dim g = Graphics.FromImage(bmpDraw)
             Dim br As Brush = New SolidBrush(System.Drawing.Color.FromArgb(&H20, System.Drawing.Color.Blue))
             '           Dim text As String = ""
-'*          Trace.W("Class10:MarkWORDs: TextAngle=" & result.TextAngle & ",linectr=" & listLines.Count & ",bmpH=" & Pbmp.Height & ",bmpW=" & Pbmp.Width) ''~v138R~''~v140R~''~v148R~''+v155R~
+            '*          Trace.W("Class10:MarkWORDs: TextAngle=" & result.TextAngle & ",linectr=" & listLines.Count & ",bmpH=" & Pbmp.Height & ",bmpW=" & Pbmp.Width) ''~v138R~''~v140R~''~v148R~''~v155R~
             '*          For Each line As OcrLine In result.Lines                   ''~v140R~
             Dim angle As Double = CType(result.TextAngle, Double)                      ''~v148I~
             Dim msin As Double                                         ''~v148I~
@@ -385,21 +395,21 @@ Public Class Cocr
             If angle <> 0 Then                                                ''~v148I~
                 adjustMarkingBoxInit(angle, msin, mcos) '*get sin cosin''~v148R~
             End If                                                     ''~v148I~
-'*          For Each line As OcrLine In listLines                      ''~v140I~''~v155R~
+            '*          For Each line As OcrLine In listLines                      ''~v140I~''~v155R~
             For Each line As OcrLine In result.Lines                   ''~v155I~
                 '               text += line.Text & " "
-'*              Trace.W("Class10:MarkWords:  word count=" & line.Words.Count & ",Line Text=" & line.Text)             ''~va05R~''~v138R~''+v155R~
+                '*              Trace.W("Class10:MarkWords:  word count=" & line.Words.Count & ",Line Text=" & line.Text)             ''~va05R~''~v138R~''~v155R~
                 For Each word As OcrWord In line.Words
                     Dim brect As Windows.Foundation.Rect = word.BoundingRect
                     Dim rect As Rectangle = New System.Drawing.Rectangle(CType(brect.X, Integer), CType(brect.Y, Integer), CType(brect.Width, Integer), CType(brect.Height, Integer)) ''~v100R~
                     If angle <> 0 Then                                        ''~v148I~
-'*                      Trace.W("Ajust angle angle=" & angle & ",text=" & word.Text) ''~v148I~''+v155R~
+                        '*                      Trace.W("Ajust angle angle=" & angle & ",text=" & word.Text) ''~v148I~''~v155R~
                         adjustMarkingBox(bmpDraw, rect, msin, mcos, swRectBMP, clipRect) '*get sin cosin''~v148R~
                     End If                                             ''~v148I~
                     rect.X += xx0                                       ''~v139I~
                     rect.Y += yy0                                       ''~v139I~
-'*                  Trace.W("Class10:markWords: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",text=" & word.Text) ''~va05R~''+v155R~
-'*                  Trace.W("Class10:markWords rect: X=" & rect.X & ",Y=" & rect.Y & ",W=" & rect.Width & ",H=" & rect.Height & ",text=" & word.Text) ''~v147I~''+v155R~
+                    '*                  Trace.W("Class10:markWords: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",text=" & word.Text) ''~va05R~''~v155R~
+                    '*                  Trace.W("Class10:markWords rect: X=" & rect.X & ",Y=" & rect.Y & ",W=" & rect.Width & ",H=" & rect.Height & ",text=" & word.Text) ''~v147I~''~v155R~
                     g.FillRectangle(br, rect)
                     g.DrawRectangle(Pens.Red, rect)
                     '                   text &= word.Text & " "
@@ -421,7 +431,7 @@ Public Class Cocr
         Dim mcos As Double = Math.Cos(rad)                             ''~v148R~
         Ppsin = msin                                                     ''~v148I~
         Ppcos = mcos                                                     ''~v148I~
-'*      Trace.W("ajustangleInit  msin=" & msin & ",mcos=" & mcos)      ''~v148I~''+v155R~
+        '*      Trace.W("ajustangleInit  msin=" & msin & ",mcos=" & mcos)      ''~v148I~''~v155R~
     End Sub                                                            ''~v148I~
     '*************************************************************     ''~v148I~
     '*x2=x1cos-y1sin, y2=x1sin+y1cos;center is (x/2,y/2)=x0,y0         ''~v148I~
@@ -445,7 +455,7 @@ Public Class Cocr
         Dim y2 As Double = y0 + dx * Psin + dy * Pcos                          ''~v148I~
         Pprect.X = CType(x2, Integer)                                  ''~v148R~
         Pprect.Y = CType(y2, Integer)                                  ''~v148R~
-'*      Trace.W("ajustangle  xx=" & x1 & ",yy=" & y1 & ",xxnew=" & x2 & ",yynew=" & y2) ''~v148R~''+v155R~
+        '*      Trace.W("ajustangle  xx=" & x1 & ",yy=" & y1 & ",xxnew=" & x2 & ",yynew=" & y2) ''~v148R~''~v155R~
     End Sub                                                            ''~v148I~
     '*************************************************************     ''~v145I~
     '*chk horizontal for the case 1word/line,1char/word                ''~v145I~
@@ -464,8 +474,8 @@ Public Class Cocr
                 prect = pl.Words.Item(0).BoundingRect                  ''~v145R~
                 dy = Abs(crect.Y - prect.Y)                                ''~v145R~
                 dx = Abs(crect.X - prect.X)                                ''~v145I~
-'*              Trace.W("1charline dx=" & dx & ",dy=" & dy & ",text=" & Pline.Text) ''~v145I~''+v155R~
-'*              Trace.W("1charline chH=" & crect.Height & ",chW=" & crect.Width & "prev text=" & pl.Text) ''~v145I~''+v155R~
+                '*              Trace.W("1charline dx=" & dx & ",dy=" & dy & ",text=" & Pline.Text) ''~v145I~''~v155R~
+                '*              Trace.W("1charline chH=" & crect.Height & ",chW=" & crect.Width & "prev text=" & pl.Text) ''~v145I~''~v155R~
                 If dy < crect.Height Then                                     ''~v145I~
                     type = LS_HORIZONTAL                               ''~v145I~
                     Exit Do                                            ''~v145I~
@@ -479,7 +489,7 @@ Public Class Cocr
             End If                                                     ''~v145I~
             Exit Do                                                    ''~v145I~
         Loop                                                           ''~v145I~
-'*      Trace.W("1charline type=" & type)                              ''~v145I~''+v155R~
+        '*      Trace.W("1charline type=" & type)                              ''~v145I~''~v155R~
         Return type                                                    ''~v145I~
     End Function                                                       ''~v145I~
     '*************************************************************     ''~v138I~
@@ -488,10 +498,15 @@ Public Class Cocr
         Dim ctrline As Integer = listLines.Count()                     ''~v140I~
         Dim ls As Integer() = New Integer(ctrline) {}                      ''~v138I~
         Dim linesz As Double() = New Double(ctrline) {}               ''~v138R~
-        Dim charH As Double() = New Double(ctrline) {}                 ''~v138R~
-        Dim charW As Double() = New Double(ctrline) {}                 ''~v138I~
+        '*      Dim charH As Double() = New Double(ctrline) {}                 ''~v138R~''~v178R~
+        '*      Dim charW As Double() = New Double(ctrline) {}                 ''~v138I~''~v178R~
+        charH = New Double(ctrline) {}                                 ''~v178I~
+        charW = New Double(ctrline) {}                                 ''~v178I~
         Dim lineSpacing As Double() = New Double(ctrline) {}           ''~v140I~
         Dim baseline As Double() = New Double(ctrline) {}            ''~v147I~
+        Dim bound1 As Double() = New Double(ctrline) {}                ''~v176R~
+        Dim bound2 As Double() = New Double(ctrline) {}                ''~v176R~
+        Dim axis As Double() = New Double(ctrline) {}                ''~v176I~
         Dim brect As Rect                                              ''~v138I~
         Dim brect1 As Rect                                        ''~v138I~
         Dim brect2 As Rect                                        ''~v138I~
@@ -504,6 +519,7 @@ Public Class Cocr
         Dim minLineHeight As Double = 1000.0                            ''~v140I~
         Dim minLineWidth As Double = 1000.0                              ''~v140I~
         lineno = 0                                                       ''~v138I~
+        '*** determine line is horizontal or vertical ***              ''~v176I~
         '*      For Each line As OcrLine In result.Lines                       ''~v138I~''~v140R~
         For Each line As OcrLine In listLines                          ''~v140I~
             Dim ctrword As Integer = line.Words.Count                    ''~v138I~
@@ -524,18 +540,18 @@ Public Class Cocr
                     linesz(lineno) = leny                                    ''~v138I~
                 End If                                                     ''~v138I~
             End If                                                       ''~v145I~
-'*          Trace.W("Class10:chkLineStyle type=" & type & ",lenx=" & lenx & ",leny=" & leny) ''~v138I~''+v155R~
-'*          Trace.W("Class10:chkLineStyle type=" & type & ",lineno=" & lineno & ",X=" & brect1.X & ",txt=" & line.Text) ''~v138I~''+v155R~
+            '*          Trace.W("Class10:chkLineStyle type=" & type & ",lenx=" & lenx & ",leny=" & leny) ''~v138I~''~v155R~
+            '*          Trace.W("Class10:chkLineStyle type=" & type & ",lineno=" & lineno & ",X=" & brect1.X & ",txt=" & line.Text) ''~v138I~''~v155R~
             Dim txt = word2.Text                                        ''~v138I~
             Dim txtlen As Integer = txt.Length                           ''~v138I~
             If txtlen > 0 Then                                                ''~v138I~
                 Dim ch As Char = txt.Chars(txtlen - 1)                     ''~v138I~
                 If ClassKanaText.isDelmCharEOL(ch) Then                     ''~v138I~
-'*                  Trace.W("EOL_DELM text=" & line.Text)              ''~v140I~''+v155R~
+                    '*                  Trace.W("EOL_DELM text=" & line.Text)              ''~v140I~''~v155R~
                     type = type Or LS_EOL_DELM     '* 0x02 line end with delm''~v138I~
                 End If                                                 ''~v138I~
             End If                                                     ''~v138I~
-            '*get char size                                                        ''~v138I~
+            '*** get average char size ***                                                    ''~v138I~''~v176R~
             Dim ptmaxw As Double = 0.0                                 ''~v138R~
             Dim ptmaxh As Double = 0.0                                 ''~v138I~
             Dim ptmaxwMax As Double = 0.0                              ''~v153I~
@@ -544,11 +560,11 @@ Public Class Cocr
             Dim base As Double = 0.0                                     ''~v147I~
             For Each word As OcrWord In line.Words                     ''~v138I~
                 brect = word.BoundingRect                                ''~v138I~
-'*              Trace.W("Class10:chkLineStyle Words: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",btext=" & word.Text) ''~v138I~''+v155R~
+'*              Trace.W("Class10:chkLineStyle Words: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",btext=" & word.Text) ''~v138I~''~v155R~''+v178R~
                 hh = brect.Height                                      ''~v138R~
                 ww = brect.Width                                       ''~v138R~
                 '*              brect.Y += hh             '*change to baseline for line spacing''~v140I~''~v146R~''~v147R~
-'*              Trace.W("Class10:chkLineStyle Words: new baseline Y=" & brect.Y & ",text=" & word.Text) ''~v140I~''~v146R~''~v147R~''+v155R~
+'*              Trace.W("Class10:chkLineStyle Words: new baseline Y=" & brect.Y & ",text=" & word.Text) ''~v140I~''~v146R~''~v147R~''~v155R~''+v178R~
                 If word.Text.Length > 1 Then                                  ''~v143I~
                     If (type And LS_HORIZONTAL) <> 0 Then     '*horizontal line''~v154I~
                         ww /= word.Text.Length                               ''~v143I~
@@ -568,21 +584,43 @@ Public Class Cocr
             charH(lineno) = ptmaxh / wordctr                             ''~v146I~
             charW(lineno) = ptmaxw / wordctr                             ''~v146I~
             baseline(lineno) = base '*for line spacing chk             ''~v147R~
-'*          Trace.W("average avaerage baseline=" & baseline(lineno) & ",sum=" & base & ",ctr=" & wordctr) ''~v147I~''~v153M~''+v155R~
+'*          Trace.W("average avaerage baseline=" & baseline(lineno) & ",sum=" & base & ",ctr=" & wordctr) ''~v147I~''~v153M~''~v155R~''+v178R~
             ''~v153I~
+            '*** modify average char size except small size char ***   ''~v176I~
             Dim avh2 As Double = charH(lineno) * RATE_SMALL_CHAR          ''~v153I~
             Dim avw2 As Double = charW(lineno) * RATE_SMALL_CHAR          ''~v153I~
-'*          Trace.W("all average ptmaxh=" & charH(lineno) & ",ptmaxw=" & charW(lineno) & ",smallrateH=" & avh2 & ",smallrateW=" & avw2 & ",text=" & line.Text) ''~v153I~''+v155R~
+'*          Trace.W("all average ptmaxh=" & charH(lineno) & ",ptmaxw=" & charW(lineno) & ",smallrateH=" & avh2 & ",smallrateW=" & avw2 & ",text=" & line.Text) ''~v153I~''~v155R~''+v178R~
             ptmaxw = 0.0                                               ''~v153I~
             ptmaxh = 0.0                                               ''~v153I~
             Dim wordctrH As Integer = 0                                  ''~v153R~
             Dim wordctrW As Integer = 0                                  ''~v153I~
+            Dim pix1 As Double = 0                                     ''~v176R~
+            Dim pix2 As Double = 0                                     ''~v176R~
             For Each word As OcrWord In line.Words                     ''~v153I~
                 brect = word.BoundingRect                              ''~v153I~
                 hh = brect.Height                                      ''~v153I~
                 ww = brect.Width                                       ''~v153I~
+                If (type And LS_HORIZONTAL) <> 0 Then     '*horizontal line''~v176I~
+                    If pix1 = 0 Then                                          ''~v176I~
+                        pix1 = brect.Y       '*min top                 ''~v176I~
+                    Else                                               ''~v176I~
+                        pix1 = Min(pix1, brect.Y)       '*min top      ''~v176R~
+                    End If                                             ''~v176I~
+                    pix2 = Max(pix2, brect.Y + hh)    '*max bottom       ''~v176I~
+                Else                                                   ''~v176I~
+                    If pix1 = 0 Then                                          ''~v176I~
+                        pix1 = brect.X                 '*min left      ''~v176I~
+                    Else                                               ''~v176I~
+                        pix1 = Min(pix1, brect.X)       '*min left     ''~v176R~
+                    End If                                             ''~v176I~
+                    pix2 = Max(pix2, brect.X + ww)    '*max right        ''~v176I~
+                End If                                                 ''~v176I~
                 If word.Text.Length > 1 Then                           ''~v153I~
-                    ww /= word.Text.Length                             ''~v153I~
+                    If (type And LS_HORIZONTAL) <> 0 Then     '*horizontal line''~v176I~
+                        ww /= word.Text.Length                             ''~v153I~
+                    Else                                                 ''~v176I~
+                        hh /= word.Text.Length                             ''~v176I~
+                    End If                                               ''~v176I~
                 End If                                                 ''~v153I~
                 Dim wordlen = word.Text.Length                         ''~v153M~
                 If hh > avh2 Then                                           ''~v153R~
@@ -593,7 +631,7 @@ Public Class Cocr
                     wordctrW += 1                                        ''~v153I~
                     ptmaxw += ww * wordlen                             ''~v153I~
                 End If                                                 ''~v153I~
-'*              Trace.W("Class10:chkLineStyle largeChar Words: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",btext=" & word.Text) ''~v153I~''+v155R~
+                '*              Trace.W("Class10:chkLineStyle largeChar Words: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",btext=" & word.Text) ''~v153I~''~v155R~
             Next                                                       ''~v153I~
             If wordctrH > 0 Then                                              ''~v153R~
                 charH(lineno) = ptmaxh / wordctrH                      ''~v153R~
@@ -601,69 +639,121 @@ Public Class Cocr
             If wordctrW > 0 Then                                              ''~v153I~
                 charW(lineno) = ptmaxw / wordctrW                      ''~v153R~
             End If                                                     ''~v153I~
-'*          Trace.W("average large char ctrH=" & wordctrH & ",ctrW=" & wordctrW & ",average W=" & charH(lineno) & ",H=" & charW(lineno) & ",text=" & line.Text) ''~v153I~''+v155R~
+            '*          Trace.W("average large char ctrH=" & wordctrH & ",ctrW=" & wordctrW & ",average W=" & charH(lineno) & ",H=" & charW(lineno) & ",text=" & line.Text) ''~v153I~''~v155R~
             If (type And LS_HORIZONTAL) <> 0 Then     '*horizontal line       ''~v140I~
                 minLineHeight = Min(minLineHeight, charH(lineno))      ''~v140R~
             Else                                                       ''~v140I~
                 minLineWidth = Min(minLineWidth, charW(lineno))        ''~v140R~
             End If                                                     ''~v140I~
-'*          Trace.W("minLineHeigh=" & minLineHeight & ",width=" & minLineWidth) ''~v154I~''+v155R~
+            '*          Trace.W("minLineHeigh=" & minLineHeight & ",width=" & minLineWidth) ''~v154I~''~v155R~
             If swPointChangeByMax Then                                      ''~v153I~''~v154R~
                 charW(lineno) = ptmaxwMax                              ''~v153I~''~v154R~
                 charH(lineno) = ptmaxhMax                              ''~v153I~''~v154R~
             End If                                                     ''~v153I~''~v154R~
+            bound1(lineno) = pix1       'pixel of line box, start        ''~v176I~
+            bound2(lineno) = pix2       'pixel of line box, end          ''~v176I~
+'*          Trace.W("bound1=" & pix1 & ",bound2=" & pix2 & ",chw=" & charW(lineno) & ",chH=" & charH(lineno) & ",text=" & line.Text) ''~v176R~''+v178R~
             ls(lineno) = type     '*vertical line                        ''~v138I~
             lineno += 1                                                  ''~v138I~
         Next                                                           ''~v138I~
+        '*** chk same line for vertical line                           ''~v176I~
         '***************************************************           ''~v140I~
         '*      sortLines(listLines, ls, linesz, charH, charW, minLineHeight, minLineWidth) ''~v140R~''~v147R~
-        sortLines(listLines, ls, linesz, charH, charW, minLineHeight, minLineWidth, baseline) ''~v147I~
+        '*        sortLines(listLines, ls, linesz, charH, charW, minLineHeight, minLineWidth, baseline) ''~v147I~''~v176R~
+        sortLines(listLines, ls, linesz, charH, charW, minLineHeight, minLineWidth, baseline, bound1, bound2, Nothing) ''~v176R~
+        '***************************************************           ''~v176I~
+        If chkSameLineAfterSort(0, listLines, ls, bound1, bound2, axis) Then '*same line found''~v176R~
+            sortLines(listLines, ls, linesz, charH, charW, minLineHeight, minLineWidth, baseline, bound1, bound2, axis) ''~v176R~
+            chkSameLineAfterSort(1, listLines, ls, bound1, bound2, axis) 'reset eol flag''~v176R~
+        End If                                                         ''~v176I~
         '***************************************************           ''~v140I~
         '*chk char size changed                                                ''~v138I~
+#If True Then                                                          ''~v176R~
         Dim hho As Double = 0.0                                        ''~v138R~
         Dim wwo As Double = 0.0                                        ''~v138I~
+#Else                                                                  ''~v176I~
+        Dim diffline As Double = 0.0                                   ''~v176I~
+        Dim difflineo As Double = 0.0                                  ''~v176I~
+#End If                                                                ''~v176I~
         Dim dirHo = False                                              ''~v138R~
         Dim poso As Double = 0.0                                         ''~v140I~
         For ii As Integer = 0 To ctrline - 1                               ''~v138I~
-'*          Trace.W("chkLineStyle Line text=" & listLines.Item(ii).Text) ''~v138I~''~v140R~''+v155R~
             type = ls(ii)                                                ''~v138I~
+'*          Trace.W("chkLineStyle ii=" & ii & ",type=" & type & ",AfterSort text=" & listLines.Item(ii).Text) ''~v138I~''~v140R~''~v155R~''~v176R~''+v178R~
             hh = charH(ii)                                              ''~v138R~
             ww = charW(ii)                                              ''~v138I~
             Dim dirH As Boolean = (type And LS_HORIZONTAL) <> 0       '*horizontal''~v138R~''~v140R~
             Dim word As OcrWord = listLines.Item(ii).Words.Item(0)            ''~v140I~
             Dim pos As Double                                          ''~v140I~
+#If False Then                                                         ''~v176I~
             If dirH Then '*horizontal                                       ''~v140I~
                 '*              pos = word.BoundingRect.Y                       ''~v140I~''~v147R~
                 pos = baseline(ii) '*baseline                          ''~v147I~
             Else                                                       ''~v140I~
                 pos = word.BoundingRect.X                       ''~v140I~
             End If                                                     ''~v140I~
+#Else                                                                  ''~v176I~
+            pos = axis(ii)                                             ''~v176I~
+#End If                                                                ''~v176I~
             lineSpacing(ii) = Abs(pos - poso)                           ''~v140R~
-'*          Trace.W("linespacing from prev=" & lineSpacing(ii) & ",pos=" & pos & ",poso=" & poso) ''~v140I~''~v146R~''+v155R~
+'*          Trace.W("linespacing from prev=" & lineSpacing(ii) & ",pos=" & pos & ",poso=" & poso) ''~v140I~''~v146R~''~v155R~''~v176R~''+v178R~
             poso = pos                                                   ''~v140I~
             If ii > 0 Then                                                    ''~v138I~
                 If dirHo <> dirH Then           '*direction change            ''~v138I~
                     ls(ii - 1) = ls(ii - 1) Or LS_ADD_CRLF             '*add crlf at eol''~v138R~
                     ls(ii) = ls(ii) Or (LS_CHANGE_DIR)                 '*top of dir change''~v138I~
-'*                  Trace.W("chkLineStyle Direction changed dirH=" & dirH & ",dirHo=" & dirHo & ",txt=" + listLines.Item(ii).Text) ''~v138R~''~v140R~''+v155R~
+'*                  Trace.W("chkLineStyle Direction changed add crlf ii=" & ii & ",dirH=" & dirH & ",dirHo=" & dirHo & ",txt=" + listLines.Item(ii).Text) ''~v138R~''~v140R~''~v155R~''~v176R~''+v178R~
                 Else                                                   ''~v138I~
-                    Dim diffh As Double = Abs(hh - hho)                ''~v138R~
-                    Dim diffw As Double = Abs(ww - wwo)                ''~v138I~
-                    Dim rateh As Double = diffh / hho                 ''~v138R~
-                    Dim ratew As Double = diffw / wwo                 ''~v138I~
-'*                  Trace.W("chkLineStyle Direction point ww=" & ww & ",wwo=" & wwo & ",diffw=" & diffw & ",ratew=" & ratew) ''~v138R~''+v155R~
-'*                  Trace.W("chkLineStyle Direction point hh=" & hh & ",hho=" & hho & ",diffh=" & diffh & ",rateh=" & rateh) ''~v138I~''+v155R~
-                    If Min(ratew, rateh) > RATE_POINT_CHANGED Then      ''~v138R~
-'*                      Trace.W("chkLineStyle Direction pointchange")  ''~v138R~''+v155R~
-                        ls(ii - 1) = ls(ii - 1) Or LS_ADD_CRLF  '* add crlf to prev line''~v138R~
-                        ls(ii) = ls(ii) Or LS_CHANGE_POINT            ''~v138I~
-'*                      Trace.W("chkLineStyle Direction pointchange  without EOL_DELM add CRLF to Prev line") ''~v138R~''~v145R~''+v155R~
-                    End If                                             ''~v138I~
+'*                  Trace.W("chkLineStyle Direction point linespacing=" & lineSpacing(ii) & ",bound=(" & bound1(ii) & "-" & bound2(ii) & ")") ''~v176M~''+v178R~
+#If True Then                                                         ''~v176R~
+                    If lineSpacing(ii) <> 0 Then  'same line             ''~v176I~
+                        Dim diffh As Double = Abs(hh - hho)                ''~v138R~
+                        Dim diffw As Double = Abs(ww - wwo)                ''~v138I~
+                        Dim rateh As Double = diffh / hho                 ''~v138R~
+                        Dim ratew As Double = diffw / wwo                 ''~v138I~
+'*                      Trace.W("chkLineStyle Direction point ww=" & ww & ",wwo=" & wwo & ",diffw=" & diffw & ",ratew=" & ratew) ''~v138R~''~v155R~''~v176R~''+v178R~
+'*                      Trace.W("chkLineStyle Direction point hh=" & hh & ",hho=" & hho & ",diffh=" & diffh & ",rateh=" & rateh) ''~v138I~''~v155R~''~v176R~''+v178R~
+                        If Min(ratew, rateh) > RATE_POINT_CHANGED Then      ''~v138R~
+'*                          Trace.W("chkLineStyle Direction pointchange type prev=" & ls(ii - 1) & ",curr=" & ls(ii))  ''~v138R~''~v155R~''~v176R~''+v178R~
+                            ls(ii - 1) = ls(ii - 1) Or LS_ADD_CRLF  '* add crlf to prev line''~v138R~
+                            ls(ii) = ls(ii) Or LS_CHANGE_POINT            ''~v138I~
+'*                          Trace.W("chkLineStyle Direction pointchange  without EOL_DELM add CRLF to Prev line ii=" & ii - 1) ''~v138R~''~v145R~''~v155R~''~v176R~''+v178R~
+                        End If                                             ''~v138I~
+                    End If                                               ''~v176I~
+#Else                                                                  ''~v176M~
+                    Dim diff As Double = bound2(ii) - bound1(ii)       ''~v176M~
+                    If lineSpacing(ii) = 0 Then  'same line            ''~v176M~
+                        diffline = Max(diff, diffline)                 ''~v176M~
+                    Else                                               ''~v176M~
+                        If diffline = 0 Then                           ''~v176M~
+                            diffline = diff                            ''~v176M~
+                        End If                                         ''~v176M~
+                        If difflineo = 0 Then                          ''~v176M~
+                            difflineo = 1.0                            ''~v176M~
+                        End If                                         ''~v176M~
+                        If diffline = 0 Then                           ''~v176M~
+                            diffline = 1.0                             ''~v176M~
+                        End If                                         ''~v176M~
+                        Dim rate1 As Double = diffline / difflineo     ''~v176M~
+                        Dim rate2 As Double = difflineo / diffline     ''~v176M~
+'*                      Trace.W("chkLineStyle Direction point diff=" & difflineo & "-->" & diffline & ",rate=" & Min(rate1, rate2))''~v176M~''+v178R~
+                        If Min(rate1, rate2) < (1 - RATE_POINT_CHANGED) Then''~v176M~
+'*                          Trace.W("chkLineStyle Direction pointchange type prev=" & ls(ii - 1) & ",curr=" & ls(ii))''~v176I~''+v178R~
+                            ls(ii - 1) = ls(ii - 1) Or LS_ADD_CRLF  '* add crlf to prev line''~v176I~
+                            ls(ii) = ls(ii) Or LS_CHANGE_POINT         ''~v176I~
+'*                          Trace.W("chkLineStyle Direction pointchange  without EOL_DELM add CRLF to Prev line ii=" & ii - 1)''~v176I~''+v178R~
+                        End If                                         ''~v176I~
+                        difflineo = diffline                             ''~v176I~
+                        diffline = 0.0                                   ''~v176I~
+                    End If  '* not same line                           ''~v176I~
+#End If                                                                ''~v176M~
                 End If                                                 ''~v138I~
             End If                                                     ''~v138I~
             dirHo = dirH                                                 ''~v138I~
+#If True Then                                                         ''~v176R~
             hho = hh
             wwo = ww                                                     ''~v138I~
+#End If                                                                ''~v176I~
         Next                                                           ''~v138I~
         '*chk short line/line spacing                                                       ''~v138I~''~v140R~
         Dim grouptop As Integer = 0                                    ''~v138R~
@@ -674,11 +764,11 @@ Public Class Cocr
             chkSameLine(ii, ls, minLineHeight, minLineWidth, baseline)  ''~v147I~
             chkLineSpacing(ii, ls, lineSpacing, charH, charW)              ''~v140I~
             type = ls(ii)                                                ''~v138I~
-'*          Trace.W("chkLineStyle lineno=" & ii & ",type=" & type & ",txt=" & listLines.Item(ii).Text) ''~v138R~''~v140R~''+v155R~
-'*          Trace.W("chkLineStyle and=" & (type And (LS_CHANGE_DIR + LS_CHANGE_POINT))) ''~v138M~''+v155R~
+            '*          Trace.W("chkLineStyle lineno=" & ii & ",type=" & type & ",txt=" & listLines.Item(ii).Text) ''~v138R~''~v140R~''~v155R~
+            '*          Trace.W("chkLineStyle and=" & (type And (LS_CHANGE_DIR + LS_CHANGE_POINT))) ''~v138M~''~v155R~
             sz = linesz(ii)                                             ''~v138I~
             If (type And (LS_CHANGE_DIR + LS_CHANGE_POINT)) <> 0 Then    '*direction/charsize change''~v138R~
-'*              Trace.W("chkLineStyle grouptop=" & grouptop & ",ctr=" & groupctr) ''~v138R~''+v155R~
+                '*              Trace.W("chkLineStyle grouptop=" & grouptop & ",ctr=" & groupctr) ''~v138R~''~v155R~
                 If groupctr > 1 Then      '* >= 2 line group            ''~v138I~''~v140R~''~v138R~
                     chkShortLine(listLines, linesz, groupmax, grouptop, groupctr, ls) ''~v138I~
                 End If                                             ''~v138I~
@@ -696,7 +786,7 @@ Public Class Cocr
             End If                                                 ''~v138I~
         Next                                                           ''~v138I~
         If groupctr > 1 Then      '* >= 2 line group                   ''~v138I~
-'*          Trace.W("last chkshortLine")                               ''~v138I~''+v155R~
+            '*          Trace.W("last chkshortLine")                               ''~v138I~''~v155R~
             chkShortLine(listLines, linesz, groupmax, grouptop, groupctr, ls) ''~v138I~
         End If                                                         ''~v138I~
         lineStyle = ls                                                   ''~v138I~
@@ -727,11 +817,11 @@ Public Class Cocr
         Else                                                           ''~v140I~
             charsz = PcharW(ii)                                          ''~v140I~
         End If                                                         ''~v140I~
-'*      Trace.W("chkLineSpacing dirH=" & dirH & ",charH=" & PcharH(ii) & ",charW=" & PcharW(ii) & ",charsz pixel=" & charsz) ''~v140R~''+v155R~
-'*      Trace.W("chkLineSpacing charsz=" & charsz & ",prev=" & prevSpace & ",next=" & nextSpace & ",text=" & listLines.Item(ii).Text) ''~v140I~''+v155R~
+        '*      Trace.W("chkLineSpacing dirH=" & dirH & ",charH=" & PcharH(ii) & ",charW=" & PcharW(ii) & ",charsz pixel=" & charsz) ''~v140R~''~v155R~
+        '*      Trace.W("chkLineSpacing charsz=" & charsz & ",prev=" & prevSpace & ",next=" & nextSpace & ",text=" & listLines.Item(ii).Text) ''~v140I~''~v155R~
         charsz *= RATE_LINESPACING '*2.0 if over 1 line spacing (linespacing include the line itself''~v154I~
         If prevSpace > charsz AndAlso nextSpace > charsz Then                  ''~v140I~
-'*          Trace.W("chkLineSpacing changelinespace add CRLF")         ''~v140I~''+v155R~
+'*          Trace.W("chkLineSpacing changelinespace add CRLF ii=" & ii)         ''~v140I~''~v155R~''~v176R~''+v178R~
             Pls(ii) = Pls(ii) Or (LS_ADD_CRLF + LS_CHANGE_LINESPACE)       ''~v140I~
         End If                                                         ''~v140I~
     End Sub                                                            ''~v140I~
@@ -746,7 +836,7 @@ Public Class Cocr
         Dim typeo As Integer = Pls(ii - 1)                             ''~v144I~
         Dim dirH As Boolean = (type And LS_HORIZONTAL) <> 0       '*horizontal''~v144I~
         Dim dirHo As Boolean = (typeo And LS_HORIZONTAL) <> 0       '*horizontal''~v144I~
-'*      Trace.W("chkSameLine dirH=" & dirH & ",dirHo=" & dirHo & ",text=" & listLines(ii).Text) ''~v145I~''+v155R~
+        '*      Trace.W("chkSameLine dirH=" & dirH & ",dirHo=" & dirHo & ",text=" & listLines(ii).Text) ''~v145I~''~v155R~
         If dirH <> dirHo Then    'dir changed                               ''~v144I~
             Exit Sub                                                   ''~v144I~
         End If                                                         ''~v144I~
@@ -771,30 +861,121 @@ Public Class Cocr
         End If                                                         ''~v144I~
         Dim lineid As Integer = CType(Math.Floor(base), Integer)                       ''~v144R~
         Dim lineido As Integer = CType(Math.Floor(baseo), Integer)                     ''~v144R~
-'*      Trace.W("chkSameLine dirH=" & dirH & ",lineid=" & lineid & ",lineido=" & lineido & ",base=" & base & ",baseo=" & baseo & ",text=" & line.Text & ",texto=" & lineo.Text) ''~v144I~''~v145R~''+v155R~
+        '*      Trace.W("chkSameLine dirH=" & dirH & ",lineid=" & lineid & ",lineido=" & lineido & ",base=" & base & ",baseo=" & baseo & ",text=" & line.Text & ",texto=" & lineo.Text) ''~v144I~''~v145R~''~v155R~
         If lineid = lineido Then                                              ''~v144I~
-'*          Trace.W("chkSamelineSame prevtext=" & lineo.Text)           ''~v144R~''+v155R~
+            '*          Trace.W("chkSamelineSame prevtext=" & lineo.Text)           ''~v144R~''~v155R~
             typeo = typeo Or LS_REP_CRLF                                 ''~v144I~
             Pls(ii - 1) = typeo                                          ''~v144I~
         End If                                                         ''~v144I~
     End Sub                                                            ''~v144I~
+    '*************************************************************     ''~v176I~
+    '* chk same line after sort using center line                      ''~v176I~
+    '*************************************************************     ''~v176I~
+    Private Function chkSameLineAfterSort(Popt As Integer, PlistLines As List(Of OcrLine), Pls() As Integer, Pbound1() As Double, Pbound2() As Double, Paxis() As Double) As Boolean ''~v176R~
+        If sortOption = 0 Then                                         ''~v177I~
+            Return False                                               ''~v177I~
+        End If                                                         ''~v177I~
+        Dim ii As Integer = 0                                          ''~v176I~
+        Dim type As Integer                                            ''~v176I~
+        Dim dirH As Boolean                                            ''~v176I~
+        Dim dirHo As Boolean                                           ''~v176I~
+        Dim bound1 As Double                                           ''~v176R~
+        Dim bound2 As Double                                           ''~v176R~
+        Dim bound1o As Double                                          ''~v176R~
+        Dim bound2o As Double                                          ''~v176R~
+        Dim center As Double                                           ''~v176R~
+        Dim centero As Double                                          ''~v176R~
+        Dim swChange As Boolean = False                                  ''~v176I~
+        For Each line As OcrLine In PlistLines                         ''~v176I~
+            type = Pls(ii)                                             ''~v176I~
+            dirH = (type And LS_HORIZONTAL) <> 0       '*horizontal    ''~v176I~
+            bound1 = Pbound1(ii)                                       ''~v176I~
+            bound2 = Pbound2(ii)                                       ''~v176I~
+            If Popt = 0 Then                                                  ''~v176I~
+                center = (bound1 + bound2) / 2                         ''~v176R~
+                Paxis(ii) = center                                       ''~v176I~
+            Else                                                       ''~v176I~
+                center = Paxis(ii)                                       ''~v176I~
+            End If                                                     ''~v176I~
+'*          Trace.W("Class10:chkSameLineAfterSort line=" & ii & ",type=" & type & ",lineText" & line.Text) ''~v176R~''+v178R~
+            If ii > 0 Then                                             ''~v176R~
+'*              Trace.W("chkSameLineAfterSort dirH=" & dirH & ",dirHo=" & dirHo & ",bound1=" & bound1 & ",bound2=" & bound2) ''~v176R~''+v178R~
+                If dirH = dirHo Then                                           ''~v176R~
+'*                  Trace.W("chkSameLineAfterSort center=" & center & ",centero=" & centero & ",prev bound=" & bound1o & "," & bound2o & "curr bound=" & bound1 & "," & bound2) ''~v176R~''+v178R~
+                    If Popt = 0 Then                                          ''~v176I~
+                        If center > bound1o AndAlso center < bound2o AndAlso centero > bound1 AndAlso centero < bound2 Then ''~v176R~
+                            '*                          Pbound1(ii) = Pbound1(ii - 1)              ''~v176R~
+                            '*                          Pbound2(ii) = Pbound2(ii - 1)              ''~v176R~
+                            Paxis(ii) = Paxis(ii - 1)                  ''~v176I~
+                            swChange = True                            ''~v176R~
+'*                          Trace.W("chkSameLineAfterSort set center same as prev axis(ii)=" & Paxis(ii)) ''~v176R~''+v178R~
+                        End If                                         ''~v176R~
+                    Else                                               ''~v176I~
+                        If center = centero Then  '*same line                 ''~v176I~
+'*                          Trace.W("chkSameLineAfterSort Before type prev=" & Pls(ii - 1) & ",curr=" & Pls(ii)) ''~v176I~''+v178R~
+                            Pls(ii - 1) = Pls(ii - 1) And (Not LS_EOL_DELM)   'do not add CRLF''~v176I~
+                            Pls(ii - 1) = Pls(ii - 1) Or LS_SKIP_CRLF '*''~v176I~
+                            swChange = True                            ''~v176I~
+'*                          Trace.W("chkSameLineAfterSort After type prev=" & Pls(ii - 1) & ",curr=" & Pls(ii)) ''~v176I~''+v178R~
+                        End If                                         ''~v176I~
+                    End If                                             ''~v176I~
+                End If                                                 ''~v176I~
+            End If                                                     ''~v176I~
+            dirHo = dirH                                               ''~v176I~
+            bound1o = bound1                                           ''~v176I~
+            bound2o = bound2                                           ''~v176I~
+            centero = center                                           ''~v176I~
+            ii += 1                                                    ''~v176I~
+        Next                                                           ''~v176I~
+'*      Trace.W("chkSameLineAfterSort rc=" & swChange)                 ''~v176I~''+v178R~
+        Return swChange                                                ''~v176I~
+    End Function                                                       ''~v176R~
     '*************************************************************     ''~v138I~
     Private Sub chkShortLine(PlistLines As List(Of OcrLine), Plinesz() As Double, Pgroupmax As Double, Pgrouptop As Integer, Pgroupctr As Integer, Pls() As Integer) ''~v138I~
 #If False Then    '* same linechk insert space between OcrLine on the same line''~v145I~
-'*      Trace.W("chkShortLine grouptop=" & Pgrouptop & "groupctr=" & Pgroupctr & ",groupmax=" & Pgroupmax) ''~v138I~''+v155R~
+'*      Trace.W("chkShortLine grouptop=" & Pgrouptop & "groupctr=" & Pgroupctr & ",groupmax=" & Pgroupmax) ''~v138I~''~v155R~
         For jj As Integer = Pgrouptop To Pgrouptop + Pgroupctr - 1         ''~v138I~
-'*          Trace.W("chkShortLine grouptext=" & PlistLines.Item(jj).Text) ''~v138I~''+v155R~
+'*          Trace.W("chkShortLine grouptext=" & PlistLines.Item(jj).Text) ''~v138I~''~v155R~
             Dim ratesz As Double = Plinesz(jj) / Pgroupmax             ''~v138I~
             If ratesz < RATE_LENGTH_CHANGED Then '*short line          ''~v138I~
-'*              Trace.W("chkShortLine lengthchanged len=" & Plinesz(jj) & ",groupmax=" & Pgroupmax & ",rate=" & ratesz) ''~v138I~''+v155R~
+'*              Trace.W("chkShortLine lengthchanged len=" & Plinesz(jj) & ",groupmax=" & Pgroupmax & ",rate=" & ratesz) ''~v138I~''~v155R~
                 If (Pls(jj) And LS_EOL_DELM) = 0 Then                  ''~v138I~
                     Pls(jj) = Pls(jj) Or LS_ADD_SPACE                  ''~v138I~
-'*                  Trace.W("chkShortline lengthchanged addspace") ''~v138I~''~v140R~''+v155R~
+'*                  Trace.W("chkShortline lengthchanged addspace") ''~v138I~''~v140R~''~v155R~
                 End If                                                 ''~v138I~
             End If                                                     ''~v138I~
         Next                                                           ''~v138I~
 #End If                                                                ''~v145I~
     End Sub                                                            ''~v138I~
+    '*************************************************************     ''~v178I~
+    Private Function chkWordDistance(Ptype As Integer, Pline As OcrLine, Plineno As Integer, Pword As OcrWord, Pwordo As OcrWord) As Boolean ''~v178R~
+        Dim brect, brecto As Rect                                       ''~v178I~
+        Dim chsz, rate, diff As Double                                   ''~v178I~
+        Dim rc As Boolean = False                                        ''~v178R~
+        '***********                                                       ''~v178I~
+        If Pwordo Is Nothing Then '*top word                                ''~v178I~
+            Return False                                               ''~v178I~
+        End If                                                         ''~v178I~
+        brect = Pword.BoundingRect                                     ''~v178I~
+        brecto = Pwordo.BoundingRect                                   ''~v178I~
+        If (Ptype And LS_HORIZONTAL) <> 0 Then                         ''~v178I~
+            diff = Abs(brect.X - brecto.X)                                 ''~v178I~
+            chsz = charW(Plineno)                                        ''~v178I~
+        Else                                                           ''~v178I~
+            diff = brect.Y - brecto.Y                                      ''~v178I~
+            chsz = charH(Plineno)                                        ''~v178I~
+        End If                                                         ''~v178I~
+        If chsz = 0 Then                                                      ''~v178I~
+            Return False                                               ''~v178I~
+        End If                                                         ''~v178I~
+        rate = diff / chsz                                                 ''~v178I~
+'*      Trace.W("chkWordDistance insertspace rate=" & rate & ",diff=" & diff & ",chsz=" & chsz & ",txt=" & Pword.Text & ",prev=" & Pwordo.Text)''+v178R~
+        If rate > RATE_WORDSPACING Then '*add space between word if distance is multiple of char size''~v178I~
+'*          Trace.W("chkWordDistance return True")                     ''+v178R~
+            rc = True                                                    ''~v178I~
+        End If                                                         ''~v178I~
+        Return rc                                                      ''~v178I~
+    End Function                                                       ''~v178I~
     '*************************************************************
     Public Function makeLines(Plen As Integer) As String
         Dim sb = New StringBuilder(Plen * 2)
@@ -804,26 +985,38 @@ Public Class Cocr
             '*          For Each line As OcrLine In result.Lines                   ''~v140R~
             For Each line As OcrLine In listLines                     ''~v140I~
                 '               sb.Append(line.Text)                                   ''~v104R~
-                For Each word As OcrWord In line.Words                 ''~v104I~
-                    sb.Append(word.Text)                               ''~v104I~
-                Next                                                   ''~v104I~
-                Dim type = lineStyle(lineno)                             ''~v138I~
-'*              Trace.W("makeLines type=" & type & ",lineText=" & line.Text) ''~v138I~''+v155R~
+                Dim type = lineStyle(lineno)                           ''~v178I~
+'*              Trace.W("makeLines type=" & type & ",lineText=" & line.Text) ''~v138I~''~v155R~''~v176R~''+v178R~
+                If langTag.StartsWith("ja") Then                         ''~v177I~
+                    Dim wordprev As OcrWord = Nothing                    ''~v178I~
+                    For Each word As OcrWord In line.Words                 ''~v104I~
+                        If chkWordDistance(type, line, lineno, word, wordprev) Then ''~v178R~
+                            sb.Append(" "c)                            ''~v178I~
+                        End If                                         ''~v178I~
+                        sb.Append(word.Text)                               ''~v104I~
+                        wordprev = word                                  ''~v178I~
+                    Next                                                   ''~v104I~
+                Else                                                     ''~v177I~
+                    sb.Append(line.Text)                                   ''~v177I~
+                End If                                                   ''~v177I~
+                '*              Dim type = lineStyle(lineno)                             ''~v138I~''~v178R~
                 If (type And LS_REP_CRLF) <> 0 Then  '*sameline          ''~v144I~
                     sb.Append(" "c)  '* double CRLF to avoid eol concatination''~v144I~
                 Else                                                     ''~v144I~
                     If (type And LS_EOL_DELM) = 0 Then                     ''~v138R~
                         If (type And LS_ADD_CRLF) <> 0 Then                ''~v138R~
                             sb.Append(vbCrLf)  '* double CRLF to avoid eol concatination''~v138I~
-'*                          Trace.W("makeLines addcrlf")                  ''~v138I~''+v155R~
+                            '*                          Trace.W("makeLines addcrlf")                  ''~v138I~''~v155R~
                         Else                                               ''~v138I~
                             If (type And LS_ADD_SPACE) <> 0 Then           ''~v138R~
                                 sb.Append(" "c)  '* double CRLF to avoid eol concatination''~v138I~
-'*                              Trace.W("makeLines addspace")             ''~v138I~''+v155R~
+                                '*                              Trace.W("makeLines addspace")             ''~v138I~''~v155R~
                             End If                                         ''~v138R~
                         End If                                             ''~v138I~
                     End If    ''~v138I~
-                    sb.Append(vbCrLf)
+                    If (type And LS_SKIP_CRLF) = 0 Then '*line concatinated    ''~v176I~
+                        sb.Append(vbCrLf)
+                    End If                                               ''~v176I~
                 End If                                                   ''~v144I~
                 lineno += 1                                              ''~v138I~
             Next
@@ -862,7 +1055,7 @@ Public Class Cocr
     '*************************************************************     ''~va04I~
     Public Function cutImage(Pbmp As Bitmap, Prect As Rectangle) As Bitmap ''~va04I~
         Dim bmp As Bitmap = Pbmp.Clone(Prect, Pbmp.PixelFormat)        ''~va04I~
-'*      Trace.W("cutimage Prect X=" & Prect.X & ",Y=" & Prect.Y & ",W=" & Prect.Width & ",H=" & Prect.Height)''+v155R~
+        '*      Trace.W("cutimage Prect X=" & Prect.X & ",Y=" & Prect.Y & ",W=" & Prect.Width & ",H=" & Prect.Height)''~v155R~
         Return bmp                                                     ''~va04I~
     End Function                                                       ''~va04I~
     '*************************************************************     ''~va04I~
@@ -929,51 +1122,71 @@ Public Class Cocr
     End Function                                                       ''~v140I~
     '*************************************************************         ''~v140I~
     '*  Private Sub sortLines(PlistLines As List(Of OcrLine), Pls() As Integer, Plinesz() As Double, PcharH() As Double, PcharW() As Double, PminLineHeight As Double, PminLineWidth As Double) ''~v140R~''~v147R~
-    Private Sub sortLines(PlistLines As List(Of OcrLine), Pls() As Integer, Plinesz() As Double, PcharH() As Double, PcharW() As Double, PminLineHeight As Double, PminLineWidth As Double, Pbaseline() As Double) ''~v147I~
+    '*    Private Sub sortLines(PlistLines As List(Of OcrLine), Pls() As Integer, Plinesz() As Double, PcharH() As Double, PcharW() As Double, PminLineHeight As Double, PminLineWidth As Double, Pbaseline() As Double) ''~v147I~''~v176R~
+    Private Sub sortLines(PlistLines As List(Of OcrLine), Pls() As Integer, Plinesz() As Double, PcharH() As Double, PcharW() As Double, PminLineHeight As Double, PminLineWidth As Double, Pbaseline() As Double, Pbound1() As Double, Pbound2() As Double, Paxis() As Double) ''~v176R~
         If sortOption = 0 Then                                              ''~v140I~
             Exit Sub                                                   ''~v140I~
         End If                                                         ''~v140I~
         Dim lineno As Integer = 0                                        ''~v140I~
         Dim sList As New SortedList(Of Integer, Integer)                ''~v140R~
         For Each line As OcrLine In PlistLines                         ''~v140R~
-'*          Trace.W("sortVRTL Line text=" & line.Text)                 ''~v140I~''+v155R~
+            '*          Trace.W("sortVRTL Line text=" & line.Text)                 ''~v140I~''~v155R~
             Dim type As Integer = Pls(lineno)                   ''~v140R~
-'*          Dim wordctr As Integer = line.Words.Count                    ''~v140I~''~v155R~
+            '*          Dim wordctr As Integer = line.Words.Count                    ''~v140I~''~v155R~
             Dim word As OcrWord = line.Words.Item(0)                     ''~v140I~
             Dim brect As Rect = word.BoundingRect                        ''~v140I~
-            brect.Y = Pbaseline(lineno)                                  ''~v147I~
-'*          Trace.W("Class10:sortLines WordsTop: X=" & brect.X & ",Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",btext=" & word.Text) ''~v140R~''+v155R~
+            '*          brect.Y = Pbaseline(lineno)                                  ''~v147I~''~v176R~
+            Dim center As Double                                       ''~v176R~
+            If Paxis Is Nothing Then                                        ''~v176I~
+                center = (Pbound1(lineno) + Pbound2(lineno)) / 2       ''~v176I~
+            Else                                                       ''~v176I~
+                center = Paxis(lineno)                                 ''~v176R~
+            End If                                                     ''~v176I~
+            If (type And LS_HORIZONTAL) <> 0 Then                      ''~v176I~
+                brect.Y = center                                       ''~v176R~
+            Else                                                       ''~v176I~
+                brect.X = center                                       ''~v176R~
+            End If                                                     ''~v176I~
+'*          Trace.W("Class10:sortLines sortOption=" & sortOption & ",WordsTop: X=" & brect.X & ",base Y=" & brect.Y & ",W=" & brect.Width & ",H=" & brect.Height & ",btext=" & word.Text) ''~v140R~''~v155R~''+v178R~
             Dim key As Double                                          ''~v140I~
             Dim chW As Double = PminLineWidth                          ''~v140R~
             Dim chH As Double = PminLineHeight                         ''~v140R~
             Select Case sortOption                                     ''~v141I~
                 Case SORT_VLINE_RTL  '*= 1       '*sort vertical line by X:largeX-->smallX''~v141I~
                     If (type And LS_HORIZONTAL) <> 0 Then                                ''~v140I~
-                        key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X    '*Y:small(Up)-->large(Down) and X:left->right''~v140R~
+                        '*                      key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X    '*Y:small(Up)-->large(Down) and X:left->right''~v140R~''~v176R~
+                        key = brect.Y * SORT_SCALE + brect.X    '*Y:small(Up)-->large(Down) and X:left->right''~v176I~
                     Else                                                       ''~v140I~
-                        key = -(CType(brect.X / chW, Integer) * SORT_SCALE) + brect.Y  '*X:large minus(Right)-->small minus(Left)  and Y:up-->Down''~v140R~
+                        '*                      key = -(CType(brect.X / chW, Integer) * SORT_SCALE) + brect.Y  '*X:large minus(Right)-->small minus(Left)  and Y:up-->Down''~v140R~''~v176R~
+                        key = -brect.X * SORT_SCALE + brect.Y  '*X:large minus(Right)-->small minus(Left)  and Y:up-->Down''~v176R~
                     End If                                                     ''~v140I~
                 Case SORT_VLINE_LTR  '*= 2       '*sort horizontal line by Y:smallY-->largeY''~v141I~
                     If (type And LS_HORIZONTAL) <> 0 Then                      ''~v141I~
-                        key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X    '*Y:small(Up)-->large(Down) and X:left->right''~v140R~
+                        '*                      key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X    '*Y:small(Up)-->large(Down) and X:left->right''~v140R~''~v176R~
+                        key = brect.Y * SORT_SCALE + brect.X    '*Y:small(Up)-->large(Down) and X:left->right''~v176I~
                     Else                                                       ''~v141I~
-                        key = -CType((SORT_SCALE - brect.X) / chW, Integer) * SORT_SCALE + brect.Y  '*X:large minus(Left)-->small minus(Right) and Y:small(Up)-->Down''~v140R~
+                        '*                      key = -CType((SORT_SCALE - brect.X) / chW, Integer) * SORT_SCALE + brect.Y  '*X:large minus(Left)-->small minus(Right) and Y:small(Up)-->Down''~v140R~''~v176R~
+                        key = -(SORT_SCALE - brect.X) * SORT_SCALE + brect.Y  '*X:large minus(Left)-->small minus(Right) and Y:small(Up)-->Down''~v176I~
                     End If                                                     ''~v141I~
                 Case SORT_HLINE_RTL  '*= 3       '*sort horizontal line by Y:smallY-->largeY''~v141I~''~v140R~
                     If (type And LS_HORIZONTAL) <> 0 Then              ''~v141I~
-                        key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X   '*Y:small(Up)->Down, X:large minus(Right)->Left''~v140R~
+                        '*                      key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X   '*Y:small(Up)->Down, X:large minus(Right)->Left''~v140R~''~v176R~
+                        key = brect.Y * SORT_SCALE + brect.X   '*Y:small(Up)->Down, X:large minus(Right)->Left''~v176I~
                     Else                                               ''~v141I~
-                        key = CType((SORT_SCALE - brect.X) / chW, Integer) * SORT_SCALE + brect.Y   '*X:small(Right)->Left Y:small(Up)-->Down''~v140R~
+                        '*                      key = CType((SORT_SCALE - brect.X) / chW, Integer) * SORT_SCALE + brect.Y   '*X:small(Right)->Left Y:small(Up)-->Down''~v140R~''~v176R~
+                        key = (SORT_SCALE - brect.X) * SORT_SCALE + brect.Y   '*X:small(Right)->Left Y:small(Up)-->Down''~v176I~
                     End If                                             ''~v141I~
                 Case SORT_HLINE_LTR  '*= 4       '*sort horizontal line by Y:smallY-->largeY''~v141I~''~v140R~
                     If (type And LS_HORIZONTAL) <> 0 Then                      ''~v141I~
-                        key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X   '*Y:small(Up)->Down, X:small(Left)->Right''~v140R~
+                        '*                      key = CType(brect.Y / chH, Integer) * SORT_SCALE + brect.X   '*Y:small(Up)->Down, X:small(Left)->Right''~v140R~''~v176R~
+                        key = brect.Y * SORT_SCALE + brect.X   '*Y:small(Up)->Down, X:small(Left)->Right''~v176I~
                     Else                                                       ''~v141I~
-                        key = CType((SORT_SCALE + brect.X) / chW, Integer) * SORT_SCALE + brect.Y   '*Y:small(Up)->Down, X:large minus(Right)->Left      '*after vertical line''~v140R~
+                        '*                      key = CType((SORT_SCALE + brect.X) / chW, Integer) * SORT_SCALE + brect.Y   '*Y:small(Up)->Down, X:large minus(Right)->Left      '*after vertical line''~v140R~''~v176R~
+                        key = (SORT_SCALE + brect.X) * SORT_SCALE + brect.Y   '*Y:small(Up)->Down, X:large minus(Right)->Left      '*after vertical line''~v176I~
                     End If                                                     ''~v141I~
             End Select                                                   ''~v141I~
             Dim intkey As Integer = CType(key, Integer)                   ''~v140I~
-'*          Trace.W("sort key=" & intkey & ",chW=" & chW & ",chH=" & chH & ",text=" & line.Text) ''~v140R~''+v155R~
+'*          Trace.W("sort key=" & intkey & ",chW=" & chW & ",chH=" & chH & ",text=" & line.Text) ''~v140R~''~v155R~''+v178R~
             Try                                                        ''~v140I~
                 sList.Add(intkey, lineno)                              ''~v140R~
             Catch ex As Exception                                      ''~v140I~
@@ -987,6 +1200,12 @@ Public Class Cocr
         Dim linesz() As Double = CType(Plinesz.Clone(), Double())       ''~v140I~
         Dim charH() As Double = CType(PcharH.Clone(), Double())         ''~v140I~
         Dim charW() As Double = CType(PcharW.Clone(), Double())         ''~v140I~
+        Dim bound1() As Double = CType(Pbound1.Clone(), Double())      ''~v176I~
+        Dim bound2() As Double = CType(Pbound2.Clone(), Double())      ''~v176I~
+        Dim axis() As Double = Nothing                                   ''~v176R~
+        If Paxis IsNot Nothing Then                                    ''~v176I~
+            axis = CType(Paxis.Clone(), Double())                      ''~v176R~
+        End If                                                         ''~v176I~
         Dim ii As Integer = 0                                            ''~v140I~
         Dim baseline() As Double = CType(Pbaseline.Clone(), Double())  ''~v147I~
         For Each ent As KeyValuePair(Of Integer, Integer) In sList       ''~v140I~
@@ -997,8 +1216,14 @@ Public Class Cocr
             PcharH(ii) = charH(idx)                                      ''~v140I~
             PcharW(ii) = charW(idx)                                      ''~v140I~
             Pbaseline(ii) = baseline(idx)                              ''~v147I~
-'*          Trace.W("Sorted ii=" & ii & ",type=" & Pls(ii) & ",linesz=" & Plinesz(ii) & ",charH=" & PcharH(ii) & ",charW=" & PcharW(ii)) ''~v140R~''+v155R~
-'*          Trace.W("baseline.Y=" & Pbaseline(ii) & ",orgY=" & PlistLines(ii).Words.Item(0).BoundingRect.Y & "text=" & PlistLines(ii).Text) ''~v146I~''~v147R~''+v155R~
+            Pbound1(ii) = bound1(idx)                                  ''~v176I~
+            Pbound2(ii) = bound2(idx)                                  ''~v176I~
+            If Paxis IsNot Nothing Then                                ''~v176I~
+                Paxis(ii) = axis(idx)                                  ''~v176R~
+'*              Trace.W("axis=" & Paxis(ii))                           ''~v176I~''+v178R~
+            End If                                                     ''~v176I~
+            '*          Trace.W("Sorted ii=" & ii & ",type=" & Pls(ii) & ",linesz=" & Plinesz(ii) & ",charH=" & PcharH(ii) & ",charW=" & PcharW(ii)) ''~v140R~''~v155R~
+'*          Trace.W("type=" & Pls(ii) & ",bound1=" & Pbound1(ii) & ",bound2=" & Pbound2(ii) & ",text=" & PlistLines(ii).Text) ''~v146I~''~v147R~''~v155R~''~v176R~''+v178R~
             ii += 1                                                      ''~v140I~
         Next                                                           ''~v140I~
     End Sub                                                    ''~v140I~

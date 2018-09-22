@@ -1,4 +1,4 @@
-﻿'CID:''+v152R~:#72                             update#=  271;         ''+v152R~
+﻿'CID:''+v152R~:#72                             update#=  272;         ''~v152R~
 '************************************************************************************''~v017I~
 'v152 2018/01/08 zoom also for rotated any degree                      ''~v151I~
 'v151 2018/01/07 show rotate degree on status bar                      ''~v151I~
@@ -1106,9 +1106,9 @@ Public Class Form2
     Private Sub saveRotateAnyBMP(Pbmp As Bitmap)                       ''~va08I~
         Dim oldbmp = rotateAnyBMP                                      ''~va08I~
         rotateAnyBMP = CType(Pbmp.Clone(), Bitmap)                     ''~va08I~
-        Trace.W("saveRotateAnyBMP  new bmp Hashcode:" & rotateAnyBMP.GetHashCode()) ''~va08I~
+'*        Trace.W("saveRotateAnyBMP  new bmp Hashcode:" & rotateAnyBMP.GetHashCode()) ''~va08I~''+v152R~
         If oldbmp IsNot Nothing Then                                   ''~va08I~
-            Trace.W("saveRotateAnyBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~va08I~
+'*            Trace.W("saveRotateAnyBMP dispose Hashcode:" & oldbmp.GetHashCode()) ''~va08I~''+v152R~
             oldbmp.Dispose()                                           ''~va08I~
         End If                                                         ''~va08I~
         swWordBMP = False    'zoom use orgBMP                          ''~v152M~

@@ -1,9 +1,10 @@
-﻿'CID:''+v164R~:#72                          update#=     23;          ''~v164R~
+﻿'CID:''+v164R~:#72                          update#=     24;          ''~v164R~
 '************************************************************************************''~v078I~
 'v164 2018/03/04 refresh required to toolstrip in any case?            ''~v164I~
 'v101 2017/12/16 Conversion warning                                    ''~v101I~
 'v078 2017/10/09 dialog status bar                                     ''~v078I~
 '************************************************************************************''~v078I~
+'*Show Msg on StatusBar ********************                           ''+v164I~
 Imports System.Windows.Forms                                           ''~v078I~
 Public Class SBM                                                       ''~v078R~
     Public Enum MSGID                                                  ''~v078I~
@@ -31,7 +32,7 @@ Public Class SBM                                                       ''~v078R~
     '   Public Sub show(Pmsg)                                              ''~v078R~''~v101R~
     Public Sub show(Pmsg As String)                                    ''~v101I~
         SBL.Text = Pmsg                                                ''~v078R~
-'*      Trace.W("Class8:show=" & Pmsg)                                 ''~v101R~''+v164R~
+'*      Trace.W("Class8:show=" & Pmsg)                                 ''~v101R~''~v164R~
         refresh()                                                      ''~v164M~
     End Sub                                                            ''~v078I~
     Public Sub show(Pmsg As String, Pswdelay As Boolean)                          ''~v078I~
@@ -73,7 +74,7 @@ Public Class SBM                                                       ''~v078R~
     Public Sub refresh()                                               ''~v164I~
         If SB IsNot Nothing Then                                             ''~v164R~
             SB.Refresh()                                               ''~v164R~
-'*          Trace.W("class8:refresh()")                                ''+v164R~
+'*          Trace.W("class8:refresh()")                                ''~v164R~
         End If                                                         ''~v164I~
     End Sub                                                            ''~v164I~
 End Class

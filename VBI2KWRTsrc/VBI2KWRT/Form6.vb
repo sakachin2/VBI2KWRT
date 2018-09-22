@@ -1,5 +1,6 @@
-﻿'CID:''+v169R~:#72                             update#=  202;         ''~v169R~
+﻿'CID:''+v172R~:#72                             update#=  203;        ''+v172R~
 '************************************************************************************''~v163I~
+'v172 2018/09/11 (Bug of V169)char type msg was not shown(gueryAdditionalChangeLetter return code set err)''+v172I~
 'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)''~v169I~
 'v164 2018/03/04 refresh required to toolstrip in any case?            ''~v164I~
 'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
@@ -74,13 +75,13 @@ Public Class Form6                                                     ''~v158R~
         If rc > 0 Then                                                        ''~v163I~
             If PswForm1 Then                                           ''~v163I~
                 If Ppcvsrclen = 0 Then                                        ''~v169I~
-                    Form1.MainForm.showStatus(True, String.Format(Rstr.getStr("STR_MSG_CHANGELETTER_ADDITIONAL"), Pch, Ppch)) ''~v163R~''+v169R~
+                    Form1.MainForm.showStatus(True, String.Format(Rstr.getStr("STR_MSG_CHANGELETTER_ADDITIONAL"), Pch, Ppch)) ''~v163R~''~v169R~
                 Else                                                   ''~v169I~
                     Form1.MainForm.showStatus(True, String.Format(Rstr.getStr("STR_MSG_CHANGELETTER_ADDITIONAL_STR"), querystr)) ''~v169R~
                 End If                                                 ''~v169I~
             Else                                                       ''~v163I~
                 If Ppcvsrclen = 0 Then                                        ''~v169I~
-                    Form1.formText.showStatus(True, String.Format(Rstr.getStr("STR_MSG_CHANGELETTER_ADDITIONAL"), Pch, Ppch)) ''~v163R~''+v169R~
+                    Form1.formText.showStatus(True, String.Format(Rstr.getStr("STR_MSG_CHANGELETTER_ADDITIONAL"), Pch, Ppch)) ''~v163R~''~v169R~
                 Else                                                   ''~v169I~
                     Form1.formText.showStatus(True, String.Format(Rstr.getStr("STR_MSG_CHANGELETTER_ADDITIONAL_STR"), querystr)) ''~v169R~
                 End If                                                 ''~v169I~
@@ -594,7 +595,8 @@ Public Class Form6                                                     ''~v158R~
         If rc2 > 0 Then                                                       ''~v169I~
             Return rc2                                                 ''~v169I~
         End If                                                         ''~v169I~
-        Dim rc As Integer = 1                                          ''~v163I~
+        '*      Dim rc As Integer = 1                                          ''~v163I~''+v172R~
+        Dim rc As Integer = 0                                          ''+v172I~
         Dim str As String                                              ''~v163I~
         Dim pos1 As Integer = 0                                          ''~v163I~
         Dim pos2 As Integer = 0                                          ''~v163I~
@@ -632,6 +634,7 @@ Public Class Form6                                                     ''~v158R~
                 Else                                                   ''~v163R~
                     str2 = str.Substring(pos1, pos2 - pos1 + 1)        ''~v163R~
                 End If                                                 ''~v163R~
+                rc = 1                                                  ''+v172I~
             End If                                                     ''~v163I~
             str = Sshiftchars                                          ''~v163I~
         Next                                                           ''~v163I~

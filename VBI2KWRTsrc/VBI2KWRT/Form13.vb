@@ -1,6 +1,7 @@
-﻿'CID:''+v159R~:#72                             update#=  164;         ''+v159R~
+﻿'CID:''+v174R~:#72                             update#=  167;         ''~v159R~''+v174R~
 '************************************************************************************''~v008I~
-'v159 2018/02/24 load dicctionary file is not restore (it is not written)''+v159I~
+'v174 2018/09/13 (Bug by v165) SendButton from WordDialog always replace a char on csr''+v174I~
+'v159 2018/02/24 load dicctionary file is not restore (it is not written)''~v159I~
 'v123 2017/12/29 word/symbol dialog;no change dialog target by shortcut(Ctrl+x),change only by f9,add change button to form''~v123I~
 'v117 2017/12/27 word dialog from also form1 as single instance        ''~v117I~
 'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err''~v103I~
@@ -655,7 +656,7 @@ Public Class Form13                                                    ''~v008R~
         End If                                                         ''~v012I~
         ListData = tmp                                                   ''~v012I~
         fillColumn()                                                   ''~v012I~
-        swUpdated = True                                               ''+v159I~
+        swUpdated = True                                               ''~v159I~
         setTitle(Pfnm)                                                 ''~v012I~
         'MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_WORDS_LOADED")) ''~v013R~''~v065R~''~v078R~
         SB.show(SBM.MSGID.LOAD, Pfnm)                                   ''~v078I~
@@ -894,9 +895,11 @@ Public Class Form13                                                    ''~v008R~
         End If                                                         ''~v065I~
         If swForm1 Then   'when showdialog
             '*          Return False                                               ''~v117R~
+            callerForm1.restoreSelection()                             ''+v174I~
             callerForm1.undoRedo.setWord(phrase)                      ''~v117I~
         Else                                                           ''~v065I~
             '*          Form1.formText.undoRedo.setWord(phrase)                    ''~v065R~''~v117R~
+            callerForm3.restoreSelection()                             ''+v174I~
             callerForm3.undoRedo.setWord(phrase)                      ''~v117I~
         End If
         SB.show(SBM.MSGID.SEND, phrase)                                 ''~v078I~

@@ -176,8 +176,7 @@ Namespace My.Resources
         '''ダイアログが開いてない状態でも&quot;語句&quot; をテキストボックスに転送します
         '''キーの英字の大文字小文字は区別されません、重複があると前の行が適用されます
         '''ダイアログを開いているときは &quot;転送&quot; ボタンで &quot;有効&quot;/&quot;削除&quot;の設定にかかわらず転送できます
-        '''
-        '''コピー&amp;ペ [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''尚、Ctrl+ [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form13() As String
             Get
@@ -256,11 +255,13 @@ Namespace My.Resources
         '''  マウスドラッグで囲んだ部分の読み取りテキストです
         '''
         '''カット＆ペーストでメインフォームに取り込んでください
-        '''OKボタンはメインフォームのテキストボックスに送ります、その場合
-        '''送り先はメインフォーム上でカーソルをあらかじめ設定しておきます
-        '''マウスで反転しておくとその部分が置換されます
+        '''OKボタンはマウスで反転した部分を、反転してなければ全体を
+        '''メインフォームのテキストボックスに送ります
+        '''送り先はメインフォーム上であらかじめ設定したカーソル位置に
+        '''挿入されます
+        '''送り先でマウスで反転しておけばその部分が置換されます
         '''
-        '''(Form2) 2017/12/21
+        '''(Form15) 2018/03/04
         ''' に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_Form15() As String
@@ -273,11 +274,11 @@ Namespace My.Resources
         '''  Partially extracted Text in the clipped Box.
         '''
         '''Copy then Paste to Main form.
-        '''Or, OK button sends the text to the Main form.
-        '''Specify destination range in advance by mouse.
-        '''Reversed range will be replaced.
+        '''Or, OK button sends all text or reversed part to the Main form.
+        '''Set caret at insert position on target form in advance by mouse.
+        '''If taret is reversed the range will be replaced.
         '''
-        '''(Form2E) 2017/12/21
+        '''(Form15E) 2018/03/04
         ''' に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_Form15E() As String
@@ -452,13 +453,13 @@ Namespace My.Resources
         '''  半角カタカナに使われているので使用しないほうがよいでしょう
         '''  スペースクリアーすると省略値 になります
         '''
-        '''かな/カナ文字 置換キー:
+        '''文字 置換キー:
         '''  大文字&lt;--&gt;小文字 置換に使用する機能キーを指定,  省略値 F5
         '''    &quot;あいうえおやゆよつわかけ&quot; &lt;--&gt; &quot;ぁぃぅぇぉゃゅょっゎゕゖ&quot;     ひらがな
         '''    &quot;アイウエオヤユヨツワカケ&quot; &lt;--&gt; &quot;ァィゥェォャュョッヮヵヶ&quot;     カタカナ
         '''    &quot;ｱｲｳｴｵﾔﾕﾖﾂ&quot;                &lt;--&gt; &quot;ｧｨｩｪｫｬｭｮｯ&quot;                    半角カタカナ
         '''
-        '''  同じキー操作でイメージ読み取りで間違え易い字の置換 [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  同じキー操作でイメージ読み取りで間違え易い字の置換も行います [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form5() As String
             Get
@@ -477,9 +478,10 @@ Namespace My.Resources
         '''  to translate to Katakana and Hankaku-Katakana,
         '''  Back to default value when space cleared.
         '''
-        '''Japanese Kana Letter Replacement Key:
+        '''Japanese Letter Replacement Key:
         '''  Set PFKey Number for replacement of Small and large Japanese Letter like as bellow.
-        '''  Default is :F5. [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  Default is :F5.
+        '''    [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form5E() As String
             Get
@@ -488,25 +490,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  変換の追加
-        '''  &quot;設定&quot;ダイアログで設定した&quot;かな/カナ文字 置換キー&quot;で
-        '''  変換する対象文字を 拡張できます
-        '''  変換列には2文字以上を指定してください
-        '''  例えば 変換列に &apos;&quot;&lt; をセットすると (&apos;)--&gt;(&quot;)--&gt;(&lt;)--&gt;(&apos;) と
+        '''  &quot;設定&quot;ダイアログの&quot;文字置換キー&quot;で変換する対象文字を
+        '''このダイアログで拡張できます
+        '''  &quot;変換列&quot;には2文字以上を指定してください
+        '''  例） &apos;&quot;&lt;                    : (&apos;)--&gt;(&quot;)--&gt;(&lt;)--&gt;(&apos;) と巡回
         '''  変換します
-        '''  &quot;設定&quot;ダイアログのヘルプで示した省略時の変換と文字の重複があると
-        '''  &quot;追加&quot;のほうが適用されます
-        '''
-        '''
-        '''  &quot;有効&quot;は一時的に対象外にしたいときにオフにしてください
-        '''  &quot;シフト&quot;はシフトキーを同時に押したときに適用されます
-        '''  &quot;削除&quot;にチェックを入れると&quot;OK&quot;ボタンのときに行が削除されます
-        '''--------------------------------------------------------------------------
-        '''タイトル行の下のツールバーボタン オープン/保存/別名保存 は文書ごとに
-        '''&quot;変換の追加&quot;設定を取り換えて使用したい場合に使用します
-        '''(1パターンであればファイルに保存する必要はありません)
-        '''ファイルの形式は各行以下のようにします。改行コードは0x0d0aです
-        '''拡張子 [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  /str1/str2/ 型式で文字列の変換も定義できます、逆の置換はしません
+        '''  str1,str2 には空白文字も含められます
+        '''  例) (F5は省略値の文字置換キーで設定ダイアログで変更可能)
+        '''       -!                     : F5 で (-)--&gt;(!)--&gt;(-)
+        '''       /:/.../                : F5 で (:)--&gt;(...)
+        '''       /&quot;/&lt;/                  : F5 で (&quot;)--&gt;(&lt;)  
+        '''       /&quot;/&gt;/     (+shift On)  : Shift+F5 で (&quot;)--&gt;(&lt;)
+        '''       /、つ/う/              : F5 で (、つ)--&gt;(う)
+        '''  &quot;設定&quot;ダイアログのヘルプで示 [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form6() As String
             Get
@@ -515,19 +512,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Print Font/Screen Font:
-        '''  Setup Font
-        '''  Open FontDialog when IconButton pushed.
-        '''  Choose Standard/Bold/Italic/Bold Italic only for FontStyle.
-        '''
-        '''  Set PFKey Number(F1&lt;--&gt;F12) for 4 items bellow.
-        '''  F7 and F8 is not to be assigned because those are used by Japanese IME
-        '''  to translate to Katakana and Hankaku-Katakana,
-        '''  Back to default value when space cleared.
-        '''
-        '''Japanese Kana Letter Replacement Key:
-        '''  Set PFKey Number for replacement of Small and large Japanese Letter like as bellow.
-        '''  Default is :F5. [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  This dialog expands replacement by &quot;Japanese Letter Replacement Key&quot;
+        '''over default translation cases shown on &quot;Help&quot; of Setting dialog.
+        '''  Specify at least 2 characters in &quot;Translation&quot; column.
+        '''  e.g.) &apos;&quot;&lt;              : (&apos;)--&gt;(&quot;)--&gt;(&lt;)--&gt;(&apos;).
+        '''  If char is defined duplicated to default cases shown on &quot;Help&quot; of &quot;Settings&quot;,
+        '''  definition in this dialog is applied.
+        '''  /str1/str2/ format allows string translation, no reverse replacemeny.
+        '''  str1,str2 may contains space char.
+        '''  e.g) (F5 is default functio key [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form6E() As String
             Get
@@ -719,6 +712,15 @@ Namespace My.Resources
         Friend ReadOnly Property STR_ENGLISH_DOC_EXTRACTED() As String
             Get
                 Return ResourceManager.GetString("STR_ENGLISH_DOC_EXTRACTED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  エラー({0}) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_ADDTRANS_ERRVALUE() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_ADDTRANS_ERRVALUE", resourceCulture)
             End Get
         End Property
         
@@ -984,6 +986,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  変換の追加ファイルを読み込みました に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_INFO_MSG_ADDTRANS_LOADED() As String
+            Get
+                Return ResourceManager.GetString("STR_INFO_MSG_ADDTRANS_LOADED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  辞書ファイルを読み込みました に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_INFO_MSG_DICTIONARY_LOADED() As String
@@ -1007,6 +1018,24 @@ Namespace My.Resources
         Friend ReadOnly Property STR_LOAD() As String
             Get
                 Return ResourceManager.GetString("STR_LOAD", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  {0} --&gt; {1} に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_CHANGELETTER_ADDITIONAL() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_CHANGELETTER_ADDITIONAL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  変換しました {0} に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_CHANGELETTER_ADDITIONAL_STR() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_CHANGELETTER_ADDITIONAL_STR", resourceCulture)
             End Get
         End Property
         
@@ -1088,6 +1117,15 @@ Namespace My.Resources
         Friend ReadOnly Property STR_MSG_ERR_ALREADY_EXTRACTED() As String
             Get
                 Return ResourceManager.GetString("STR_MSG_ERR_ALREADY_EXTRACTED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  クリップボードにテキストデータがありません。 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_CLIPBOARD_NOTEXT() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_CLIPBOARD_NOTEXT", resourceCulture)
             End Get
         End Property
         
@@ -1502,6 +1540,15 @@ Namespace My.Resources
         Friend ReadOnly Property STR_NEWTEXT_FILE() As String
             Get
                 Return ResourceManager.GetString("STR_NEWTEXT_FILE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  貼り付け に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_PASTE() As String
+            Get
+                Return ResourceManager.GetString("STR_PASTE", resourceCulture)
             End Get
         End Property
         
