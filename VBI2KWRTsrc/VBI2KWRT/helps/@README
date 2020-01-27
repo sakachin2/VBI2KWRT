@@ -1,0 +1,32 @@
+How to Up
+================================================= g:\src\xe\up.txt
+VBI2KWRT GitHub
+    update W:\\msvs2017CProjects\VBI2KWRT\VBI2KWRT\helps\README's
+	copy /c and rename
+	  rename w:\gitLocalOld\VBI2KWRT-->*.Vxxx (copy /c and rename)
+	  xcopy w:\gitLocal\VBI2KWRT-->w:\gitLocalOld
+    set Version
+        change version My Project\AssemblyInfo.vb, SetupProject\Product.wxs:Vesion, Minimum,Maximum
+        Form1 Const VERSION
+    release build
+    build SetupVBI2KWRT      -->SetupVBI2KWRT\bin\Release\SetupVBI2KWRT.msi
+	bat\vbi2kwrtupsrc.bat
+        msvs2017CProjects\VBOI2KWRT -> msvs2017CProjects\Release\VBI2KWRTsrc\VBI2KWRT and VBI2KWRTsrc.zip
+
+    bat\vbi2kwrtgitup.bat
+        (after vbi2kwrtupsrc.bat)
+
+        xcopy w:\msvs2017CPpjects\Release\VBI2KWRTsrc     w:\gitLocal\VBI2KWRTsrc
+        copy  w:\msvs2010CPpjects\Release\VBI2KWRTsrc.zip w:\gitLocal\VBI2KWRT\
+        copy  w:\msvs2010CPpjects\SetupVBI2KWRT\bin\release\SetupVBI2KWRT.msi ->Release, w:\gitLocal\VBI2KWRT
+    push to git@github.com:sakachin2/VBI2KWRT.git
+
+    Vector
+        update registration.txt in helps
+        rename W:\gitlocal\VBI2KWRT.vector\VBI2KWRT.vector.zip VBI2KWRT.vectorzip.Vxxx
+		bat\vbi2kwrtvectorup.bat
+    		(after vbi2kgitup.bat)
+        	at W:\GitLocal\VBI2KWRT.vector
+        	zip VBI2KWRTvector VBI2KWRT.zip registration.txt
+        upload  VBI2KWRTvector.zip
+        	after login,online update 

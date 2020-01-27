@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE>VBI2K-V208-J</TITLE>
+<STYLE TYPE="text/css">
+<!--
+a:hover{font-weight:bold;}-->
+</STYLE>
+</HEAD>
+<BODY bgcolor="#FFFFE2">
+<PRE><SPAN STYLE="color:#000000;font-size:12pt;font-family:ＭＳ ゴシック">
+
+V2.08 : 変更点                               2020/01/27
+
+・置換文字定義ダイアログを漢字画面、かな画面からもコンテキストメニューから呼び出せるようにした。
+・検索・置換ダイアログの"置換"機能のショートカットキーを追加。設定ダイアログで指定できるが省略値は F2 キー。
+・(BUG) 検索・置換ダイアログで"次を検索"ボタンが効かない。
+・(BUG) 省略値 F5 キーで置換文字定義ダイアログに設定された置換を行うが、
+        1文字置換タイプの場合最初に戻らず、他の1文字置換定義による置換をしてしまう。
+        例えば "「『" と "」』" を設定していると、 "「"の上で F5 を続けて押したとき、
+        本来 「 --> 『 --> 「 と置換するはずが、「 --> 『 --> 」 --> 』 --> 「  となる。
+
+</SPAN></PRE>
+</BODY>
+</HTML>

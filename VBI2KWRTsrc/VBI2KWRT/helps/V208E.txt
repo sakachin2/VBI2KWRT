@@ -1,0 +1,9 @@
+V2.08 : Update                               2020/01/27
+
+ .You can now open Letter Replacement Dialog by context menu on both Kanji text dialog and Kana text dialog. 
+ .Shotcut key is added for "Replace" on "Find & Replace" Dialog. Default is F2 key which is defined on Setting Dialog.
+ .(BUG) "FindNext" button on "Find & Replace" Dialog did not work.
+ .(BUG) Letter replacement key(default F5) did not back to top character defined.
+        e.g) When 2 definition "[{" and "]}" exist, 
+             "[" changes like as [ --> { --> ] --> } --> [ -->... by continued F5.
+             [ --> { --> [ -->... is valid.
