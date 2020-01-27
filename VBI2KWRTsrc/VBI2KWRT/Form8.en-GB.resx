@@ -148,6 +148,9 @@
   <data name="CheckBoxUp.Text" xml:space="preserve">
     <value>Upward Search</value>
   </data>
+  <data name="ButtonHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
   <data name="ButtonReplaceAll.Text" xml:space="preserve">
     <value>Rep. All</value>
   </data>

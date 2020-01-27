@@ -1,6 +1,8 @@
-﻿'CID:''+v172R~:#72                             update#=  203;        ''+v172R~
+﻿'CID:''+v182R~:#72                             update#=  213;        ''~v179R~''~v182R~
 '************************************************************************************''~v163I~
-'v172 2018/09/11 (Bug of V169)char type msg was not shown(gueryAdditionalChangeLetter return code set err)''+v172I~
+'v182 2020/01/26 (BUG)repchar by F6 loops as all entry concatinated(「『 and [{ are rounds 「->『->[->{->「）''~v182R~
+'v179 2020/01/22 move LetterReplacement from Form5(setting) to From1/Fom3 Menu''~v179I~
+'v172 2018/09/11 (Bug of V169)char type msg was not shown(gueryAdditionalChangeLetter return code set err)''~v172I~
 'v169 2018/03/08 support string replacement by /str1/str2/ fmt(enable contains space)''~v169I~
 'v164 2018/03/04 refresh required to toolstrip in any case?            ''~v164I~
 'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
@@ -48,9 +50,11 @@ Public Class Form6                                                     ''~v158R~
     Private swForm1 As Boolean = False                                 ''~v163I~
     Private swDirty As Boolean = False                                 ''~v163I~
     Private swNotEnabled As Boolean = False                            ''~v163I~
+    Private swShown As Boolean = False                                 ''~v179I~
     Private SB As SBM     'StatusBar                                   ''~v163I~
     Public callerForm1 As Form1                                        ''~v163I~
     Public callerForm3 As Form3                                        ''~v163I~
+    Public Shared dlgLetterReplacement As Form6                        ''~v179I~
     Private BGColor As Color                                           ''~v163I~
     Private Shared Schars As String = ""                               ''~v163R~
     Private Shared Sshiftchars As String = ""                          ''~v163R~
@@ -128,6 +132,13 @@ Public Class Form6                                                     ''~v158R~
         Return rc                                                      ''~v163I~
     End Function                                                       ''~v163I~
     '*******************************************************************************************************''~v163I~
+    Public Shared Sub sharedShowDlg()                                  ''~v179I~
+        If dlgLetterReplacement Is Nothing OrElse dlgLetterReplacement.IsDisposed() Then ''~v179I~
+            dlgLetterReplacement = New Form6()                         ''~v179I~
+        End If                                                         ''~v179I~
+        dlgLetterReplacement.showDlgModeless()                         ''~v179R~
+    End Sub                                                            ''~v179I~
+    '*******************************************************************************************************''~v179I~
     Sub New()                                                          ''~v163I~
         swFilled = False                                               ''~v163I~
         swUpdated = False                                              ''~v163I~
@@ -144,6 +155,19 @@ Public Class Form6                                                     ''~v158R~
         initListView()                                                 ''~v163R~
         ShowDialog()    'moderess                                            ''~v163R~''~v169R~
     End Sub                                                            ''~v163R~
+    Public Sub showDlgModeless()                                       ''~v179I~
+        If swShown Then                                                ''~v179I~
+            If Not IsDisposed() Then                                   ''~v179I~
+                Me.Focus()                                             ''~v179I~
+                Exit Sub                                               ''~v179I~
+            End If                                                     ''~v179I~
+            '*         sharedShowDlg()                                            ''~v179I~
+            Exit Sub                                                   ''~v179I~
+        End If                                                         ''~v179I~
+        initListView()                                                 ''~v179I~
+        Show()    'moderess                                            ''~v179I~
+        swShown = True                                                 ''~v179I~
+    End Sub                                                            ''~v179I~
     Private Sub Form6_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~v163R~
         '        chkDiscard(e)                                         ''~v163I~
         Dim rc As Boolean = chkDiscard(e)                              ''~v163I~
@@ -188,8 +212,18 @@ Public Class Form6                                                     ''~v158R~
             End If                                                     ''~v163I~
             swUpdated = False                                          ''~v163I~
         End If                                                         ''~v163I~
-        Me.Close()                                                     ''~v163I~
+        '** Me.Close()                                                     ''~v163I~''~v179R~
     End Sub 'resize                                                    ''~v163I~
+    Private Sub ButtonClose_Click(sender As Object, e As EventArgs) Handles ButtonClose.Click ''~v179M~
+        Dim str As String = Nothing                                    ''~v179I~
+        If swUpdated Then                                              ''~v179I~
+            If Not putCFG() Then                                       ''~v179I~
+                Exit Sub                                               ''~v179I~
+            End If                                                     ''~v179I~
+            swUpdated = False                                          ''~v179I~
+        End If                                                         ''~v179I~
+        Me.Close()                                                     ''~v179I~
+    End Sub                                                            ''~v179M~
     Private Sub ButtonHelp_Click(sender As Object, e As EventArgs) Handles ButtonHelp.Click ''~v163M~
         showHelp()                                                     ''~v163I~
     End Sub                                                            ''~v163I~
@@ -245,7 +279,8 @@ Public Class Form6                                                     ''~v158R~
             Dim shiftid As String = ListData(ii * COLNO + 1)            ''~v163I~
             enable = CType(IIf(enableid.CompareTo(ENABLEID_ON) = 0, True, False), Boolean) ''~v163I~
             shift = CType(IIf(shiftid.CompareTo(ENABLEID_ON) = 0, True, False), Boolean) ''~v163I~
-            DGV.Rows.Add(enable, shift, ListData(ii * COLNO + 2), False) ''~v163R~
+            '           DGV.Rows.Add(enable, shift, ListData(ii * COLNO + 2), False) ''~v163R~''~v182R~
+            DGV.Rows.Add(enable, shift, ListData(ii * COLNO + CELLNO_CHARS), False) ''~v182I~
         Next                                                           ''~v163I~
         swFilled = True                                                ''~v163I~
     End Sub                                                            ''~v163I~
@@ -294,7 +329,8 @@ Public Class Form6                                                     ''~v158R~
                     Dim jj As Integer = ii - delctr                        ''~v163I~
                     tmp(jj * COLNO) = enableid                             ''~v163I~
                     tmp(jj * COLNO + 1) = shiftid                          ''~v163R~
-                    tmp(jj * COLNO + 2) = transch                          ''~v163R~
+                    '                   tmp(jj * COLNO + 2) = transch                          ''~v163R~''~v182R~
+                    tmp(jj * COLNO + CELLNO_CHARS) = transch           ''~v182I~
                 End If                                                     ''~v163I~
             Catch ex As Exception                                          ''~v169I~
                 Form1.exceptionMsg("Form6 GetListData", ex)                ''~v169I~
@@ -387,11 +423,13 @@ Public Class Form6                                                     ''~v158R~
                 Dim str As String = ListData(ii * COLNO + 2)             ''~v163I~
                 If shiftid.CompareTo(ENABLEID_ON) = 0 Then         ''~v163I~
                     If Not saveStringTranslation(str, True) Then '*not str type translation''~v169R~
-                        tmpshiftchars &= str                           ''~v163I~
+                        '                       tmpshiftchars &= str                           ''~v163I~''~v182R~
+                        tmpshiftchars &= str & SPLITTER                ''~v182I~
                     End If                                               ''~v169I~
                 Else                                               ''~v163I~
                     If Not saveStringTranslation(str, False) Then '*not str type translation''~v169R~
-                        tmpchars &= str                                ''~v163I~
+                        '                       tmpchars &= str                                ''~v163I~''~v182R~
+                        tmpchars &= str & SPLITTER                     ''~v182I~
                     End If                                               ''~v169I~
                 End If                                             ''~v163I~
             End If                                                     ''~v163I~
@@ -595,14 +633,17 @@ Public Class Form6                                                     ''~v158R~
         If rc2 > 0 Then                                                       ''~v169I~
             Return rc2                                                 ''~v169I~
         End If                                                         ''~v169I~
-        '*      Dim rc As Integer = 1                                          ''~v163I~''+v172R~
-        Dim rc As Integer = 0                                          ''+v172I~
+        '*      Dim rc As Integer = 1                                          ''~v163I~''~v172R~
+        Dim rc As Integer = 0                                          ''~v172I~
         Dim str As String                                              ''~v163I~
         Dim pos1 As Integer = 0                                          ''~v163I~
         Dim pos2 As Integer = 0                                          ''~v163I~
         Dim str1 As String = ""                                          ''~v163I~
         Dim str2 As String = ""                                          ''~v163I~
         ''~v163I~
+        If Pch = SPLITTER Then    ' ";" is not supported                    ''~v182I~
+            Return 0                                                   ''~v182I~
+        End If                                                         ''~v182I~
         str = Schars                                                   ''~v163I~
         For jj As Integer = 0 To 1                                       ''~v163I~
             Dim pos As Integer = str.IndexOf(Pch)                      ''~v163I~
@@ -611,11 +652,13 @@ Public Class Form6                                                     ''~v158R~
                 Dim pos0 = pos                                         ''~v163R~
                 For ii As Integer = pos0 To len - 1                    ''~v163R~
                     If ii = len - 1 Then                               ''~v163R~
-                        pos2 = ii                                      ''~v163R~
+                        '                       pos2 = ii                                      ''~v163R~''~v182R~
+                        pos2 = ii + 1                                    ''~v182I~
                         Exit For                                       ''~v163R~
                     End If                                             ''~v163R~
                     If str.Chars(ii) = SPLITTER Then                   ''~v163R~
-                        pos2 = pos - 1                                 ''~v163R~
+                        '                       pos2 = pos - 1                                 ''~v163R~''~v182R~
+                        pos2 = ii                                      ''+v182R~
                         Exit For                                       ''~v163R~
                     End If                                             ''~v163R~
                 Next                                                   ''~v163R~
@@ -630,11 +673,13 @@ Public Class Form6                                                     ''~v158R~
                     End If                                             ''~v163R~
                 Next                                                   ''~v163R~
                 If jj = 0 Then                                         ''~v163R~
-                    str1 = str.Substring(pos1, pos2 - pos1 + 1)        ''~v163R~
+                    '                   str1 = str.Substring(pos1, pos2 - pos1 + 1)        ''~v163R~''~v182R~
+                    str1 = str.Substring(pos1, pos2 - pos1)            ''~v182I~
                 Else                                                   ''~v163R~
-                    str2 = str.Substring(pos1, pos2 - pos1 + 1)        ''~v163R~
+                    '                   str2 = str.Substring(pos1, pos2 - pos1 + 1)        ''~v163R~''~v182R~
+                    str2 = str.Substring(pos1, pos2 - pos1)            ''~v182I~
                 End If                                                 ''~v163R~
-                rc = 1                                                  ''+v172I~
+                rc = 1                                                  ''~v172I~
             End If                                                     ''~v163I~
             str = Sshiftchars                                          ''~v163I~
         Next                                                           ''~v163I~
@@ -659,7 +704,7 @@ Public Class Form6                                                     ''~v158R~
                 idx = str.IndexOf(ch, idx)              ''~v169I~
                 If idx < 0 Then                                          ''~v169I~
                     Exit While                                         ''~v169I~
-                    End If                                             ''~v169R~
+                End If                                             ''~v169R~
                 Dim str1 As String = Sstrstr1(idx)                                      ''~v169I~
                 If str1.Length <= reslen Then                          ''~v169R~
                     If Ptext.IndexOf(str1, Ppos) = Ppos Then                   ''~v169I~
@@ -1042,4 +1087,5 @@ Public Class Form6                                                     ''~v158R~
         Sshiftstrstr2.Clear()                                           ''~v169I~
         Sshiftstrstrquery.Clear()                                      ''~v169I~
     End Sub                                                            ''~v169I~
+
 End Class

@@ -54,6 +54,7 @@ Partial Class Form1
         Me.ToolStripMenuItemSpecialChar = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMFind = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemWords = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemLetterReplacement = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TBBES = New System.Windows.Forms.TextBox()
@@ -64,111 +65,111 @@ Partial Class Form1
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolStripMenuItemSave, Me.ToolStripMenuItemSaveAs, Me.ToolStripMenuItemPrintIcon, Me.ToolStripMenuItemUndo, Me.ToolStripMenuItemRedo, Me.ToolStripMenuItemOptions, Me.ToolStripMenuItemHelp, Me.ToolStripMenuButtonKata, Me.ToolStripMenuButtonHira})
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolStripMenuItemSave, Me.ToolStripMenuItemSaveAs, Me.ToolStripMenuItemPrintIcon, Me.ToolStripMenuItemUndo, Me.ToolStripMenuItemRedo, Me.ToolStripMenuItemOptions, Me.ToolStripMenuItemHelp, Me.ToolStripMenuButtonKata, Me.ToolStripMenuButtonHira})
         Me.MenuStrip1.Name = "MenuStrip1"
         '
         'FileToolStripMenuItem
         '
+        resources.ApplyResources(Me.FileToolStripMenuItem, "FileToolStripMenuItem")
         Me.FileToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImageToolStripMenuItem, Me.KanjiTextToolStripMenuItem, Me.KanaTextToolStripMenuItem, Me.ToolStripMenuItemClose, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripMenuItemPrint, Me.ExitXToolStripMenuItem})
-        resources.ApplyResources(Me.FileToolStripMenuItem, "FileToolStripMenuItem")
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         '
         'ImageToolStripMenuItem
         '
-        Me.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem"
         resources.ApplyResources(Me.ImageToolStripMenuItem, "ImageToolStripMenuItem")
+        Me.ImageToolStripMenuItem.Name = "ImageToolStripMenuItem"
         '
         'KanjiTextToolStripMenuItem
         '
-        Me.KanjiTextToolStripMenuItem.Name = "KanjiTextToolStripMenuItem"
         resources.ApplyResources(Me.KanjiTextToolStripMenuItem, "KanjiTextToolStripMenuItem")
+        Me.KanjiTextToolStripMenuItem.Name = "KanjiTextToolStripMenuItem"
         '
         'KanaTextToolStripMenuItem
         '
-        Me.KanaTextToolStripMenuItem.Name = "KanaTextToolStripMenuItem"
         resources.ApplyResources(Me.KanaTextToolStripMenuItem, "KanaTextToolStripMenuItem")
+        Me.KanaTextToolStripMenuItem.Name = "KanaTextToolStripMenuItem"
         '
         'ToolStripMenuItemClose
         '
-        Me.ToolStripMenuItemClose.Name = "ToolStripMenuItemClose"
         resources.ApplyResources(Me.ToolStripMenuItemClose, "ToolStripMenuItemClose")
+        Me.ToolStripMenuItemClose.Name = "ToolStripMenuItemClose"
         '
         'SaveToolStripMenuItem
         '
-        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         resources.ApplyResources(Me.SaveToolStripMenuItem, "SaveToolStripMenuItem")
+        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         '
         'SaveAsToolStripMenuItem
         '
-        Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
         resources.ApplyResources(Me.SaveAsToolStripMenuItem, "SaveAsToolStripMenuItem")
+        Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
         '
         'ToolStripMenuItemPrint
         '
-        Me.ToolStripMenuItemPrint.Name = "ToolStripMenuItemPrint"
         resources.ApplyResources(Me.ToolStripMenuItemPrint, "ToolStripMenuItemPrint")
+        Me.ToolStripMenuItemPrint.Name = "ToolStripMenuItemPrint"
         '
         'ExitXToolStripMenuItem
         '
-        Me.ExitXToolStripMenuItem.Name = "ExitXToolStripMenuItem"
         resources.ApplyResources(Me.ExitXToolStripMenuItem, "ExitXToolStripMenuItem")
+        Me.ExitXToolStripMenuItem.Name = "ExitXToolStripMenuItem"
         '
         'ToolStripMenuItemSave
         '
-        Me.ToolStripMenuItemSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemSave, "ToolStripMenuItemSave")
+        Me.ToolStripMenuItemSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemSave.Name = "ToolStripMenuItemSave"
         '
         'ToolStripMenuItemSaveAs
         '
-        Me.ToolStripMenuItemSaveAs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemSaveAs, "ToolStripMenuItemSaveAs")
+        Me.ToolStripMenuItemSaveAs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemSaveAs.Name = "ToolStripMenuItemSaveAs"
         '
         'ToolStripMenuItemPrintIcon
         '
-        Me.ToolStripMenuItemPrintIcon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemPrintIcon, "ToolStripMenuItemPrintIcon")
+        Me.ToolStripMenuItemPrintIcon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemPrintIcon.Name = "ToolStripMenuItemPrintIcon"
         '
         'ToolStripMenuItemUndo
         '
-        Me.ToolStripMenuItemUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemUndo, "ToolStripMenuItemUndo")
+        Me.ToolStripMenuItemUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemUndo.Name = "ToolStripMenuItemUndo"
         '
         'ToolStripMenuItemRedo
         '
-        Me.ToolStripMenuItemRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemRedo, "ToolStripMenuItemRedo")
+        Me.ToolStripMenuItemRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemRedo.Name = "ToolStripMenuItemRedo"
         '
         'ToolStripMenuItemOptions
         '
-        Me.ToolStripMenuItemOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemOptions, "ToolStripMenuItemOptions")
+        Me.ToolStripMenuItemOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemOptions.Name = "ToolStripMenuItemOptions"
         '
         'ToolStripMenuItemHelp
         '
-        Me.ToolStripMenuItemHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         resources.ApplyResources(Me.ToolStripMenuItemHelp, "ToolStripMenuItemHelp")
+        Me.ToolStripMenuItemHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItemHelp.Name = "ToolStripMenuItemHelp"
         '
         'ToolStripMenuButtonKata
         '
+        resources.ApplyResources(Me.ToolStripMenuButtonKata, "ToolStripMenuButtonKata")
         Me.ToolStripMenuButtonKata.BackColor = System.Drawing.Color.Yellow
         Me.ToolStripMenuButtonKata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        resources.ApplyResources(Me.ToolStripMenuButtonKata, "ToolStripMenuButtonKata")
         Me.ToolStripMenuButtonKata.Name = "ToolStripMenuButtonKata"
         '
         'ToolStripMenuButtonHira
         '
+        resources.ApplyResources(Me.ToolStripMenuButtonHira, "ToolStripMenuButtonHira")
         Me.ToolStripMenuButtonHira.BackColor = System.Drawing.Color.Turquoise
         Me.ToolStripMenuButtonHira.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        resources.ApplyResources(Me.ToolStripMenuButtonHira, "ToolStripMenuButtonHira")
         Me.ToolStripMenuButtonHira.Name = "ToolStripMenuButtonHira"
         '
         'OpenFileDialog1
@@ -186,62 +187,67 @@ Partial Class Form1
         '
         'ContextMenuSpecialChar
         '
-        Me.ContextMenuSpecialChar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.CMFind, Me.ToolStripMenuItemWords})
-        Me.ContextMenuSpecialChar.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.ContextMenuSpecialChar, "ContextMenuSpecialChar")
+        Me.ContextMenuSpecialChar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.CMFind, Me.ToolStripMenuItemWords, Me.ToolStripMenuItemLetterReplacement})
+        Me.ContextMenuSpecialChar.Name = "ContextMenuStrip1"
         '
         'CMCut
         '
-        Me.CMCut.Name = "CMCut"
         resources.ApplyResources(Me.CMCut, "CMCut")
+        Me.CMCut.Name = "CMCut"
         '
         'CMCopy
         '
-        Me.CMCopy.Name = "CMCopy"
         resources.ApplyResources(Me.CMCopy, "CMCopy")
+        Me.CMCopy.Name = "CMCopy"
         '
         'CMPaste
         '
-        Me.CMPaste.Name = "CMPaste"
         resources.ApplyResources(Me.CMPaste, "CMPaste")
+        Me.CMPaste.Name = "CMPaste"
         '
         'CMSelectAll
         '
-        Me.CMSelectAll.Name = "CMSelectAll"
         resources.ApplyResources(Me.CMSelectAll, "CMSelectAll")
+        Me.CMSelectAll.Name = "CMSelectAll"
         '
         'ToolStripMenuItemSpecialChar
         '
-        Me.ToolStripMenuItemSpecialChar.Name = "ToolStripMenuItemSpecialChar"
         resources.ApplyResources(Me.ToolStripMenuItemSpecialChar, "ToolStripMenuItemSpecialChar")
+        Me.ToolStripMenuItemSpecialChar.Name = "ToolStripMenuItemSpecialChar"
         '
         'CMFind
         '
-        Me.CMFind.Name = "CMFind"
         resources.ApplyResources(Me.CMFind, "CMFind")
+        Me.CMFind.Name = "CMFind"
         '
         'ToolStripMenuItemWords
         '
-        Me.ToolStripMenuItemWords.Name = "ToolStripMenuItemWords"
         resources.ApplyResources(Me.ToolStripMenuItemWords, "ToolStripMenuItemWords")
+        Me.ToolStripMenuItemWords.Name = "ToolStripMenuItemWords"
+        '
+        'ToolStripMenuItemLetterReplacement
+        '
+        resources.ApplyResources(Me.ToolStripMenuItemLetterReplacement, "ToolStripMenuItemLetterReplacement")
+        Me.ToolStripMenuItemLetterReplacement.Name = "ToolStripMenuItemLetterReplacement"
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
         resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
         Me.StatusStrip1.Name = "StatusStrip1"
         '
         'ToolStripStatusLabel1
         '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         '
         'TBBES
         '
+        resources.ApplyResources(Me.TBBES, "TBBES")
         Me.TBBES.BackColor = System.Drawing.SystemColors.Info
         Me.TBBES.ContextMenuStrip = Me.ContextMenuSpecialChar
         Me.TBBES.Cursor = System.Windows.Forms.Cursors.Default
-        resources.ApplyResources(Me.TBBES, "TBBES")
         Me.TBBES.HideSelection = False
         Me.TBBES.Name = "TBBES"
         Me.TBBES.ShortcutsEnabled = False
@@ -302,5 +308,6 @@ Partial Class Form1
     Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripMenuItemWords As ToolStripMenuItem
     Friend WithEvents TBBES As TextBox
+    Friend WithEvents ToolStripMenuItemLetterReplacement As ToolStripMenuItem
     '   Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
 End Class

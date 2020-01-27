@@ -1,5 +1,7 @@
-﻿'CID:''+v174R~:#72                             update#=  758;        ''~v174R~
+﻿'CID:''+v181R~:#72                             update#=  763;        ''~v174R~''~v179R~''~v181R~
 '************************************************************************************''~v002I~
+'v181 2020/01/26 ReplaceKey:default F2                                 ''~v181I~
+'v179 2020/01/22 move LetterReplacement from Form5(setting) to From1/Fom3 Menu''~v179I~
 'v174 2018/09/13 (Bug by v165) SendButton from WordDialog always replace a char on csr''~v174I~
 'v171 2018/03/16 Do Paste by Ctrl+V if not registered as wordsRep key  ''~v171I~
 'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign''~v168I~
@@ -40,7 +42,7 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.07"                                   ''~v122I~''~v128R~''~v133R~''~v168R~''+v174R~
+    Private Const VERSION = "v2.08"                                   ''~v122I~''~v128R~''~v133R~''~v168R~''~v174R~''+v181R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -1222,6 +1224,13 @@ Public Class Form1
             dlgFind1.FindNext(PswUp)                                   ''~7521R~
         End If                                                         ''~7521I~
     End Sub
+    Public Sub findNextReplace(PswUp As Boolean)                       ''~v181I~
+        If newDlgFind(dlgFind1) Then                                   ''~v181I~
+            dlgFind1.showForForm1(Me)                                  ''~v181I~
+        Else                                                           ''~v181I~
+            dlgFind1.FindNextReplace(PswUp)                            ''~v181I~
+        End If                                                         ''~v181I~
+    End Sub                                                            ''~v181I~
     Public Sub findNext(Pform3 As Form3, PswUp As Boolean)              ''~7521I~
         If newDlgFind(dlgFind3) Then   'alrweady dlg opened                 ''~7521R~
             dlgFind3.showForForm3(Pform3)                              ''~7521I~
@@ -1229,6 +1238,13 @@ Public Class Form1
             dlgFind3.FindNext(PswUp)                                   ''~7521I~
         End If                                                         ''~7521I~
     End Sub                                                            ''~7521I~
+    Public Sub findNextReplace(Pform3 As Form3, PswUp As Boolean)      ''~v181I~
+        If newDlgFind(dlgFind3) Then   'alrweady dlg opened            ''~v181I~
+            dlgFind3.showForForm3(Pform3)                              ''~v181I~
+        Else                                                           ''~v181I~
+            dlgFind3.FindNextReplace(PswUp)                            ''~v181I~
+        End If                                                         ''~v181I~
+    End Sub                                                            ''~v181I~
 #If False Then                                                         ''~7521I~
     Private Sub TBGotFocus(sender As System.Object, e As System.EventArgs) Handles TBBES.GotFocus''~7521I~
     End Sub                                                            ''~7521I~
@@ -1354,7 +1370,7 @@ Public Class Form1
         msg = String.Format(msg, strSrc, Pch)                          ''~v052I~
         showStatus(msg)     'imediately put msg                        ''~v052I~
     End Sub                                                            ''~v052I~
-    Public shared Sub showStatusForChild(PswForm1 as Boolean,Pmsg as String)''~v115I~
+    Public Shared Sub showStatusForChild(PswForm1 As Boolean, Pmsg As String) ''~v115I~
         '** showStatus for Form1 or form3                              ''~v115I~
         If PswForm1 Then                                               ''~v115I~
             MainForm.showStatus(Pmsg)    '*Form1                       ''~v115I~
@@ -1405,8 +1421,8 @@ Public Class Form1
         setMRUListMenu(2, 5, Pitem)                                    ''~v114I~
     End Sub                                                            ''~v114I~
     '**********************************************************************''~v114I~
-    Public Sub isrtMRUListSaveImage(Pfnm as String)                    ''~v114I~
-    	insertMRUList(1,Pfnm)                                          ''~v114I~
+    Public Sub isrtMRUListSaveImage(Pfnm As String)                    ''~v114I~
+        insertMRUList(1, Pfnm)                                          ''~v114I~
         formImage.updateMRUList()   'To form2                          ''~v114I~
     End Sub                                                            ''~v114I~
     '*************************************************************     ''~v112I~
@@ -1426,6 +1442,14 @@ Public Class Form1
         PpnewForm = frmT                                                 ''~v113I~
         Return swNew                                                   ''~v113R~
     End Function                                                          ''~v113I~
+
+    Private Sub ToolStripMenuItemLetterReplacement_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLetterReplacement.Click
+        Try                                                            ''~v179R~
+            Form6.sharedShowDlg()      '*True:Form1                    ''~v179R~
+        Catch ex As Exception                                          ''~v179R~
+            Form1.exceptionMsg("Form1 Menu.LetterReplacement", ex)     ''~v179R~
+        End Try                                                        ''~v179R~
+    End Sub
     '*************************************************************     ''~v113I~
     Public Shared Sub showForm(Of T As {Form})(Pform As T, PswNew As Boolean) ''~v113I~
         '* newrly show or showtop                                      ''~v113I~

@@ -1,6 +1,6 @@
 ﻿# README.md 
 
-VBI2KWRT                 2018/09/22  V2.07
+VBI2KWRT                 2020/01/27  V2.08
 
 Tool of generating Japanese-Kana text file for Braille tool:WinBES99
 from Kanji-Kana-Mixed text extracting from image file 

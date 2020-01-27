@@ -1,5 +1,6 @@
-﻿'*CID:''+v163R~:#72                          update#=  190;           ''~v163R~
+﻿'*CID:''+v181R~:#72                          update#=  191;          ''+v181R~
 '************************************************************************************''~v030I~
+'v181 2020/01/26 ReplaceKey:default F2                                 ''+v181I~
 'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
 'v115 2017/12/26 support dakuon,handakuon key                          ''~v115I~
 'v110 2017/12/22 StringConstant reset required when lang changed       ''~v110I~
@@ -24,6 +25,7 @@ Public Class FormOptions
     Public Shared keyDakuonKey As Keys                                 ''~v115I~
     Public Shared keyWordsKey As Keys                                  ''~v065I~
     Public Shared keyFindKey As Keys                                   ''~v070I~
+    Public Shared keyReplaceKey As Keys                                ''+v181I~
     Public Shared keySpecialCharKey As Keys                                   ''~7515I~''~7525M~
     Public Shared swWinBES99 As Boolean                               ''~7525I~''~7604R~
     '   Public Shared swEnglishDoc As Boolean                              ''~7618I~''~7619R~
@@ -54,6 +56,7 @@ Public Class FormOptions
     Private Const DEFAULT_KEY_DAKUON = 4                               ''~v115I~
     Private Const DEFAULT_KEY_WORDS = 9                                ''~v065R~''~v070R~
     Private Const DEFAULT_KEY_FIND = 3                          ''~v070I~
+    Private Const DEFAULT_KEY_REPLACE = 2                              ''+v181I~
     Private Const DEFAULT_KEY_SPECIALCHAR = 6                          ''~7515I~''~7525R~
     Public keySmall As Integer = DEFAULT_KEY_SMALL                      ''~7502R~
 #If False Then                                                              ''~v105I~
@@ -62,6 +65,7 @@ Public Class FormOptions
     Public keyDakuon As Integer = DEFAULT_KEY_DAKUON                   ''~v115I~
     Public keyWords As Integer = DEFAULT_KEY_WORDS                     ''~v065I~
     Public keyFind As Integer = DEFAULT_KEY_FIND                       ''~v070I~
+    Public keyReplace As Integer = DEFAULT_KEY_REPLACE                 ''+v181I~
     Public keySpecialChar As Integer = DEFAULT_KEY_SPECIALCHAR         ''~7515I~
     Private samePrintFont As Boolean                                   ''~7515I~
     Private swInit As Boolean = False                                    ''~7614I~
@@ -136,8 +140,13 @@ Public Class FormOptions
         If keyFind = 0 Then                                            ''~v070I~
             keyFind = DEFAULT_KEY_FIND                                 ''~v070I~
         End If                                                         ''~v070I~
+        keyReplace = My.Settings.CFGF5_KeyReplace                      ''+v181I~
+        If keyReplace = 0 Then                                         ''+v181I~
+            keyReplace = DEFAULT_KEY_REPLACE                           ''+v181I~
+        End If                                                         ''+v181I~
         '       keyFindKey = Keys.F1 + keyFind - 1                             ''~v070I~''~v101R~
         keyFindKey = CType(Keys.F1 + keyFind - 1, Keys)                 ''~v101I~
+        keyReplaceKey = CType(Keys.F1 + keyReplace - 1, Keys)          ''+v181I~
         ''~v070I~
         keySpecialChar = My.Settings.CFGF5_KeySpecialChar              ''~v070I~
         If keySpecialChar = 0 Then                                           ''~7515I~''~7521R~
@@ -161,6 +170,7 @@ Public Class FormOptions
         My.Settings.CFGF5_KeyDakuon = keyDakuon                        ''~v115I~
         My.Settings.CFGF5_KeyWords = keyWords                          ''~v065I~
         My.Settings.CFGF5_KeyFind = keyFind                            ''~v070I~
+        My.Settings.CFGF5_KeyReplace = keyReplace                      ''+v181I~
         My.Settings.CFGF5_KeySpecialChar = keySpecialChar              ''~7515I~
         My.Settings.CFGF5_PrintFontSame = samePrintFont                  ''~7515I~
         '       My.Settings.CFGF12_swBES99 = swWinBES99             ''~7525I~''~7604R~''~v030R~
@@ -248,6 +258,7 @@ Public Class FormOptions
         TextBoxKeyDakuon.Text = "F" & keyDakuon                        ''~v115I~
         TextBoxKeyWords.Text = "F" & keyWords                          ''~v065I~
         TextBoxKeyFind.Text = "F" & keyFind                            ''~v070I~
+        TextBoxKeyReplace.Text = "F" & keyReplace                      ''+v181I~
         TextBoxKeySpecialChar.Text = "F" & keySpecialChar              ''~7515I~
     End Sub 'resize
     Private Function getOptions() As Boolean
@@ -305,6 +316,12 @@ Public Class FormOptions
         keyFind = keyval                                               ''~v070I~
         '       keyFindKey = Keys.F1 + keyFind - 1                             ''~v070I~''~v101R~
         keyFindKey = CType(Keys.F1 + keyFind - 1, Keys)                 ''~v101I~
+        keyval = getKeyValue(TextBoxLabelReplace.Text, TextBoxKeyReplace.Text, DEFAULT_KEY_REPLACE) ''+v181I~
+        If keyval < 0 Then                                             ''+v181I~
+            Return False                                               ''+v181I~
+        End If                                                         ''+v181I~
+        keyReplace = keyval                                            ''+v181I~
+        keyReplaceKey = CType(Keys.F1 + keyReplace - 1, Keys)          ''+v181I~
         ''~7515I~
         '       keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text) ''~7515I~''~v038R~
         keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text, DEFAULT_KEY_SPECIALCHAR) ''~v038I~
@@ -654,6 +671,6 @@ Public Class FormOptions
     '********************************************************************************''~v163I~
     Private Sub dialogAddString()                                      ''~v163I~
         Dim dlg As Form6 = New Form6()                                   ''~v163R~
-        dlg.showDlg()                                                  ''+v163R~
+        dlg.showDlg()                                                  ''~v163R~
     End Sub                                                            ''~v163I~
 End Class

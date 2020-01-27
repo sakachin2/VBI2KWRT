@@ -1,6 +1,8 @@
-﻿'CID:''+v175R~:#72                             update#=  399;        ''+v175R~
+﻿'CID:''+v181R~:#72                             update#=  406;        ''~v181R~
 '************************************************************************************''~v006I~
-'v175 2018/09/13 (Bug)"OK" on partial extracted form, scroll to top page of Form3''+v175I~
+'v181 2020/01/26 ReplaceKey:default F2                                 ''~v181I~
+'v179 2020/01/22 move LetterReplacement from Form5(setting) to From1/Fom3 Menu''~v179I~
+'v175 2018/09/13 (Bug)"OK" on partial extracted form, scroll to top page of Form3''~v175I~
 'v171 2018/03/16 Do Paste by Ctrl+V if not registered as wordsRep key  ''~v171I~
 'v168 2018/03/05 paste from partial by mouse, new SelectionStart position is short, consider CRLF sign''~v168I~
 'v167 2018/03/04 partial text send;target reverse length is short by CRLF sign''~v167I~
@@ -216,7 +218,7 @@ Public Class Form3
         If swEnglishDoc Then                                                 ''~v032I~
             Me.Text = Rstr.getStr("STR_ENGLISH_DOC_EXTRACTED") & Form1.TITLE_SEP & imageTextFilename ''~v032I~
         Else                                                             ''~v032I~
-            Me.Text = Rstr.FORM3_TITLE_RECEIVED & Form1.TITLE_SEP & imageTextFilename     ''~7614R~''~7617R~''~7619R~
+            Me.Text = Rstr.FORM3_TITLE    ''~7614R~''~7617R~''~7619R~  ''+v181R~
         End If                                                           ''~v032I~
         swSource = 1                                                     ''~7411I~
         swSaved = False                                                  ''~v017I~
@@ -266,7 +268,7 @@ Public Class Form3
         revlen += getSubstrCount(txtadd, vbCrLf)                       ''~v167R~
         TextBox1.Select(pos, revlen) 'pos and length                   ''~v167I~
         '        TextBox1.Invalidate()                                           ''~v106I~
-        TextBox1.ScrollToCaret()  '*above set text set caretr to top page,ajust to insterted text pos''+v175I~
+        TextBox1.ScrollToCaret()  '*above set text set caretr to top page,ajust to insterted text pos''~v175I~
     End Sub                                                            ''~v106I~
     '***************************************************************************''~v106I~
     Sub setText(Pfnm As String)                                    ''~7411I~
@@ -749,6 +751,9 @@ Public Class Form3
     Public Sub findNext(PswUp As Boolean)                              ''~v101I~
         Form1.MainForm.findNext(Me, PswUp)                             ''~7521R~
     End Sub                                                            ''~7521I~
+    Public Sub findNextReplace(PswUp As Boolean)                       ''~v181I~
+        Form1.MainForm.findNextReplace(Me, PswUp)                      ''~v181I~
+    End Sub                                                            ''~v181I~
     Public Sub setLocale(Prefresh As Boolean)                          ''~7614R~
         Dim title As String = Me.Text                                    ''~7614I~
         FormOptions.setLang(Me, GetType(Form3))                        ''~7614I~
@@ -854,4 +859,12 @@ Public Class Form3
     Public Sub restoreSelection()                                      ''~v171I~
         TBF.restoreSelection()                                         ''~v171I~
     End Sub                                                            ''~v171I~
+
+    Private Sub ToolStripMenuItemLetterReplacement_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLetterReplacement.Click''~v179R~
+        Try                                                            ''~v179R~
+            Form6.sharedShowDlg()      '*True:Form1                    ''~v179R~
+        Catch ex As Exception                                          ''~v179R~
+            Form1.exceptionMsg("Form3 Menu.LetterReplacement", ex)     ''~v179R~
+        End Try                                                        ''~v179R~
+    End Sub
 End Class

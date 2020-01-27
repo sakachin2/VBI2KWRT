@@ -29,6 +29,7 @@ Partial Class Form8
         Me.CheckBoxCase = New System.Windows.Forms.CheckBox()
         Me.CheckBoxUp = New System.Windows.Forms.CheckBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ButtonHelp = New System.Windows.Forms.Button()
         Me.ButtonReplaceAll = New System.Windows.Forms.Button()
         Me.ButtonReplace = New System.Windows.Forms.Button()
         Me.ButtonFind = New System.Windows.Forms.Button()
@@ -66,11 +67,19 @@ Partial Class Form8
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.ButtonHelp)
         Me.Panel1.Controls.Add(Me.ButtonReplaceAll)
         Me.Panel1.Controls.Add(Me.ButtonReplace)
         Me.Panel1.Controls.Add(Me.ButtonFind)
         resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
+        '
+        'ButtonHelp
+        '
+        Me.ButtonHelp.BackColor = System.Drawing.SystemColors.ControlLight
+        resources.ApplyResources(Me.ButtonHelp, "ButtonHelp")
+        Me.ButtonHelp.Name = "ButtonHelp"
+        Me.ButtonHelp.UseVisualStyleBackColor = False
         '
         'ButtonReplaceAll
         '
@@ -137,4 +146,5 @@ Partial Class Form8
     Friend WithEvents ButtonFind As System.Windows.Forms.Button
     Friend WithEvents ComboBoxSearchWord As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBoxRepWord As System.Windows.Forms.ComboBox
+    Friend WithEvents ButtonHelp As Button
 End Class

@@ -1,3 +1,5 @@
+Kana-Kanji mixed text dialog.
+
 Text of Extracted from Document Image file
 Adjust mis-recognition in extraction.
 Long line is shown folded.

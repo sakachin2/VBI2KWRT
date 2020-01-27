@@ -119,61 +119,67 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CMCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="CMCut.Text" xml:space="preserve">
     <value>Cut</value>
   </data>
   <data name="CMCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="CMCopy.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="CMPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="CMPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="CMSelectAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="CMSelectAll.Text" xml:space="preserve">
     <value>SelectAll</value>
   </data>
   <data name="ToolStripMenuItemSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="ToolStripMenuItemSpecialChar.Text" xml:space="preserve">
     <value>Symbol Dialog</value>
   </data>
   <data name="ToolStripMenuItemFind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="ToolStripMenuItemFind.Text" xml:space="preserve">
     <value>Find/Replace</value>
   </data>
   <data name="ToolStripMenuItem_DocOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="ToolStripMenuItem_DocOptions.Text" xml:space="preserve">
     <value>DocumentOptions</value>
   </data>
   <data name="ToolStripMenuItemDictionary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="ToolStripMenuItemDictionary.Text" xml:space="preserve">
     <value>Dictionary</value>
   </data>
   <data name="ToolStripMenuItemWords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>172, 22</value>
   </data>
   <data name="ToolStripMenuItemWords.Text" xml:space="preserve">
     <value>FrequentWords</value>
   </data>
+  <data name="文字置換定義ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="文字置換定義ToolStripMenuItem.Text" xml:space="preserve">
+    <value>LetterReplacement</value>
+  </data>
   <data name="ContextMenuWordSelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 202</value>
+    <value>173, 224</value>
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>983, 459</value>
@@ -183,9 +189,6 @@
   </data>
   <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>983, 22</value>
-  </data>
-  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>983, 40</value>
   </data>
   <data name="ToolStripMenuItemFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -431,6 +434,9 @@
         hrC9uuTRqwXPxdLlEZpwe4h2quh2RHtEX2IbGvGzq1U7Qcf+gufjWNM8VKJ40exCLz3dT/AA75RBjW9y
         rn4zvkzccYkgBhIphH6Q6ommZJ8Tcwn9cNUP2LtFgH8BNI4nDy993scAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>983, 40</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>983, 499</value>

@@ -1,3 +1,11 @@
+'v182 2020/01/26 (BUG)repchar by F5 loops as all entry concatinated(「『 and [{ are rounds 「->『->[->{->「)
+           Form6
+'v181 2020/01/26 ReplaceKey:default F2
+           Form5 class2 Form1
+'v180 2020/01/25 Find form-FindButton did not move cursor to the word(F3 move cursor but)
+           Form8
+'v179 2020/01/22 move LetterReplacement from Form5(setting) to From1/Fom3 Menu
+           Form1 Fom3 Form5 Form6
 V2.0.7 : 2018/09/22  gitup         *************************************************
 'v178 2018/09/20 insert space after if X or Y is too far from next
            class10.vb

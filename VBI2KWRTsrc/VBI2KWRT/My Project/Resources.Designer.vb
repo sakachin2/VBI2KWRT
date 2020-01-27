@@ -47,7 +47,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+        '''  すべてについて、現在のスレッドの CurrentUICulture プロパティをオーバーライドします
         '''  現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
@@ -64,7 +64,7 @@ Namespace My.Resources
         '''  辞書編集ダイアログ
         '''
         '''&quot;文字列&quot;とその&quot;読み仮名&quot;を登録してください
-        '''文中に同じものがあれば置換するので、どちらも漢字に限らず登録できます
+        '''文中に同じものがあれば置換するので、どちらも漢字に限らず、送り仮名つきも、登録できます
         '''文書に何度も出てくる語で変換を誤る場合に登録してください
         '''また、読み取りで同じように誤認識する場合は
         '''それを登録してかな変換時に修正数方法もかんがえられます
@@ -81,7 +81,7 @@ Namespace My.Resources
         '''
         '''&quot;読み仮名&quot;を指定しないと&quot;(null)&quot;と表示され、変換時に
         '''その&quot;文字列&quot;は削除されます
-        '''また&quot;読み仮名&quot;に空白文字を指定すると&quot;(  )&quot; [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''また&quot;読み仮名&quot;に空白文字を指定 [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form11() As String
             Get
@@ -288,7 +288,9 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  By &quot;TextExtraction function&quot; + &quot;Kana translation function&quot;,
+        '''  Kana text dialog
+        '''
+        '''By &quot;TextExtraction function&quot; + &quot;Kana translation function&quot;,
         '''generate Japanese Kana file for WinBES99 extracting text from document file
         '''created by scanner device.
         '''English Document can be extracted, and &quot;Kana translation&quot; do nothing paticularly.
@@ -297,7 +299,7 @@ Namespace My.Resources
         '''WinBES99 is a text translation tool into Braille.
         '''Windows app &quot;Windows Fax and Scan&quot; can be used to create image file. 
         '''
-        '''Requirement：Extrancting text from image file uses &quot;Microsoft OCR Library for Win [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''Requirement：Extrancting text from image file uses &quot;Microsoft [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form1E() As String
             Get
@@ -419,7 +421,9 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Text of Extracted from Document Image file
+        '''  Kana-Kanji mixed text dialog.
+        '''
+        '''Text of Extracted from Document Image file
         '''Adjust mis-recognition in extraction.
         '''Long line is shown folded.
         '''User Enter key to split line,
@@ -431,9 +435,7 @@ Namespace My.Resources
         '''Lines not ended with puctuation including parenthesis or space
         '''are concatinated to the next line at translation.
         '''Concatination is not done if over 2 EndOfLine sign at end of line. 
-        '''Cosider it at translation.
-        '''
-        '''Mouse  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''Cos [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form3E() As String
             Get
@@ -529,15 +531,14 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form7) 
-        '''記号入力追加ダイアログ
+        '''  記号入力追加ダイアログ
         '''  記号入力の追加設定ができます
         '''  文字列には記号文字に限らず任意の文字列を設定できます
         '''  コメントの指定はなくてもかまいません
         '''  点字文字を設定する方法は、記号入力ダイアログのヘルプを
         '''  見てください
         '''
-        '''2017/04/29
+        '''(Form7) 2017/04/29
         ''' に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form7() As String
@@ -559,6 +560,43 @@ Namespace My.Resources
         Friend ReadOnly Property help_form7E() As String
             Get
                 Return ResourceManager.GetString("help_form7E", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  探索と置換ダイアログ
+        '''
+        '''  かなテキスト画面と漢字テキスト画面と両方で使います。
+        '''  どちらの画面に対するものかは画面の色で判定できます。
+        '''  &quot;次の検索&quot;のショートカットは 省略値 F3 で、上へ検索は Shift+F3 です
+        '''  &quot;置換&quot;のショートカットは 省略値 F2 で、上へ検索は Shift+F2 です
+        '''  F3/F2 は&quot;設定&quot;で変更できます。
+        '''
+        '''(Form8) 2020/01/26
+        ''' に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form8() As String
+            Get
+                Return ResourceManager.GetString("help_form8", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Find &amp; Replace Dialog
+        '''
+        '''  Available for both Kana-Kanji text and Kana text dialog.
+        '''  The background colour indicates for which the dialog is.
+        '''
+        '''  Default shortcut key is F3 for FindNext, Shift+F3 for FindNext Upword.
+        '''  Default shortcut key is F2 for Replace, Shift+F2 for Replace Upword.
+        '''  Shortcut key is defined on &quot;Setting&quot; dialog.
+        '''
+        '''(Form8) 2020/01/26
+        ''' に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form8E() As String
+            Get
+                Return ResourceManager.GetString("help_form8E", resourceCulture)
             End Get
         End Property
         
@@ -982,6 +1020,15 @@ Namespace My.Resources
         Friend ReadOnly Property STR_FORM3_TITLE_RECEIVED() As String
             Get
                 Return ResourceManager.GetString("STR_FORM3_TITLE_RECEIVED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  探索と置換 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FORM8_TITLE() As String
+            Get
+                Return ResourceManager.GetString("STR_FORM8_TITLE", resourceCulture)
             End Get
         End Property
         

@@ -35,6 +35,7 @@ Partial Class Form3
         Me.ToolStripMenuItem_DocOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDictionary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemWords = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemLetterReplacement = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -66,7 +67,7 @@ Partial Class Form3
         '
         'ContextMenuWordSelection
         '
-        Me.ContextMenuWordSelection.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.ToolStripMenuItemFind, Me.ToolStripMenuItem_DocOptions, Me.ToolStripMenuItemDictionary, Me.ToolStripMenuItemWords})
+        Me.ContextMenuWordSelection.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.ToolStripMenuItemFind, Me.ToolStripMenuItem_DocOptions, Me.ToolStripMenuItemDictionary, Me.ToolStripMenuItemWords, Me.ToolStripMenuItemLetterReplacement})
         Me.ContextMenuWordSelection.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.ContextMenuWordSelection, "ContextMenuWordSelection")
         '
@@ -114,6 +115,11 @@ Partial Class Form3
         '
         Me.ToolStripMenuItemWords.Name = "ToolStripMenuItemWords"
         resources.ApplyResources(Me.ToolStripMenuItemWords, "ToolStripMenuItemWords")
+        '
+        'ToolStripMenuItemLetterReplacement
+        '
+        Me.ToolStripMenuItemLetterReplacement.Name = "ToolStripMenuItemLetterReplacement"
+        resources.ApplyResources(Me.ToolStripMenuItemLetterReplacement, "ToolStripMenuItemLetterReplacement")
         '
         'ToolStripSeparator4
         '
@@ -234,4 +240,5 @@ Partial Class Form3
     Friend WithEvents ToolStripMenuItemRedo As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemKanaConv As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemHelp As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemLetterReplacement As ToolStripMenuItem
 End Class

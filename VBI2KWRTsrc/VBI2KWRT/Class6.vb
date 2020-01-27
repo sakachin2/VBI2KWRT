@@ -1,7 +1,7 @@
-﻿''*CID:''+v110R~:#72                          update#=  122;          ''+v110R~
-'************************************************************************************''+v110I~
-'v110 2017/12/22 StringConstant reset required when lang changed       ''+v110I~
-'************************************************************************************''+v110I~
+﻿''*CID:''+v110R~:#72                          update#=  124;          ''~v110R~
+'************************************************************************************''~v110I~
+'v110 2017/12/22 StringConstant reset required when lang changed       ''~v110I~
+'************************************************************************************''~v110I~
 Imports System.Globalization                                           ''~7615I~
 Imports System.IO                                                      ''~7615I~
 Imports System.Text                                                    ''~7615I~
@@ -28,11 +28,12 @@ Public Class Rstr                                                      ''~7615I~
     Public Shared MSG_ERR_FAILED_KANJI2KANA_CONV As String             ''~7618I~
     Public Shared MSG_ERR_ALREADY_EXTRACTED As String                  ''~7618R~
     Public Shared FORM2_TITLE As String                                ''~7619I~
+    Public Shared FORM8_TITLE As String                                ''+v110I~
     ''~7617I~
     Private Shared resMgr As Resources.ResourceManager                 ''~7615R~
     Private Shared resMgrEN As Resources.ResXResourceSet               ''~7615R~
-    Private Shared swInitialized As Boolean = False                      ''+v110I~
-    Private Shared oldLangEN As Boolean = False                          ''+v110I~
+    Private Shared swInitialized As Boolean = False                      ''~v110I~
+    Private Shared oldLangEN As Boolean = False                          ''~v110I~
     Sub New()                                                          ''~7615I~
         resMgr = My.Resources.ResourceManager                            ''~7615I~
         resMgrEN = setupResourceEN()                                     ''~7615I~
@@ -66,13 +67,13 @@ Public Class Rstr                                                      ''~7615I~
         Return str                                                     ''~7618I~
     End Function                                                       ''~7618I~
     Public Shared Sub setupStrings()                                   ''~7617I~
-        If swInitialized Then                                                ''+v110I~
-            If oldLangEN = FormOptions.swLangEN Then                    ''+v110I~
-                Exit Sub                ' avoid duplication at Form1; New Rstr() and setLocaleConst()''+v110I~
-            End If                                                     ''+v110I~
-        End If                                                         ''+v110I~
-        swInitialized = True                                             ''+v110I~
-        oldLangEN = FormOptions.swLangEN                                 ''+v110I~
+        If swInitialized Then                                                ''~v110I~
+            If oldLangEN = FormOptions.swLangEN Then                    ''~v110I~
+                Exit Sub                ' avoid duplication at Form1; New Rstr() and setLocaleConst()''~v110I~
+            End If                                                     ''~v110I~
+        End If                                                         ''~v110I~
+        swInitialized = True                                             ''~v110I~
+        oldLangEN = FormOptions.swLangEN                                 ''~v110I~
         '******* Form1                                                 ''~7617R~
         MENU_NEWTEXT = getStr("STR_NEWTEXT")                           ''~7617R~
         MENU_NEWTEXT_FILE = getStr("STR_NEWTEXT_FILE")                 ''~7617R~
@@ -94,7 +95,7 @@ Public Class Rstr                                                      ''~7615I~
         '****** Form2                                                  ''~7617R~
         FORM2_TITLE = getStr("STR_FORM2_TITLE")                        ''~7619I~
         MSG_ERR_ZOOM = getStr("STR_MSG_ERR_ZOOM")                   ''~7617I~
-        MSG_ERR_ALREADY_EXTRACTED = getStr("STR_MSG_ERR_ALREADY_EXTRACTED")''~7618R~
+        MSG_ERR_ALREADY_EXTRACTED = getStr("STR_MSG_ERR_ALREADY_EXTRACTED") ''~7618R~
         '****** Form3                                                  ''~7617I~
         MSG_ERR_EXTRACT = getStr("STR_MSG_ERR_EXTRACT")                ''~7617M~
         FORM3_TITLE = getStr("STR_FORM3_TITLE")                          ''~7617I~
@@ -120,17 +121,18 @@ Public Class Rstr                                                      ''~7615I~
         '****** Form8                                                  ''~7618I~
         MSG_ERR_FIND_NULL = getStr("STR_MSG_ERR_FIND_NULL")              ''~7618I~
         MSG_INFO_FIND_UP = getStr("STR_MSG_INFO_FIND_UP")                ''~7618I~
-        MSG_INFO_FIND_DOWN = getSTr("STR_MSG_INFO_FIND_DOWN")            ''~7618I~
-        MSG_INFO_FIND_CASE_SENSITIVE = getStr("STR_MSG_INFO_FIND_CASE_SENSITIVE")''~7618R~
-        MSG_INFO_FIND_CASE_INSENSE = getStr("STR_MSG_INFO_FIND_CASE_INSENSE")''~7618R~
+        MSG_INFO_FIND_DOWN = getStr("STR_MSG_INFO_FIND_DOWN")            ''~7618I~
+        MSG_INFO_FIND_CASE_SENSITIVE = getStr("STR_MSG_INFO_FIND_CASE_SENSITIVE") ''~7618R~
+        MSG_INFO_FIND_CASE_INSENSE = getStr("STR_MSG_INFO_FIND_CASE_INSENSE") ''~7618R~
         MSG_ERR_FIND_NOT_FOUND = getStr("STR_MSG_ERR_FIND_NOT_FOUND")  ''~7618R~
         MSG_ERR_NOT_FOUND_CPOS = getStr("STR_MSG_ERR_NOT_FOUND_CPOS")    ''~7618I~
         MSG_ERR_NOT_FOUND_LINE_COL = getStr("STR_MSG_ERR_NOT_FOUND_LINE_COL") ''~7618I~
         MSG_ERR_NOT_FOUND_NO_CPOS = getStr("STR_MSG_ERR_NOT_FOUND_NO_CPOS") ''~7618I~
         MSG_ERR_REPSTR_SAME = getStr("STR_MSG_ERR_REPSTR_SAME")          ''~7618I~
         MSG_ERR_NOT_FOUND_ALL = getStr("STR_MSG_ERR_NOT_FOUND_ALL")      ''~7618I~
+        FORM8_TITLE = getStr("STR_FORM8_TITLE")                        ''~v110I~
         '****** class1                                                 ''~7618I~
-  		MSG_ERR_SMALL_LARGE=getStr("STR_MSG_ERR_SMALL_LARGE")          ''~7618I~
+        MSG_ERR_SMALL_LARGE =getStr("STR_MSG_ERR_SMALL_LARGE")          ''~7618I~
   		MSG_ERR_SMALL_LARGE_OTHER=getStr("STR_MSG_ERR_SMALL_LARGE_OTHER")''~7618I~
         '****** class5                                                 ''~7618I~
   		MSG_ERR_FAILED_KANJI2KANA_CONV=getStr("STR_MSG_ERR_FAILED_KANJI2KANA_CONV")''~7618I~

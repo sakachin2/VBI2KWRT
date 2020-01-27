@@ -135,6 +135,9 @@
   <data name="STR_FORM1_TITLE_KANA_FILE" xml:space="preserve">
     <value>Kana Text</value>
   </data>
+  <data name="STR_FORM8_TITLE" xml:space="preserve">
+    <value>Find and Replace</value>
+  </data>
   <data name="STR_ENGLISH_DOC" xml:space="preserve">
     <value>English Text</value>
   </data>

@@ -509,50 +509,56 @@
   <data name="ExitXToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit(&amp;X)</value>
   </data>
+  <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 180</value>
+  </data>
   <data name="CMCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="CMCut.Text" xml:space="preserve">
     <value>Cut</value>
   </data>
   <data name="CMCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="CMCopy.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="CMPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="CMPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="CMSelectAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="CMSelectAll.Text" xml:space="preserve">
     <value>Select All</value>
   </data>
   <data name="ToolStripMenuItemSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="ToolStripMenuItemSpecialChar.Text" xml:space="preserve">
     <value>Symbol Dialog</value>
   </data>
   <data name="CMFind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="CMFind.Text" xml:space="preserve">
     <value>Find/Replace</value>
   </data>
   <data name="ToolStripMenuItemWords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="ToolStripMenuItemWords.Text" xml:space="preserve">
     <value>FrequentWords</value>
   </data>
-  <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 158</value>
+  <data name="ToolStripMenuItemLetterReplacement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="ToolStripMenuItemLetterReplacement.Text" xml:space="preserve">
+    <value>Letter Replacement</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

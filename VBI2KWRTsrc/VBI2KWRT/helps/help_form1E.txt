@@ -1,3 +1,5 @@
+Kana text dialog
+
 By "TextExtraction function" + "Kana translation function",
 generate Japanese Kana file for WinBES99 extracting text from document file
 created by scanner device.

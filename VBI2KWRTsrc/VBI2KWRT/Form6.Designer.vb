@@ -34,9 +34,10 @@ Partial Class Form6
         Me.ToolStripMenuItemCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.PanelButtons = New System.Windows.Forms.Panel()
-        Me.ButtonHelp = New System.Windows.Forms.Button()
-        Me.ButtonCancel = New System.Windows.Forms.Button()
         Me.ButtonOK = New System.Windows.Forms.Button()
+        Me.ButtonClose = New System.Windows.Forms.Button()
+        Me.ButtonCancel = New System.Windows.Forms.Button()
+        Me.ButtonHelp = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DataGridViewAddStr = New System.Windows.Forms.DataGridView()
         Me.ColumnEnable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -115,17 +116,24 @@ Partial Class Form6
         '
         'PanelButtons
         '
-        Me.PanelButtons.Controls.Add(Me.ButtonHelp)
-        Me.PanelButtons.Controls.Add(Me.ButtonCancel)
         Me.PanelButtons.Controls.Add(Me.ButtonOK)
+        Me.PanelButtons.Controls.Add(Me.ButtonClose)
+        Me.PanelButtons.Controls.Add(Me.ButtonCancel)
+        Me.PanelButtons.Controls.Add(Me.ButtonHelp)
         resources.ApplyResources(Me.PanelButtons, "PanelButtons")
         Me.PanelButtons.Name = "PanelButtons"
         '
-        'ButtonHelp
+        'ButtonOK
         '
-        resources.ApplyResources(Me.ButtonHelp, "ButtonHelp")
-        Me.ButtonHelp.Name = "ButtonHelp"
-        Me.ButtonHelp.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ButtonOK, "ButtonOK")
+        Me.ButtonOK.Name = "ButtonOK"
+        Me.ButtonOK.UseVisualStyleBackColor = True
+        '
+        'ButtonClose
+        '
+        resources.ApplyResources(Me.ButtonClose, "ButtonClose")
+        Me.ButtonClose.Name = "ButtonClose"
+        Me.ButtonClose.UseVisualStyleBackColor = True
         '
         'ButtonCancel
         '
@@ -133,11 +141,11 @@ Partial Class Form6
         Me.ButtonCancel.Name = "ButtonCancel"
         Me.ButtonCancel.UseVisualStyleBackColor = True
         '
-        'ButtonOK
+        'ButtonHelp
         '
-        resources.ApplyResources(Me.ButtonOK, "ButtonOK")
-        Me.ButtonOK.Name = "ButtonOK"
-        Me.ButtonOK.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ButtonHelp, "ButtonHelp")
+        Me.ButtonHelp.Name = "ButtonHelp"
+        Me.ButtonHelp.UseVisualStyleBackColor = True
         '
         'Panel1
         '
@@ -227,4 +235,5 @@ Partial Class Form6
     Friend WithEvents ColumnShift As DataGridViewCheckBoxColumn
     Friend WithEvents ColumnChars As DataGridViewTextBoxColumn
     Friend WithEvents ColumnDel As DataGridViewCheckBoxColumn
+    Friend WithEvents ButtonClose As Button
 End Class

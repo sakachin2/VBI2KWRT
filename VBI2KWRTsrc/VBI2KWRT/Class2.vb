@@ -1,5 +1,6 @@
-﻿'CID:''+v173R~:#72                          update#=  285;           ''+v173R~
+﻿'CID:''+v181R~:#72                          update#=  286;           ''+v181R~
 '************************************************************************************''~v026I~
+'v181 2020/01/26 ReplaceKey:default F2                                 ''+v181I~
 'v173 2018/09/31 (Bug)Exception by Del key after EOF                   ''~v173I~
 'v171 2018/03/16 Do Paste by Ctrl+V/C/X if not registered as wordsRep key''~v171I~
 'v170 2018/03/16 msg "not registered" disappear showchartype by KeyUp event of ControlKey''~v170I~
@@ -446,6 +447,13 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 Else                                                   ''~7521I~
                     Form1.formText.findNext(swUp)             ''~7521R~
                 End If                                                 ''~7521I~
+            Case FormOptions.keyReplaceKey                             ''+v181I~
+                Dim swUp As Boolean = ((e.Modifiers And Keys.Shift) = Keys.Shift)''+v181I~
+                If swForm1 Then                                        ''+v181I~
+                    Form1.MainForm.findNextReplace(swUp)               ''+v181I~
+                Else                                                   ''+v181I~
+                    Form1.formText.findNextReplace(swUp)               ''+v181I~
+                End If                                                 ''+v181I~
             Case Keys.ControlKey                                       ''~v170I~
                 '*                Trace.W("Class2 KeyDown key=ControlKey=" & e.KeyCode)  ''~v170I~''~v171R~
             Case Else                                                  ''~v124I~

@@ -14,4 +14,4 @@ Windows10 Version 1511 (2015/11)以降が必要です
 ソースはGitHubにあります(sakachin2/VBI2KWRT)
     水巻マチ (sakachin2@yahoo.co.jp)
 
-2017/12/31
+2020/01/27   v2.08

@@ -1,6 +1,8 @@
-﻿''*CID:''+v113R~:#72                          update#=  123;          ''~v105R~''+v113R~
+﻿''*CID:''+v181R~:#72                          update#=  130;         ''~v181R~
 '************************************************************************************''~7C16I~
-'v113 2017/12/22 put Zorder Top                                        ''+v113I~
+'v181 2020/01/26 ReplaceKey:default F2                                 ''~v181I~
+'v180 2020/01/25 Find form-FindButton did not move cursor to the word(F3 move cursor but)''~v180I~
+'v113 2017/12/22 put Zorder Top                                        ''~v113I~
 'v105 2017/12/20 support srch/rep word enclosed by quotation           ''~v101I~
 'v101 2017/12/16 Conversion warning                                    ''~7C16I~
 '************************************************************************************''~7C16I~
@@ -75,7 +77,7 @@ Public Class Form8                                                     ''~7516R~
         posFound = -1                                                    ''~7516I~
         initDialog()                                                   ''~7516M~''~7521R~
         Show()                                              ''~7516M~  ''~7519R~''~7521R~
-        Form1.showTop(CType(Me,Form))                                  ''+v113I~
+        Form1.showTop(CType(Me, Form))                                  ''~v113I~
         '       TB.Focus()                                                     ''~7523I~''~7524R~
     End Sub                                                            ''~7516I~
     Public Sub showForForm3(Pform As Form3)                            ''~7516I~
@@ -86,7 +88,7 @@ Public Class Form8                                                     ''~7516R~
         posFound = -1                                                    ''~7516I~
         initDialog()                                                   ''~7516I~''~7521R~
         Show()                                              ''~7516M~  ''~7519R~''~7521R~
-        Form1.showTop(CType(Me,Form))                                  ''+v113I~
+        Form1.showTop(CType(Me, Form))                                  ''~v113I~
         '       TB.Focus()                                                     ''~7523I~''~7524R~
     End Sub                                                            ''~7516I~
     Public Sub Form8_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Shown ''~7519I~
@@ -245,12 +247,13 @@ Public Class Form8                                                     ''~7516R~
             TB.Focus()                                                 ''~7521I~
             Return False                                               ''~7524I~
         Else                                                           ''~7519I~
+            TB.Focus()                                                 ''~v180I~
             TB.Select(posFound, word.Length)                                ''~7516R~''~7519I~
             If Not swRepAll Then                                            ''~7612I~
                 scrollToWord(TB, posFound)                                  ''~7612I~
             End If                                                     ''~7612I~
         End If                                                         ''~7516I~
-        TB.Focus()                                                     ''~7519I~
+        '       TB.Focus()                                                     ''~7519I~''~v180R~
         Return True                                                    ''~7524I~
     End Function 'resize                                                    ''~7516I~
     Private Function incaseSearchDown(Ppos As Integer, Pword As String) As Integer ''~7516I~
@@ -433,11 +436,22 @@ Public Class Form8                                                     ''~7516R~
         swUp = PswUp                                                     ''~7519I~
         searchWord()                                                   ''~7519I~
     End Sub 'resize                                                    ''~7519I~
+    Public Sub FindNextReplace(PswUp As Boolean)    'by F2 key         ''~v181R~
+        If Not swGetOption Then                                        ''~v181I~
+            getOption()                                                ''~v181I~
+        End If                                                         ''~v181I~
+        swUp = PswUp                                                   ''~v181I~
+        replaceWord()                                                  ''~v181I~
+    End Sub 'resize                                                    ''~v181I~
     Private Sub KeyDownEvent(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown ''~7521I~
         Select Case e.KeyCode                                          ''~7521I~
-            Case Keys.F3                                               ''~7521I~
+'           Case Keys.F3                                               ''~7521I~''+v181R~
+            Case FormOptions.keyFindKey                                ''~v181I~
                 Dim swUp As Boolean = ((e.Modifiers And Keys.Shift) = Keys.Control) ''~7521I~''~7609R~
                 FindNext(swUp)                                         ''~7521I~
+            Case FormOptions.keyReplaceKey                             ''~v181I~
+                Dim swUp As Boolean = ((e.Modifiers And Keys.Shift) = Keys.Control) ''~v181I~
+                FindNextReplace(swUp)                                  ''~v181I~
         End Select                                                     ''~7521I~
     End Sub                                                            ''~7521I~
     Private Sub scrollToWord(Ptb As TextBox, Ppos As Integer)           ''~7612I~
@@ -495,6 +509,16 @@ Public Class Form8                                                     ''~7516R~
     Private Sub setLang()                                              ''~7614R~
         FormOptions.setLang()                                          ''~7614R~
     End Sub                                                            ''~7614I~
+
+    Private Sub ButtonHelp_Click(sender As Object, e As EventArgs) Handles ButtonHelp.Click
+        Try                                                            ''~v181I~
+            showHelp()                                                 ''~v181I~
+        Catch ex As Exception                                          ''~v181I~
+            Form1.exceptionMsg("Form8 Help", ex)                       ''~v181I~
+        End Try                                                        ''~v181I~
+
+    End Sub
+
     Private Function dropQuotationEnclosing(Pword As String) As String ''~v105I~
         Dim str As String                                              ''~v105I~
         str = Pword.Trim()                                               ''~v105I~
@@ -503,4 +527,14 @@ Public Class Form8                                                     ''~7516R~
         End If                                                         ''~v105I~
         Return str                                                     ''~v105I~
     End Function                                                       ''~v105I~
+    '*************************************************************     ''~v181I~
+    Private Sub showHelp()                                             ''~v181I~
+        Dim txt As String                                              ''~v181I~
+        If FormOptions.swLangEN Then                                   ''~v181I~
+            txt = My.Resources.help_form8E                             ''~v181I~
+        Else                                                           ''~v181I~
+            txt = My.Resources.help_form8                              ''~v181I~
+        End If                                                         ''~v181I~
+        MessageBox.Show(txt, Rstr.FORM8_TITLE)                         ''~v181R~
+    End Sub                                                            ''~v181I~
 End Class

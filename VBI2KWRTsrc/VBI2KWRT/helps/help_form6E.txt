@@ -1,6 +1,7 @@
 This dialog expands replacement by "Japanese Letter Replacement Key"
 over default translation cases shown on "Help" of Setting dialog.
   Specify at least 2 characters in "Translation" column.
+  Semicolon(;) is not available.
   e.g.) '"<              : (')-->(")-->(<)-->(').
   If char is defined duplicated to default cases shown on "Help" of "Settings",
   definition in this dialog is applied.
@@ -16,6 +17,29 @@ over default translation cases shown on "Help" of Setting dialog.
   Use "Use" checkbox to set on/off temporally.
   The line with "Shift":On is applied when PF key is pressed with Shift modifier.
   The line with "Del":On is deleted when dialog closed by "OK".
+-----
+Floowins are applied as default.
+    "あいうえおやゆよつわかけ" <--> "ぁぃぅぇぉゃゅょっゎゕゖ"     Hiragana
+    "アイウエオヤユヨツワカケ" <--> "ァィゥェォャュョッヮヵヶ"     Katakana(DBCS)
+    "ｱｲｳｴｵﾔﾕﾖﾂ"                <--> "ｧｨｩｪｫｬｭｮｯ"                    Katakana(SBCS)
+
+  By the same key, following replacemnt will be down, which sometimes cause mis-reading of image.
+    リ(katakana)    <--> り(hiragana)
+    ヘ(katakana)    <--> へ(hiragana)
+    ベ(katakana)    <--> べ(hiragana)
+    ソ(katakana:so) <--> ン(katakana:n)
+  On Kanji text form, following replacement will be done including kanji char.
+    工(kanji) --> エ(katakana) --> ェ(katakana-small) --> 工(kanji)   (WrapAround)
+    力(kanji) --> カ(katakana) --> ヵ(katakana-small) --> 力(kanji)   (WrapAround)
+    一(kanji) --> ー(katakana) --> ─(HorizontalBar) --> 一(kanji)    (WrapAround)
+    夕(kanji) <--> タ(katakana)                                       
+    二(kanji) <--> ニ(katakana) 
+    八(kanji) <--> ハ(katakana) 
+    口(kanji) <--> ロ(katakana) 
+    十(kanji) <--> ＋(Plus) 
+
+  By the key with Shift modifier kety,following replacement will be done.
+    は<-->わ、へ<-->え、う<-->ー
 --------------------------------------------------------------------------
 ToolBarButtons Open/Save/SaveAS is to load/save the settiog of this dialog.
 Use for exchanging setting for each document differently.
@@ -29,4 +53,4 @@ not when cell is highlightened but when string is highlightened.
 Cut/CopyPaste buttons bellow title are used to copy/move row.
 "Paste" inserts row before the selected row(Delete flag is not copied). 
 
-(Form6E) 2018/03/08
+(Form6E) 2020/01/22
