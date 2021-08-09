@@ -220,6 +220,9 @@
   <data name="STR_MSG_ERR_EXTRACT" xml:space="preserve">
     <value>イメージファイルからのテキスト読み取り失敗</value>
   </data>
+  <data name="STR_MULTI_SELECT_FILE" xml:space="preserve">
+    <value>複数ファイル 一括 読取り</value>
+  </data>
   <data name="STR_FORM3_TITLE" xml:space="preserve">
     <value>テキストファイル</value>
   </data>
@@ -528,5 +531,11 @@
   </data>
   <data name="help_form8E" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\helps\help_form8E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;shift_jis</value>
+  </data>
+  <data name="help_formMS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_formMS.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_formMSE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_formMSE.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;shift_jis</value>
   </data>
 </root>

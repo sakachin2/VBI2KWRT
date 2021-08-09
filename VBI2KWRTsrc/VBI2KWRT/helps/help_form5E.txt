@@ -6,6 +6,7 @@ Print Font/Screen Font:
   Set PFKey Number(F1<-->F12) for 4 items bellow.
   F7 and F8 is not to be assigned because those are used by Japanese IME
   to translate to Katakana and Hankaku-Katakana,
+  Windows assigns F10 to open dropdown menu.
   Back to default value when space cleared.
 
 Japanese Letter Replacement Key:
@@ -31,7 +32,7 @@ Japanese Letter Replacement Key:
     十(kanji) <--> ＋(Plus) 
 
   By the key with Shift modifier kety,following replacement will be done.
-    は<-->わ、へ<-->え、う<-->ー
+    は<-->わ、へ<-->え、う<-->ー(u30fc)
 
 Additional:
   Push button to open additional replacement dialog
@@ -63,7 +64,18 @@ Find & Replace Dialog Open Key:
   The dialog is opened also from Context Menu.
   THis key effects same as "Find Next" button of the dialog.
 
+Replace Key
+  Default is F2.
+  ShortcutKey for Replace by Find & Replace Dialog.
+
+Split Header/Footer
+  To avoid header is extraced mixed with body text,
+  Extract Chapter title, Page count etc separated.
+  Effective only for Japanese vertical writing.
+  Default is ON, reset if error occurs by setting ON. 
+  You may extract patially specifying range by mouse dragging.
+
 Language
   Restart this application when changed.
 
-(Form5E) 2020/01/22
+(Form5E) 2021/08/06

@@ -18,7 +18,7 @@ OCR(文書読み取り)機能+かな変換機能で
 Windows10 Version 1511 (2015/11)以降が必要です
 .Net Framework は 4.6.1
 
-解凍してSetupVBI2KWRT,msiをクリックしてインストール(デスクトップにアイコン作成)
+解凍してSetupVBI2KWRT.msiをクリックしてインストール(デスクトップにアイコン作成)
 ソースはGitHubにあります(sakachin2/VBI2KWRT)
     水巻マチ (sakachin2@yahoo.co.jp)
 [アーカイブファイルの名前]

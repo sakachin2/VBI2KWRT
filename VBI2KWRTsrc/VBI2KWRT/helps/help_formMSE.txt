@@ -1,0 +1,15 @@
+Multiple image files are seleted.
+
+"Forms":
+  Vertical, Horizontal ... , applies to all input files.
+"Extract":
+  All files are extacted to a output file at once.
+"Output File":
+  Modify if required.
+
+If you want to adjust output of individual image file,
+open the image file and use parial extract function.
+(extract the range mouse dragged,
+then send the text at the cursor position of the output file) 
+
+(Form2E) 2021/08/08

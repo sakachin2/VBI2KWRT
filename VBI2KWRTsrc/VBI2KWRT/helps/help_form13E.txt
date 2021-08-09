@@ -32,9 +32,10 @@ Column header "Use" sorts by sequence of Check-On and Check-Off.
 Column header "Key" sorts by sequense of values of "Key" column.
 
 Toolbar button Fie/Save/SaveAs are used to switch dictionary for each documents.
+You may SaveAs to appropriate folder before re-install which looses the update.
 Record format of dictionary file is as following, CRLF is 0x0d0a.
 Default extension is ".wrd"
 Line format :
    n;Key;Phrase    (n: '1':Use, '0':NotUse)
 
-(Form13E) 2018/03/16
+(Form13E) 2020/01/28

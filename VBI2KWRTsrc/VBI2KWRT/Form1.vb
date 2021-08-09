@@ -1,5 +1,8 @@
-﻿'CID:''+v181R~:#72                             update#=  763;        ''~v174R~''~v179R~''~v181R~
+﻿'CID:''+v210R~:#72                             update#=  768;        ''~v210R~
 '************************************************************************************''~v002I~
+'v210 2021/08/06 support imagefile multi selection                     ''~v210I~
+'v202 2021/08/06  apply vbocr2 image to text v192-->v201 ****          ''~v202I~
+'v191 2020/01/27 Help dialog "OK" did not work                         ''~v191I~
 'v181 2020/01/26 ReplaceKey:default F2                                 ''~v181I~
 'v179 2020/01/22 move LetterReplacement from Form5(setting) to From1/Fom3 Menu''~v179I~
 'v174 2018/09/13 (Bug by v165) SendButton from WordDialog always replace a char on csr''~v174I~
@@ -42,7 +45,8 @@ Imports System.IO
 Imports System.Threading                                               ''~7613I~''~v110I~''~v105I~
 
 Public Class Form1
-    Private Const VERSION = "v2.08"                                   ''~v122I~''~v128R~''~v133R~''~v168R~''~v174R~''+v181R~
+    ''  Private Const VERSION = "v2.08"                                   ''~v122I~''~v128R~''~v133R~''~v168R~''~v174R~''~v181R~''~v202R~
+    Private Const VERSION = "v2.09"                                    ''~v202I~''+v210R~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
     Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
     Private caretWidth As Integer = 2                                  ''~v067I~
@@ -136,6 +140,7 @@ Public Class Form1
     '   Private swSpecificItem As Boolean = False   'menuitem of Form2       ''~v112I~''~v114R~
     '   Private parmItem As ToolStripMenuItem                               ''~v112I~''~v114R~
     Private TBF As TBFocus                                             ''~v165I~
+    Private swForm2MRUImage As Boolean                                 ''~v210I~
 
     '**************************************************************************************''~v110I~
     Private Sub Form1_Activated(sender As System.Object, e As System.EventArgs) Handles Me.Activated ''~7412I~
@@ -249,12 +254,16 @@ Public Class Form1
         OpenFileDialog1.FilterIndex = imageFilterIndex
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Dim fnm As String = OpenFileDialog1.FileName
+          If OpenFileDialog1.FileNames.Length > 1 Then                 ''~v210I~
+                openImageBoxMultiSelect(OpenFileDialog1.FileNames)     ''~v210I~
+          Else                                                         ''~v210I~
             insertMRUList(1, fnm)      '1:imagefile                     ''~7411R~''~7522R~
             Dim basename As String = System.IO.Path.GetFileNameWithoutExtension(fnm)
             imageFilename = basename
             kanjiFilename = basename
             imageFilterIndex = OpenFileDialog1.FilterIndex    'save for next open
             openImageBox(fnm)
+          End If                                                       ''~v210I~
         End If
     End Sub
     Private Sub KanjiTextToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
@@ -540,6 +549,7 @@ Public Class Form1
             Dim item = DirectCast(sender, ToolStripMenuItem)                ''~7411I~
             Dim fnm As String                                              ''~7411I~
             fnm = item.Text                                                ''~7411I~
+            swForm2MRUImage = False                                    ''~v210I~
             If fnm.CompareTo(Rstr.MENU_NEWFILE) = 0 Then                          ''~7412R~''~7613R~''~7615R~
                 ImageToolStripMenuItem_Click(sender, e)                     ''~7412I~
             Else                                                           ''~7412I~
@@ -556,6 +566,7 @@ Public Class Form1
             Dim item = DirectCast(sender, ToolStripMenuItem)           ''~v112I~
             Dim fnm As String                                          ''~v112I~
             fnm = item.Text                                            ''~v112I~
+            swForm2MRUImage = True                                     ''~v210I~
             If fnm.CompareTo(Rstr.MENU_NEWFILE) = 0 Then               ''~v112I~
                 ImageToolStripMenuItem_Click(sender, e)                ''~v112I~
             Else                                                       ''~v112I~
@@ -963,7 +974,8 @@ Public Class Form1
             txt = My.Resources.help_form1U8                                  ''~7430I~''~7501R~''~7613R~
         End If                                                         ''~7613I~
         '       MessageBox.Show(txt, initialTitle)                                      ''~7430I~''~7613R~''~7615R~''~7621R~
-        MsgBox.ShowMsg(txt, initialTitle)                              ''~7621I~
+'       MsgBox.ShowMsg(txt, initialTitle)                              ''~7621I~''~v191R~
+        MessageBox.Show(txt, initialTitle)                             ''~v191I~
     End Sub                                                            ''~7430I~
 
     Private Sub MenuStrip1_ItemClicked(sender As System.Object, e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
@@ -1467,4 +1479,15 @@ Public Class Form1
     Public Sub restoreSelection()                                      ''~v174I~
         TBF.restoreSelection()                                         ''~v174I~
     End Sub                                                            ''~v174I~
+    '*************************************************************     ''~v210I~
+    Private Sub openImageBoxMultiSelect(Pfnms() As String)             ''~v210I~
+        Dim formMS As FormMS = Nothing                                 ''~v210I~
+        Try                                                            ''~v210I~
+            Dim swNew As Boolean = newForm(formMS, formMS)             ''~v210I~
+            formMS.setImage(Pfnms, swForm2MRUImage)                    ''~v210I~
+            showForm(formMS, swNew)                                    ''~v210I~
+        Catch ex As Exception                                          ''~v210I~
+            ReadError(Pfnms(0), ex)                                    ''~v210I~
+        End Try                                                        ''~v210I~
+    End Sub                                                            ''~v210I~
 End Class

@@ -1,11 +1,11 @@
 ﻿# README.md 
 
-VBI2KWRT                 2020/01/27  V2.08
+VBI2KWRT                 2021/08/09  V2.09
 
 Tool of generating Japanese-Kana text file for Braille tool:WinBES99
 from Kanji-Kana-Mixed text extracting from image file 
 using "Microsoft OCR Library for Windows" (Windows10).
-DictionaryDialog is for Mistrnslation,
+DictionaryDialog is for Mistranslation,
 WordDialog(FrequentlyUsedWords) and Fn key is for mis-recognition
 (change to voiced sound character,exchange small and large letter).
 

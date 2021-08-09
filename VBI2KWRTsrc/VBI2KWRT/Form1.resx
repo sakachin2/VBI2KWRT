@@ -187,14 +187,14 @@
   <data name="&gt;&gt;ToolStripMenuButtonKata.Name" xml:space="preserve">
     <value>ToolStripMenuButtonKata</value>
   </data>
+  <data name="&gt;&gt;ImageToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TBBES.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="SaveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
-  </data>
-  <data name="MenuStrip1.Text" xml:space="preserve">
-    <value>MenuStrip1</value>
   </data>
   <data name="&gt;&gt;CMFind.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -213,9 +213,6 @@
   </data>
   <data name="CMSelectAll.Text" xml:space="preserve">
     <value>全選択</value>
-  </data>
-  <data name="ToolStripMenuItemLetterReplacement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
   </data>
   <data name="StatusStrip1.Text" xml:space="preserve">
     <value>StatusStrip1</value>
@@ -270,9 +267,6 @@
   </data>
   <data name="&gt;&gt;StatusStrip1.Name" xml:space="preserve">
     <value>StatusStrip1</value>
-  </data>
-  <data name="KanjiTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -644,9 +638,6 @@
   <data name="ToolStripMenuItemOptions.Text" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemPrint.Name" xml:space="preserve">
-    <value>ToolStripMenuItemPrint</value>
-  </data>
   <data name="ToolStripMenuItemOptions.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -655,9 +646,6 @@
   </data>
   <data name="CMCut.Text" xml:space="preserve">
     <value>切り取り</value>
-  </data>
-  <data name="ExitXToolStripMenuItem.Text" xml:space="preserve">
-    <value>終了(&amp;X)</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemLetterReplacement.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -673,6 +661,9 @@
   </data>
   <data name="&gt;&gt;FileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TBBES.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="FileToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>名前を付けて保存</value>
@@ -727,8 +718,11 @@
   <data name="NotifyIcon1.Text" xml:space="preserve">
     <value>NotifyIcon1</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form1</value>
+  <data name="&gt;&gt;CMCut.Name" xml:space="preserve">
+    <value>CMCut</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>963, 501</value>
   </data>
   <data name="&gt;&gt;FontDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FontDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -763,9 +757,6 @@
   <data name="&gt;&gt;ToolStripMenuItemClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripMenuItemPrintIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 36</value>
-  </data>
   <data name="FileToolStripMenuItem.Text" xml:space="preserve">
     <value>ファイル(&amp;F)</value>
   </data>
@@ -778,11 +769,14 @@
   <data name="&gt;&gt;ToolStripMenuItemUndo.Name" xml:space="preserve">
     <value>ToolStripMenuItemUndo</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemHelp.Name" xml:space="preserve">
-    <value>ToolStripMenuItemHelp</value>
+  <data name="ToolStripMenuItemUndo.ToolTipText" xml:space="preserve">
+    <value>元に戻す</value>
   </data>
   <data name="ToolStripMenuItemHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 36</value>
+  </data>
+  <data name="ToolStripMenuItemClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
   <data name="&gt;&gt;OpenFileDialog1.Name" xml:space="preserve">
     <value>OpenFileDialog1</value>
@@ -898,21 +892,6 @@
   <data name="&gt;&gt;FontDialog1.Name" xml:space="preserve">
     <value>FontDialog1</value>
   </data>
-  <data name="ToolStripMenuButtonKata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAgNJREFUOE+lkutLk2EYxvePhJaHShFBUTEPiCieQOmDiEZgrEbpYGiCQxkqA80I
-        RUkUEZ0YRMS+DDI70MkTmzJnDc8iU8QT2mAEItnle90wHwTDyBduXnie5/rd133Q4ZKfAJqHFs9E08A8
-        zD1emDpmYXjqRlnTFIrMk8iuGkNaxWekGEaQrHecBfw+/vPXODw6hj9whN2fh/Bt/8LSRgA3cxr/DeBZ
-        9kvmTNMoHGNbIrYN+3Aj23IxgJkpds0doP3VstgmsNexhutZ9QrAms8T0zYzU5xXM46kcjsmvfvoeL2i
-        AeoUgA07T8yaaZuZKab1rzN74jgys1YB2O2gmBZzH49LODXrrJlnzEzxe9cOLH1ziMioVgCOiuIFX0CE
-        Q+/WYf+yieiCFrRp9tkwxnP7Kt5MbKGm6wfC000KwDlTXNLgEvHMkh+Db32o7fYivtQm1l9+3IBOp5P7
-        yjYPwlKNCsAluWudxgvtknb5t9oWcL/VLU2Mvd2JFq3uqs7vAtE/ceNayiMF4KiYMSjmY2O7B4Ua+NaD
-        YQGEJumRbvyG1IcfBHI12aAAXM8R57aIWTNrLLY4tfNPiCvpR1SeVeu6WWzHFD6THSDwFMDdpmUG62NJ
-        PKM4Or9ZxBxb8H8l7g5CEu8pAOfM3WanSeeS8CFHxW4zM2umbWamOCShXAH+/wNOANABIDUxWnDPAAAA
-        AElFTkSuQmCC
-</value>
-  </data>
   <data name="&gt;&gt;StatusStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -928,8 +907,8 @@
   <data name="ToolStripMenuButtonKata.Text" xml:space="preserve">
     <value>カナ表示</value>
   </data>
-  <data name="ToolStripMenuItemUndo.ToolTipText" xml:space="preserve">
-    <value>元に戻す</value>
+  <data name="ToolStripMenuItemLetterReplacement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 22</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemPrintIcon.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -939,9 +918,6 @@
   </data>
   <data name="ToolStripMenuItemSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 22</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemLetterReplacement.Name" xml:space="preserve">
-    <value>ToolStripMenuItemLetterReplacement</value>
   </data>
   <data name="ToolStripMenuItemSaveAs.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 36</value>
@@ -955,6 +931,9 @@
   <data name="&gt;&gt;KanaTextToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItemHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ToolStripMenuButtonKata.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -964,6 +943,9 @@
   <data name="&gt;&gt;FileToolStripMenuItem.Name" xml:space="preserve">
     <value>FileToolStripMenuItem</value>
   </data>
+  <data name="&gt;&gt;NotifyIcon1.Name" xml:space="preserve">
+    <value>NotifyIcon1</value>
+  </data>
   <data name="ToolStripMenuItemSpecialChar.Text" xml:space="preserve">
     <value>記号入力</value>
   </data>
@@ -972,6 +954,12 @@
   </data>
   <data name="&gt;&gt;ToolStripMenuItemSpecialChar.Name" xml:space="preserve">
     <value>ToolStripMenuItemSpecialChar</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemRedo.Name" xml:space="preserve">
+    <value>ToolStripMenuItemRedo</value>
   </data>
   <data name="ToolStripMenuItemRedo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1029,14 +1017,14 @@
         JgdGZtLotyR7yv17aWv7BfrZQNijSMRvAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItemHelp.Name" xml:space="preserve">
+    <value>ToolStripMenuItemHelp</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItemSave.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CMCopy.Name" xml:space="preserve">
     <value>CMCopy</value>
-  </data>
-  <data name="&gt;&gt;CMCut.Name" xml:space="preserve">
-    <value>CMCut</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1104,9 +1092,6 @@
   <data name="ToolStripMenuItemRedo.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 36</value>
   </data>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>All(*.*)|*.*</value>
-  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>
   </data>
@@ -1122,8 +1107,8 @@
   <data name="&gt;&gt;ExitXToolStripMenuItem.Name" xml:space="preserve">
     <value>ExitXToolStripMenuItem</value>
   </data>
-  <data name="ToolStripMenuItemClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+  <data name="&gt;&gt;ToolStripMenuItemPrint.Name" xml:space="preserve">
+    <value>ToolStripMenuItemPrint</value>
   </data>
   <data name="NotifyIcon1.Visible" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1131,16 +1116,28 @@
   <data name="ToolStripMenuItemSave.ToolTipText" xml:space="preserve">
     <value>上書き保存</value>
   </data>
-  <data name="&gt;&gt;NotifyIcon1.Name" xml:space="preserve">
-    <value>NotifyIcon1</value>
+  <data name="ToolStripMenuButtonKata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAgNJREFUOE+lkutLk2EYxvePhJaHShFBUTEPiCieQOmDiEZgrEbpYGiCQxkqA80I
+        RUkUEZ0YRMS+DDI70MkTmzJnDc8iU8QT2mAEItnle90wHwTDyBduXnie5/rd133Q4ZKfAJqHFs9E08A8
+        zD1emDpmYXjqRlnTFIrMk8iuGkNaxWekGEaQrHecBfw+/vPXODw6hj9whN2fh/Bt/8LSRgA3cxr/DeBZ
+        9kvmTNMoHGNbIrYN+3Aj23IxgJkpds0doP3VstgmsNexhutZ9QrAms8T0zYzU5xXM46kcjsmvfvoeL2i
+        AeoUgA07T8yaaZuZKab1rzN74jgys1YB2O2gmBZzH49LODXrrJlnzEzxe9cOLH1ziMioVgCOiuIFX0CE
+        Q+/WYf+yieiCFrRp9tkwxnP7Kt5MbKGm6wfC000KwDlTXNLgEvHMkh+Db32o7fYivtQm1l9+3IBOp5P7
+        yjYPwlKNCsAluWudxgvtknb5t9oWcL/VLU2Mvd2JFq3uqs7vAtE/ceNayiMF4KiYMSjmY2O7B4Ua+NaD
+        YQGEJumRbvyG1IcfBHI12aAAXM8R57aIWTNrLLY4tfNPiCvpR1SeVeu6WWzHFD6THSDwFMDdpmUG62NJ
+        PKM4Or9ZxBxb8H8l7g5CEu8pAOfM3WanSeeS8CFHxW4zM2umbWamOCShXAH+/wNOANABIDUxWnDPAAAA
+        AElFTkSuQmCC
+</value>
   </data>
   <data name="CMCopy.Text" xml:space="preserve">
     <value>コピー</value>
   </data>
-  <data name="&gt;&gt;ImageToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolStripMenuItemLetterReplacement.Name" xml:space="preserve">
+    <value>ToolStripMenuItemLetterReplacement</value>
   </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemPrintIcon.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 36</value>
   </data>
   <data name="ToolStripMenuItemHelp.Text" xml:space="preserve">
@@ -1152,14 +1149,17 @@
   <data name="ToolStripMenuItemWords.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 22</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>963, 501</value>
+  <data name="KanjiTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SaveFileDialog1.Filter" xml:space="preserve">
+    <value>All(*.*)|*.*</value>
   </data>
   <data name="&gt;&gt;ImageToolStripMenuItem.Name" xml:space="preserve">
     <value>ImageToolStripMenuItem</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 36</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemWords.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1194,8 +1194,8 @@
   <data name="&gt;&gt;ToolStripMenuItemPrintIcon.Name" xml:space="preserve">
     <value>ToolStripMenuItemPrintIcon</value>
   </data>
-  <data name="TBBES.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="MenuStrip1.Text" xml:space="preserve">
+    <value>MenuStrip1</value>
   </data>
   <data name="&gt;&gt;SaveAsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1261,8 +1261,8 @@
   <data name="&gt;&gt;ContextMenuSpecialChar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemRedo.Name" xml:space="preserve">
-    <value>ToolStripMenuItemRedo</value>
+  <data name="ExitXToolStripMenuItem.Text" xml:space="preserve">
+    <value>終了(&amp;X)</value>
   </data>
   <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 180</value>

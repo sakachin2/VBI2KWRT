@@ -1,6 +1,8 @@
-﻿'*CID:''+v181R~:#72                          update#=  191;          ''+v181R~
+﻿'*CID:''+v211R~:#72                          update#=  193;          ''+v211R~
 '************************************************************************************''~v030I~
-'v181 2020/01/26 ReplaceKey:default F2                                 ''+v181I~
+'v211 2021/08/09 (BUG)Release version hide language selection of configure dialog''+v211I~
+'v198 2021/06/02 split header/footer as setting option                 ''~v198I~
+'v181 2020/01/26 ReplaceKey:default F2                                 ''~v181I~
 'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
 'v115 2017/12/26 support dakuon,handakuon key                          ''~v115I~
 'v110 2017/12/22 StringConstant reset required when lang changed       ''~v110I~
@@ -25,7 +27,7 @@ Public Class FormOptions
     Public Shared keyDakuonKey As Keys                                 ''~v115I~
     Public Shared keyWordsKey As Keys                                  ''~v065I~
     Public Shared keyFindKey As Keys                                   ''~v070I~
-    Public Shared keyReplaceKey As Keys                                ''+v181I~
+    Public Shared keyReplaceKey As Keys                                ''~v181I~
     Public Shared keySpecialCharKey As Keys                                   ''~7515I~''~7525M~
     Public Shared swWinBES99 As Boolean                               ''~7525I~''~7604R~
     '   Public Shared swEnglishDoc As Boolean                              ''~7618I~''~7619R~
@@ -56,7 +58,7 @@ Public Class FormOptions
     Private Const DEFAULT_KEY_DAKUON = 4                               ''~v115I~
     Private Const DEFAULT_KEY_WORDS = 9                                ''~v065R~''~v070R~
     Private Const DEFAULT_KEY_FIND = 3                          ''~v070I~
-    Private Const DEFAULT_KEY_REPLACE = 2                              ''+v181I~
+    Private Const DEFAULT_KEY_REPLACE = 2                              ''~v181I~
     Private Const DEFAULT_KEY_SPECIALCHAR = 6                          ''~7515I~''~7525R~
     Public keySmall As Integer = DEFAULT_KEY_SMALL                      ''~7502R~
 #If False Then                                                              ''~v105I~
@@ -65,12 +67,13 @@ Public Class FormOptions
     Public keyDakuon As Integer = DEFAULT_KEY_DAKUON                   ''~v115I~
     Public keyWords As Integer = DEFAULT_KEY_WORDS                     ''~v065I~
     Public keyFind As Integer = DEFAULT_KEY_FIND                       ''~v070I~
-    Public keyReplace As Integer = DEFAULT_KEY_REPLACE                 ''+v181I~
+    Public keyReplace As Integer = DEFAULT_KEY_REPLACE                 ''~v181I~
     Public keySpecialChar As Integer = DEFAULT_KEY_SPECIALCHAR         ''~7515I~
     Private samePrintFont As Boolean                                   ''~7515I~
     Private swInit As Boolean = False                                    ''~7614I~
     Public swFontChangedScr As Boolean                                ''~7515I~
     Public swLangChanged As Boolean = False                            ''~7618I~
+    Public Shared swSplitHeader As Boolean                             ''~v198I~
 
     '************************************************************************''~v110I~
     Sub New()
@@ -104,6 +107,7 @@ Public Class FormOptions
         fontSize = My.Settings.CFGF5_FontSize                            ''~7508I~''~7515R~
         fontStyle = My.Settings.CFGF5_FontStyle                          ''~7508I~''~7515R~
         samePrintFont = My.Settings.CFGF5_PrintFontSame                 ''~7515I~
+        swSplitHeader = My.Settings.CFGF5_SplitHeader                  ''~v198I~
         '       swWinBES99 = My.Settings.CFGF12_swBES99          ''~7525I~''~7604R~''~v030R~
         '       swEnglishDoc = My.Settings.CFGF5_EnglishDoc                    ''~7618R~''~7619R~
         cfgLang = My.Settings.CFGF5_LangID                             ''~7619R~
@@ -140,13 +144,13 @@ Public Class FormOptions
         If keyFind = 0 Then                                            ''~v070I~
             keyFind = DEFAULT_KEY_FIND                                 ''~v070I~
         End If                                                         ''~v070I~
-        keyReplace = My.Settings.CFGF5_KeyReplace                      ''+v181I~
-        If keyReplace = 0 Then                                         ''+v181I~
-            keyReplace = DEFAULT_KEY_REPLACE                           ''+v181I~
-        End If                                                         ''+v181I~
+        keyReplace = My.Settings.CFGF5_KeyReplace                      ''~v181I~
+        If keyReplace = 0 Then                                         ''~v181I~
+            keyReplace = DEFAULT_KEY_REPLACE                           ''~v181I~
+        End If                                                         ''~v181I~
         '       keyFindKey = Keys.F1 + keyFind - 1                             ''~v070I~''~v101R~
         keyFindKey = CType(Keys.F1 + keyFind - 1, Keys)                 ''~v101I~
-        keyReplaceKey = CType(Keys.F1 + keyReplace - 1, Keys)          ''+v181I~
+        keyReplaceKey = CType(Keys.F1 + keyReplace - 1, Keys)          ''~v181I~
         ''~v070I~
         keySpecialChar = My.Settings.CFGF5_KeySpecialChar              ''~v070I~
         If keySpecialChar = 0 Then                                           ''~7515I~''~7521R~
@@ -170,9 +174,10 @@ Public Class FormOptions
         My.Settings.CFGF5_KeyDakuon = keyDakuon                        ''~v115I~
         My.Settings.CFGF5_KeyWords = keyWords                          ''~v065I~
         My.Settings.CFGF5_KeyFind = keyFind                            ''~v070I~
-        My.Settings.CFGF5_KeyReplace = keyReplace                      ''+v181I~
+        My.Settings.CFGF5_KeyReplace = keyReplace                      ''~v181I~
         My.Settings.CFGF5_KeySpecialChar = keySpecialChar              ''~7515I~
         My.Settings.CFGF5_PrintFontSame = samePrintFont                  ''~7515I~
+        My.Settings.CFGF5_SplitHeader = swSplitHeader                  ''~v198I~
         '       My.Settings.CFGF12_swBES99 = swWinBES99             ''~7525I~''~7604R~''~v030R~
         '       My.Settings.CFGF5_EnglishDoc = swEnglishDoc                    ''~7618R~''~7619R~
         My.Settings.CFGF5_LangID = cfgLang                             ''~7614I~''~7619R~
@@ -248,6 +253,7 @@ Public Class FormOptions
         TextBoxScrFontName.Text = createFontnameScr()                   ''~7508I~''~7515R~
         TextBoxPrintFontname.Text = createFontname()                   ''~7515R~
         CheckBoxPrintFont.Checked = samePrintFont                      ''~7515M~
+        CheckBox1.Checked = swSplitHeader                              ''~v198I~
         '       CheckBoxWinBES99.Checked = swWinBES99              ''~7525I~   ''~7604R~''~v030R~
         '       CheckBoxEnglishDoc.Checked = swEnglishDoc                      ''~7618I~''~7619R~
         setRGLang(cfgLang)                                             ''~7614I~
@@ -258,7 +264,7 @@ Public Class FormOptions
         TextBoxKeyDakuon.Text = "F" & keyDakuon                        ''~v115I~
         TextBoxKeyWords.Text = "F" & keyWords                          ''~v065I~
         TextBoxKeyFind.Text = "F" & keyFind                            ''~v070I~
-        TextBoxKeyReplace.Text = "F" & keyReplace                      ''+v181I~
+        TextBoxKeyReplace.Text = "F" & keyReplace                      ''~v181I~
         TextBoxKeySpecialChar.Text = "F" & keySpecialChar              ''~7515I~
     End Sub 'resize
     Private Function getOptions() As Boolean
@@ -275,6 +281,7 @@ Public Class FormOptions
         '       swWinBES99 = CheckBoxWinBES99.Checked                ''~7525I~ ''~7604R~''~v030R~
         '       swEnglishDoc = CheckBoxEnglishDoc.Checked                      ''~7618I~''~7619R~
         '       Dim keyval As Integer = getKeyValue(TextBoxlabelSmallKey.Text, TextBoxKeySmallKana.Text)                ''~7502R~''~7515R~''~v038R~
+        swSplitHeader = CheckBox1.Checked                              ''~v198I~
         Dim keyval As Integer                                          ''~v038I~
         keyval = getKeyValue(TextBoxLabelSmallKey.Text, TextBoxKeySmallKana.Text, DEFAULT_KEY_SMALL) ''~v038I~
         If keyval < 0 Then                                                    ''~7502I~
@@ -316,12 +323,12 @@ Public Class FormOptions
         keyFind = keyval                                               ''~v070I~
         '       keyFindKey = Keys.F1 + keyFind - 1                             ''~v070I~''~v101R~
         keyFindKey = CType(Keys.F1 + keyFind - 1, Keys)                 ''~v101I~
-        keyval = getKeyValue(TextBoxLabelReplace.Text, TextBoxKeyReplace.Text, DEFAULT_KEY_REPLACE) ''+v181I~
-        If keyval < 0 Then                                             ''+v181I~
-            Return False                                               ''+v181I~
-        End If                                                         ''+v181I~
-        keyReplace = keyval                                            ''+v181I~
-        keyReplaceKey = CType(Keys.F1 + keyReplace - 1, Keys)          ''+v181I~
+        keyval = getKeyValue(TextBoxLabelReplace.Text, TextBoxKeyReplace.Text, DEFAULT_KEY_REPLACE) ''~v181I~
+        If keyval < 0 Then                                             ''~v181I~
+            Return False                                               ''~v181I~
+        End If                                                         ''~v181I~
+        keyReplace = keyval                                            ''~v181I~
+        keyReplaceKey = CType(Keys.F1 + keyReplace - 1, Keys)          ''~v181I~
         ''~7515I~
         '       keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text) ''~7515I~''~v038R~
         keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text, DEFAULT_KEY_SPECIALCHAR) ''~v038I~
@@ -658,15 +665,15 @@ Public Class FormOptions
     End Sub                                                            ''~v110I~
     '********************************************************************************''~v110I~
     Private Sub hideNonDebug()                                         ''~v110I~
-#If Not DEBUG Then                                                          ''~v110I~
-        GroupBoxLang.visible=False                                     ''~v110I~
-        RBLangEN.Visible=False                                         ''~v110I~
-        RBLangJP.Visible=False                                         ''~v110I~
-        RBLangDefault.Visible=False                                    ''~v110I~
-        RBLangEN.Enabled = False                                          ''~v110I~
-        RBLangJP.Enabled = False                                          ''~v110I~
-        RBLangDefault.Enabled=False                                     ''~v110I~
-#End If                                                                ''~v110I~
+'*#If Not DEBUG Then                                                          ''~v110I~''+v211R~
+'*        GroupBoxLang.visible=False                                     ''~v110I~''+v211R~
+'*        RBLangEN.Visible=False                                         ''~v110I~''+v211R~
+'*        RBLangJP.Visible=False                                         ''~v110I~''+v211R~
+'*        RBLangDefault.Visible=False                                    ''~v110I~''+v211R~
+'*        RBLangEN.Enabled = False                                          ''~v110I~''+v211R~
+'*        RBLangJP.Enabled = False                                          ''~v110I~''+v211R~
+'*        RBLangDefault.Enabled=False                                     ''~v110I~''+v211R~
+'*#End If                                                                ''~v110I~''+v211R~
     End Sub                                                            ''~v110I~
     '********************************************************************************''~v163I~
     Private Sub dialogAddString()                                      ''~v163I~

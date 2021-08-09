@@ -1,5 +1,6 @@
-﻿''*CID:''+v163R~:#72                          update#=   21;        ''~v163R~
+﻿''*CID:''+v210R~:#72                          update#=   23;         ''~v210R~
 '************************************************************************************''~7915I~
+'v210 2021/08/06 support imagefile multi selection                     ''~v210I~
 'v163 2018/03/03 add string customizability for kata/hira chikan       ''~v163I~
 'v076 2017/10/08 Symbol Dialog by DataGridView                         ''~v076I~
 'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
@@ -7,11 +8,12 @@
 '************************************************************************************''~7915I~
 Public Class ClassMRU                                                  ''~7522R~
     'localization not required                                             ''~7618R~
-    Public Const MRULISTSZ = 10                                        ''~7522R~
+'*  Public Const MRULISTSZ = 10                                        ''~7522R~''+v210R~
+    Public Const MRULISTSZ = 20                                        ''~v210I~
     Public Const ID_DICTIONARY = 4                                     ''~v012R~
     Public Const ID_WORDS=5                                            ''~v065I~
     Public Const ID_SYMBOL=6                                           ''~v076I~
-    Public Const ID_TRANSCH=7                                          ''+v163I~
+    Public Const ID_TRANSCH=7                                          ''~v163I~
     Private MRUList As New List(Of String)                         ''~7421R~''~7522M~
     Private MRUListImage As New List(Of String)                            ''~7411I~''~7421R~''~7522M~
     Private MRUListText As New List(Of String)                             ''~7411I~''~7421R~''~7522M~
@@ -20,7 +22,7 @@ Public Class ClassMRU                                                  ''~7522R~
     Private MRUListDictionary As New List(Of String)                   ''~v012R~
     Private MRUListWords As New List(Of String)                        ''~v065I~
     Private MRUListSymbol As New List(Of String)                       ''~v076I~
-    Private MRUListTransChars As New List(Of String)                   ''+v163I~
+    Private MRUListTransChars As New List(Of String)                   ''~v163I~
     Public Sub New()                                                   ''~7522I~
         '        loadMRUList()                                                  ''~7522M~
     End Sub                                                            ''~7522I~
@@ -36,8 +38,8 @@ Public Class ClassMRU                                                  ''~7522R~
                 MRUList = MRUListWords                                 ''~v065I~
             Case ID_SYMBOL                                             ''~v076I~
                 MRUList = MRUListSymbol                                ''~v076I~
-            Case ID_TRANSCH                                            ''+v163I~
-                MRUList = MRUListTransChars                            ''+v163I~
+            Case ID_TRANSCH                                            ''~v163I~
+                MRUList = MRUListTransChars                            ''~v163I~
             Case Else '3 'KanaText                                           ''~7411I~''~7522I~
                 MRUList = MRUListKanaText                                ''~7411I~''~7522M~
         End Select                                                     ''~7411I~''~7522M~
@@ -70,8 +72,8 @@ Public Class ClassMRU                                                  ''~7522R~
                 My.Settings.CfgMRUWords = Pstr                         ''~v065I~
             Case ID_SYMBOL                                             ''~v076I~
                 My.Settings.CfgMRUSymbol = Pstr                        ''~v076I~
-            Case ID_TRANSCH                                            ''+v163I~
-                My.Settings.CfgMRUTransChars = Pstr                    ''+v163I~
+            Case ID_TRANSCH                                            ''~v163I~
+                My.Settings.CfgMRUTransChars = Pstr                    ''~v163I~
             Case 3 'KanaText                                           ''~7411I~''~7522M~
                 My.Settings.CfgMRUKanaText = Pstr                        ''~7411I~''~7522M~
         End Select                                                     ''~7411I~''~7522M~
@@ -111,8 +113,8 @@ Public Class ClassMRU                                                  ''~7522R~
                 str = My.Settings.CfgMRUWords                          ''~v065I~
             Case ID_SYMBOL                                             ''~v076I~
                 str = My.Settings.CfgMRUSymbol                         ''~v076I~
-            Case ID_TRANSCH                                            ''+v163I~
-                str = My.Settings.CfgMRUTransChars                     ''+v163I~
+            Case ID_TRANSCH                                            ''~v163I~
+                str = My.Settings.CfgMRUTransChars                     ''~v163I~
             Case Else '3 'KanaText                                     ''~7522I~
                 str = My.Settings.CfgMRUKanaText                         ''~7522I~
         End Select                                                     ''~7522I~
@@ -154,8 +156,8 @@ Public Class ClassMRU                                                  ''~7522R~
                 tmp = MRUListWords                                     ''~v065I~
             Case ID_SYMBOL                                             ''~v076I~
                 tmp = MRUListSymbol                                    ''~v076I~
-            Case ID_TRANSCH                                           ''+v163I~
-                tmp = MRUListTransChars                                ''+v163I~
+            Case ID_TRANSCH                                           ''~v163I~
+                tmp = MRUListTransChars                                ''~v163I~
             Case Else '3 'KanaText                                     ''~v012R~
                 tmp = MRUListKanaText                                  ''~v012R~
         End Select                                                     ''~v012R~

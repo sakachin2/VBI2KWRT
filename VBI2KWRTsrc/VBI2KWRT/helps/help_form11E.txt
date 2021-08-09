@@ -40,6 +40,7 @@ Column header "Use" sorts by sequence of Check-On and Check-Off.
 Column header "String" sorts by sequense of values of "String" column.
 
 Fie/Save/SaveAs buttons are used to select dictionary for each documents.
+You may SaveAs to appropriate folder before re-install which looses the update.
 Record format of dictionary file is as following, CRLF is 0x0d0a.
 Default extension is ".dct".
 
@@ -50,4 +51,4 @@ e.g)  1;飛び地;　とびち
       1;本町;ほんまち
       1;町;ちょー
 
-(Form11E) 2017/02/24
+(Form11E) 2020/01/28

@@ -118,6 +118,57 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ImageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="ImageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Image file</value>
+  </data>
+  <data name="KanjiTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="KanjiTextToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Kanji text file</value>
+  </data>
+  <data name="KanaTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="KanaTextToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Kana text file</value>
+  </data>
+  <data name="ToolStripMenuItemClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="ToolStripMenuItemClose.Text" xml:space="preserve">
+    <value>Close(&amp;C)</value>
+  </data>
+  <data name="SaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="SaveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save(&amp;S)</value>
+  </data>
+  <data name="SaveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="SaveAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>SaveAs(&amp;A)</value>
+  </data>
+  <data name="ToolStripMenuItemPrint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="ToolStripMenuItemPrint.Text" xml:space="preserve">
+    <value>Print(&amp;P)</value>
+  </data>
+  <data name="ToolStripMenuItemPrint.ToolTipText" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ExitXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 22</value>
+  </data>
+  <data name="ExitXToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit(&amp;X)</value>
+  </data>
   <data name="FileToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAABV1JREFUWEft
@@ -458,60 +509,6 @@
   <data name="ToolStripMenuButtonHira.ToolTipText" xml:space="preserve">
     <value>Display by Hiragana</value>
   </data>
-  <data name="ImageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="ImageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Image file</value>
-  </data>
-  <data name="KanjiTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="KanjiTextToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Kanji text file</value>
-  </data>
-  <data name="KanaTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="KanaTextToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Kana text file</value>
-  </data>
-  <data name="ToolStripMenuItemClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="ToolStripMenuItemClose.Text" xml:space="preserve">
-    <value>Close(&amp;C)</value>
-  </data>
-  <data name="SaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="SaveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save(&amp;S)</value>
-  </data>
-  <data name="SaveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="SaveAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>SaveAs(&amp;A)</value>
-  </data>
-  <data name="ToolStripMenuItemPrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="ToolStripMenuItemPrint.Text" xml:space="preserve">
-    <value>Print(&amp;P)</value>
-  </data>
-  <data name="ToolStripMenuItemPrint.ToolTipText" xml:space="preserve">
-    <value>Print</value>
-  </data>
-  <data name="ExitXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
-  </data>
-  <data name="ExitXToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exit(&amp;X)</value>
-  </data>
-  <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 180</value>
-  </data>
   <data name="CMCut.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -559,6 +556,9 @@
   </data>
   <data name="ToolStripMenuItemLetterReplacement.Text" xml:space="preserve">
     <value>Letter Replacement</value>
+  </data>
+  <data name="ContextMenuSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 180</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

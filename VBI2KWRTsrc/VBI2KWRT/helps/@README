@@ -9,7 +9,7 @@ VBI2KWRT GitHub
         change version My Project\AssemblyInfo.vb, SetupProject\Product.wxs:Vesion, Minimum,Maximum
         Form1 Const VERSION
     release build
-    build SetupVBI2KWRT      -->SetupVBI2KWRT\bin\Release\SetupVBI2KWRT.msi
+    build SetupVBI2KWRT      -->SetupProject\bin\Release\SetupVBI2KWRT.msi
 	bat\vbi2kwrtupsrc.bat
         msvs2017CProjects\VBOI2KWRT -> msvs2017CProjects\Release\VBI2KWRTsrc\VBI2KWRT and VBI2KWRTsrc.zip
 
@@ -19,7 +19,9 @@ VBI2KWRT GitHub
         xcopy w:\msvs2017CPpjects\Release\VBI2KWRTsrc     w:\gitLocal\VBI2KWRTsrc
         copy  w:\msvs2010CPpjects\Release\VBI2KWRTsrc.zip w:\gitLocal\VBI2KWRT\
         copy  w:\msvs2010CPpjects\SetupVBI2KWRT\bin\release\SetupVBI2KWRT.msi ->Release, w:\gitLocal\VBI2KWRT
-    push to git@github.com:sakachin2/VBI2KWRT.git
+        ==>execute SetupVBI2KWRT.msi and chk version
+
+    push to git@github.com:sakachin2/VBI2KWRT.git by GitGUI StateChanged, Commit with commit Message
 
     Vector
         update registration.txt in helps

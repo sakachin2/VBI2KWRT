@@ -239,6 +239,12 @@
     <Compile Include="Form8.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMS.Designer.vb">
+      <DependentUpon>FormMS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -341,6 +347,15 @@
     <EmbeddedResource Include="Form8.resx">
       <DependentUpon>Form8.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMS.en-001.resx">
+      <DependentUpon>FormMS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMS.en-GB.resx">
+      <DependentUpon>FormMS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMS.resx">
+      <DependentUpon>FormMS.vb</DependentUpon>
+    </EmbeddedResource>
     <!--None Include="My Project\Resources.en-GB.resx" /-->
     <EmbeddedResource Include="My Project\Resources.en-GB.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -351,7 +366,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -413,10 +430,6 @@
     <None Include="helps\help_form5E.txt" />
     <None Include="helps\help_form1E.txt" />
     <None Include="helps\help_form2E.txt" />
-    <None Include="helps\help_form9.txt" />
-    <None Include="helps\help_form9E.txt" />
-    <None Include="helps\help_form10.txt" />
-    <None Include="helps\help_form10E.txt" />
     <None Include="helps\help_form11.txt" />
     <None Include="helps\help_form11E.txt" />
     <None Include="helps\help_form12.txt" />
@@ -444,6 +457,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="helps\help_form8E.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="helps\help_formMS.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="helps\help_formMSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

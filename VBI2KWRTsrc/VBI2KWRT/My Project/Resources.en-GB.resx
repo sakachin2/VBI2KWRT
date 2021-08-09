@@ -186,6 +186,9 @@
   <data name="STR_MSG_ERR_EXTRACT" xml:space="preserve">
     <value>Failed to Extract text from Image file</value>
   </data>
+  <data name="STR_MULTI_SELECT_FILE" xml:space="preserve">
+    <value>Extract multiple files</value>
+  </data>
   <data name="STR_FORM2_TITLE" xml:space="preserve">
     <value>ImageDocument</value>
   </data>

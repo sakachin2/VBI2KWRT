@@ -641,6 +641,18 @@ Namespace My
                 Me("CFGF5_KeyReplace") = value
             End Set
         End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CFGF5_SplitHeader() As Boolean
+            Get
+                Return CType(Me("CFGF5_SplitHeader"),Boolean)
+            End Get
+            Set
+                Me("CFGF5_SplitHeader") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -16,7 +16,7 @@ Displaying document image file
   in shch case as vertical and horizontal writing are mixed,
   Boxing by mouse, you can re-extract the portion failed to extract.
   Blue line box will disappear by mouse click.
-  Extracted text partially is shown on another form.
+  Under opened text file, extracted text partially is shown on another form.
   Use OK button or Copy & Paste to take in the text.
 
 "Language":
@@ -30,6 +30,8 @@ Displaying document image file
   and Left or Rifht is for vertical lines. 
   When the image has some inclination,a line may be split and mixed into next line.
   Try 1°rotattion.
+  H2L2R or H2R2L displays left or right page at first for Japanese horizontal writing.
+  V2R2L or V2L2R displays Upper half, Lower half,  then next page for Japanese Vertical writing.
 
   When simply "Japanese" is selected, no sort is done. 
 
@@ -40,4 +42,4 @@ Displaying document image file
     Another way from "Settings", you can install the Language Pack,
     "Application","Optional Feature", ... "OCR",Download & Install. 
 
-(Form2E) 2018/01/10
+(Form2E) 2021/08/06
